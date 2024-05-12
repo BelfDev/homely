@@ -12,7 +12,7 @@ def create_app(config_object=DevConfig):
     app = Flask(__name__,
                 instance_relative_config=True,
                 instance_path=config_object.INSTANCE_DIR)
-    app.config.from_object(config)
+    app.config.from_object(config_object)
     create_instance_dir(app)
     register_extensions(app)
 

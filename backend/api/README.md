@@ -11,3 +11,9 @@ Assuming you are at this project's root directory:
 ```bash
 flask --app api run --debug
 ```
+# Useful Commands
+
+## Database
+
+1. `flask --app api db init` -> create a migration repository.
+2. `flask --app api db migrate -m "Initial migration."` -> generate an initial migration.
