@@ -22,3 +22,8 @@ flask run --debug
 # Important notes
 
 1. Don't forget to get the `.env` file with the main author!
+
+# Useful 3rd-party docs
+
+1.[Flask SQLAlchemy](https://flask-sqlalchemy.palletsprojects.com/en/3.1.x/quickstart/)
+2.[Flask-Migrate](https://flask-migrate.readthedocs.io/en/latest/)
