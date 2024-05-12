@@ -2,7 +2,8 @@ import os
 
 from flask import Flask, jsonify
 from flask_cors import CORS
-from .models import User
+from api.models import User
+
 
 def create_app(test_config=None):
     # create and configure the app
@@ -11,8 +12,8 @@ def create_app(test_config=None):
 
     app.config.from_mapping(
         SECRET_KEY='dev',
-        SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(app.instance_path, "homely.db"),
-        SQLALCHEMY_TRACK_MODIFICATIONS = False
+        SQLALCHEMY_DATABASE_URI="sqlite:///" + os.path.join(app.instance_path, "homely.db"),
+        SQLALCHEMY_TRACK_MODIFICATIONS=False
     )
 
     if test_config is None:
@@ -28,20 +29,20 @@ def create_app(test_config=None):
     except OSError:
         pass
 
+    # configure database
+    from api.db import db
+    db.init_app(app)
+
     # a simple page that says hello
     @app.route('/hello')
     def hello():
         return 'Hello, World!'
 
-    from . import db
-    db.init_app(app)
-
     @app.route("/users", methods=["GET"])
     def users():
-     users = User.query.all()
-     json_users = list(map(lambda x: x.to_json(), users))
- 
-     return jsonify({"users": json_users})
+        result = User.query.all()
+        json_users = list(map(lambda x: x.to_json(), result))
 
+        return jsonify({"users": json_users})
 
     return app

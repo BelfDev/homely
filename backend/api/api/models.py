@@ -1,4 +1,5 @@
-from .db import db
+from api.db import db
+
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -13,4 +14,3 @@ class User(db.Model):
             "lastName": self.last_name,
             "email": self.email
         }
-    
