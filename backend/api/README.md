@@ -17,6 +17,7 @@ flask run --debug
 
 1. `flask db init` -> create a migration repository.
 2. `flask db migrate -m "Initial migration."` -> generate an initial migration.
+3. `flask db upgrade` -> apply the changes described by the migration script.
 
 # Important notes
 
