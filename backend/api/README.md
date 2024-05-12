@@ -1,5 +1,7 @@
 # Running the App
 
+Assuming you are at this project's root directory:
 ```bash
-flask --app api run --debug
+cd homely/backend/api/api
+flask run --debug
 ```
