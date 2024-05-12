@@ -9,11 +9,15 @@
 
 Assuming you are at this project's root directory:
 ```bash
-flask --app api run --debug
+flask run --debug
 ```
 # Useful Commands
 
 ## Database
 
-1. `flask --app api db init` -> create a migration repository.
-2. `flask --app api db migrate -m "Initial migration."` -> generate an initial migration.
+1. `flask db init` -> create a migration repository.
+2. `flask db migrate -m "Initial migration."` -> generate an initial migration.
+
+# Important notes
+
+1. Don't forget to get the `.env` file with the main author!

@@ -70,4 +70,4 @@ htmlcov/
 dist/
 build/
 *.egg-info/
-.flaskenv
+.env
