@@ -1,5 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase
+from sqlalchemy import String
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 
 class Base(DeclarativeBase):
@@ -7,6 +9,12 @@ class Base(DeclarativeBase):
 
 
 db = SQLAlchemy(model_class=Base)
+
+# Aliases
+DBString = String
+DBMapped = Mapped
+db_mapped_column = mapped_column
+db_relationship = relationship()
 
 
 def init_app(app):

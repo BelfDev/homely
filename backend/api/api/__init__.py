@@ -3,7 +3,7 @@ import os
 from flask import Flask, jsonify
 
 from api.config import DevConfig
-from api.extensions import db, cors, migrate
+from api.extensions import db, cors, migrate, jwt
 from api.models import User
 
 
@@ -36,6 +36,7 @@ def register_extensions(app):
     cors.init_app(app)
     db.init_app(app)
     migrate.init_app(app, db)
+    jwt.init_app(app)
 
 
 def create_instance_dir(app):
