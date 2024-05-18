@@ -6,7 +6,7 @@ from api.config import DevConfig
 from api.extensions import db, cors, migrate
 from api.models import User
 from markupsafe import escape
-
+from flask import render_template
 
 def create_app(config_object=DevConfig):
     # create and configure the app
@@ -18,10 +18,15 @@ def create_app(config_object=DevConfig):
     register_extensions(app)
 
     # a simple page that says hello
-    @app.route('/hello')
-    def hello():
-        return 'Hello, World!'
+    
+    @app.route('/')
+    def index():
+        return 'Index Page'
 
+    @app.route('/hello')
+    def hello(name="Sofia"):
+        return render_template('hello.html', name=name)
+    
     @app.route("/users", methods=["GET"])
     def users():
         db.create_all()
@@ -30,16 +35,10 @@ def create_app(config_object=DevConfig):
 
         return jsonify({"users": json_users})
     
-    @app.route('/')
-    def index():
-        return 'Index Page'
-    
     @app.route('/post/<int:post_id>')
     def show_post(post_id):
         # show the post with the given id, the id is an integer
         return f'Post {post_id}'
-    
-
 
     return app
 
