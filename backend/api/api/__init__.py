@@ -5,6 +5,7 @@ from flask import Flask, jsonify
 from api.config import DevConfig
 from api.extensions import db, cors, migrate
 from api.models import User
+from markupsafe import escape
 
 
 def create_app(config_object=DevConfig):
@@ -28,6 +29,17 @@ def create_app(config_object=DevConfig):
         json_users = list(map(lambda x: x.to_json(), result))
 
         return jsonify({"users": json_users})
+    
+    @app.route('/')
+    def index():
+        return 'Index Page'
+    
+    @app.route('/post/<int:post_id>')
+    def show_post(post_id):
+        # show the post with the given id, the id is an integer
+        return f'Post {post_id}'
+    
+
 
     return app
 
