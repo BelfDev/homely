@@ -1,10 +1,9 @@
 import os
 
-from flask import Flask, jsonify
+from flask import Flask
 
 from api.config import DevConfig
 from api.extensions import db, db_init_app, cors, jwt, marsh
-from api.models import User
 from api.user import user_blueprint
 
 
@@ -25,14 +24,6 @@ def create_app(config_object=DevConfig):
     @app.route('/hello')
     def hello():
         return 'Hello, World!'
-
-    @app.route("/users", methods=["GET"])
-    def users():
-        db.create_all()
-        result = User.query.all()
-        json_users = list(map(lambda x: x.to_json(), result))
-
-        return jsonify({"users": json_users})
 
     return app
 

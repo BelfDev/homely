@@ -37,3 +37,10 @@ def register_user():
     # Return new user
     result = user_schema.dump(new_user)
     return jsonify(result), 201
+
+
+@bp.route('/v1/admin/users', methods=('GET',))
+def get_all_users():
+    users = User.query.all()
+    result = user_schema.dump(users, many=True)
+    return jsonify({"users": result}), 200
