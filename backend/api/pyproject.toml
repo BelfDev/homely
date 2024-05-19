@@ -15,6 +15,7 @@ python-dotenv = "^1.0.1"
 flask-jwt-extended = "^4.6.0"
 flask-bcrypt = "^1.0.1"
 flask-marshmallow = "^1.2.1"
+marshmallow-sqlalchemy = "^1.0.0"
 
 
 [build-system]
