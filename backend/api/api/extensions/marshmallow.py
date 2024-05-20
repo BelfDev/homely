@@ -2,6 +2,11 @@ from flask_marshmallow import Marshmallow
 from marshmallow import INCLUDE, fields, validate, ValidationError, post_load
 
 marsh = Marshmallow()
+ValidationError = ValidationError
+INCLUDE = INCLUDE
+fields = fields
+validate = validate
+post_load = post_load
 
 
 def camelcase(s):

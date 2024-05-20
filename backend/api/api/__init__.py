@@ -5,6 +5,7 @@ from flask import Flask
 from api.config import DevConfig
 from api.extensions import db, db_init_app, cors, jwt, marsh
 from api.user import user_blueprint
+from api.common import user_identity_lookup, user_lookup_callback
 
 
 def create_app(config_object=DevConfig):
