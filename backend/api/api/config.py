@@ -4,11 +4,12 @@ import os
 class Config(object):
     """Base configuration."""
 
-    SECRET_KEY = os.environ.get('CONDUIT_SECRET', 'secret-key')  # TODO(BelfDev): Update
+    SECRET_KEY = os.environ.get('HOMELY_SECRET', 'secret-key')  # TODO(BelfDev): Update
     APP_DIR = os.path.abspath(os.path.dirname(__file__))
     PROJECT_ROOT = os.path.abspath(os.path.join(APP_DIR, os.pardir))
     INSTANCE_DIR = os.path.join(PROJECT_ROOT, 'instance')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY', 'jwt-secret-key')
 
 
 class ProdConfig(Config):
