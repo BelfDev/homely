@@ -1,5 +1,6 @@
 from api.user.models import User
-from .user_aux import login_route, client_create_user, client_login_user, db_get_user_by_email, db_add_user
+from .user_aux import login_route, client_create_user, client_login_user, db_get_user_by_email, db_add_user, \
+    all_users_route, current_user_route
 
 
 def test_register_user_success(client, app):
@@ -94,3 +95,38 @@ def test_login_incorrect_password(client, db):
     assert response.status_code == 401
     data = response.get_json()
     assert data['msg'] == "Bad email or password"
+
+
+def test_get_all_users(client, db):
+    # Create test users
+    db_add_user(db, User(email="test1@test.com", password="test123", first_name="Test", last_name="User"))
+    db_add_user(db, User(email="test2@test.com", password="test123", first_name="Test", last_name="User"))
+
+    # Attempt to get all users
+    response = client.get(all_users_route)
+    assert response.status_code == 200
+    data = response.get_json()
+    assert 'users' in data
+    assert len(data['users']) == 2
+
+
+def test_get_current_user(client, db):
+    # Create a test user
+    db_add_user(db, User(email="test@test.com", password="test123", first_name="Test", last_name="User"))
+
+    # Login to get access token
+    login_response = client_login_user(client, "test@test.com", "test123")
+    assert login_response.status_code == 200
+    access_token = login_response.get_json()['access_token']
+
+    headers = {
+        'Authorization': f'Bearer {access_token}'
+    }
+
+    # Attempt to get the current user's information
+    response = client.get(current_user_route, headers=headers)
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['email'] == "test@test.com"
+    assert data['firstName'] == "Test"
+    assert data['lastName'] == "User"

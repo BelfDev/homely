@@ -2,6 +2,8 @@ from api.user.models import User
 
 register_route = '/api/v1/users'
 login_route = '/api/v1/users/login'
+all_users_route = '/api/v1/admin/users'
+current_user_route = '/api/v1/users/me'
 
 
 # Helper functions
