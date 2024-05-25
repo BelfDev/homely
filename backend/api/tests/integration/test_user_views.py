@@ -62,3 +62,4 @@ def test_register_user(client, app):
         "lastName": "User"
     })
     assert response.status_code == 400
+

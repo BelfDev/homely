@@ -5,7 +5,7 @@ from api.config import TestConfig
 from api.extensions import db as _db
 
 
-@pytest.fixture(scope='module')
+@pytest.fixture(scope='session')
 def app():
     app = create_app(config_object=TestConfig)
 
@@ -15,12 +15,12 @@ def app():
         _db.drop_all()
 
 
-@pytest.fixture(scope='module')
+@pytest.fixture(scope='session')
 def client(app):
     return app.test_client()
 
 
-@pytest.fixture(scope='module')
+@pytest.fixture(scope='session')
 def db(app):
     return _db
 
