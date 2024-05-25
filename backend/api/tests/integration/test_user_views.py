@@ -34,6 +34,10 @@ def test_register_user_existing_email(client, app):
     data = response.get_json()
     assert data['msg'] == "Email already exists"
 
+    # Check that only one user exists in the database
+    users = User.query.filter_by(email=valid_email).all()
+    assert len(users) == 1
+
 
 def test_register_user_missing_fields(client):
     # Given missing fields, when registering a new user, then an error is returned
