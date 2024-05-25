@@ -11,7 +11,7 @@ def test_password_setter():
 def test_no_password_getter():
     user = User(password="mypassword")
     with pytest.raises(AttributeError):
-        user.password
+        user.password()
 
 
 def test_password_verification():
