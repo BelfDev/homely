@@ -6,7 +6,7 @@ from api.extensions import db, ValidationError, create_access_token, jwt_require
 from api.user.models import User
 from api.user.schemas import UserSchema, LoginSchema
 
-bp = Blueprint('user', __name__, url_prefix='/v1/users')
+bp = Blueprint('user', __name__)
 user_schema = UserSchema()
 login_schema = LoginSchema()
 
