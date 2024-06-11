@@ -14,59 +14,36 @@ struct LoginView: View {
         GeometryReader { geometry in
             
             ZStack(alignment: .top) {
-                Image(.background)
-                    .resizable()
-                    .scaledToFit()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(maxWidth: .infinity, minHeight: geometry.size.height * 0.3)
-                    .edgesIgnoringSafeArea(.all)
+                BackgroundImage(minHeight: geometry.size.height * 0.3)
                 
                 ScrollView {
                     
                     VStack {
-                        Text("Homely")
-                            .foregroundStyle(.white)
-                            .font(.largeTitle)
-                            .frame(maxWidth: .infinity, minHeight: geometry.size.height * 0.3)
-
+                        AppTitleLabel(minHeight: geometry.size.height * 0.3, title: "Homely")
+                        
                         VStack {
                             Spacer()
                                 .frame(height: 32.0)
-                            
                             Text("Login")
                                 .foregroundStyle(.black)
                                 .font(.title)
-                            
                             Spacer()
                                 .frame(height: 32.0)
-                            
                             EmailInputField()
-                            
                             Spacer()
                                 .frame(height: 24.0)
-                            
                             PasswordInputField()
-                            
                             Spacer()
                                 .frame(height: 8.0)
-                            
-                            // OK
                             ForgotPasswordButton()
-                            
-                            
                             Spacer()
-                            
-                            // OK
                             LoginButton()
-                            
                             Spacer()
                                 .frame(height: 8.0)
-                            
-                            // OK
                             SignUpRow()
                             
-//                            Spacer()
-//                                .frame(height: 600.0)
+                            //                            Spacer()
+                            //                                .frame(height: 600.0)
                             
                             
                         }
@@ -75,10 +52,9 @@ struct LoginView: View {
                             UnevenRoundedRectangle(
                                 cornerRadii: .init(topLeading: 32.0, topTrailing: 32.0),
                                 style: .continuous
-                            )
-                            .foregroundStyle(.white)
+                            ).foregroundStyle(.white)
                         )
-                    
+                        
                     }
                     .frame(maxWidth: .infinity, minHeight: geometry.size.height)
                 }
@@ -182,5 +158,30 @@ struct EmailInputField: View {
                     .background(.gray)
                     .cornerRadius(16.0)
             }
+    }
+}
+
+struct BackgroundImage: View {
+    let minHeight: CGFloat
+    
+    var body: some View {
+        Image(.background)
+            .resizable()
+            .scaledToFit()
+            .aspectRatio(contentMode: .fit)
+            .frame(maxWidth: .infinity, minHeight: minHeight)
+            .edgesIgnoringSafeArea(.all)
+    }
+}
+
+struct AppTitleLabel: View {
+    let minHeight: CGFloat
+    let title: String
+    
+    var body: some View {
+        Text(title)
+            .foregroundStyle(.white)
+            .font(.largeTitle)
+            .frame(maxWidth: .infinity, minHeight: minHeight)
     }
 }
