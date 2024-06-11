@@ -15,53 +15,58 @@ struct LoginView: View {
             
             ZStack(alignment: .top) {
                 BackgroundImage(minHeight: geometry.size.height * 0.3)
+                Text("Homely")
+                    .foregroundStyle(.white)
+                    .font(.largeTitle)
+                    .padding(.top, geometry.size.height * 0.12)
                 
                 ScrollView {
                     
                     VStack {
-                        AppTitleLabel(minHeight: geometry.size.height * 0.3, title: "Homely")
+                        Spacer()
+                            .frame(height: 32.0)
+                        Text("Login")
+                            .foregroundStyle(.black)
+                            .font(.title)
+                        Spacer()
+                            .frame(height: 32.0)
+                        EmailInputField()
+                        Spacer()
+                            .frame(height: 24.0)
+                        PasswordInputField()
+                        Spacer()
+                            .frame(height: 8.0)
+                        ForgotPasswordButton()
+                        Spacer()
+                        LoginButton()
+                        Spacer()
+                            .frame(height: 8.0)
+                        SignUpRow()
                         
-                        VStack {
-                            Spacer()
-                                .frame(height: 32.0)
-                            Text("Login")
-                                .foregroundStyle(.black)
-                                .font(.title)
-                            Spacer()
-                                .frame(height: 32.0)
-                            EmailInputField()
-                            Spacer()
-                                .frame(height: 24.0)
-                            PasswordInputField()
-                            Spacer()
-                                .frame(height: 8.0)
-                            ForgotPasswordButton()
-                            Spacer()
-                            LoginButton()
-                            Spacer()
-                                .frame(height: 8.0)
-                            SignUpRow()
-                            
-                            //                            Spacer()
-                            //                                .frame(height: 600.0)
-                            
-                            
-                        }
-                        .padding([.horizontal, .bottom], 24.0)
-                        .background(
-                            UnevenRoundedRectangle(
-                                cornerRadii: .init(topLeading: 32.0, topTrailing: 32.0),
-                                style: .continuous
-                            ).foregroundStyle(.white)
-                        )
-                        
+                        Spacer()
+                            .frame(height: 400.0)
                     }
-                    .frame(maxWidth: .infinity, minHeight: geometry.size.height)
+                    .padding([.horizontal, .bottom], 24.0)
+                    .background(
+                        UnevenRoundedRectangle(
+                            cornerRadii: .init(topLeading: 32.0, topTrailing: 32.0),
+                            style: .continuous
+                        )
+                        .foregroundStyle(.white)
+                    )
+                    .frame(maxWidth: .infinity, minHeight: geometry.size.height * 0.7)
+                    .padding(.top, geometry.size.height * 0.3)
                 }
                 .scrollBounceBehavior(.basedOnSize)
             }
             .edgesIgnoringSafeArea(.bottom)
-            .background(.white)
+            .background(
+                LinearGradient(
+                    gradient: Gradient(colors: [.blue, .white, .white]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+            )
         }
     }
 }
@@ -171,17 +176,5 @@ struct BackgroundImage: View {
             .aspectRatio(contentMode: .fit)
             .frame(maxWidth: .infinity, minHeight: minHeight)
             .edgesIgnoringSafeArea(.all)
-    }
-}
-
-struct AppTitleLabel: View {
-    let minHeight: CGFloat
-    let title: String
-    
-    var body: some View {
-        Text(title)
-            .foregroundStyle(.white)
-            .font(.largeTitle)
-            .frame(maxWidth: .infinity, minHeight: minHeight)
     }
 }
