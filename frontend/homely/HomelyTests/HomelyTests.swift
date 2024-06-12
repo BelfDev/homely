@@ -8,7 +8,7 @@
 import XCTest
 @testable import homely
 
-final class homelyTests: XCTestCase {
+final class HomelyTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
