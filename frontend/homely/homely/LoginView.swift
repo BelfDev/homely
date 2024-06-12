@@ -42,9 +42,6 @@ struct LoginView: View {
                         Spacer()
                             .frame(height: 8.0)
                         SignUpRow()
-                        
-                        Spacer()
-                            .frame(height: 400.0)
                     }
                     .padding([.horizontal, .bottom], 24.0)
                     .background(
