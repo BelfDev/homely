@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct LoginView: View {
+struct LoginView: View {    
+    @EnvironmentObject private var themeManager: ThemeManager
     
     var body: some View {
         
@@ -17,7 +18,7 @@ struct LoginView: View {
                 BackgroundImage(minHeight: geometry.size.height * 0.3)
                 Text("Homely")
                     .foregroundStyle(.white)
-                    .font(.largeTitle)
+                    .font(themeManager.selectedTheme.largeTitleFont)
                     .padding(.top, geometry.size.height * 0.12)
                 
                 ScrollView {
@@ -70,6 +71,7 @@ struct LoginView: View {
 
 #Preview {
     LoginView()
+        .environmentObject(ThemeManager())
 }
 
 struct LoginButton: View {

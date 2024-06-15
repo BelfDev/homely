@@ -9,10 +9,13 @@ import SwiftUI
 
 @main
 struct HomelyApp: App {
+    @StateObject var themeManager = ThemeManager()
+    
     var body: some Scene {
         WindowGroup {
 //            ContentView(data: dummyData)
             LoginView()
+                .environmentObject(themeManager)
         }
     }
 }
