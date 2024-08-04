@@ -9,9 +9,9 @@ import Foundation
 import SwiftUI
 
 class ThemeManager: ObservableObject {
-    @Published var selectedTheme: ThemeProtocol = Main()
+    @Published var current: ThemeProtocol = MainTheme()
     
     func setTheme(_ theme: ThemeProtocol) {
-        selectedTheme = theme
+        current = theme
     }
 }

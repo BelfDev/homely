@@ -8,27 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		9F0A23F82C19980E00B5DEB3 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F0A23F72C19980E00B5DEB3 /* Colors.xcassets */; };
-		9F0A240C2C199C1B00B5DEB3 /* Graphik-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F0A23FA2C199C1A00B5DEB3 /* Graphik-Medium.otf */; };
-		9F0A240D2C199C1B00B5DEB3 /* Graphik-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F0A23FB2C199C1A00B5DEB3 /* Graphik-Thin.otf */; };
-		9F0A240E2C199C1B00B5DEB3 /* Graphik-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F0A23FC2C199C1A00B5DEB3 /* Graphik-BlackItalic.otf */; };
-		9F0A240F2C199C1B00B5DEB3 /* Graphik-RegularItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F0A23FD2C199C1A00B5DEB3 /* Graphik-RegularItalic.otf */; };
-		9F0A24102C199C1B00B5DEB3 /* Graphik-Extralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F0A23FE2C199C1A00B5DEB3 /* Graphik-Extralight.otf */; };
-		9F0A24112C199C1B00B5DEB3 /* Graphik-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F0A23FF2C199C1A00B5DEB3 /* Graphik-SemiboldItalic.otf */; };
-		9F0A24122C199C1B00B5DEB3 /* Graphik-Super.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F0A24002C199C1A00B5DEB3 /* Graphik-Super.otf */; };
-		9F0A24132C199C1B00B5DEB3 /* Graphik-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F0A24012C199C1A00B5DEB3 /* Graphik-Light.otf */; };
-		9F0A24142C199C1B00B5DEB3 /* Graphik-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F0A24022C199C1A00B5DEB3 /* Graphik-MediumItalic.otf */; };
-		9F0A24152C199C1B00B5DEB3 /* Graphik-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F0A24032C199C1A00B5DEB3 /* Graphik-Bold.otf */; };
-		9F0A24162C199C1B00B5DEB3 /* Graphik-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F0A24042C199C1A00B5DEB3 /* Graphik-BoldItalic.otf */; };
-		9F0A24172C199C1B00B5DEB3 /* Graphik-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F0A24052C199C1A00B5DEB3 /* Graphik-Black.otf */; };
-		9F0A24182C199C1B00B5DEB3 /* Graphik-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F0A24062C199C1A00B5DEB3 /* Graphik-LightItalic.otf */; };
-		9F0A24192C199C1B00B5DEB3 /* Graphik-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F0A24072C199C1B00B5DEB3 /* Graphik-Semibold.otf */; };
-		9F0A241A2C199C1B00B5DEB3 /* Graphik-SuperItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F0A24082C199C1B00B5DEB3 /* Graphik-SuperItalic.otf */; };
-		9F0A241B2C199C1B00B5DEB3 /* Graphik-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F0A24092C199C1B00B5DEB3 /* Graphik-ThinItalic.otf */; };
-		9F0A241C2C199C1B00B5DEB3 /* Graphik-ExtralightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F0A240A2C199C1B00B5DEB3 /* Graphik-ExtralightItalic.otf */; };
-		9F0A241D2C199C1B00B5DEB3 /* Graphik-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F0A240B2C199C1B00B5DEB3 /* Graphik-Regular.otf */; };
 		9F0A241F2C1DA57400B5DEB3 /* ThemeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0A241E2C1DA57400B5DEB3 /* ThemeProtocol.swift */; };
 		9F0A24212C1DA62600B5DEB3 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0A24202C1DA62600B5DEB3 /* ThemeManager.swift */; };
 		9F0A24232C1DAA5F00B5DEB3 /* MainTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0A24222C1DAA5F00B5DEB3 /* MainTheme.swift */; };
+		9F390FF02C1E2BA900DB1C1D /* FilledTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F390FEF2C1E2BA900DB1C1D /* FilledTextFieldStyle.swift */; };
 		9F5D8B372C144A37002B98D5 /* DummyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5D8B362C144A37002B98D5 /* DummyModel.swift */; };
 		9F5D8B392C14C725002B98D5 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5D8B382C14C725002B98D5 /* LoginView.swift */; };
 		9F6960F72C03B64900605975 /* HomelyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6960F62C03B64900605975 /* HomelyApp.swift */; };
@@ -38,6 +21,25 @@
 		9F6961082C03B64A00605975 /* HomelyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6961072C03B64A00605975 /* HomelyTests.swift */; };
 		9F6961122C03B64A00605975 /* HomelyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6961112C03B64A00605975 /* HomelyUITests.swift */; };
 		9F6961142C03B64A00605975 /* HomelyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6961132C03B64A00605975 /* HomelyUITestsLaunchTests.swift */; };
+		9F73B5922C5F623C0007CD73 /* HankenGrotesk-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F73B5802C5F623C0007CD73 /* HankenGrotesk-ExtraLightItalic.ttf */; };
+		9F73B5932C5F623C0007CD73 /* HankenGrotesk-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F73B5812C5F623C0007CD73 /* HankenGrotesk-SemiBoldItalic.ttf */; };
+		9F73B5942C5F623C0007CD73 /* HankenGrotesk-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F73B5822C5F623C0007CD73 /* HankenGrotesk-SemiBold.ttf */; };
+		9F73B5952C5F623C0007CD73 /* HankenGrotesk-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F73B5832C5F623C0007CD73 /* HankenGrotesk-LightItalic.ttf */; };
+		9F73B5962C5F623C0007CD73 /* HankenGrotesk-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F73B5842C5F623C0007CD73 /* HankenGrotesk-ExtraBoldItalic.ttf */; };
+		9F73B5972C5F623C0007CD73 /* HankenGrotesk-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F73B5852C5F623C0007CD73 /* HankenGrotesk-Light.ttf */; };
+		9F73B5982C5F623C0007CD73 /* HankenGrotesk-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F73B5862C5F623C0007CD73 /* HankenGrotesk-Bold.ttf */; };
+		9F73B5992C5F623C0007CD73 /* HankenGrotesk-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F73B5872C5F623C0007CD73 /* HankenGrotesk-Regular.ttf */; };
+		9F73B59A2C5F623C0007CD73 /* HankenGrotesk-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F73B5882C5F623C0007CD73 /* HankenGrotesk-ExtraBold.ttf */; };
+		9F73B59B2C5F623C0007CD73 /* HankenGrotesk-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F73B5892C5F623C0007CD73 /* HankenGrotesk-ThinItalic.ttf */; };
+		9F73B59C2C5F623C0007CD73 /* HankenGrotesk-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F73B58A2C5F623C0007CD73 /* HankenGrotesk-Medium.ttf */; };
+		9F73B59D2C5F623C0007CD73 /* HankenGrotesk-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F73B58B2C5F623C0007CD73 /* HankenGrotesk-Thin.ttf */; };
+		9F73B59E2C5F623C0007CD73 /* HankenGrotesk-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F73B58C2C5F623C0007CD73 /* HankenGrotesk-Italic.ttf */; };
+		9F73B59F2C5F623C0007CD73 /* HankenGrotesk-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F73B58D2C5F623C0007CD73 /* HankenGrotesk-MediumItalic.ttf */; };
+		9F73B5A02C5F623C0007CD73 /* HankenGrotesk-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F73B58E2C5F623C0007CD73 /* HankenGrotesk-BoldItalic.ttf */; };
+		9F73B5A12C5F623C0007CD73 /* HankenGrotesk-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F73B58F2C5F623C0007CD73 /* HankenGrotesk-BlackItalic.ttf */; };
+		9F73B5A22C5F623C0007CD73 /* HankenGrotesk-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F73B5902C5F623C0007CD73 /* HankenGrotesk-ExtraLight.ttf */; };
+		9F73B5A32C5F623C0007CD73 /* HankenGrotesk-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F73B5912C5F623C0007CD73 /* HankenGrotesk-Black.ttf */; };
+		9F73B5A52C5F63E30007CD73 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F73B5A42C5F63E30007CD73 /* Fonts.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,27 +61,11 @@
 
 /* Begin PBXFileReference section */
 		9F0A23F72C19980E00B5DEB3 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
-		9F0A23FA2C199C1A00B5DEB3 /* Graphik-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-Medium.otf"; sourceTree = "<group>"; };
-		9F0A23FB2C199C1A00B5DEB3 /* Graphik-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-Thin.otf"; sourceTree = "<group>"; };
-		9F0A23FC2C199C1A00B5DEB3 /* Graphik-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-BlackItalic.otf"; sourceTree = "<group>"; };
-		9F0A23FD2C199C1A00B5DEB3 /* Graphik-RegularItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-RegularItalic.otf"; sourceTree = "<group>"; };
-		9F0A23FE2C199C1A00B5DEB3 /* Graphik-Extralight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-Extralight.otf"; sourceTree = "<group>"; };
-		9F0A23FF2C199C1A00B5DEB3 /* Graphik-SemiboldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-SemiboldItalic.otf"; sourceTree = "<group>"; };
-		9F0A24002C199C1A00B5DEB3 /* Graphik-Super.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-Super.otf"; sourceTree = "<group>"; };
-		9F0A24012C199C1A00B5DEB3 /* Graphik-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-Light.otf"; sourceTree = "<group>"; };
-		9F0A24022C199C1A00B5DEB3 /* Graphik-MediumItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-MediumItalic.otf"; sourceTree = "<group>"; };
-		9F0A24032C199C1A00B5DEB3 /* Graphik-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-Bold.otf"; sourceTree = "<group>"; };
-		9F0A24042C199C1A00B5DEB3 /* Graphik-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-BoldItalic.otf"; sourceTree = "<group>"; };
-		9F0A24052C199C1A00B5DEB3 /* Graphik-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-Black.otf"; sourceTree = "<group>"; };
-		9F0A24062C199C1A00B5DEB3 /* Graphik-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-LightItalic.otf"; sourceTree = "<group>"; };
-		9F0A24072C199C1B00B5DEB3 /* Graphik-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-Semibold.otf"; sourceTree = "<group>"; };
-		9F0A24082C199C1B00B5DEB3 /* Graphik-SuperItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-SuperItalic.otf"; sourceTree = "<group>"; };
-		9F0A24092C199C1B00B5DEB3 /* Graphik-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-ThinItalic.otf"; sourceTree = "<group>"; };
-		9F0A240A2C199C1B00B5DEB3 /* Graphik-ExtralightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-ExtralightItalic.otf"; sourceTree = "<group>"; };
-		9F0A240B2C199C1B00B5DEB3 /* Graphik-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-Regular.otf"; sourceTree = "<group>"; };
 		9F0A241E2C1DA57400B5DEB3 /* ThemeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeProtocol.swift; sourceTree = "<group>"; };
 		9F0A24202C1DA62600B5DEB3 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		9F0A24222C1DAA5F00B5DEB3 /* MainTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTheme.swift; sourceTree = "<group>"; };
+		9F390FEF2C1E2BA900DB1C1D /* FilledTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledTextFieldStyle.swift; sourceTree = "<group>"; };
+		9F390FF12C1E377500DB1C1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = homely/Info.plist; sourceTree = "<group>"; };
 		9F5D8B362C144A37002B98D5 /* DummyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyModel.swift; sourceTree = "<group>"; };
 		9F5D8B382C14C725002B98D5 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		9F6960F32C03B64900605975 /* homely.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = homely.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,6 +78,25 @@
 		9F69610D2C03B64A00605975 /* homelyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = homelyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F6961112C03B64A00605975 /* HomelyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomelyUITests.swift; sourceTree = "<group>"; };
 		9F6961132C03B64A00605975 /* HomelyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomelyUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		9F73B5802C5F623C0007CD73 /* HankenGrotesk-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HankenGrotesk-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		9F73B5812C5F623C0007CD73 /* HankenGrotesk-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HankenGrotesk-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		9F73B5822C5F623C0007CD73 /* HankenGrotesk-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HankenGrotesk-SemiBold.ttf"; sourceTree = "<group>"; };
+		9F73B5832C5F623C0007CD73 /* HankenGrotesk-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HankenGrotesk-LightItalic.ttf"; sourceTree = "<group>"; };
+		9F73B5842C5F623C0007CD73 /* HankenGrotesk-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HankenGrotesk-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		9F73B5852C5F623C0007CD73 /* HankenGrotesk-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HankenGrotesk-Light.ttf"; sourceTree = "<group>"; };
+		9F73B5862C5F623C0007CD73 /* HankenGrotesk-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HankenGrotesk-Bold.ttf"; sourceTree = "<group>"; };
+		9F73B5872C5F623C0007CD73 /* HankenGrotesk-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HankenGrotesk-Regular.ttf"; sourceTree = "<group>"; };
+		9F73B5882C5F623C0007CD73 /* HankenGrotesk-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HankenGrotesk-ExtraBold.ttf"; sourceTree = "<group>"; };
+		9F73B5892C5F623C0007CD73 /* HankenGrotesk-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HankenGrotesk-ThinItalic.ttf"; sourceTree = "<group>"; };
+		9F73B58A2C5F623C0007CD73 /* HankenGrotesk-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HankenGrotesk-Medium.ttf"; sourceTree = "<group>"; };
+		9F73B58B2C5F623C0007CD73 /* HankenGrotesk-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HankenGrotesk-Thin.ttf"; sourceTree = "<group>"; };
+		9F73B58C2C5F623C0007CD73 /* HankenGrotesk-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HankenGrotesk-Italic.ttf"; sourceTree = "<group>"; };
+		9F73B58D2C5F623C0007CD73 /* HankenGrotesk-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HankenGrotesk-MediumItalic.ttf"; sourceTree = "<group>"; };
+		9F73B58E2C5F623C0007CD73 /* HankenGrotesk-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HankenGrotesk-BoldItalic.ttf"; sourceTree = "<group>"; };
+		9F73B58F2C5F623C0007CD73 /* HankenGrotesk-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HankenGrotesk-BlackItalic.ttf"; sourceTree = "<group>"; };
+		9F73B5902C5F623C0007CD73 /* HankenGrotesk-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HankenGrotesk-ExtraLight.ttf"; sourceTree = "<group>"; };
+		9F73B5912C5F623C0007CD73 /* HankenGrotesk-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HankenGrotesk-Black.ttf"; path = "../../../../../../../Downloads/Hanken_Grotesk/static/HankenGrotesk-Black.ttf"; sourceTree = "<group>"; };
+		9F73B5A42C5F63E30007CD73 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,31 +147,41 @@
 		9F0A23F92C19982B00B5DEB3 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				9F0A24052C199C1A00B5DEB3 /* Graphik-Black.otf */,
-				9F0A23FC2C199C1A00B5DEB3 /* Graphik-BlackItalic.otf */,
-				9F0A24032C199C1A00B5DEB3 /* Graphik-Bold.otf */,
-				9F0A24042C199C1A00B5DEB3 /* Graphik-BoldItalic.otf */,
-				9F0A23FE2C199C1A00B5DEB3 /* Graphik-Extralight.otf */,
-				9F0A240A2C199C1B00B5DEB3 /* Graphik-ExtralightItalic.otf */,
-				9F0A24012C199C1A00B5DEB3 /* Graphik-Light.otf */,
-				9F0A24062C199C1A00B5DEB3 /* Graphik-LightItalic.otf */,
-				9F0A23FA2C199C1A00B5DEB3 /* Graphik-Medium.otf */,
-				9F0A24022C199C1A00B5DEB3 /* Graphik-MediumItalic.otf */,
-				9F0A240B2C199C1B00B5DEB3 /* Graphik-Regular.otf */,
-				9F0A23FD2C199C1A00B5DEB3 /* Graphik-RegularItalic.otf */,
-				9F0A24072C199C1B00B5DEB3 /* Graphik-Semibold.otf */,
-				9F0A23FF2C199C1A00B5DEB3 /* Graphik-SemiboldItalic.otf */,
-				9F0A24002C199C1A00B5DEB3 /* Graphik-Super.otf */,
-				9F0A24082C199C1B00B5DEB3 /* Graphik-SuperItalic.otf */,
-				9F0A23FB2C199C1A00B5DEB3 /* Graphik-Thin.otf */,
-				9F0A24092C199C1B00B5DEB3 /* Graphik-ThinItalic.otf */,
+				9F73B5912C5F623C0007CD73 /* HankenGrotesk-Black.ttf */,
+				9F73B58F2C5F623C0007CD73 /* HankenGrotesk-BlackItalic.ttf */,
+				9F73B5862C5F623C0007CD73 /* HankenGrotesk-Bold.ttf */,
+				9F73B58E2C5F623C0007CD73 /* HankenGrotesk-BoldItalic.ttf */,
+				9F73B5882C5F623C0007CD73 /* HankenGrotesk-ExtraBold.ttf */,
+				9F73B5842C5F623C0007CD73 /* HankenGrotesk-ExtraBoldItalic.ttf */,
+				9F73B5902C5F623C0007CD73 /* HankenGrotesk-ExtraLight.ttf */,
+				9F73B5802C5F623C0007CD73 /* HankenGrotesk-ExtraLightItalic.ttf */,
+				9F73B58C2C5F623C0007CD73 /* HankenGrotesk-Italic.ttf */,
+				9F73B5852C5F623C0007CD73 /* HankenGrotesk-Light.ttf */,
+				9F73B5832C5F623C0007CD73 /* HankenGrotesk-LightItalic.ttf */,
+				9F73B58A2C5F623C0007CD73 /* HankenGrotesk-Medium.ttf */,
+				9F73B58D2C5F623C0007CD73 /* HankenGrotesk-MediumItalic.ttf */,
+				9F73B5872C5F623C0007CD73 /* HankenGrotesk-Regular.ttf */,
+				9F73B5822C5F623C0007CD73 /* HankenGrotesk-SemiBold.ttf */,
+				9F73B5812C5F623C0007CD73 /* HankenGrotesk-SemiBoldItalic.ttf */,
+				9F73B58B2C5F623C0007CD73 /* HankenGrotesk-Thin.ttf */,
+				9F73B5892C5F623C0007CD73 /* HankenGrotesk-ThinItalic.ttf */,
+				9F73B5A42C5F63E30007CD73 /* Fonts.swift */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		9F390FEE2C1E2B9200DB1C1D /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				9F390FEF2C1E2BA900DB1C1D /* FilledTextFieldStyle.swift */,
+			);
+			path = Styles;
 			sourceTree = "<group>";
 		};
 		9F6960EA2C03B64900605975 = {
 			isa = PBXGroup;
 			children = (
+				9F390FF12C1E377500DB1C1D /* Info.plist */,
 				9F6960F52C03B64900605975 /* Homely */,
 				9F6961062C03B64A00605975 /* HomelyTests */,
 				9F6961102C03B64A00605975 /* HomelyUITests */,
@@ -187,6 +202,7 @@
 		9F6960F52C03B64900605975 /* Homely */ = {
 			isa = PBXGroup;
 			children = (
+				9F390FEE2C1E2B9200DB1C1D /* Styles */,
 				9F0A23F62C1997C900B5DEB3 /* Resources */,
 				9F0A23F52C1997AA00B5DEB3 /* Themes */,
 				9F6960F62C03B64900605975 /* HomelyApp.swift */,
@@ -327,27 +343,27 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9F0A24192C199C1B00B5DEB3 /* Graphik-Semibold.otf in Resources */,
-				9F0A24152C199C1B00B5DEB3 /* Graphik-Bold.otf in Resources */,
-				9F0A240E2C199C1B00B5DEB3 /* Graphik-BlackItalic.otf in Resources */,
-				9F0A24172C199C1B00B5DEB3 /* Graphik-Black.otf in Resources */,
-				9F0A24142C199C1B00B5DEB3 /* Graphik-MediumItalic.otf in Resources */,
+				9F73B5952C5F623C0007CD73 /* HankenGrotesk-LightItalic.ttf in Resources */,
 				9F0A23F82C19980E00B5DEB3 /* Colors.xcassets in Resources */,
-				9F0A240C2C199C1B00B5DEB3 /* Graphik-Medium.otf in Resources */,
-				9F0A241B2C199C1B00B5DEB3 /* Graphik-ThinItalic.otf in Resources */,
-				9F0A24112C199C1B00B5DEB3 /* Graphik-SemiboldItalic.otf in Resources */,
-				9F0A241A2C199C1B00B5DEB3 /* Graphik-SuperItalic.otf in Resources */,
-				9F0A24122C199C1B00B5DEB3 /* Graphik-Super.otf in Resources */,
-				9F0A240D2C199C1B00B5DEB3 /* Graphik-Thin.otf in Resources */,
-				9F0A24102C199C1B00B5DEB3 /* Graphik-Extralight.otf in Resources */,
-				9F0A241D2C199C1B00B5DEB3 /* Graphik-Regular.otf in Resources */,
-				9F0A24162C199C1B00B5DEB3 /* Graphik-BoldItalic.otf in Resources */,
+				9F73B59E2C5F623C0007CD73 /* HankenGrotesk-Italic.ttf in Resources */,
+				9F73B5972C5F623C0007CD73 /* HankenGrotesk-Light.ttf in Resources */,
+				9F73B5992C5F623C0007CD73 /* HankenGrotesk-Regular.ttf in Resources */,
+				9F73B59F2C5F623C0007CD73 /* HankenGrotesk-MediumItalic.ttf in Resources */,
+				9F73B5A02C5F623C0007CD73 /* HankenGrotesk-BoldItalic.ttf in Resources */,
 				9F6960FE2C03B64A00605975 /* Preview Assets.xcassets in Resources */,
-				9F0A24132C199C1B00B5DEB3 /* Graphik-Light.otf in Resources */,
-				9F0A241C2C199C1B00B5DEB3 /* Graphik-ExtralightItalic.otf in Resources */,
+				9F73B59D2C5F623C0007CD73 /* HankenGrotesk-Thin.ttf in Resources */,
+				9F73B59B2C5F623C0007CD73 /* HankenGrotesk-ThinItalic.ttf in Resources */,
+				9F73B5A22C5F623C0007CD73 /* HankenGrotesk-ExtraLight.ttf in Resources */,
+				9F73B5922C5F623C0007CD73 /* HankenGrotesk-ExtraLightItalic.ttf in Resources */,
+				9F73B59A2C5F623C0007CD73 /* HankenGrotesk-ExtraBold.ttf in Resources */,
+				9F73B5A12C5F623C0007CD73 /* HankenGrotesk-BlackItalic.ttf in Resources */,
+				9F73B5942C5F623C0007CD73 /* HankenGrotesk-SemiBold.ttf in Resources */,
+				9F73B5932C5F623C0007CD73 /* HankenGrotesk-SemiBoldItalic.ttf in Resources */,
+				9F73B5982C5F623C0007CD73 /* HankenGrotesk-Bold.ttf in Resources */,
+				9F73B59C2C5F623C0007CD73 /* HankenGrotesk-Medium.ttf in Resources */,
+				9F73B5962C5F623C0007CD73 /* HankenGrotesk-ExtraBoldItalic.ttf in Resources */,
 				9F6960FB2C03B64A00605975 /* Assets.xcassets in Resources */,
-				9F0A240F2C199C1B00B5DEB3 /* Graphik-RegularItalic.otf in Resources */,
-				9F0A24182C199C1B00B5DEB3 /* Graphik-LightItalic.otf in Resources */,
+				9F73B5A32C5F623C0007CD73 /* HankenGrotesk-Black.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,6 +395,8 @@
 				9F6960F72C03B64900605975 /* HomelyApp.swift in Sources */,
 				9F0A24232C1DAA5F00B5DEB3 /* MainTheme.swift in Sources */,
 				9F0A24212C1DA62600B5DEB3 /* ThemeManager.swift in Sources */,
+				9F73B5A52C5F63E30007CD73 /* Fonts.swift in Sources */,
+				9F390FF02C1E2BA900DB1C1D /* FilledTextFieldStyle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -545,6 +563,7 @@
 				DEVELOPMENT_TEAM = 3N2ZMMKPFS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = homely/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -574,6 +593,7 @@
 				DEVELOPMENT_TEAM = 3N2ZMMKPFS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = homely/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

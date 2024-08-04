@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>HankenGrotesk-Black.ttf</string>
+		<string>HankenGrotesk-BlackItalic.ttf</string>
+		<string>HankenGrotesk-Bold.ttf</string>
+		<string>HankenGrotesk-BoldItalic.ttf</string>
+		<string>HankenGrotesk-ExtraBold.ttf</string>
+		<string>HankenGrotesk-ExtraBoldItalic.ttf</string>
+		<string>HankenGrotesk-Italic.ttf</string>
+		<string>HankenGrotesk-Light.ttf</string>
+		<string>HankenGrotesk-LightItalic.ttf</string>
+		<string>HankenGrotesk-Medium.ttf</string>
+		<string>HankenGrotesk-MediumItalic.ttf</string>
+		<string>HankenGrotesk-Regular.ttf</string>
+		<string>HankenGrotesk-SemiBold.ttf</string>
+		<string>HankenGrotesk-SemiBoldItalic.ttf</string>
+		<string>HankenGrotesk-Thin.ttf</string>
+		<string>HankenGrotesk-ThinItalic.ttf</string>
+	</array>
+</dict>
+</plist>
