@@ -25,7 +25,7 @@ struct FilledTextFieldStyle: TextFieldStyle {
         configuration
             .frame(height: 48.0)
             .padding(.horizontal, 12)
-            .background(theme.current.color.background)
+            .background(theme.color.background)
             .cornerRadius(8)
         
         
