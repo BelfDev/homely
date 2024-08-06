@@ -13,7 +13,7 @@
 		9F0A24232C1DAA5F00B5DEB3 /* MainTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0A24222C1DAA5F00B5DEB3 /* MainTheme.swift */; };
 		9F390FF02C1E2BA900DB1C1D /* FilledTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F390FEF2C1E2BA900DB1C1D /* FilledTextFieldStyle.swift */; };
 		9F5D8B372C144A37002B98D5 /* DummyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5D8B362C144A37002B98D5 /* DummyModel.swift */; };
-		9F5D8B392C14C725002B98D5 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5D8B382C14C725002B98D5 /* LoginView.swift */; };
+		9F5D8B392C14C725002B98D5 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5D8B382C14C725002B98D5 /* LoginScreen.swift */; };
 		9F6960F72C03B64900605975 /* HomelyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6960F62C03B64900605975 /* HomelyApp.swift */; };
 		9F6960F92C03B64900605975 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6960F82C03B64900605975 /* ContentView.swift */; };
 		9F6960FB2C03B64A00605975 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F6960FA2C03B64A00605975 /* Assets.xcassets */; };
@@ -40,6 +40,7 @@
 		9F73B5A22C5F623C0007CD73 /* HankenGrotesk-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F73B5902C5F623C0007CD73 /* HankenGrotesk-ExtraLight.ttf */; };
 		9F73B5A32C5F623C0007CD73 /* HankenGrotesk-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F73B5912C5F623C0007CD73 /* HankenGrotesk-Black.ttf */; };
 		9F73B5A52C5F63E30007CD73 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F73B5A42C5F63E30007CD73 /* Fonts.swift */; };
+		9F73B5AB2C62141B0007CD73 /* LoginViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F73B5AA2C62141B0007CD73 /* LoginViews.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,7 +68,7 @@
 		9F390FEF2C1E2BA900DB1C1D /* FilledTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledTextFieldStyle.swift; sourceTree = "<group>"; };
 		9F390FF12C1E377500DB1C1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = homely/Info.plist; sourceTree = "<group>"; };
 		9F5D8B362C144A37002B98D5 /* DummyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyModel.swift; sourceTree = "<group>"; };
-		9F5D8B382C14C725002B98D5 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		9F5D8B382C14C725002B98D5 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		9F6960F32C03B64900605975 /* homely.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = homely.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F6960F62C03B64900605975 /* HomelyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomelyApp.swift; sourceTree = "<group>"; };
 		9F6960F82C03B64900605975 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -97,6 +98,7 @@
 		9F73B5902C5F623C0007CD73 /* HankenGrotesk-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HankenGrotesk-ExtraLight.ttf"; sourceTree = "<group>"; };
 		9F73B5912C5F623C0007CD73 /* HankenGrotesk-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HankenGrotesk-Black.ttf"; path = "../../../../../../../Downloads/Hanken_Grotesk/static/HankenGrotesk-Black.ttf"; sourceTree = "<group>"; };
 		9F73B5A42C5F63E30007CD73 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		9F73B5AA2C62141B0007CD73 /* LoginViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViews.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +204,7 @@
 		9F6960F52C03B64900605975 /* Homely */ = {
 			isa = PBXGroup;
 			children = (
+				9F73B5A82C6213B50007CD73 /* Features */,
 				9F390FEE2C1E2B9200DB1C1D /* Styles */,
 				9F0A23F62C1997C900B5DEB3 /* Resources */,
 				9F0A23F52C1997AA00B5DEB3 /* Themes */,
@@ -209,7 +212,6 @@
 				9F6960F82C03B64900605975 /* ContentView.swift */,
 				9F6960FC2C03B64A00605975 /* Preview Content */,
 				9F5D8B362C144A37002B98D5 /* DummyModel.swift */,
-				9F5D8B382C14C725002B98D5 /* LoginView.swift */,
 			);
 			path = Homely;
 			sourceTree = "<group>";
@@ -237,6 +239,23 @@
 				9F6961132C03B64A00605975 /* HomelyUITestsLaunchTests.swift */,
 			);
 			path = HomelyUITests;
+			sourceTree = "<group>";
+		};
+		9F73B5A82C6213B50007CD73 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				9F73B5A92C6213F20007CD73 /* Login */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		9F73B5A92C6213F20007CD73 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				9F5D8B382C14C725002B98D5 /* LoginScreen.swift */,
+				9F73B5AA2C62141B0007CD73 /* LoginViews.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -391,7 +410,8 @@
 				9F0A241F2C1DA57400B5DEB3 /* ThemeProtocol.swift in Sources */,
 				9F5D8B372C144A37002B98D5 /* DummyModel.swift in Sources */,
 				9F6960F92C03B64900605975 /* ContentView.swift in Sources */,
-				9F5D8B392C14C725002B98D5 /* LoginView.swift in Sources */,
+				9F5D8B392C14C725002B98D5 /* LoginScreen.swift in Sources */,
+				9F73B5AB2C62141B0007CD73 /* LoginViews.swift in Sources */,
 				9F6960F72C03B64900605975 /* HomelyApp.swift in Sources */,
 				9F0A24232C1DAA5F00B5DEB3 /* MainTheme.swift in Sources */,
 				9F0A24212C1DA62600B5DEB3 /* ThemeManager.swift in Sources */,

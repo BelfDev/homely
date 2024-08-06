@@ -13,7 +13,7 @@ struct HomelyApp: App {
     
     var body: some Scene {
         WindowGroup {
-            LoginView().environmentObject(theme)
+            LoginScreen().environmentObject(theme)
         }
     }
 }
