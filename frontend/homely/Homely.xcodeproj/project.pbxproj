@@ -40,6 +40,9 @@
 		9F73B5A22C5F623C0007CD73 /* HankenGrotesk-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F73B5902C5F623C0007CD73 /* HankenGrotesk-ExtraLight.ttf */; };
 		9F73B5A32C5F623C0007CD73 /* HankenGrotesk-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F73B5912C5F623C0007CD73 /* HankenGrotesk-Black.ttf */; };
 		9F73B5A52C5F63E30007CD73 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F73B5A42C5F63E30007CD73 /* Fonts.swift */; };
+		9FCC2E112C67FFC100A787C3 /* LoginScreen.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9FCC2E102C67FFC100A787C3 /* LoginScreen.xcstrings */; };
+		9FCC2E132C68043100A787C3 /* LoginStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCC2E122C68043100A787C3 /* LoginStrings.swift */; };
+		9FCC2E152C680D0100A787C3 /* FixedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCC2E142C680D0100A787C3 /* FixedStrings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +100,9 @@
 		9F73B5902C5F623C0007CD73 /* HankenGrotesk-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HankenGrotesk-ExtraLight.ttf"; sourceTree = "<group>"; };
 		9F73B5912C5F623C0007CD73 /* HankenGrotesk-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HankenGrotesk-Black.ttf"; path = "../../../../../../../Downloads/Hanken_Grotesk/static/HankenGrotesk-Black.ttf"; sourceTree = "<group>"; };
 		9F73B5A42C5F63E30007CD73 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		9FCC2E102C67FFC100A787C3 /* LoginScreen.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = LoginScreen.xcstrings; sourceTree = "<group>"; };
+		9FCC2E122C68043100A787C3 /* LoginStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStrings.swift; sourceTree = "<group>"; };
+		9FCC2E142C680D0100A787C3 /* FixedStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedStrings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +143,7 @@
 		9F0A23F62C1997C900B5DEB3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9FCC2E0F2C67FF6500A787C3 /* Strings */,
 				9F0A23F92C19982B00B5DEB3 /* Fonts */,
 				9F6960FA2C03B64A00605975 /* Assets.xcassets */,
 				9F0A23F72C19980E00B5DEB3 /* Colors.xcassets */,
@@ -251,8 +258,18 @@
 			isa = PBXGroup;
 			children = (
 				9F5D8B382C14C725002B98D5 /* LoginScreen.swift */,
+				9FCC2E122C68043100A787C3 /* LoginStrings.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		9FCC2E0F2C67FF6500A787C3 /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				9FCC2E102C67FFC100A787C3 /* LoginScreen.xcstrings */,
+				9FCC2E142C680D0100A787C3 /* FixedStrings.swift */,
+			);
+			path = Strings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -341,6 +358,8 @@
 			knownRegions = (
 				en,
 				Base,
+				"pt-BR",
+				el,
 			);
 			mainGroup = 9F6960EA2C03B64900605975;
 			productRefGroup = 9F6960F42C03B64900605975 /* Products */;
@@ -375,6 +394,7 @@
 				9F73B5A12C5F623C0007CD73 /* HankenGrotesk-BlackItalic.ttf in Resources */,
 				9F73B5942C5F623C0007CD73 /* HankenGrotesk-SemiBold.ttf in Resources */,
 				9F73B5932C5F623C0007CD73 /* HankenGrotesk-SemiBoldItalic.ttf in Resources */,
+				9FCC2E112C67FFC100A787C3 /* LoginScreen.xcstrings in Resources */,
 				9F73B5982C5F623C0007CD73 /* HankenGrotesk-Bold.ttf in Resources */,
 				9F73B59C2C5F623C0007CD73 /* HankenGrotesk-Medium.ttf in Resources */,
 				9F73B5962C5F623C0007CD73 /* HankenGrotesk-ExtraBoldItalic.ttf in Resources */,
@@ -406,6 +426,8 @@
 			files = (
 				9F0A241F2C1DA57400B5DEB3 /* ThemeProtocol.swift in Sources */,
 				9F5D8B372C144A37002B98D5 /* DummyModel.swift in Sources */,
+				9FCC2E152C680D0100A787C3 /* FixedStrings.swift in Sources */,
+				9FCC2E132C68043100A787C3 /* LoginStrings.swift in Sources */,
 				9F6960F92C03B64900605975 /* ContentView.swift in Sources */,
 				9F5D8B392C14C725002B98D5 /* LoginScreen.swift in Sources */,
 				9F6960F72C03B64900605975 /* HomelyApp.swift in Sources */,
@@ -508,6 +530,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -564,6 +587,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -580,6 +604,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = homely/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -610,6 +635,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = homely/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

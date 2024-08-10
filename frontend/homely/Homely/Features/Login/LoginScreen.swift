@@ -17,7 +17,7 @@ struct LoginScreen: View {
             
             ZStack(alignment: .top) {
                 backgroundImage(minHeight: geometry.size.height * 0.3)
-                Text("Homely")
+                Text(FixedStrings.appTitle)
                     .foregroundStyle(theme.color.onPrimary)
                     .font(theme.font.h2)
                     .bold()
@@ -29,7 +29,7 @@ struct LoginScreen: View {
                         Spacer()
                             .frame(height: 32.0)
                         
-                        Text("Login")
+                        Text(LoginStrings.screenTitle)
                             .font(theme.font.h5)
                             .bold()
                             .foregroundColor(theme.color.onSurface)
@@ -86,7 +86,7 @@ struct LoginScreen: View {
     
     private var signUpRow: some View {
         HStack {
-            Text("Don't have an account?")
+            Text(LoginStrings.signUpHelperText)
                 .font(theme.font.body1)
                 .foregroundColor(theme.color.onSurface)
             Spacer()
@@ -94,7 +94,7 @@ struct LoginScreen: View {
                 print("Sign up")
             } label: {
                 HStack {
-                    Text("Sign Up")
+                    Text(LoginStrings.signUpButton)
                         .font(theme.font.body1)
                         .foregroundColor(theme.color.onSurface)
                     Image(systemName: "arrow.right")
@@ -109,7 +109,7 @@ struct LoginScreen: View {
         VStack(
             alignment: .leading,
             spacing: 8.0) {
-                Text("E-mail")
+                Text(LoginStrings.emailInputLabel)
                     .font(theme.font.body1)
                     .fontWeight(.medium)
                     .foregroundColor(theme.color.onSurface)
@@ -127,7 +127,7 @@ struct LoginScreen: View {
         VStack(
             alignment: .leading,
             spacing: 8.0) {
-                Text("Password")
+                Text(LoginStrings.passwordInputLabel)
                     .font(theme.font.body1)
                     .fontWeight(.medium)
                     .foregroundColor(theme.color.onSurface)
@@ -149,7 +149,7 @@ struct LoginScreen: View {
         Button {
             print("Log user in")
         } label: {
-            Text("Login")
+            Text(LoginStrings.loginButton)
                 .font(theme.font.button)
                 .foregroundColor(theme.color.onPrimary)
         }
@@ -161,11 +161,14 @@ struct LoginScreen: View {
     private var forgotPasswordButton: some View {
         HStack {
             Spacer()
-            Button("Forgot password?") {
+            Button {
                 print("Forgot")
+            } label: {
+                Text(LoginStrings.forgotPasswordButton)
+                    .font(theme.font.body1)
+                    .foregroundColor(theme.color.onSurface)
             }
-            .font(theme.font.body1)
-            .foregroundColor(theme.color.onSurface)
+          
         }
     }
 }

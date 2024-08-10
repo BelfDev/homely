@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import homely
+@testable import Homely
 
 final class HomelyTests: XCTestCase {
 
