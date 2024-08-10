@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "9F6960F22C03B64900605975"
-               BuildableName = "homely.app"
-               BlueprintName = "homely"
+               BuildableName = "Homely.app"
+               BlueprintName = "Homely"
                ReferencedContainer = "container:homely.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -36,8 +36,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "9F6961022C03B64A00605975"
-               BuildableName = "homelyTests.xctest"
-               BlueprintName = "homelyTests"
+               BuildableName = "HomelyTests.xctest"
+               BlueprintName = "HomelyTests"
                ReferencedContainer = "container:homely.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -47,8 +47,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "9F69610C2C03B64A00605975"
-               BuildableName = "homelyUITests.xctest"
-               BlueprintName = "homelyUITests"
+               BuildableName = "HomelyUITests.xctest"
+               BlueprintName = "HomelyUITests"
                ReferencedContainer = "container:homely.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -69,8 +69,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9F6960F22C03B64900605975"
-            BuildableName = "homely.app"
-            BlueprintName = "homely"
+            BuildableName = "Homely.app"
+            BlueprintName = "Homely"
             ReferencedContainer = "container:homely.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -86,8 +86,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9F6960F22C03B64900605975"
-            BuildableName = "homely.app"
-            BlueprintName = "homely"
+            BuildableName = "Homely.app"
+            BlueprintName = "Homely"
             ReferencedContainer = "container:homely.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

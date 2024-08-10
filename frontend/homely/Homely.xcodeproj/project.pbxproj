@@ -68,14 +68,14 @@
 		9F390FF12C1E377500DB1C1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = homely/Info.plist; sourceTree = "<group>"; };
 		9F5D8B362C144A37002B98D5 /* DummyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyModel.swift; sourceTree = "<group>"; };
 		9F5D8B382C14C725002B98D5 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
-		9F6960F32C03B64900605975 /* homely.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = homely.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F6960F32C03B64900605975 /* Homely.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homely.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F6960F62C03B64900605975 /* HomelyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomelyApp.swift; sourceTree = "<group>"; };
 		9F6960F82C03B64900605975 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9F6960FA2C03B64A00605975 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9F6960FD2C03B64A00605975 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		9F6961032C03B64A00605975 /* homelyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = homelyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F6961032C03B64A00605975 /* HomelyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HomelyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F6961072C03B64A00605975 /* HomelyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomelyTests.swift; sourceTree = "<group>"; };
-		9F69610D2C03B64A00605975 /* homelyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = homelyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F69610D2C03B64A00605975 /* HomelyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HomelyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F6961112C03B64A00605975 /* HomelyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomelyUITests.swift; sourceTree = "<group>"; };
 		9F6961132C03B64A00605975 /* HomelyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomelyUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		9F73B5802C5F623C0007CD73 /* HankenGrotesk-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HankenGrotesk-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
@@ -192,9 +192,9 @@
 		9F6960F42C03B64900605975 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9F6960F32C03B64900605975 /* homely.app */,
-				9F6961032C03B64A00605975 /* homelyTests.xctest */,
-				9F69610D2C03B64A00605975 /* homelyUITests.xctest */,
+				9F6960F32C03B64900605975 /* Homely.app */,
+				9F6961032C03B64A00605975 /* HomelyTests.xctest */,
+				9F69610D2C03B64A00605975 /* HomelyUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -258,9 +258,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9F6960F22C03B64900605975 /* homely */ = {
+		9F6960F22C03B64900605975 /* Homely */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9F6961172C03B64A00605975 /* Build configuration list for PBXNativeTarget "homely" */;
+			buildConfigurationList = 9F6961172C03B64A00605975 /* Build configuration list for PBXNativeTarget "Homely" */;
 			buildPhases = (
 				9F6960EF2C03B64900605975 /* Sources */,
 				9F6960F02C03B64900605975 /* Frameworks */,
@@ -270,14 +270,14 @@
 			);
 			dependencies = (
 			);
-			name = homely;
+			name = Homely;
 			productName = homely;
-			productReference = 9F6960F32C03B64900605975 /* homely.app */;
+			productReference = 9F6960F32C03B64900605975 /* Homely.app */;
 			productType = "com.apple.product-type.application";
 		};
-		9F6961022C03B64A00605975 /* homelyTests */ = {
+		9F6961022C03B64A00605975 /* HomelyTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9F69611A2C03B64A00605975 /* Build configuration list for PBXNativeTarget "homelyTests" */;
+			buildConfigurationList = 9F69611A2C03B64A00605975 /* Build configuration list for PBXNativeTarget "HomelyTests" */;
 			buildPhases = (
 				9F6960FF2C03B64A00605975 /* Sources */,
 				9F6961002C03B64A00605975 /* Frameworks */,
@@ -288,14 +288,14 @@
 			dependencies = (
 				9F6961052C03B64A00605975 /* PBXTargetDependency */,
 			);
-			name = homelyTests;
+			name = HomelyTests;
 			productName = homelyTests;
-			productReference = 9F6961032C03B64A00605975 /* homelyTests.xctest */;
+			productReference = 9F6961032C03B64A00605975 /* HomelyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		9F69610C2C03B64A00605975 /* homelyUITests */ = {
+		9F69610C2C03B64A00605975 /* HomelyUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9F69611D2C03B64A00605975 /* Build configuration list for PBXNativeTarget "homelyUITests" */;
+			buildConfigurationList = 9F69611D2C03B64A00605975 /* Build configuration list for PBXNativeTarget "HomelyUITests" */;
 			buildPhases = (
 				9F6961092C03B64A00605975 /* Sources */,
 				9F69610A2C03B64A00605975 /* Frameworks */,
@@ -306,9 +306,9 @@
 			dependencies = (
 				9F69610F2C03B64A00605975 /* PBXTargetDependency */,
 			);
-			name = homelyUITests;
+			name = HomelyUITests;
 			productName = homelyUITests;
-			productReference = 9F69610D2C03B64A00605975 /* homelyUITests.xctest */;
+			productReference = 9F69610D2C03B64A00605975 /* HomelyUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -334,7 +334,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9F6960EE2C03B64900605975 /* Build configuration list for PBXProject "homely" */;
+			buildConfigurationList = 9F6960EE2C03B64900605975 /* Build configuration list for PBXProject "Homely" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -347,9 +347,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9F6960F22C03B64900605975 /* homely */,
-				9F6961022C03B64A00605975 /* homelyTests */,
-				9F69610C2C03B64A00605975 /* homelyUITests */,
+				9F6960F22C03B64900605975 /* Homely */,
+				9F6961022C03B64A00605975 /* HomelyTests */,
+				9F69610C2C03B64A00605975 /* HomelyUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -438,12 +438,12 @@
 /* Begin PBXTargetDependency section */
 		9F6961052C03B64A00605975 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 9F6960F22C03B64900605975 /* homely */;
+			target = 9F6960F22C03B64900605975 /* Homely */;
 			targetProxy = 9F6961042C03B64A00605975 /* PBXContainerItemProxy */;
 		};
 		9F69610F2C03B64A00605975 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 9F6960F22C03B64900605975 /* homely */;
+			target = 9F6960F22C03B64900605975 /* Homely */;
 			targetProxy = 9F69610E2C03B64A00605975 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -644,7 +644,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/homely.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/homely";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Homely.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Homely";
 			};
 			name = Debug;
 		};
@@ -664,7 +664,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/homely.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/homely";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Homely.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Homely";
 			};
 			name = Release;
 		};
@@ -707,7 +707,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9F6960EE2C03B64900605975 /* Build configuration list for PBXProject "homely" */ = {
+		9F6960EE2C03B64900605975 /* Build configuration list for PBXProject "Homely" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9F6961152C03B64A00605975 /* Debug */,
@@ -716,7 +716,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9F6961172C03B64A00605975 /* Build configuration list for PBXNativeTarget "homely" */ = {
+		9F6961172C03B64A00605975 /* Build configuration list for PBXNativeTarget "Homely" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9F6961182C03B64A00605975 /* Debug */,
@@ -725,7 +725,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9F69611A2C03B64A00605975 /* Build configuration list for PBXNativeTarget "homelyTests" */ = {
+		9F69611A2C03B64A00605975 /* Build configuration list for PBXNativeTarget "HomelyTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9F69611B2C03B64A00605975 /* Debug */,
@@ -734,7 +734,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9F69611D2C03B64A00605975 /* Build configuration list for PBXNativeTarget "homelyUITests" */ = {
+		9F69611D2C03B64A00605975 /* Build configuration list for PBXNativeTarget "HomelyUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9F69611E2C03B64A00605975 /* Debug */,
