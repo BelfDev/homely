@@ -43,6 +43,7 @@
 		9FCC2E112C67FFC100A787C3 /* LoginScreen.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9FCC2E102C67FFC100A787C3 /* LoginScreen.xcstrings */; };
 		9FCC2E132C68043100A787C3 /* LoginStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCC2E122C68043100A787C3 /* LoginStrings.swift */; };
 		9FCC2E152C680D0100A787C3 /* FixedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCC2E142C680D0100A787C3 /* FixedStrings.swift */; };
+		9FCC2E172C68FF8E00A787C3 /* Limelight-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9FCC2E162C68FC3B00A787C3 /* Limelight-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +104,7 @@
 		9FCC2E102C67FFC100A787C3 /* LoginScreen.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = LoginScreen.xcstrings; sourceTree = "<group>"; };
 		9FCC2E122C68043100A787C3 /* LoginStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStrings.swift; sourceTree = "<group>"; };
 		9FCC2E142C680D0100A787C3 /* FixedStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedStrings.swift; sourceTree = "<group>"; };
+		9FCC2E162C68FC3B00A787C3 /* Limelight-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Limelight-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 		9F0A23F92C19982B00B5DEB3 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				9FCC2E162C68FC3B00A787C3 /* Limelight-Regular.ttf */,
 				9F73B5912C5F623C0007CD73 /* HankenGrotesk-Black.ttf */,
 				9F73B58F2C5F623C0007CD73 /* HankenGrotesk-BlackItalic.ttf */,
 				9F73B5862C5F623C0007CD73 /* HankenGrotesk-Bold.ttf */,
@@ -396,6 +399,7 @@
 				9F73B5932C5F623C0007CD73 /* HankenGrotesk-SemiBoldItalic.ttf in Resources */,
 				9FCC2E112C67FFC100A787C3 /* LoginScreen.xcstrings in Resources */,
 				9F73B5982C5F623C0007CD73 /* HankenGrotesk-Bold.ttf in Resources */,
+				9FCC2E172C68FF8E00A787C3 /* Limelight-Regular.ttf in Resources */,
 				9F73B59C2C5F623C0007CD73 /* HankenGrotesk-Medium.ttf in Resources */,
 				9F73B5962C5F623C0007CD73 /* HankenGrotesk-ExtraBoldItalic.ttf in Resources */,
 				9F6960FB2C03B64A00605975 /* Assets.xcassets in Resources */,

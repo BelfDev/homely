@@ -8,6 +8,8 @@
 import Foundation
 
 struct Fonts {
+    static let limeLightRegular:String = "Limelight-Regular"
+    
     static let hankenGroteskBlack: String = "HankenGrotesk-Black"
     static let hankenGroteskBlackItalic: String = "HankenGrotesk-BlackItalic"
     static let hankenGroteskBold: String = "HankenGrotesk-Bold"

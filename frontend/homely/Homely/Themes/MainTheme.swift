@@ -9,8 +9,8 @@ import Foundation
 import SwiftUI
 
 struct MainTypographyTheme: TypographyThemeProtocol {
-    var h1: Font { return .custom(Fonts.hankenGroteskLight, size: 96.0, relativeTo: .largeTitle) }
-    var h2: Font { return .custom(Fonts.hankenGroteskLight, size: 60.0, relativeTo: .title) }
+    var h1: Font { return .custom(Fonts.limeLightRegular, size: 96.0, relativeTo: .largeTitle) }
+    var h2: Font { return .custom(Fonts.limeLightRegular, size: 60.0, relativeTo: .title) }
     var h3: Font { return .custom(Fonts.hankenGroteskRegular, size: 48.0, relativeTo: .title2) }
     var h4: Font { return .custom(Fonts.hankenGroteskRegular, size: 34.0, relativeTo: .title3) }
     var h5: Font { return .custom(Fonts.hankenGroteskRegular, size: 24.0, relativeTo: .headline) }
