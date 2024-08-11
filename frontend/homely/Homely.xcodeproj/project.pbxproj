@@ -44,6 +44,9 @@
 		9FCC2E132C68043100A787C3 /* LoginStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCC2E122C68043100A787C3 /* LoginStrings.swift */; };
 		9FCC2E152C680D0100A787C3 /* FixedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCC2E142C680D0100A787C3 /* FixedStrings.swift */; };
 		9FCC2E172C68FF8E00A787C3 /* Limelight-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9FCC2E162C68FC3B00A787C3 /* Limelight-Regular.ttf */; };
+		9FCC2E1B2C69011D00A787C3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCC2E1A2C69011D00A787C3 /* User.swift */; };
+		9FCC2E1E2C69020000A787C3 /* UserApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCC2E1D2C69020000A787C3 /* UserApiService.swift */; };
+		9FCC2E202C69052900A787C3 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCC2E1F2C69052900A787C3 /* LoginViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +108,9 @@
 		9FCC2E122C68043100A787C3 /* LoginStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStrings.swift; sourceTree = "<group>"; };
 		9FCC2E142C680D0100A787C3 /* FixedStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedStrings.swift; sourceTree = "<group>"; };
 		9FCC2E162C68FC3B00A787C3 /* Limelight-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Limelight-Regular.ttf"; sourceTree = "<group>"; };
+		9FCC2E1A2C69011D00A787C3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		9FCC2E1D2C69020000A787C3 /* UserApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserApiService.swift; sourceTree = "<group>"; };
+		9FCC2E1F2C69052900A787C3 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,6 +218,8 @@
 		9F6960F52C03B64900605975 /* Homely */ = {
 			isa = PBXGroup;
 			children = (
+				9FCC2E1C2C69019F00A787C3 /* Services */,
+				9FCC2E192C6900BE00A787C3 /* Models */,
 				9F73B5A82C6213B50007CD73 /* Features */,
 				9F390FEE2C1E2B9200DB1C1D /* Styles */,
 				9F0A23F62C1997C900B5DEB3 /* Resources */,
@@ -262,6 +270,7 @@
 			children = (
 				9F5D8B382C14C725002B98D5 /* LoginScreen.swift */,
 				9FCC2E122C68043100A787C3 /* LoginStrings.swift */,
+				9FCC2E1F2C69052900A787C3 /* LoginViewModel.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -273,6 +282,22 @@
 				9FCC2E142C680D0100A787C3 /* FixedStrings.swift */,
 			);
 			path = Strings;
+			sourceTree = "<group>";
+		};
+		9FCC2E192C6900BE00A787C3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9FCC2E1A2C69011D00A787C3 /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		9FCC2E1C2C69019F00A787C3 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				9FCC2E1D2C69020000A787C3 /* UserApiService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -429,6 +454,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F0A241F2C1DA57400B5DEB3 /* ThemeProtocol.swift in Sources */,
+				9FCC2E1E2C69020000A787C3 /* UserApiService.swift in Sources */,
 				9F5D8B372C144A37002B98D5 /* DummyModel.swift in Sources */,
 				9FCC2E152C680D0100A787C3 /* FixedStrings.swift in Sources */,
 				9FCC2E132C68043100A787C3 /* LoginStrings.swift in Sources */,
@@ -436,7 +462,9 @@
 				9F5D8B392C14C725002B98D5 /* LoginScreen.swift in Sources */,
 				9F6960F72C03B64900605975 /* HomelyApp.swift in Sources */,
 				9F0A24232C1DAA5F00B5DEB3 /* MainTheme.swift in Sources */,
+				9FCC2E1B2C69011D00A787C3 /* User.swift in Sources */,
 				9F0A24212C1DA62600B5DEB3 /* ThemeManager.swift in Sources */,
+				9FCC2E202C69052900A787C3 /* LoginViewModel.swift in Sources */,
 				9F73B5A52C5F63E30007CD73 /* Fonts.swift in Sources */,
 				9F390FF02C1E2BA900DB1C1D /* FilledTextFieldStyle.swift in Sources */,
 			);
