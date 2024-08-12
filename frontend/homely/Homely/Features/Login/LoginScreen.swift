@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginScreen: View {
-    @EnvironmentObject private var theme: ThemeManager
+    @Environment(ThemeManager.self) private var theme
     @State private var email: String = ""
     @State private var password: String = ""
     
@@ -175,5 +175,5 @@ struct LoginScreen: View {
 
 #Preview {
     LoginScreen()
-        .environmentObject(ThemeManager())
+        .environment(ThemeManager())
 }

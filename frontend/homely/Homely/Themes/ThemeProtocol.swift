@@ -5,7 +5,6 @@
 //  Created by Pedro Belfort on 15.06.24.
 //
 
-import Foundation
 import SwiftUI
 
 protocol TypographyThemeProtocol {

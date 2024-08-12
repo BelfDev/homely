@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 // Placeholder
-class HomeViewModel: ObservableObject {
+@Observable class HomeViewModel {
 
     enum ViewState {
         case START
@@ -18,7 +18,7 @@ class HomeViewModel: ObservableObject {
         case FAILURE(error: String)
     }
 
-    @Published var currentState: ViewState = .START
+    var currentState: ViewState = .START
     private var cancelables = Set<AnyCancellable>()
 
     init() {

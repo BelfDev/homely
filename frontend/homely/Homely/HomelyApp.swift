@@ -9,11 +9,11 @@ import SwiftUI
 
 @main
 struct HomelyApp: App {
-    @StateObject var theme = ThemeManager()
+    @State private var theme = ThemeManager()
     
     var body: some Scene {
         WindowGroup {
-            LoginScreen().environmentObject(theme)
+            LoginScreen().environment(theme)
         }
     }
 }
