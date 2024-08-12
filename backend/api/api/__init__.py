@@ -1,12 +1,11 @@
 import os
 
-from flask import Flask
+from flask import Flask, jsonify
 
 from api.config import DevConfig
 from api.extensions import db, db_init_app, cors, jwt, marsh
 from api.user import user_blueprint
 from api.common import user_identity_lookup, user_lookup_callback
-
 
 def create_app(config_object=DevConfig):
     # create and configure the app
@@ -20,11 +19,10 @@ def create_app(config_object=DevConfig):
 
     with app.app_context():
         db.create_all()
-
-    # a simple page that says hello
-    @app.route('/hello')
-    def hello():
-        return 'Hello, World!'
+    
+    @app.route('/v1/health', methods=['GET'])
+    def healthcheck():
+        return jsonify({"status": "ok"}), 200
 
     return app
 
