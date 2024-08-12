@@ -22,8 +22,8 @@ COPY poetry.lock pyproject.toml /app/
 COPY api ./api
 COPY README.md ./README.md
 
-# Install project dependencies
-RUN poetry install --without dev && rm -rf $POETRY_CACHE_DIR
+# Install project dependencies, excluding dev dependencies
+RUN poetry install --only main && rm -rf $POETRY_CACHE_DIR
 
 # Expose the port on which the Flask app will run
 EXPOSE 5000
