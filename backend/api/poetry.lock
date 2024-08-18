@@ -289,6 +289,27 @@ docs = ["Sphinx", "furo"]
 test = ["objgraph", "psutil"]
 
 [[package]]
+name = "gunicorn"
+version = "23.0.0"
+description = "WSGI HTTP Server for UNIX"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "gunicorn-23.0.0-py3-none-any.whl", hash = "sha256:ec400d38950de4dfd418cff8328b2c8faed0edb0d517d3394e457c317908ca4d"},
+    {file = "gunicorn-23.0.0.tar.gz", hash = "sha256:f014447a0101dc57e294f6c18ca6b40227a4c90e9bdb586042628030cba004ec"},
+]
+
+[package.dependencies]
+packaging = "*"
+
+[package.extras]
+eventlet = ["eventlet (>=0.24.1,!=0.36.0)"]
+gevent = ["gevent (>=1.4.0)"]
+setproctitle = ["setproctitle"]
+testing = ["coverage", "eventlet", "gevent", "pytest", "pytest-cov"]
+tornado = ["tornado (>=0.2)"]
+
+[[package]]
 name = "iniconfig"
 version = "2.0.0"
 description = "brain-dead simple config-ini parsing"
@@ -436,23 +457,23 @@ tests = ["pytest", "pytz", "simplejson"]
 
 [[package]]
 name = "marshmallow-sqlalchemy"
-version = "1.0.0"
+version = "1.1.0"
 description = "SQLAlchemy integration with the marshmallow (de)serialization library"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "marshmallow_sqlalchemy-1.0.0-py3-none-any.whl", hash = "sha256:f415d57809e3555b6323356589aba91e36e4470f35953d3a10c755ac5c3307df"},
-    {file = "marshmallow_sqlalchemy-1.0.0.tar.gz", hash = "sha256:20a0f2fcdd5bddc86444fa01461f17f9b6a12a8ddd4ca8c9b34fe2f2e35d00a2"},
+    {file = "marshmallow_sqlalchemy-1.1.0-py3-none-any.whl", hash = "sha256:cce261148e4c6ec4ee275f3d29352933380a1afa2fd3933f5e9ecd02fdc16ade"},
+    {file = "marshmallow_sqlalchemy-1.1.0.tar.gz", hash = "sha256:2ab092da269dafa8a05d51a58409af71a8d2183958ba47143127dd239e0359d8"},
 ]
 
 [package.dependencies]
-marshmallow = ">=3.10.0"
+marshmallow = ">=3.18.0"
 SQLAlchemy = ">=1.4.40,<3.0"
 
 [package.extras]
 dev = ["marshmallow-sqlalchemy[tests]", "pre-commit (>=3.5,<4.0)", "tox"]
-docs = ["alabaster (==0.7.16)", "sphinx (==7.2.6)", "sphinx-issues (==4.0.0)"]
-tests = ["pytest (<8)", "pytest-lazy-fixture (>=0.6.2)"]
+docs = ["alabaster (==1.0.0)", "sphinx (==8.0.2)", "sphinx-issues (==4.1.0)"]
+tests = ["pytest (<9)", "pytest-lazy-fixtures"]
 
 [[package]]
 name = "packaging"
@@ -649,4 +670,4 @@ watchdog = ["watchdog (>=2.3)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "3af9b7cec9fb76fe4cde30f42a4644d4db28e93fea4c02c9828d764e1e1169c2"
+content-hash = "d4f6d50aea6e1a49ae6a68a3f94568ae4ec8aa9af6ec6bf002f87ca6aabfb4ff"
