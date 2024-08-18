@@ -7,6 +7,7 @@ from api.extensions import db, db_init_app, cors, jwt, marsh
 from api.user import user_blueprint
 from api.common import user_identity_lookup, user_lookup_callback
 
+
 def create_app(config_object=DevConfig):
     # create and configure the app
     app = Flask(__name__,
@@ -19,7 +20,7 @@ def create_app(config_object=DevConfig):
 
     with app.app_context():
         db.create_all()
-    
+
     @app.route('/v1/health', methods=['GET'])
     def healthcheck():
         return jsonify({"status": "ok"}), 200

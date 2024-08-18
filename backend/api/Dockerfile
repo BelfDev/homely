@@ -29,4 +29,4 @@ RUN poetry install --only main && rm -rf $POETRY_CACHE_DIR
 EXPOSE 5000
 
 # Set the entrypoint command to run the Flask app
-CMD ["poetry", "run", "flask", "run", "--host=0.0.0.0"]
+CMD ["poetry", "run", "gunicorn", "-c", "gunicorn_config.py", "api:create_app()"]

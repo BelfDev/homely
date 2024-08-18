@@ -1,10 +1,11 @@
 import os
+from logging.config import dictConfig
 
 
 class Config(object):
     """Base configuration."""
 
-    SECRET_KEY = os.environ.get('HOMELY_SECRET', 'secret-key')  # TODO(BelfDev): Update
+    SECRET_KEY = os.environ.get('HOMELY_SECRET', 'secret-key')
     APP_DIR = os.path.abspath(os.path.dirname(__file__))
     PROJECT_ROOT = os.path.abspath(os.path.join(APP_DIR, os.pardir))
     INSTANCE_DIR = os.path.join(PROJECT_ROOT, 'instance')
@@ -38,3 +39,20 @@ class TestConfig(Config):
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
     WTF_CSRF_ENABLED = False
+
+
+dictConfig({
+    'version': 1,
+    'formatters': {'default': {
+        'format': '[%(asctime)s] %(levelname)s in %(module)s: %(message)s',
+    }},
+    'handlers': {'wsgi': {
+        'class': 'logging.StreamHandler',
+        'stream': 'ext://flask.logging.wsgi_errors_stream',
+        'formatter': 'default'
+    }},
+    'root': {
+        'level': 'INFO',
+        'handlers': ['wsgi']
+    }
+})
