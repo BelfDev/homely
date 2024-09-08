@@ -10,12 +10,8 @@ services:
     dockerfilePath: ./Dockerfile
     dockerCommand: ""
     healthCheckPath: /v1/health
+    autoDeploy: true
     region: frankfurt
-    scaling:
-      minInstances: 1
-      maxInstances: 3
-      targetMemoryPercent: 60 
-      targetCPUPercent: 60 
     envVars:
       - key: FLASK_ENV
         value: production
