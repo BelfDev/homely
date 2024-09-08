@@ -3,7 +3,7 @@ import os
 from flask import Flask, jsonify
 
 from api.config import DevConfig
-from api.extensions import db, db_init_app, cors, jwt, marsh
+from api.extensions import db, db_init_app, cors, jwt, marsh, swagger_ui
 from api.user import user_blueprint
 from api.common import user_identity_lookup, user_lookup_callback
 
@@ -31,6 +31,7 @@ def create_app(config_object=DevConfig):
 def register_extensions(app):
     db_init_app(app)
     jwt.init_app(app)
+    swagger_ui.init_app(app)
 
 
 def register_routes(app):
