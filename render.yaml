@@ -1,0 +1,26 @@
+# Every Render Blueprint is backed by a YAML file that defines a set of interconnected services, databases, and environment groups.
+services:
+  - type: web
+    plan: free
+    name: Homely
+    repo: https://github.com/BelfDev/homely.git
+    branch: main
+    rootDir: backend/api
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerCommand: ""
+    healthCheckPath: /v1/health
+    autoDeploy: true
+    region: frankfurt
+    scaling:
+      minInstances: 1
+      maxInstances: 3
+      targetMemoryPercent: 60 
+      targetCPUPercent: 60 
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: HOMELY_SECRET
+        generateValue: true
+      - key: JWT_SECRET_KEY
+        generateValue: true
