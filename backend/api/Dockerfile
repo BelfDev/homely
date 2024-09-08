@@ -16,7 +16,7 @@ ENV POETRY_NO_INTERACTION=1 \
 WORKDIR /app
 
 # Copy the poetry.lock and pyproject.toml files to the container
-COPY backend/api/poetry.lock backend/api/pyproject.toml /app/
+COPY poetry.lock pyproject.toml /app/
 
 # Copy the rest of the project files to the container
 COPY api ./api
