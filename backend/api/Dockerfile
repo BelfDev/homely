@@ -19,11 +19,11 @@ WORKDIR /app
 COPY backend/api/poetry.lock backend/api/pyproject.toml /app/
 
 # Copy the rest of the project files to the container
-COPY backend/api/api ./api
-COPY backend/api/tests ./tests
-COPY backend/api/README.md ./README.md
-COPY backend/api/gunicorn_config.py ./gunicorn_config.py
-COPY backend/api/.flake8 ./.flake8
+COPY api ./api
+COPY tests ./tests
+COPY README.md ./README.md
+COPY gunicorn_config.py ./gunicorn_config.py
+COPY .flake8 ./.flake8
 
 # Install project dependencies, excluding dev dependencies
 RUN poetry install --with dev && rm -rf $POETRY_CACHE_DIR

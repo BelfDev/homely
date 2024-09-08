@@ -24,7 +24,7 @@ jobs:
       # Step 3: Build the Docker image from the Dockerfile
       - name: Build Docker image
         run: |
-          docker build -t homely-api-image:latest -f backend/api/Dockerfile .
+          docker build -t homely-api-image:latest -f backend/api/Dockerfile backend/api
 
       # Step 4: Run auto-formatting check with black
       - name: Check code formatting with black
