@@ -26,7 +26,7 @@ COPY backend/api/gunicorn_config.py ./gunicorn_config.py
 COPY backend/api/.flake8 ./.flake8
 
 # Install project dependencies, excluding dev dependencies
-RUN poetry install --only main && rm -rf $POETRY_CACHE_DIR
+RUN poetry install --with dev && rm -rf $POETRY_CACHE_DIR
 
 # Expose the port on which the Flask app will run
 EXPOSE 5000
