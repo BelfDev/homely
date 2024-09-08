@@ -21,7 +21,7 @@ def create_app(config_object=DevConfig):
     with app.app_context():
         db.create_all()
 
-    @app.route('/v1/health', methods=['GET'])
+    @app.route('/api/v1/health', methods=['GET'])
     def healthcheck():
         return jsonify({"status": "ok"}), 200
 

@@ -9,7 +9,7 @@ services:
     runtime: docker
     dockerfilePath: ./Dockerfile
     dockerCommand: ""
-    healthCheckPath: /v1/health
+    healthCheckPath: /api/v1/health
     autoDeploy: true
     region: frankfurt
     envVars:
