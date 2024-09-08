@@ -2,6 +2,7 @@ from flask import (
     Blueprint, request, jsonify
 )
 
+from api.common.decorators import roles_required
 from api.extensions import db, ValidationError, create_access_token, jwt_required, current_user
 from api.user.models import User
 from api.user.schemas import UserSchema, LoginSchema
@@ -63,11 +64,12 @@ def login():
     if user is None or not user.check_password(password):
         return jsonify({"msg": "Bad email or password"}), 401
 
-    access_token = create_access_token(identity=user.id)
+    access_token = create_access_token(identity={"id": str(user.id), "role": user.role})
     return jsonify(access_token=access_token), 200
 
 
 @bp.route('/v1/admin/users', methods=('GET',))
+@roles_required('admin')
 def get_all_users():
     users = User.query.all()
     result = user_schema.dump(users, many=True)

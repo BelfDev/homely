@@ -12,6 +12,7 @@ class User(db.Model):
     password_hash: DBMapped[str] = db_mapped_column(DBString(length=150), nullable=False)
     first_name: DBMapped[str] = db_mapped_column(DBString(80), unique=False, nullable=False)
     last_name: DBMapped[str] = db_mapped_column(DBString(80), unique=False, nullable=False)
+    role: DBMapped[str] = db_mapped_column(DBString(80), nullable=False, default="user")
 
     @property
     def password(self):

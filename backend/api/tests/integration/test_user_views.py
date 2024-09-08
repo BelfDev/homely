@@ -95,7 +95,7 @@ def test_login_incorrect_password(client, db):
     db_add_user(db, user)
 
     # Attempt to login with incorrect password
-    response = client_login_user(client, "test2@test.com", "wrongpassword")
+    response = client_login_user(client, "test2@test.com", "wrong_password")
     assert response.status_code == 401
     data = response.get_json()
     assert data['msg'] == "Bad email or password"
@@ -106,12 +106,50 @@ def test_get_all_users(client, db):
     db_add_user(db, User(email="test1@test.com", password="test123", first_name="Test", last_name="User"))
     db_add_user(db, User(email="test2@test.com", password="test123", first_name="Test", last_name="User"))
 
-    # Attempt to get all users
-    response = client.get(all_users_route)
+    # Create an admin user and get their JWT
+    admin_user = User(email="admin@test.com", password="admin123", first_name="Admin", last_name="Admin", role="admin")
+    db_add_user(db, admin_user)
+
+    login_response = client_login_user(client, "admin@test.com", "admin123")
+    assert login_response.status_code == 200
+    access_token = login_response.get_json()['access_token']
+
+    headers = {
+        'Authorization': f'Bearer {access_token}'
+    }
+
+    # Attempt to get all users with admin JWT
+    response = client.get(all_users_route, headers=headers)
     assert response.status_code == 200
     data = response.get_json()
     assert 'users' in data
-    assert len(data['users']) == 2
+    assert len(data['users']) == 3
+
+
+def test_non_admin_access(client, db):
+    # Create a non-admin user
+    user = User(email="user@test.com", password="user123", first_name="User", last_name="Test", role="user")
+    db_add_user(db, user)
+
+    # Login as non-admin
+    login_response = client_login_user(client, "user@test.com", "user123")
+    assert login_response.status_code == 200
+    access_token = login_response.get_json()['access_token']
+
+    headers = {
+        'Authorization': f'Bearer {access_token}'
+    }
+
+    # Attempt to access admin route with non-admin JWT
+    response = client.get(all_users_route, headers=headers)
+    assert response.status_code == 403
+    assert response.get_json() == {"msg": "Access denied: Insufficient role"}
+
+
+def test_admin_access_no_jwt(client):
+    response = client.get(all_users_route)  # No headers, so no JWT
+    assert response.status_code == 401
+    assert response.get_json()['msg'] == "Missing Authorization Header"
 
 
 def test_get_current_user(client, db):
