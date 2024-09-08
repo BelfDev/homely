@@ -1,0 +1,25 @@
+# .flake8
+
+[flake8]
+# Set maximum allowed line length
+max-line-length = 100
+
+# Ignore specific rules
+# E203, E266, E501, W503 are common options to ignore
+# Customize based on your team's preferences
+ignore = E203, E266, E501, W503
+
+# Exclude specific directories and files from linting
+exclude = 
+    .venv,  # Virtual environment
+    __pycache__,  # Python cache directory
+    migrations,  # Django/Flask migration files
+    tests/*,  # Test files (optional)
+
+per-file-ignores = __init__.py:F401
+
+# Enable specific warnings (optional)
+# select = E,W,F
+
+# Specify file types to lint
+filename = *.py  # Lint only Python files
