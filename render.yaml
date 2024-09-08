@@ -10,7 +10,6 @@ services:
     dockerfilePath: ./Dockerfile
     dockerCommand: ""
     healthCheckPath: /v1/health
-    autoDeploy: true
     region: frankfurt
     scaling:
       minInstances: 1
