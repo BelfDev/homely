@@ -22,6 +22,7 @@ COPY backend/api/poetry.lock backend/api/pyproject.toml /app/
 COPY backend/api/api ./api
 COPY backend/api/README.md ./README.md
 COPY backend/api/gunicorn_config.py ./gunicorn_config.py
+COPY backend/api/.flake8 ./.flake8
 
 # Install project dependencies, excluding dev dependencies
 RUN poetry install --only main && rm -rf $POETRY_CACHE_DIR
