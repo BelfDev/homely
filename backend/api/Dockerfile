@@ -18,13 +18,13 @@ WORKDIR /app
 # Copy the poetry.lock and pyproject.toml files to the container
 COPY poetry.lock pyproject.toml /app/
 
-# Install project dependencies, excluding dev dependencies
-RUN poetry install --only main && rm -rf $POETRY_CACHE_DIR
-
 # Copy the rest of the project files to the container
 COPY api ./api
 COPY README.md ./README.md
 COPY gunicorn_config.py ./gunicorn_config.py
+
+# Install project dependencies, excluding dev dependencies
+RUN poetry install --only main && rm -rf $POETRY_CACHE_DIR
 
 # Expose the port on which the Flask app will run
 EXPOSE 5000
