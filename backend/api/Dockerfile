@@ -18,9 +18,6 @@ WORKDIR /app
 # Copy the poetry.lock and pyproject.toml files to the container
 COPY poetry.lock pyproject.toml /app/
 
-# Copy the installed dependencies from the builder stage
-COPY --from=builder /app/.venv /app/.venv
-
 # Install project dependencies, excluding dev dependencies
 RUN poetry install --only main && rm -rf $POETRY_CACHE_DIR
 
