@@ -10,9 +10,11 @@ from api.common import user_identity_lookup, user_lookup_callback
 
 def create_app(config_object=DevConfig):
     # create and configure the app
-    app = Flask(__name__,
-                instance_relative_config=True,
-                instance_path=config_object.INSTANCE_DIR)
+    app = Flask(
+        __name__,
+        instance_relative_config=True,
+        instance_path=config_object.INSTANCE_DIR,
+    )
     app.config.from_object(config_object)
     create_instance_dir(app)
     register_extensions(app)
@@ -21,7 +23,7 @@ def create_app(config_object=DevConfig):
     with app.app_context():
         db.create_all()
 
-    @app.route('/api/v1/health', methods=['GET'])
+    @app.route("/api/v1/health", methods=["GET"])
     def healthcheck():
         return jsonify({"status": "ok"}), 200
 
@@ -35,10 +37,10 @@ def register_extensions(app):
 
 
 def register_routes(app):
-    origins = app.config.get('CORS_ORIGIN_WHITELIST', '*')
+    origins = app.config.get("CORS_ORIGIN_WHITELIST", "*")
     cors.init_app(user_blueprint, origins=origins)
 
-    app.register_blueprint(user_blueprint, url_prefix='/api')
+    app.register_blueprint(user_blueprint, url_prefix="/api")
 
 
 def create_instance_dir(app):

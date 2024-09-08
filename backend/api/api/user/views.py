@@ -1,18 +1,22 @@
-from flask import (
-    Blueprint, request, jsonify
-)
+from flask import Blueprint, request, jsonify
 
 from api.common.decorators import roles_required
-from api.extensions import db, ValidationError, create_access_token, jwt_required, current_user
+from api.extensions import (
+    db,
+    ValidationError,
+    create_access_token,
+    jwt_required,
+    current_user,
+)
 from api.user.models import User
 from api.user.schemas import UserSchema, LoginSchema
 
-bp = Blueprint('user', __name__)
+bp = Blueprint("user", __name__)
 user_schema = UserSchema()
 login_schema = LoginSchema()
 
 
-@bp.route('/v1/users', methods=('POST',))
+@bp.route("/v1/users", methods=("POST",))
 def register_user():
     # Check if request is JSON
     if not request.is_json:
@@ -41,7 +45,7 @@ def register_user():
     return jsonify(result), 201
 
 
-@bp.route('/v1/users/login', methods=('POST',))
+@bp.route("/v1/users/login", methods=("POST",))
 def login():
     # Check if request is JSON
     if not request.is_json:
@@ -56,8 +60,8 @@ def login():
         # Return validation errors
         return jsonify(err.messages), 400
 
-    email = login_data['email']
-    password = login_data['password']
+    email = login_data["email"]
+    password = login_data["password"]
 
     user = User.query.filter_by(email=email).first()
 
@@ -68,15 +72,15 @@ def login():
     return jsonify(access_token=access_token), 200
 
 
-@bp.route('/v1/admin/users', methods=('GET',))
-@roles_required('admin')
+@bp.route("/v1/admin/users", methods=("GET",))
+@roles_required("admin")
 def get_all_users():
     users = User.query.all()
     result = user_schema.dump(users, many=True)
     return jsonify({"users": result}), 200
 
 
-@bp.route('/v1/users/me', methods=['GET'])
+@bp.route("/v1/users/me", methods=["GET"])
 @jwt_required()
 def get_current_user():
     result = user_schema.dump(current_user)

@@ -18,16 +18,22 @@ WORKDIR /app
 # Copy the poetry.lock and pyproject.toml files to the container
 COPY poetry.lock pyproject.toml /app/
 
+# Copy the installed dependencies from the builder stage
+COPY --from=builder /app/.venv /app/.venv
+
+# Install project dependencies, excluding dev dependencies
+RUN poetry install --only main && rm -rf $POETRY_CACHE_DIR
+
 # Copy the rest of the project files to the container
 COPY api ./api
 COPY README.md ./README.md
 COPY gunicorn_config.py ./gunicorn_config.py
 
-# Install project dependencies, excluding dev dependencies
-RUN poetry install --only main && rm -rf $POETRY_CACHE_DIR
-
 # Expose the port on which the Flask app will run
 EXPOSE 5000
+
+# Add health check to ensure the container is running correctly
+HEALTHCHECK CMD curl --fail http://localhost:5000/api/v1/health || exit 1
 
 # Set the entrypoint command to run the Flask app
 CMD ["poetry", "run", "gunicorn", "-c", "gunicorn_config.py", "api:create_app()"]
