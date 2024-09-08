@@ -24,19 +24,19 @@ jobs:
       # Step 3: Build the Docker image from the Dockerfile
       - name: Build Docker image
         run: |
-          docker build -t homely-api-image:latest .
+          docker build -t homely-api-image:latest -f backend/api/Dockerfile .
 
-      # Step 5: Run auto-formatting check with black
+      # Step 4: Run auto-formatting check with black
       - name: Check code formatting with black
         run: |
-          docker run your-app-image:latest poetry run black --check ./api
+          docker run homely-api-image:latest poetry run black --check ./api
 
-      # Step 4: Run linter inside Docker container (flake8)
+      # Step 5: Run linter inside Docker container (flake8)
       - name: Run flake8 linter
         run: |
           docker run homely-api-image:latest poetry run flake8 ./api
 
-      # Step 4: Run tests inside the Docker container
+      # Step 6: Run tests inside the Docker container
       - name: Run tests inside Docker container
         run: |
           docker run homely-api-image:latest poetry run pytest --maxfail=1 --disable-warnings
