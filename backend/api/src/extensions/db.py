@@ -4,8 +4,8 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from api.extensions.extensions import migrate
-from api.extensions.marshmallow import marsh
+from src.extensions.extensions import migrate
+from src.extensions.marshmallow import marsh
 
 
 class Base(DeclarativeBase):

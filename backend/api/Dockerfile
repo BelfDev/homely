@@ -19,7 +19,7 @@ WORKDIR /app
 COPY poetry.lock pyproject.toml /app/
 
 # Copy the rest of the project files to the container
-COPY api ./api
+COPY src ./src
 COPY tests ./tests
 COPY README.md ./README.md
 COPY gunicorn_config.py ./gunicorn_config.py

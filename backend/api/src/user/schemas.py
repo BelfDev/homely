@@ -1,4 +1,4 @@
-from api.extensions import WireSchema, fields, validate
+from src.extensions import WireSchema, fields, validate
 from .models import User
 
 

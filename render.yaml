@@ -16,7 +16,7 @@ services:
       - key: FLASK_ENV
         value: production
       - key: FLASK_APP
-        value: api
+        value: src
       - key: HOMELY_SECRET
         generateValue: true
       - key: JWT_SECRET_KEY

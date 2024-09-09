@@ -1,6 +1,6 @@
 import pytest
 
-from api.user.models import User
+from src.user.models import User
 
 
 def test_password_setter():

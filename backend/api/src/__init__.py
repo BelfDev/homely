@@ -2,10 +2,10 @@ import os
 
 from flask import Flask, jsonify
 
-from api.config import DevConfig
-from api.extensions import db, db_init_app, cors, jwt, marsh, swagger_ui
-from api.user import user_blueprint
-from api.common import user_identity_lookup, user_lookup_callback
+from src.config import DevConfig
+from src.extensions import db, db_init_app, cors, jwt, marsh, swagger_ui
+from src.user import user_blueprint
+from src.common import user_identity_lookup, user_lookup_callback
 
 
 def create_app(config_object=DevConfig):
