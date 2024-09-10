@@ -1,8 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import String
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.orm import DeclarativeBase
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 from src.extensions.extensions import migrate
 from src.extensions.marshmallow import marsh
@@ -27,6 +26,6 @@ def init_app(app):
         db.init_app(app)
         marsh.init_app(app)
         migrate.init_app(app, db)
-        print("Database tables dropped and recreated successfully.")
+        print("Database initialized successfully.")
     except Exception as e:
         print(f"An error occurred: {e}")
