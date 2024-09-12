@@ -1,14 +1,12 @@
-version: '3.8'
-
 services:
   web:
     build: 
-      context: backend/api # The root context where Dockerfile exists
-      dockerfile: backend/api/Dockerfile  # Path to your Dockerfile
+      context: ./backend/api # The root context where Dockerfile exists
+      dockerfile: Dockerfile  # Path to your Dockerfile
     ports:
-      - "5000:5000"           # Expose Flask on port 5000
+      - "5001:5000"           # Expose Flask on port 5000
     env_file:
-      - backend/api/.env                  # Load variables from .env file
+      - path: ./backend/api/.env
     depends_on:
       - db                    # Ensure the database starts before Flask
     volumes:
@@ -17,11 +15,9 @@ services:
       - homely-network        # Shared network
 
   db:
-    image: postgres:13        # PostgreSQL database service
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}      # Load from .env file
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}  # Load from .env file
-      POSTGRES_DB: ${POSTGRES_DB}          # Load from .env file
+    image: postgres:13
+    env_file:
+      - path: ./backend/api/.env
     ports:
       - "5432:5432"           # Expose PostgreSQL on port 5432
     volumes:
