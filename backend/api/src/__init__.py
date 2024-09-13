@@ -20,9 +20,6 @@ def create_app(config_object=DevConfig):
     register_extensions(app)
     register_routes(app)
 
-    with app.app_context():
-        db.create_all()
-
     @app.route("/api/v1/health", methods=["GET"])
     def healthcheck():
         return jsonify({"status": "ok"}), 200

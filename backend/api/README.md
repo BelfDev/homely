@@ -27,9 +27,6 @@ FLASK_APP=src
 JWT_SECRET_KEY="something"
 HOMELY_SECRET="something-2"
 DATABASE_URL="something-3"
-POSTGRES_USER="something-4"
-POSTGRES_PASSWORD="something-5"
-POSTGRES_DB="something-6"
 ```
 
 # Useful 3rd-party docs
