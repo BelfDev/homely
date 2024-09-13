@@ -93,10 +93,10 @@ docker-compose exec web flask db <command>
 
 There a few convinience aliases available:
 
-•	make db-migrate – Generates a new database migration based on model changes.
-•	make db-upgrade – Applies the database migrations to sync the database schema.
-•	make enter-db – Opens an interactive psql shell for the homely PostgreSQL database inside the container.
-•	make logs – View real-time logs from the Docker containers.
+- `make db-migrate` → Generates a new database migration based on model changes.
+- `make db-upgrade` → Applies the database migrations to sync the database schema.
+- `make enter-db` → Opens an interactive psql shell for the homely PostgreSQL database inside the container.
+- `make logs` → View real-time logs from the Docker containers.
 
 # Useful 3rd-party docs
 
