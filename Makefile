@@ -1,33 +1,42 @@
 # Makefile
 
 # Default target to run docker-compose with the dev config
-start:
+start: ## Start the application with docker-compose
 	@docker compose -f docker-compose.dev.yml up --build
 
 # A clean up command for stopping and removing containers
-stop:
+stop: ## Stop and remove all containers, networks, and volumes
 	@docker compose -f docker-compose.dev.yml down
 
 # Target for running tests
-test:
+test: ## Run the test suite inside the Docker container
 	@docker compose -f docker-compose.dev.yml run web poetry run pytest
 
-logs:
+# View logs for the web service
+logs: ## Tail the logs from the web service
 	@docker compose -f docker-compose.dev.yml logs -f web
 
 # Target for linting with flake8
-lint:
+lint: ## Run the flake8 linter
 	@docker compose -f docker-compose.dev.yml run web poetry run flake8 ./api
 
 # Target to remove unused Docker images and containers
-clean:
+clean: ## Clean up dangling Docker containers and images
 	@docker system prune -f
 
-enter-db:
+# Enter the PostgreSQL database container
+enter-db: ## Open a psql shell to the database
 	@docker exec -it homely-db-1 psql -U postgres -d homely
 
-db-migrate:
+# Database migration command
+db-migrate: ## Create new database migrations
 	@docker compose exec web flask db migrate
 
-db-upgrade:
+# Apply database migrations
+db-upgrade: ## Apply database migrations
 	@docker compose exec web flask db upgrade
+
+# Enter the web container shell
+shell: ## Open an interactive shell inside the web container
+	@docker exec -it homely-web-1 /bin/sh
+	
