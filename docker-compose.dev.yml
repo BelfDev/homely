@@ -4,7 +4,9 @@ services:
       context: ./backend/api # The root context where Dockerfile exists
       dockerfile: Dockerfile # Path to your Dockerfile
     ports:
-      - "5001:5000" # Expose Flask on port 5000
+      - "5050:5050" # Expose Flask on port 5050 for local development
+    environment:
+      - FLASK_ENV=development
     env_file:
       - path: ./backend/api/.env
     depends_on:
@@ -14,6 +16,7 @@ services:
       - ./backend/api/tests:/app/tests # Mount the tests directory for live updates
     networks:
       - homely-network # Shared network
+    command: /bin/sh -c ".venv/bin/flask run --debug --host=0.0.0.0 --port=5050" # Overriding CMD for dev mode
 
   db:
     image: postgres:13

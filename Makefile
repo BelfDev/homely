@@ -25,4 +25,9 @@ clean:
 
 enter-db:
 	@docker exec -it homely-db-1 psql -U postgres -d homely
-	
+
+db-migrate:
+	@docker compose exec web flask db migrate
+
+db-upgrade:
+	@docker compose exec web flask db upgrade
