@@ -81,9 +81,9 @@ make clean
 
 ### Database migrations
 
-1.	`flask db init` → Create a migration repository.
-2.	`flask db migrate -m "Initial migration."` → Generate an initial migration.
-3.	`flask db upgrade` → Apply the changes described by the migration script.
+1. `flask db init` → Create a migration repository.
+2. `flask db migrate -m "Initial migration."` → Generate an initial migration.
+3. `flask db upgrade` → Apply the changes described by the migration script.
 
 
 These commands can be run from inside the container as follows:
@@ -100,5 +100,5 @@ There a few convinience aliases available:
 
 # Useful 3rd-party docs
 
-1.[Flask SQLAlchemy](https://flask-sqlalchemy.palletsprojects.com/en/3.1.x/quickstart/)
-2.[Flask-Migrate](https://flask-migrate.readthedocs.io/en/latest/)
+1. [Flask SQLAlchemy](https://flask-sqlalchemy.palletsprojects.com/en/3.1.x/quickstart/)
+2. [Flask-Migrate](https://flask-migrate.readthedocs.io/en/latest/)
