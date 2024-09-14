@@ -1,15 +1,15 @@
 from flask import Blueprint, request, jsonify
 
-from api.common.decorators import roles_required
-from api.extensions import (
+from src.common.decorators import roles_required
+from src.extensions import (
     db,
     ValidationError,
     create_access_token,
     jwt_required,
     current_user,
 )
-from api.user.models import User
-from api.user.schemas import UserSchema, LoginSchema
+from src.user.models import User
+from src.user.schemas import UserSchema, LoginSchema
 
 bp = Blueprint("user", __name__)
 user_schema = UserSchema()

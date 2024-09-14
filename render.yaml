@@ -1,8 +1,8 @@
 # Every Render Blueprint is backed by a YAML file that defines a set of interconnected services, databases, and environment groups.
 services:
   - type: web
+    name: homely-web
     plan: free
-    name: Homely
     repo: https://github.com/BelfDev/homely.git
     branch: main
     rootDir: backend/api
@@ -16,8 +16,21 @@ services:
       - key: FLASK_ENV
         value: production
       - key: FLASK_APP
-        value: api
+        value: src
       - key: HOMELY_SECRET
-        generateValue: true
+        sync: true
       - key: JWT_SECRET_KEY
-        generateValue: true
+        sync: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: homely-db
+          property: connectionString
+
+databases:
+  - name: homely-db
+    postgresMajorVersion: "13"
+    region: frankfurt 
+    plan: free 
+    databaseName: homely
+    user: postgres
+    

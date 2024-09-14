@@ -29,12 +29,12 @@ jobs:
       # Step 4: Run auto-formatting check with black
       - name: Check code formatting with black
         run: |
-          docker run homely-api-image:latest poetry run black --check ./api
+          docker run homely-api-image:latest poetry run black --check ./src
 
       # Step 5: Run linter inside Docker container (flake8)
       - name: Run flake8 linter
         run: |
-          docker run homely-api-image:latest poetry run flake8 ./api
+          docker run homely-api-image:latest poetry run flake8 ./src
 
       # Step 6: Run tests inside the Docker container
       - name: Run tests inside Docker container

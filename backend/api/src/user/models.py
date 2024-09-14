@@ -1,7 +1,7 @@
 import uuid
 
-from api.extensions.db import db, DBString, DBMapped, db_mapped_column, UUID
-from api.extensions.jwt import bcrypt
+from src.extensions.db import db, DBString, DBMapped, db_mapped_column, UUID
+from src.extensions.jwt import bcrypt
 
 
 class User(db.Model):

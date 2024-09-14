@@ -3,8 +3,8 @@ from functools import wraps
 
 from flask import jsonify
 
-from api.extensions import jwt, jwt_required, get_jwt_identity
-from api.user.models import User
+from src.extensions import jwt, jwt_required, get_jwt_identity
+from src.user.models import User
 
 
 @jwt.user_identity_loader

@@ -1,0 +1,36 @@
+services:
+  web:
+    build:
+      context: ./backend/api # The root context where Dockerfile exists
+      dockerfile: Dockerfile # Path to your Dockerfile
+    ports:
+      - "5050:5050" # Expose Flask on port 5050 for local development
+    environment:
+      - FLASK_ENV=development
+    env_file:
+      - path: ./backend/api/.env
+    depends_on:
+      - db # Ensure the database starts before Flask
+    volumes:
+      - ./backend/api/src:/app/src # Mount the src directory for live updates
+      - ./backend/api/tests:/app/tests # Mount the tests directory for live updates
+    networks:
+      - homely-network # Shared network
+    command: /bin/sh -c ".venv/bin/flask run --debug --host=0.0.0.0 --port=5050" # Overriding CMD for dev mode
+
+  db:
+    image: postgres:13
+    env_file:
+      - path: ./backend/api/.env
+    ports:
+      - "5432:5432" # Expose PostgreSQL on port 5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # Persistent volume for database data
+    networks:
+      - homely-network # Shared network
+
+volumes:
+  postgres_data: # Named volume for PostgreSQL persistence
+
+networks:
+  homely-network: # Shared network for both services

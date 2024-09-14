@@ -1,4 +1,4 @@
-from api.user.models import User
+from src.user.models import User
 from .user_aux import login_route, client_create_user, client_login_user, db_get_user_by_email, db_add_user, \
     all_users_route, current_user_route
 

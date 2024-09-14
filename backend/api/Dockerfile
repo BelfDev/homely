@@ -19,7 +19,7 @@ WORKDIR /app
 COPY poetry.lock pyproject.toml /app/
 
 # Copy the rest of the project files to the container
-COPY api ./api
+COPY src ./src
 COPY tests ./tests
 COPY README.md ./README.md
 COPY gunicorn_config.py ./gunicorn_config.py
@@ -34,5 +34,7 @@ EXPOSE 5000
 # Add health check to ensure the container is running correctly
 HEALTHCHECK CMD curl --fail http://localhost:5000/api/v1/health || exit 1
 
+RUN ls -la /app
+
 # Set the entrypoint command to run the Flask app
-CMD ["poetry", "run", "gunicorn", "-c", "gunicorn_config.py", "api:create_app()"]
+CMD ["poetry", "run", "gunicorn", "-c", "gunicorn_config.py", "src:create_app()"]

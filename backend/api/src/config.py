@@ -28,10 +28,9 @@ class DevConfig(Config):
 
     ENV = "dev"
     DEBUG = True
-    DB_NAME = "homely.db"
-    # Put the db file in project root
-    DB_PATH = os.path.join(Config.INSTANCE_DIR, DB_NAME)
-    SQLALCHEMY_DATABASE_URI = "sqlite:///{0}".format(DB_PATH)
+    SQLALCHEMY_DATABASE_URI = os.environ.get(
+        "DATABASE_URL", f"sqlite:///{os.path.join(Config.INSTANCE_DIR, 'homely.db')}"
+    )
 
 
 class TestConfig(Config):

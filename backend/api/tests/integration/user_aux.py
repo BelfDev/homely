@@ -1,4 +1,4 @@
-from api.user.models import User
+from src.user.models import User
 
 register_route = '/api/v1/users'
 login_route = '/api/v1/users/login'
