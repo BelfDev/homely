@@ -11,7 +11,7 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-    environment: testing  # Refers to the environment named "testing" in GitHub settings
+    environment: testing
 
     services:
       db:
@@ -29,8 +29,8 @@ jobs:
           --health-retries=5
 
     env:
-      # Setting DATABASE_URL using GitHub Secrets
-      DATABASE_URL: postgresql://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@localhost:5432/${{ secrets.POSTGRES_DB }}
+      # Use DATABASE_URL from GitHub Secrets
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
     steps:
       # Step 1: Checkout code
