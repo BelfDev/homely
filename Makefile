@@ -26,7 +26,11 @@ logs: ## Tail the logs from the web service
 
 # Target for linting with flake8
 lint: ## Run the flake8 linter
-	@docker compose -f docker-compose.yml run web poetry run flake8 ./api
+	cd backend/api && poetry run flake8 ./
+
+# Target for linting with flake8
+format: ## Run the black formatter
+	cd backend/api && poetry run black ./
 
 # Target to remove unused Docker images and containers
 clean: ## Clean up dangling Docker containers and images

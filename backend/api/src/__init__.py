@@ -7,15 +7,17 @@ from src.extensions import db, db_init_app, cors, jwt, marsh, swagger_ui
 from src.user import user_blueprint
 from src.common import user_identity_lookup, user_lookup_callback
 
+
 def get_config():
     """Helper function to select the appropriate configuration class based on FLASK_ENV."""
-    env = os.environ.get('FLASK_ENV', 'development')
-    if env == 'production':
+    env = os.environ.get("FLASK_ENV", "development")
+    if env == "production":
         return ProdConfig
-    elif env == 'testing':
+    elif env == "testing":
         return TestConfig
     else:
         return DevConfig
+
 
 def create_app():
     config_object = get_config()

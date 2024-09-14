@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
 class Config(object):
     """Base configuration."""
 
@@ -44,6 +45,7 @@ class TestConfig(Config):
         "DATABASE_TEST_URL", "postgresql://localhost/example_test"
     )
     WTF_CSRF_ENABLED = False
+
 
 dictConfig(
     {
