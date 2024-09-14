@@ -28,13 +28,14 @@ COPY .flake8 ./.flake8
 # Install project dependencies, excluding dev dependencies
 RUN poetry install --with dev && rm -rf $POETRY_CACHE_DIR
 
+# Set the environment for production (locally, will be overridden in docker-compose)
+ENV FLASK_ENV=production
+
 # Expose the port on which the Flask app will run
 EXPOSE 5000
 
 # Add health check to ensure the container is running correctly
 HEALTHCHECK CMD curl --fail http://localhost:5000/api/v1/health || exit 1
-
-RUN ls -la /app
 
 # Set the entrypoint command to run the Flask app
 CMD ["poetry", "run", "gunicorn", "-c", "gunicorn_config.py", "src:create_app()"]

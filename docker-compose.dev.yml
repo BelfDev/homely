@@ -6,7 +6,7 @@ services:
     ports:
       - "5050:5050" # Expose Flask on port 5050 for local development
     environment:
-      - FLASK_ENV=development
+      - FLASK_ENV=development  # Override FLASK_ENV for development
     env_file:
       - path: ./backend/api/.env
     depends_on:

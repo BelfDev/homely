@@ -6,8 +6,11 @@ from src.extensions import db as _db
 
 
 @pytest.fixture(scope='session')
-def app():
-    app = create_app(config_object=TestConfig)
+def app(monkeypatch):
+    # Override FLASK_ENV to 'testing'
+    monkeypatch.setenv('FLASK_ENV', 'testing')
+
+    app = create_app()
 
     with app.app_context():
         _db.create_all()
