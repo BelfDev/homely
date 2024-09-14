@@ -10,7 +10,8 @@ services:
     env_file:
       - path: ./backend/api/.env
     depends_on:
-      - db # Ensure the database starts before Flask
+      - db_dev
+      - db_test  # Ensure both databases are started
     volumes:
       - ./backend/api/src:/app/src # Mount the src directory for live updates
       - ./backend/api/tests:/app/tests # Mount the tests directory for live updates
@@ -18,19 +19,34 @@ services:
       - homely-network # Shared network
     command: /bin/sh -c ".venv/bin/flask run --debug --host=0.0.0.0 --port=5050" # Overriding CMD for dev mode
 
-  db:
-    image: postgres:13
+  db_dev:
+    image: postgres:16
     env_file:
       - path: ./backend/api/.env
+    environment:
+      - POSTGRES_DB=homely
     ports:
-      - "5432:5432" # Expose PostgreSQL on port 5432
+      - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data # Persistent volume for database data
+      - postgres_data_dev:/var/lib/postgresql/data
     networks:
-      - homely-network # Shared network
+      - homely-network
 
+  db_test:
+    image: postgres:16
+    env_file:
+      - path: ./backend/api/.env
+    environment:
+      - POSTGRES_DB=homely_test
+    ports:
+      - "5433:5432"  # Expose on a different host port to avoid conflicts
+    volumes:
+      - postgres_data_test:/var/lib/postgresql/data
+    networks:
+      - homely-network
 volumes:
-  postgres_data: # Named volume for PostgreSQL persistence
+  postgres_data_dev:
+  postgres_data_test: # Named volume for PostgreSQL persistence
 
 networks:
   homely-network: # Shared network for both services

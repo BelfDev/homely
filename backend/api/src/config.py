@@ -1,6 +1,8 @@
 import os
 from logging.config import dictConfig
+from dotenv import load_dotenv
 
+load_dotenv()
 
 class Config(object):
     """Base configuration."""

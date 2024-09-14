@@ -8,11 +8,18 @@
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/instance/homely.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="homely@localhost" uuid="17efcade-bcf6-4ea1-8e5b-98b59989c708">
+    <data-source source="LOCAL" name="db_dev" uuid="85c02b4d-b952-4035-9bb1-055922d149a8">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/homely</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="db_test" uuid="eb919a01-9d9e-48fc-8f94-9376badd1da8">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5433/homely_test</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

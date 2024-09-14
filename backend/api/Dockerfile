@@ -28,9 +28,6 @@ COPY .flake8 ./.flake8
 # Install project dependencies, excluding dev dependencies
 RUN poetry install --with dev && rm -rf $POETRY_CACHE_DIR
 
-# Set the environment for production (locally, will be overridden in docker-compose)
-ENV FLASK_ENV=production
-
 # Expose the port on which the Flask app will run
 EXPOSE 5000
 
