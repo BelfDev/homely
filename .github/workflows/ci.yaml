@@ -78,7 +78,7 @@ jobs:
             sleep 1
           done
 
-      # Step 6: Build the Docker image with cache for dependencies
+      # Step 7: Build the Docker image with cache for dependencies
       - name: Build Docker image with cache
         run: |
           DOCKER_BUILDKIT=1 docker buildx build \
@@ -89,7 +89,7 @@ jobs:
             -f backend/api/Dockerfile backend/api \
             --load
 
-      # Step 7: Run formatting, linting, and tests in a single container session
+      # Step 8: Run formatting, linting, and tests in a single container session
       - name: Run formatting, linting, and tests
         run: |
           docker run --network="host" --env-file .env homely-api-image:latest sh -c "
