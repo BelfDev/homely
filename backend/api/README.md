@@ -14,14 +14,14 @@ Assuming you are at the root of the project directory:
    Ensure you get the `.env` file from the main author before proceeding. This file contains essential environment variables.
 
    Example `.env`:
-   ```bash
-   FLASK_APP=src
-   JWT_SECRET_KEY=something-1
-   HOMELY_SECRET=something-2
-   DATABASE_URL=something-3
-   POSTGRES_USER=something-4
-   POSTGRES_PASSWORD=something-5
-   POSTGRES_DB=something-6
+   ```bash 
+    FLASK_APP=something-1
+    JWT_SECRET_KEY=something-2
+    HOMELY_SECRET=something-3
+    DATABASE_URL=something-4
+    DATABASE_TEST_URL=something-5
+    POSTGRES_USER=something-6
+    POSTGRES_PASSWORD=something-7 
    ```
 
 ### 2) Start the application via docker compose

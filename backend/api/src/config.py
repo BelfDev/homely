@@ -1,5 +1,8 @@
 import os
 from logging.config import dictConfig
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 class Config(object):
@@ -29,7 +32,7 @@ class DevConfig(Config):
     ENV = "dev"
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = os.environ.get(
-        "DATABASE_URL", f"sqlite:///{os.path.join(Config.INSTANCE_DIR, 'homely.db')}"
+        "DATABASE_URL", "postgresql://localhost/example"
     )
 
 
@@ -38,7 +41,9 @@ class TestConfig(Config):
 
     TESTING = True
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"
+    SQLALCHEMY_DATABASE_URI = os.environ.get(
+        "DATABASE_TEST_URL", "postgresql://localhost/example_test"
+    )
     WTF_CSRF_ENABLED = False
 
 

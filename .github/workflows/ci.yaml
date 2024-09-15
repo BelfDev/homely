@@ -8,35 +8,110 @@ on:
     branches:
       - main
 
+env:
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
+  DATABASE_TEST_URL: ${{ secrets.DATABASE_TEST_URL }}
+  POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+  POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+  POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+  CACHE_DIR: /tmp/.cache
+
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    environment: testing
+
+    services:
+      db:
+        image: postgres:16
+        env:
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U postgres"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
 
     steps:
       # Step 1: Checkout code
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Step 2: Set up Docker
+      # Step 2: Create .env file
+      - name: Create .env file
+        run: |
+          echo DATABASE_URL=$DATABASE_URL > .env
+          echo DATABASE_TEST_URL=$DATABASE_TEST_URL >> .env
+          echo POSTGRES_USER=$POSTGRES_USER >> .env
+          echo POSTGRES_PASSWORD=$POSTGRES_PASSWORD >> .env
+          echo POSTGRES_DB=$POSTGRES_DB >> .env
+
+      # Step 3: Create cache directory if needed
+      - name: Create cache directory if needed
+        run: |
+          CACHE_DIR=${{ env.CACHE_DIR }}
+          if [ ! -d "$CACHE_DIR" ]; then
+            mkdir -p "$CACHE_DIR"
+          fi
+    
+      # Step 4: Cache Poetry dependencies after building the Docker image
+      - name: Cache Poetry dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.CACHE_DIR }}
+          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-
+
+      # Step 5: Set up Docker
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-        
-      # Step 3: Build the Docker image from the Dockerfile
-      - name: Build Docker image
-        run: |
-          docker build -t homely-api-image:latest -f backend/api/Dockerfile backend/api
 
-      # Step 4: Run auto-formatting check with black
-      - name: Check code formatting with black
+      # Step 6: Wait for the database to be ready
+      - name: Wait for PostgreSQL to be ready
         run: |
-          docker run homely-api-image:latest poetry run black --check ./src
+          until docker exec ${{ job.services.db.id }} pg_isready -U postgres; do
+            sleep 1
+          done
 
-      # Step 5: Run linter inside Docker container (flake8)
-      - name: Run flake8 linter
+      # Step 7: Build the Docker image with cache for dependencies
+      - name: Build Docker image with cache
         run: |
-          docker run homely-api-image:latest poetry run flake8 ./src
+          DOCKER_BUILDKIT=1 docker buildx build \
+            --cache-from=type=local,src=${{ env.CACHE_DIR }} \
+            --cache-to=type=local,dest=${{ env.CACHE_DIR }},mode=max \
+            --build-arg POETRY_CACHE_DIR=${{ env.CACHE_DIR }}/pypoetry \
+            -t homely-api-image:latest \
+            -f backend/api/Dockerfile backend/api \
+            --load
 
-      # Step 6: Run tests inside the Docker container
-      - name: Run tests inside Docker container
+      # Step 8: Run formatting, linting, and tests in a single container session
+      - name: Run formatting, linting, and tests
         run: |
-          docker run homely-api-image:latest poetry run pytest --maxfail=1 --disable-warnings
+          docker run --network="host" --env-file .env homely-api-image:latest sh -c "
+            echo 'Running black formatting...'; 
+            poetry run black --check ./src || { echo 'Black formatting failed!'; exit 1; }
+
+            echo 'Running flake8 linter...'; 
+            poetry run flake8 ./src || { echo 'Flake8 linting failed!'; exit 1; }
+
+            echo 'Running tests with pytest...'; 
+            poetry run pytest --maxfail=1 --disable-warnings || { echo 'Tests failed!'; exit 1; }
+          "
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build-and-test  # This ensures deployment only runs if the build-and-test job succeeds
+    if: github.ref == 'refs/heads/main'  # Only deploy on pushes to the main branch
+
+    steps:
+      # Step 1: Deploy the web service
+      - name: Deploy
+        env:
+          DEPLOY_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: |
+          curl "$DEPLOY_URL" || exit 1
