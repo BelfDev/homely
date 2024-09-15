@@ -10,7 +10,7 @@ RUN pip install poetry==1.8.3
 ENV POETRY_NO_INTERACTION=1 \
     POETRY_VIRTUALENVS_IN_PROJECT=1 \
     POETRY_VIRTUALENVS_CREATE=1 \
-    POETRY_CACHE_DIR=/tmp/poetry_cache
+    POETRY_CACHE_DIR=/app/.cache/pypoetry
 
 # Set the working directory in the container
 WORKDIR /app
@@ -18,17 +18,18 @@ WORKDIR /app
 # Copy the poetry.lock and pyproject.toml files to the container
 COPY poetry.lock pyproject.toml /app/
 
-# Use Docker's build cache for Poetry dependencies
-# This line will cache the Poetry dependencies in a specific directory on the host during the build process.
-RUN --mount=type=cache,target=/tmp/poetry_cache \
-    poetry install --with dev && rm -rf $POETRY_CACHE_DIR
-
 # Copy the rest of the project files to the container
 COPY src ./src
 COPY tests ./tests
 COPY README.md ./README.md
 COPY gunicorn_config.py ./gunicorn_config.py
 COPY .flake8 ./.flake8
+
+# Use Docker's build cache for Poetry dependencies
+# This line will cache the Poetry dependencies in a specific directory on the host during the build process.
+# The POETRY_CACHE_DIR cache directory exists only during the build process (managed by the --mount=type=cache option).
+RUN --mount=type=cache,target=$POETRY_CACHE_DIR \
+    poetry install --with dev
 
 # Expose the port on which the Flask app will run
 EXPOSE 5000
