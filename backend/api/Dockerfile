@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1
+# syntax=docker/dockerfile:1.4
 
 # Use the official Python base image
 FROM python:3.12.3-slim-bullseye
