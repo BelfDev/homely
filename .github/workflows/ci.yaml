@@ -14,7 +14,6 @@ env:
   POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
   POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
   POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
-  DOCKER_BUILDKIT: 1  # Enable Docker BuildKit
 
 jobs:
   build-and-test:
@@ -76,7 +75,7 @@ jobs:
       # Step 6: Build the Docker image with cache for dependencies
       - name: Build Docker image with cache
         run: |
-          docker buildx build \
+          DOCKER_BUILDKIT=1 docker buildx build \
             --build-arg CACHE_DIR=/root/.cache/pypoetry \
             --mount=type=cache,target=/root/.cache/pypoetry \
             -t homely-api-image:latest \
