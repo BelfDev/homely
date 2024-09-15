@@ -8,7 +8,7 @@ services:
     environment:
       - FLASK_ENV=development  # Override FLASK_ENV for development
     env_file:
-      - path: ./backend/api/.env
+      - path: ./backend/api/.env.docker
     depends_on:
       - db_dev
       - db_test  # Ensure both databases are started
@@ -22,7 +22,7 @@ services:
   db_dev:
     image: postgres:16
     env_file:
-      - path: ./backend/api/.env
+      - path: ./backend/api/.env.docker
     environment:
       - POSTGRES_DB=homely
     ports:
@@ -35,7 +35,7 @@ services:
   db_test:
     image: postgres:16
     env_file:
-      - path: ./backend/api/.env
+      - path: ./backend/api/.env.docker
     environment:
       - POSTGRES_DB=homely_test
     ports:

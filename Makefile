@@ -42,11 +42,11 @@ enter-db: ## Open a psql shell to the database
 
 # Database migration command
 db-migrate: ## Create new database migrations
-	@docker compose exec web flask db migrate
+	cd backend/api && flask db migrate
 
 # Apply database migrations
 db-upgrade: ## Apply database migrations
-	@docker compose exec web flask db upgrade
+	cd backend/api && flask db upgrade
 
 health: ## Check the health of the application
 	@curl http://localhost:5050/api/v1/health

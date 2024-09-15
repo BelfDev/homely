@@ -11,9 +11,9 @@
 Assuming you are at the root of the project directory:
 
 ### 1) **Get the .env file**  
-   Ensure you get the `.env` file from the main author before proceeding. This file contains essential environment variables.
+   Ensure you get the `.env` and `.env.docker` files from the main author before proceeding. This file contains essential environment variables.
 
-   Example `.env`:
+   Example `.env` and `.env.docker`:
    ```bash 
     FLASK_APP=something-1
     JWT_SECRET_KEY=something-2
