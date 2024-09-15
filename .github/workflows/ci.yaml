@@ -14,6 +14,7 @@ env:
   POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
   POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
   POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+  CACHE_DIR: /tmp/.cache
 
 jobs:
   build-and-test:
@@ -49,14 +50,9 @@ jobs:
           echo POSTGRES_PASSWORD=$POSTGRES_PASSWORD >> .env
           echo POSTGRES_DB=$POSTGRES_DB >> .env
 
-      # Step 3: Cache Poetry dependencies
-      - name: Cache Poetry dependencies
-        uses: actions/cache@v4
-        with:
-          path: /root/.cache/pypoetry
-          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-poetry-
+      # Step 3: Create cache directory
+      - name: Create cache directory
+        run: mkdir -p ${{ env.CACHE_DIR }}
 
       # Step 4: Set up Docker
       - name: Set up Docker Buildx
@@ -73,14 +69,23 @@ jobs:
       - name: Build Docker image with cache
         run: |
           DOCKER_BUILDKIT=1 docker buildx build \
-            --cache-from=type=local,src=/tmp/.buildx-cache \
-            --cache-to=type=local,dest=/tmp/.buildx-cache,mode=max \
-            --build-arg CACHE_DIR=/root/.cache/pypoetry \
+            --cache-from=type=local,src=${{ env.CACHE_DIR }} \
+            --cache-to=type=local,dest=${{ env.CACHE_DIR }},mode=max \
+            --build-arg POETRY_CACHE_DIR=${{ env.CACHE_DIR }}/pypoetry \
             -t homely-api-image:latest \
             -f backend/api/Dockerfile backend/api \
             --load
 
-      # Step 7: Run formatting, linting, and tests in a single container session
+      # Step 7: Cache Poetry dependencies after building the Docker image
+      - name: Cache Poetry dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.CACHE_DIR }}
+          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-
+
+      # Step 8: Run formatting, linting, and tests in a single container session
       - name: Run formatting, linting, and tests
         run: |
           docker run --network="host" --env-file .env homely-api-image:latest sh -c "
