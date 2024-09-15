@@ -39,4 +39,4 @@ EXPOSE 5000
 HEALTHCHECK CMD curl --fail http://localhost:5000/api/v1/health || exit 1
 
 # Set the entrypoint command to run the Flask app
-CMD ["sh", "-c", "poetry run flask db upgrade && poetry run gunicorn -c gunicorn_config.py src:create_app"]
+CMD ["poetry", "run", "bash", "-c", "flask db upgrade && gunicorn -c gunicorn_config.py src:create_app()"]
