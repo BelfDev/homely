@@ -24,6 +24,7 @@ COPY tests ./tests
 COPY README.md ./README.md
 COPY gunicorn_config.py ./gunicorn_config.py
 COPY .flake8 ./.flake8
+COPY migrations ./migrations
 
 # Use Docker's build cache for Poetry dependencies
 # This line will cache the Poetry dependencies in a specific directory on the host during the build process.
@@ -38,4 +39,4 @@ EXPOSE 5000
 HEALTHCHECK CMD curl --fail http://localhost:5000/api/v1/health || exit 1
 
 # Set the entrypoint command to run the Flask app
-CMD ["poetry", "run", "gunicorn", "-c", "gunicorn_config.py", "src:create_app()"]
+CMD ["sh", "-c", "poetry run flask db upgrade && poetry run gunicorn -c gunicorn_config.py src:create_app()"]
