@@ -50,15 +50,28 @@ jobs:
           echo POSTGRES_PASSWORD=$POSTGRES_PASSWORD >> .env
           echo POSTGRES_DB=$POSTGRES_DB >> .env
 
-      # Step 3: Create cache directory
-      - name: Create cache directory
-        run: mkdir -p ${{ env.CACHE_DIR }}
+      # Step 3: Create cache directory if needed
+      - name: Create cache directory if needed
+        run: |
+          CACHE_DIR=${{ env.CACHE_DIR }}
+          if [ ! -d "$CACHE_DIR" ]; then
+            mkdir -p "$CACHE_DIR"
+          fi
+    
+      # Step 4: Cache Poetry dependencies after building the Docker image
+      - name: Cache Poetry dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.CACHE_DIR }}
+          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-
 
-      # Step 4: Set up Docker
+      # Step 5: Set up Docker
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      # Step 5: Wait for the database to be ready
+      # Step 6: Wait for the database to be ready
       - name: Wait for PostgreSQL to be ready
         run: |
           until docker exec ${{ job.services.db.id }} pg_isready -U postgres; do
@@ -76,16 +89,7 @@ jobs:
             -f backend/api/Dockerfile backend/api \
             --load
 
-      # Step 7: Cache Poetry dependencies after building the Docker image
-      - name: Cache Poetry dependencies
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.CACHE_DIR }}
-          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-poetry-
-
-      # Step 8: Run formatting, linting, and tests in a single container session
+      # Step 7: Run formatting, linting, and tests in a single container session
       - name: Run formatting, linting, and tests
         run: |
           docker run --network="host" --env-file .env homely-api-image:latest sh -c "
