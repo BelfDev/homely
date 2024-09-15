@@ -23,10 +23,6 @@ jobs:
     services:
       db:
         image: postgres:16
-        env:
-          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
-          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
         ports:
           - 5432:5432
         options: >-
@@ -65,24 +61,28 @@ jobs:
         run: |
           docker build -t homely-api-image:latest -f backend/api/Dockerfile backend/api || exit 1
 
-      # Step 6: Run auto-formatting check with black
-      - name: Check code formatting with black
+      # Step 6: Run formatting, linting, and tests in a single container session
+      - name: Run formatting, linting, and tests
         run: |
-          docker run --network="host" --env-file .env homely-api-image:latest poetry run black --check ./src || exit 1
+          docker run --network="host" --env-file .env homely-api-image:latest sh -c "
+            echo 'Running black formatting...'; 
+            poetry run black --check ./src || { echo 'Black formatting failed!'; exit 1; }
 
-      # Step 7: Run linter inside Docker container (flake8)
-      - name: Run flake8 linter
-        run: |
-          docker run --network="host" --env-file .env homely-api-image:latest poetry run flake8 ./src || exit 1
+            echo 'Running flake8 linter...'; 
+            poetry run flake8 ./src || { echo 'Flake8 linting failed!'; exit 1; }
 
-      # Step 8: Run tests inside the Docker container
-      - name: Run tests inside Docker container
-        run: |
-          docker run --network="host" --env-file .env homely-api-image:latest poetry run pytest --maxfail=1 --disable-warnings || exit 1
+            echo 'Running tests with pytest...'; 
+            poetry run pytest --maxfail=1 --disable-warnings || { echo 'Tests failed!'; exit 1; }
+          "
 
-      # Step 9: Deploy the web service
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build-and-test  # This ensures deployment only runs if the build-and-test job succeeds
+    if: github.ref == 'refs/heads/main'  # Only deploy on pushes to the main branch
+
+    steps:
+      # Step 1: Deploy the web service
       - name: Deploy
-        if: github.ref == 'refs/heads/main'
         env:
           DEPLOY_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
         run: |
