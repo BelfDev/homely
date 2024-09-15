@@ -1,6 +1,7 @@
 [tool.poetry]
 name = "api"
 version = "0.1.0"
+package-mode = false
 description = "Home automation Web API"
 authors = ["Pedro Belfort <belfortdev@gmail.com>"]
 readme = "README.md"
