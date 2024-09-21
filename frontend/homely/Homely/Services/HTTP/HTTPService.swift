@@ -25,6 +25,8 @@ class HTTPService<E: EndpointProtocol> : HTTPServiceProtocol {
     private let session: URLSession
     private let tokenProvider: TokenProviderProtocol
     
+    private var tokenRefreshTask: Task<String, Error>? = nil
+    
     init(environment: Environment, tokenProvider: TokenProviderProtocol) {
         self.environment = environment
         self.session = HTTPService.createSession()
@@ -79,6 +81,21 @@ class HTTPService<E: EndpointProtocol> : HTTPServiceProtocol {
 // MARK: - Helper Methods Extension
 
 private extension HTTPService {
+    
+    func executeRequest<T: Decodable>(_ endpoint: E, method: String, body: Data? = nil) async throws -> T {
+        do {
+            let request = try createRequest(endpoint: endpoint, method: method, body: body)
+            let (data, response) = try await session.data(for: request)
+            
+            _ = try validateResponse(response, endpoint: endpoint)
+            return try decodeResponse(data)
+        } catch let error as APIError {
+            // Attempt to refresh token and retry the original request
+            let retryRequest = try createRequest(endpoint: endpoint, method: method, body: body)
+            return try await handleTokenExpiration(error: error, originalRequest: retryRequest, endpoint: endpoint, body: body)
+        }
+    }
+    
     func createRequest(endpoint: E, method: String, body: Data? = nil) throws -> URLRequest {
         guard let url = URL(string: endpoint.url(for: environment)) else {
             logError("General API error: Invalid URL")
@@ -98,20 +115,6 @@ private extension HTTPService {
             request.httpBody = body
         }
         return request
-    }
-    
-    func executeRequest<T: Decodable>(_ endpoint: E, method: String, body: Data? = nil) async throws -> T {
-        do {
-            let request = try createRequest(endpoint: endpoint, method: method, body: body)
-            let (data, response) = try await session.data(for: request)
-            
-            _ = try validateResponse(response, endpoint: endpoint)
-            return try decodeResponse(data)
-        } catch let error as APIError {
-            // Attempt to refresh token and retry the original request
-            let retryRequest = try createRequest(endpoint: endpoint, method: method, body: body)
-            return try await handleTokenExpiration(error: error, originalRequest: retryRequest, endpoint: endpoint, body: body)
-        }
     }
     
     /**
@@ -165,20 +168,55 @@ private extension HTTPService {
         body: Data?
     ) async throws -> T {
         guard case .unauthorized = error else {
-            throw error
+            throw error // If not an unauthorized error, throw it as is
         }
         
-        // Attempt to refresh token
-        let newToken = try await tokenProvider.refreshToken()
-        logInfo("JWT Token refreshed! \(newToken)")
+        // Check if token refresh is already in progress
+        if let newToken = try await checkTokenRefreshInProgress() {
+            return try await retryRequestWithToken(newToken, request: originalRequest, endpoint: endpoint)
+        }
         
-        // Retry the original request with the new token
-        var retryRequest = originalRequest
-        retryRequest.setValue("Bearer \(newToken)", forHTTPHeaderField: "Authorization")
+        // Start a new token refresh task
+        do {
+            let newToken = try await startTokenRefresh()
+            return try await retryRequestWithToken(newToken, request: originalRequest, endpoint: endpoint)
+        } catch {
+            // Handle failure and clear token
+            await clearTokenOnFailure(error)
+            throw error
+        }
+    }
+    
+    func checkTokenRefreshInProgress() async throws -> String? {
+        if let refreshTask = tokenRefreshTask {
+            return try await refreshTask.value
+        }
+        return nil
+    }
+    
+    func startTokenRefresh() async throws -> String {
+        let refreshTask = Task { () -> String in
+            return try await tokenProvider.refreshToken()
+        }
+        self.tokenRefreshTask = refreshTask
+        let newToken = try await refreshTask.value
+        logInfo("JWT Token refreshed! \(newToken)")
+        return newToken
+    }
+    
+    func retryRequestWithToken<T: Decodable>(_ token: String, request: URLRequest, endpoint: E) async throws -> T {
+        var retryRequest = request
+        retryRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
         let (data, response) = try await session.data(for: retryRequest)
         _ = try validateResponse(response, endpoint: endpoint)
         return try decodeResponse(data)
+    }
+    
+    func clearTokenOnFailure(_ error: Error) async {
+        self.tokenRefreshTask = nil
+        logError("Token refresh failed: \(error)")
+        tokenProvider.clearToken()
     }
     
     func encodeToJSON(_ body: [String: Any]) throws -> Data {
