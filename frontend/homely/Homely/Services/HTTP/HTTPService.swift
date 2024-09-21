@@ -7,18 +7,23 @@
 
 import Foundation
 
-protocol HTTPClientServiceProtocol {
-    func get<T: Decodable>(_ endpoint: String) async throws -> T
-    func post<T: Decodable>(_ endpoint: String, body: [String: Any]) async throws -> T
+protocol EndpointProtocol {
+    var path: String { get }
+    func url(for environment: Environment) -> String
 }
 
-class HTTPClientService : HTTPClientServiceProtocol {
-    private let baseUrl: String
+protocol HTTPServiceProtocol {
+    func get<T: Decodable>(_ endpoint: EndpointProtocol) async throws -> T
+    func post<T: Decodable>(_ endpoint: EndpointProtocol, body: [String: Any]) async throws -> T
+}
+
+class HTTPService : HTTPServiceProtocol {
+    private let environment: Environment
     private let session: URLSession
     
-    init(baseUrl: String) {
-        self.baseUrl = baseUrl
-        self.session = HTTPClientService.createSession()
+    init(environment: Environment) {
+        self.environment = environment
+        self.session = HTTPService.createSession()
     }
     
     private static func createSession() -> URLSession {
@@ -40,7 +45,7 @@ class HTTPClientService : HTTPClientServiceProtocol {
      - `APIError.serverError(Int)` for 5xx status codes.
      - Other possible errors related to the network or JSON decoding.
      */
-    func get<T: Decodable>(_ endpoint: String) async throws -> T {
+    func get<T: Decodable>(_ endpoint: EndpointProtocol) async throws -> T {
         let request = try createRequest(endpoint: endpoint, method: "GET")
         let (data, response) = try await session.data(for: request)
         
@@ -63,7 +68,7 @@ class HTTPClientService : HTTPClientServiceProtocol {
      - `APIError.serverError(Int)` for 5xx status codes.
      - Other possible errors related to the network or JSON decoding.
      */
-    func post<T: Decodable>(_ endpoint: String, body: [String: Any]) async throws -> T {
+    func post<T: Decodable>(_ endpoint: EndpointProtocol, body: [String: Any]) async throws -> T {
         let bodyData = try JSONSerialization.data(withJSONObject: body)
         let request = try createRequest(endpoint: endpoint, method: "POST", body: bodyData)
         let (data, response) = try await session.data(for: request)
@@ -78,9 +83,9 @@ class HTTPClientService : HTTPClientServiceProtocol {
 
 // MARK: - Helper Methods Extension
 
-private extension HTTPClientService {
-    func createRequest(endpoint: String, method: String, body: Data? = nil) throws -> URLRequest {
-        guard let url = URL(string: "\(baseUrl)\(endpoint)") else {
+private extension HTTPService {
+    func createRequest(endpoint: EndpointProtocol, method: String, body: Data? = nil) throws -> URLRequest {
+        guard let url = URL(string: endpoint.url(for: environment)) else {
             logError("General API error: Invalid URL")
             throw APIError.invalidURL
         }

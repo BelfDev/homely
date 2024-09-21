@@ -11,9 +11,11 @@
 		9F0A241F2C1DA57400B5DEB3 /* ThemeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0A241E2C1DA57400B5DEB3 /* ThemeProtocol.swift */; };
 		9F0A24212C1DA62600B5DEB3 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0A24202C1DA62600B5DEB3 /* ThemeManager.swift */; };
 		9F0A24232C1DAA5F00B5DEB3 /* MainTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0A24222C1DAA5F00B5DEB3 /* MainTheme.swift */; };
-		9F2B422C2C9EC89100A65225 /* HttpClientService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B422B2C9EC89100A65225 /* HttpClientService.swift */; };
+		9F2B422C2C9EC89100A65225 /* HTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B422B2C9EC89100A65225 /* HTTPService.swift */; };
 		9F2B422E2C9ECEAF00A65225 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B422D2C9ECEAF00A65225 /* Environment.swift */; };
 		9F2B42302C9EDF1E00A65225 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B422F2C9EDF1E00A65225 /* APIError.swift */; };
+		9F2B42322C9EF12300A65225 /* HomelyAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B42312C9EF12300A65225 /* HomelyAPIClient.swift */; };
+		9F2B423A2C9EFA3F00A65225 /* LoginRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B42392C9EFA3F00A65225 /* LoginRequestBody.swift */; };
 		9F5D8B392C14C725002B98D5 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5D8B382C14C725002B98D5 /* LoginScreen.swift */; };
 		9F6960F72C03B64900605975 /* HomelyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6960F62C03B64900605975 /* HomelyApp.swift */; };
 		9F6960FB2C03B64A00605975 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F6960FA2C03B64A00605975 /* Assets.xcassets */; };
@@ -71,9 +73,11 @@
 		9F0A241E2C1DA57400B5DEB3 /* ThemeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeProtocol.swift; sourceTree = "<group>"; };
 		9F0A24202C1DA62600B5DEB3 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		9F0A24222C1DAA5F00B5DEB3 /* MainTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTheme.swift; sourceTree = "<group>"; };
-		9F2B422B2C9EC89100A65225 /* HttpClientService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClientService.swift; sourceTree = "<group>"; };
+		9F2B422B2C9EC89100A65225 /* HTTPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPService.swift; sourceTree = "<group>"; };
 		9F2B422D2C9ECEAF00A65225 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		9F2B422F2C9EDF1E00A65225 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		9F2B42312C9EF12300A65225 /* HomelyAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomelyAPIClient.swift; sourceTree = "<group>"; };
+		9F2B42392C9EFA3F00A65225 /* LoginRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequestBody.swift; sourceTree = "<group>"; };
 		9F390FF12C1E377500DB1C1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = homely/Info.plist; sourceTree = "<group>"; };
 		9F5D8B382C14C725002B98D5 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		9F6960F32C03B64900605975 /* Homely.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homely.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -186,6 +190,55 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		9F2B42332C9EF4DE00A65225 /* HTTP */ = {
+			isa = PBXGroup;
+			children = (
+				9F2B422B2C9EC89100A65225 /* HTTPService.swift */,
+				9F2B423B2C9EFC6F00A65225 /* HomelyAPI */,
+			);
+			path = HTTP;
+			sourceTree = "<group>";
+		};
+		9F2B42342C9EF4FF00A65225 /* Wire */ = {
+			isa = PBXGroup;
+			children = (
+				9F2B42372C9EF54800A65225 /* Output */,
+				9F2B42362C9EF53200A65225 /* Input */,
+			);
+			path = Wire;
+			sourceTree = "<group>";
+		};
+		9F2B42362C9EF53200A65225 /* Input */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Input;
+			sourceTree = "<group>";
+		};
+		9F2B42372C9EF54800A65225 /* Output */ = {
+			isa = PBXGroup;
+			children = (
+				9F2B42392C9EFA3F00A65225 /* LoginRequestBody.swift */,
+			);
+			path = Output;
+			sourceTree = "<group>";
+		};
+		9F2B42382C9EF58900A65225 /* Adapters */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Adapters;
+			sourceTree = "<group>";
+		};
+		9F2B423B2C9EFC6F00A65225 /* HomelyAPI */ = {
+			isa = PBXGroup;
+			children = (
+				9F2B42312C9EF12300A65225 /* HomelyAPIClient.swift */,
+				9F2B42342C9EF4FF00A65225 /* Wire */,
+			);
+			path = HomelyAPI;
+			sourceTree = "<group>";
+		};
 		9F6960EA2C03B64900605975 = {
 			isa = PBXGroup;
 			children = (
@@ -210,6 +263,7 @@
 		9F6960F52C03B64900605975 /* Homely */ = {
 			isa = PBXGroup;
 			children = (
+				9F2B42382C9EF58900A65225 /* Adapters */,
 				9FCC2E1C2C69019F00A787C3 /* Services */,
 				9FCC2E192C6900BE00A787C3 /* Models */,
 				9F73B5A82C6213B50007CD73 /* Features */,
@@ -286,8 +340,8 @@
 		9FCC2E1C2C69019F00A787C3 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				9F2B42332C9EF4DE00A65225 /* HTTP */,
 				9FCC2E1D2C69020000A787C3 /* UserApiService.swift */,
-				9F2B422B2C9EC89100A65225 /* HttpClientService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -446,8 +500,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F0A241F2C1DA57400B5DEB3 /* ThemeProtocol.swift in Sources */,
+				9F2B423A2C9EFA3F00A65225 /* LoginRequestBody.swift in Sources */,
 				9FCC2E1E2C69020000A787C3 /* UserApiService.swift in Sources */,
-				9F2B422C2C9EC89100A65225 /* HttpClientService.swift in Sources */,
+				9F2B422C2C9EC89100A65225 /* HTTPService.swift in Sources */,
 				9FCC2E152C680D0100A787C3 /* FixedStrings.swift in Sources */,
 				9FCC2E132C68043100A787C3 /* LoginStrings.swift in Sources */,
 				9F5D8B392C14C725002B98D5 /* LoginScreen.swift in Sources */,
@@ -455,6 +510,7 @@
 				9F0A24232C1DAA5F00B5DEB3 /* MainTheme.swift in Sources */,
 				9F2B422E2C9ECEAF00A65225 /* Environment.swift in Sources */,
 				9FCC2E1B2C69011D00A787C3 /* User.swift in Sources */,
+				9F2B42322C9EF12300A65225 /* HomelyAPIClient.swift in Sources */,
 				9F0A24212C1DA62600B5DEB3 /* ThemeManager.swift in Sources */,
 				9FCC2E202C69052900A787C3 /* LoginViewModel.swift in Sources */,
 				9F73B5A52C5F63E30007CD73 /* Fonts.swift in Sources */,

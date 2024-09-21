@@ -11,7 +11,7 @@ enum Environment {
     case development
     case production
     
-    var baseApiUrl: String {
+    var baseHomelyAPIUrl: String {
         switch self {
         case .development:
             return "https://dev-api.example.com"
