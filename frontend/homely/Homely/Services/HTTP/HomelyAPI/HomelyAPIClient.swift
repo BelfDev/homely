@@ -20,18 +20,17 @@ protocol HomelyAPIClientProtocol {
 
 final class HomelyAPIClient : HomelyAPIClientProtocol {
     private let environment: Environment
-    private let http: HTTPServiceProtocol
+    private let http: HTTPService<Endpoint>
     
-    init(for environment: Environment, httpOverride: HTTPServiceProtocol? = nil) {
+    init(for environment: Environment) {
         self.environment = environment
-        self.http = httpOverride ?? HTTPService(environment: environment)
+        self.http = HTTPService<Endpoint>(environment: environment)
     }
     
     // MARK: - API Endpoints
     
     enum Endpoint: EndpointProtocol {
         case login
-        case userProfile(userId: String)
         
         /**
          Returns the path for the given API endpoint.
@@ -42,8 +41,6 @@ final class HomelyAPIClient : HomelyAPIClientProtocol {
             switch self {
             case .login:
                 return "/api/v1/users/login"
-            case .userProfile(let userId):
-                return "/api/v1/users/\(userId)"
             }
         }
         
@@ -62,6 +59,6 @@ final class HomelyAPIClient : HomelyAPIClientProtocol {
     
     func login(input: LoginRequestBody) async throws -> User {
         let body = input.toDictionary()
-        return try await http.post(Endpoint.login, body: body)
+        return try await http.post(.login, body: body)
     }
 }

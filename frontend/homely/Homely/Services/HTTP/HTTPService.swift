@@ -13,11 +13,14 @@ protocol EndpointProtocol {
 }
 
 protocol HTTPServiceProtocol {
-    func get<T: Decodable>(_ endpoint: EndpointProtocol) async throws -> T
-    func post<T: Decodable>(_ endpoint: EndpointProtocol, body: [String: Any]) async throws -> T
+    associatedtype E: EndpointProtocol
+    
+    func get<T: Decodable>(_ endpoint: E) async throws -> T
+    func post<T: Decodable>(_ endpoint: E, body: [String: Any]) async throws -> T
 }
 
-class HTTPService : HTTPServiceProtocol {
+class HTTPService<E: EndpointProtocol> : HTTPServiceProtocol {
+    
     private let environment: Environment
     private let session: URLSession
     
@@ -45,12 +48,11 @@ class HTTPService : HTTPServiceProtocol {
      - `APIError.serverError(Int)` for 5xx status codes.
      - Other possible errors related to the network or JSON decoding.
      */
-    func get<T: Decodable>(_ endpoint: EndpointProtocol) async throws -> T {
+    func get<T: Decodable>(_ endpoint: E) async throws -> T {
         let request = try createRequest(endpoint: endpoint, method: "GET")
         let (data, response) = try await session.data(for: request)
         
-        // This will throw an appropriate error based on the response
-        _ = try validateResponse(response)
+        _ = try validateResponse(response, endpoint: endpoint)
         return try decodeResponse(data)
     }
     
@@ -68,13 +70,12 @@ class HTTPService : HTTPServiceProtocol {
      - `APIError.serverError(Int)` for 5xx status codes.
      - Other possible errors related to the network or JSON decoding.
      */
-    func post<T: Decodable>(_ endpoint: EndpointProtocol, body: [String: Any]) async throws -> T {
-        let bodyData = try JSONSerialization.data(withJSONObject: body)
+    func post<T: Decodable>(_ endpoint: E, body: [String: Any]) async throws -> T {
+        let bodyData = try encodeToJSON(body)
         let request = try createRequest(endpoint: endpoint, method: "POST", body: bodyData)
         let (data, response) = try await session.data(for: request)
         
-        // This will throw an appropriate error based on the response
-        _ = try validateResponse(response)
+        _ = try validateResponse(response, endpoint: endpoint)
         return try decodeResponse(data)
     }
     
@@ -84,7 +85,7 @@ class HTTPService : HTTPServiceProtocol {
 // MARK: - Helper Methods Extension
 
 private extension HTTPService {
-    func createRequest(endpoint: EndpointProtocol, method: String, body: Data? = nil) throws -> URLRequest {
+    func createRequest(endpoint: E, method: String, body: Data? = nil) throws -> URLRequest {
         guard let url = URL(string: endpoint.url(for: environment)) else {
             logError("General API error: Invalid URL")
             throw APIError.invalidURL
@@ -112,9 +113,9 @@ private extension HTTPService {
      - `APIError.serverError(Int)` if the response status is in the 5xx range.
      - `APIError.unexpectedStatusCode(Int)` if the status code is outside expected ranges.
      */
-    func validateResponse(_ response: URLResponse?) throws -> HTTPURLResponse {
+    func validateResponse(_ response: URLResponse?, endpoint: E? = nil) throws -> HTTPURLResponse {
         guard let httpResponse = response as? HTTPURLResponse else {
-            logError("Invalid response received.")
+            logError("Invalid response received.", endpoint: endpoint)
             throw APIError.invalidResponse
         }
         
@@ -122,14 +123,23 @@ private extension HTTPService {
         case 200...299:
             return httpResponse
         case 400...499:
-            logError("Client error: \(httpResponse.statusCode)")
+            logError("Client error: \(httpResponse.statusCode)", endpoint: endpoint)
             throw APIError.clientError(httpResponse.statusCode)
         case 500...599:
-            logError("Server error: \(httpResponse.statusCode)")
+            logError("Server error: \(httpResponse.statusCode)", endpoint: endpoint)
             throw APIError.serverError(httpResponse.statusCode)
         default:
-            logError("Unexpected status code: \(httpResponse.statusCode)")
+            logError("Unexpected status code: \(httpResponse.statusCode)", endpoint: endpoint)
             throw APIError.unexpectedStatusCode(httpResponse.statusCode)
+        }
+    }
+    
+    func encodeToJSON(_ body: [String: Any]) throws -> Data {
+        do {
+            return try JSONSerialization.data(withJSONObject: body, options: [])
+        } catch {
+            logError("Failed to encode JSON: \(error.localizedDescription)")
+            throw APIError.encodingFailed
         }
     }
     
@@ -138,9 +148,13 @@ private extension HTTPService {
     }
     
     
-    func logError(_ message: String) {
+    func logError(_ message: String, endpoint: E? = nil) {
         #if DEBUG
-        print("API Error: \(message)")
+        if let endpoint = endpoint {
+            print("Path: \(endpoint.path)\nAPI Error: \(message)")
+           } else {
+               print("API Error: \(message)")
+           }
         #endif
     }
 }

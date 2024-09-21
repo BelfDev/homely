@@ -14,4 +14,5 @@ enum APIError: Error {
     case clientError(Int)   // For 4xx status codes
     case serverError(Int)   // For 5xx status codes
     case unexpectedStatusCode(Int) // Any unexpected status codes
+    case encodingFailed
 }
