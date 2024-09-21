@@ -13,15 +13,15 @@ protocol HTTPClientServiceProtocol {
 }
 
 class HTTPClientService : HTTPClientServiceProtocol {
-    private let environment: Environment
+    private let baseUrl: String
     private let session: URLSession
     
-    init(environment: Environment) {
-        self.environment = environment
-        self.session = HTTPClientService.createSession(with: environment)
+    init(baseUrl: String) {
+        self.baseUrl = baseUrl
+        self.session = HTTPClientService.createSession()
     }
     
-    private static func createSession(with environment: Environment) -> URLSession {
+    private static func createSession() -> URLSession {
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 30.0
         return URLSession(configuration: config)
@@ -80,8 +80,8 @@ class HTTPClientService : HTTPClientServiceProtocol {
 
 private extension HTTPClientService {
     func createRequest(endpoint: String, method: String, body: Data? = nil) throws -> URLRequest {
-        // TODO(BelfDev): Change baseApiUrl to something more generic later.
-        guard let url = URL(string: "\(environment.baseApiUrl)\(endpoint)") else {
+        guard let url = URL(string: "\(baseUrl)\(endpoint)") else {
+            logError("General API error: Invalid URL")
             throw APIError.invalidURL
         }
         
@@ -109,26 +109,33 @@ private extension HTTPClientService {
      */
     func validateResponse(_ response: URLResponse?) throws -> HTTPURLResponse {
         guard let httpResponse = response as? HTTPURLResponse else {
+            logError("Invalid response received.")
             throw APIError.invalidResponse
         }
         
         switch httpResponse.statusCode {
         case 200...299:
-            // Success
             return httpResponse
         case 400...499:
-            // Client error (4xx)
+            logError("Client error: \(httpResponse.statusCode)")
             throw APIError.clientError(httpResponse.statusCode)
         case 500...599:
-            // Server error (5xx)
+            logError("Server error: \(httpResponse.statusCode)")
             throw APIError.serverError(httpResponse.statusCode)
         default:
-            // Other unexpected status codes
+            logError("Unexpected status code: \(httpResponse.statusCode)")
             throw APIError.unexpectedStatusCode(httpResponse.statusCode)
         }
     }
     
     func decodeResponse<T: Decodable>(_ data: Data) throws -> T {
         return try JSONDecoder().decode(T.self, from: data)
+    }
+    
+    
+    func logError(_ message: String) {
+        #if DEBUG
+        print("API Error: \(message)")
+        #endif
     }
 }
