@@ -81,11 +81,47 @@ class HTTPService<E: EndpointProtocol> : HTTPServiceProtocol {
     
 }
 
-
 // MARK: - Helper Methods Extension
 
 private extension HTTPService {
+    func encodeToJSON(_ body: [String: Any]) throws -> Data {
+        do {
+            return try JSONSerialization.data(withJSONObject: body, options: [])
+        } catch {
+            logError("Failed to encode JSON: \(error.localizedDescription)")
+            throw APIError.encodingFailed
+        }
+    }
     
+    func decodeResponse<T: Decodable>(_ data: Data) throws -> T {
+        return try JSONDecoder().decode(T.self, from: data)
+    }
+    
+    
+    func logError(_ message: String, endpoint: E? = nil) {
+        #if DEBUG
+        if let endpoint = endpoint {
+            print("Path: \(endpoint.path)\nAPI Error: \(message)")
+        } else {
+            print("API Error: \(message)")
+        }
+        #endif
+    }
+    
+    func logInfo(_ message: String, endpoint: E? = nil) {
+        #if DEBUG
+        if let endpoint = endpoint {
+            print("Path: \(endpoint.path)\nInfo: \(message)")
+        } else {
+            print("Info: \(message)")
+        }
+        #endif
+    }
+}
+
+// MARK: - Request Handling Extension
+
+private extension HTTPService {
     func executeRequest<T: Decodable>(_ endpoint: E, method: String, body: Data? = nil) async throws -> T {
         do {
             let request = try createRequest(endpoint: endpoint, method: method, body: body)
@@ -154,7 +190,11 @@ private extension HTTPService {
             throw APIError.unexpectedStatusCode(httpResponse.statusCode)
         }
     }
-    
+}
+
+// MARK: - Expired Token Extension
+
+private extension HTTPService {
     /**
      Handles the token expiration scenario. If the token is expired, tries to refresh it, updates the token provider, and retries the original request.
      
@@ -221,40 +261,6 @@ private extension HTTPService {
         self.tokenRefreshTask = nil
         logError("Token refresh failed: \(error)")
         tokenProvider.clearToken()
-    }
-    
-    func encodeToJSON(_ body: [String: Any]) throws -> Data {
-        do {
-            return try JSONSerialization.data(withJSONObject: body, options: [])
-        } catch {
-            logError("Failed to encode JSON: \(error.localizedDescription)")
-            throw APIError.encodingFailed
-        }
-    }
-    
-    func decodeResponse<T: Decodable>(_ data: Data) throws -> T {
-        return try JSONDecoder().decode(T.self, from: data)
-    }
-    
-    
-    func logError(_ message: String, endpoint: E? = nil) {
-        #if DEBUG
-        if let endpoint = endpoint {
-            print("Path: \(endpoint.path)\nAPI Error: \(message)")
-        } else {
-            print("API Error: \(message)")
-        }
-        #endif
-    }
-    
-    func logInfo(_ message: String, endpoint: E? = nil) {
-        #if DEBUG
-        if let endpoint = endpoint {
-            print("Path: \(endpoint.path)\nInfo: \(message)")
-        } else {
-            print("Info: \(message)")
-        }
-        #endif
     }
 }
 
