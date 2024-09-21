@@ -18,6 +18,7 @@
 		9F2B423A2C9EFA3F00A65225 /* LoginRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B42392C9EFA3F00A65225 /* LoginRequestBody.swift */; };
 		9F2B423D2C9F513300A65225 /* HomelyAPITokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B423C2C9F513300A65225 /* HomelyAPITokenProvider.swift */; };
 		9F2B423F2C9F51B800A65225 /* TokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B423E2C9F51B800A65225 /* TokenProvider.swift */; };
+		9F2B42412C9F6C9400A65225 /* KeychainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B42402C9F6C9400A65225 /* KeychainError.swift */; };
 		9F5D8B392C14C725002B98D5 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5D8B382C14C725002B98D5 /* LoginScreen.swift */; };
 		9F6960F72C03B64900605975 /* HomelyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6960F62C03B64900605975 /* HomelyApp.swift */; };
 		9F6960FB2C03B64A00605975 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F6960FA2C03B64A00605975 /* Assets.xcassets */; };
@@ -82,6 +83,7 @@
 		9F2B42392C9EFA3F00A65225 /* LoginRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequestBody.swift; sourceTree = "<group>"; };
 		9F2B423C2C9F513300A65225 /* HomelyAPITokenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomelyAPITokenProvider.swift; sourceTree = "<group>"; };
 		9F2B423E2C9F51B800A65225 /* TokenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenProvider.swift; sourceTree = "<group>"; };
+		9F2B42402C9F6C9400A65225 /* KeychainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainError.swift; sourceTree = "<group>"; };
 		9F390FF12C1E377500DB1C1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = homely/Info.plist; sourceTree = "<group>"; };
 		9F5D8B382C14C725002B98D5 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		9F6960F32C03B64900605975 /* Homely.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homely.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -200,6 +202,7 @@
 				9F2B422B2C9EC89100A65225 /* HTTPService.swift */,
 				9F2B423E2C9F51B800A65225 /* TokenProvider.swift */,
 				9F2B422F2C9EDF1E00A65225 /* APIError.swift */,
+				9F2B42402C9F6C9400A65225 /* KeychainError.swift */,
 				9F2B423B2C9EFC6F00A65225 /* HomelyAPI */,
 			);
 			path = HTTP;
@@ -506,6 +509,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F0A241F2C1DA57400B5DEB3 /* ThemeProtocol.swift in Sources */,
+				9F2B42412C9F6C9400A65225 /* KeychainError.swift in Sources */,
 				9F2B423A2C9EFA3F00A65225 /* LoginRequestBody.swift in Sources */,
 				9FCC2E1E2C69020000A787C3 /* UserApiService.swift in Sources */,
 				9F2B422C2C9EC89100A65225 /* HTTPService.swift in Sources */,

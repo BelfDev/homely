@@ -9,7 +9,7 @@ import Foundation
 
 protocol TokenProviderProtocol {
     var jwtToken: String? { get }
-    func setToken(_ token: String)
-    func clearToken()
-    func refreshToken() async throws -> String
+        func setToken(_ token: String) throws
+        func clearToken()
+        func refreshToken() async throws -> String
 }
