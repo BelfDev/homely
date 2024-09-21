@@ -9,9 +9,9 @@ import Combine
 import Foundation
 
 // Placeholder
-class APIService {
+class APIServiceOld {
 
-    static let shared = APIService()
+    static let shared = APIServiceOld()
 
     func getUsers() -> AnyPublisher<[User], Error> {
         guard let url = URL(string: "https://api.github.com/users") else {
