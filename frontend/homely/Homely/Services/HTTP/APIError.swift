@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum APIError: Error {
+enum APIError: Error, Equatable {
     case invalidURL
     case noData
     case invalidResponse
@@ -15,4 +15,5 @@ enum APIError: Error {
     case serverError(Int)   // For 5xx status codes
     case unexpectedStatusCode(Int) // Any unexpected status codes
     case encodingFailed
+    case unauthorized
 }

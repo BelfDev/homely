@@ -24,7 +24,7 @@ final class HomelyAPIClient : HomelyAPIClientProtocol {
     
     init(for environment: Environment) {
         self.environment = environment
-        self.http = HTTPService<Endpoint>(environment: environment)
+        self.http = HTTPService<Endpoint>(environment: environment, tokenProvider: HomelyAPITokenProvider())
     }
     
     // MARK: - API Endpoints

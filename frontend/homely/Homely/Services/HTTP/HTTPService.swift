@@ -23,10 +23,12 @@ class HTTPService<E: EndpointProtocol> : HTTPServiceProtocol {
     
     private let environment: Environment
     private let session: URLSession
+    private let tokenProvider: TokenProviderProtocol
     
-    init(environment: Environment) {
+    init(environment: Environment, tokenProvider: TokenProviderProtocol) {
         self.environment = environment
         self.session = HTTPService.createSession()
+        self.tokenProvider = tokenProvider
     }
     
     private static func createSession() -> URLSession {
@@ -49,11 +51,7 @@ class HTTPService<E: EndpointProtocol> : HTTPServiceProtocol {
      - Other possible errors related to the network or JSON decoding.
      */
     func get<T: Decodable>(_ endpoint: E) async throws -> T {
-        let request = try createRequest(endpoint: endpoint, method: "GET")
-        let (data, response) = try await session.data(for: request)
-        
-        _ = try validateResponse(response, endpoint: endpoint)
-        return try decodeResponse(data)
+        return try await executeRequest(endpoint, method: "GET")
     }
     
     /**
@@ -72,11 +70,7 @@ class HTTPService<E: EndpointProtocol> : HTTPServiceProtocol {
      */
     func post<T: Decodable>(_ endpoint: E, body: [String: Any]) async throws -> T {
         let bodyData = try encodeToJSON(body)
-        let request = try createRequest(endpoint: endpoint, method: "POST", body: bodyData)
-        let (data, response) = try await session.data(for: request)
-        
-        _ = try validateResponse(response, endpoint: endpoint)
-        return try decodeResponse(data)
+        return try await executeRequest(endpoint, method: "POST", body: bodyData)
     }
     
 }
@@ -94,10 +88,30 @@ private extension HTTPService {
         var request = URLRequest(url: url)
         request.httpMethod = method
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        // Add the JWT token to the Authorization header if available
+        if let token = tokenProvider.jwtToken {
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        }
+        
         if let body = body {
             request.httpBody = body
         }
         return request
+    }
+    
+    func executeRequest<T: Decodable>(_ endpoint: E, method: String, body: Data? = nil) async throws -> T {
+        do {
+            let request = try createRequest(endpoint: endpoint, method: method, body: body)
+            let (data, response) = try await session.data(for: request)
+            
+            _ = try validateResponse(response, endpoint: endpoint)
+            return try decodeResponse(data)
+        } catch let error as APIError {
+            // Attempt to refresh token and retry the original request
+            let retryRequest = try createRequest(endpoint: endpoint, method: method, body: body)
+            return try await handleTokenExpiration(error: error, originalRequest: retryRequest, endpoint: endpoint, body: body)
+        }
     }
     
     /**
@@ -134,6 +148,39 @@ private extension HTTPService {
         }
     }
     
+    /**
+     Handles the token expiration scenario. If the token is expired, tries to refresh it, updates the token provider, and retries the original request.
+     
+     - Parameters:
+     - originalRequest: The original request that failed due to token expiration.
+     - endpoint: The endpoint of the failed request.
+     - body: The body data of the original request.
+     - Returns: A decoded object of type `T` if the retry is successful.
+     - Throws: An error if the token refresh fails or the retry fails.
+     */
+    func handleTokenExpiration<T: Decodable>(
+        error: APIError,
+        originalRequest: URLRequest,
+        endpoint: E,
+        body: Data?
+    ) async throws -> T {
+        guard case .unauthorized = error else {
+            throw error
+        }
+        
+        // Attempt to refresh token
+        let newToken = try await tokenProvider.refreshToken()
+        logInfo("JWT Token refreshed! \(newToken)")
+        
+        // Retry the original request with the new token
+        var retryRequest = originalRequest
+        retryRequest.setValue("Bearer \(newToken)", forHTTPHeaderField: "Authorization")
+        
+        let (data, response) = try await session.data(for: retryRequest)
+        _ = try validateResponse(response, endpoint: endpoint)
+        return try decodeResponse(data)
+    }
+    
     func encodeToJSON(_ body: [String: Any]) throws -> Data {
         do {
             return try JSONSerialization.data(withJSONObject: body, options: [])
@@ -152,9 +199,19 @@ private extension HTTPService {
         #if DEBUG
         if let endpoint = endpoint {
             print("Path: \(endpoint.path)\nAPI Error: \(message)")
-           } else {
-               print("API Error: \(message)")
-           }
+        } else {
+            print("API Error: \(message)")
+        }
+        #endif
+    }
+    
+    func logInfo(_ message: String, endpoint: E? = nil) {
+        #if DEBUG
+        if let endpoint = endpoint {
+            print("Path: \(endpoint.path)\nInfo: \(message)")
+        } else {
+            print("Info: \(message)")
+        }
         #endif
     }
 }
