@@ -79,6 +79,60 @@ class HTTPService<E: EndpointProtocol> : HTTPServiceProtocol {
         return try await executeRequestWithRetry(endpoint, method: "POST", body: bodyData)
     }
     
+    /**
+     Makes a PUT request to the given endpoint with the provided JSON body and decodes the response.
+     
+     - Parameters:
+     - endpoint: The endpoint relative to the base URL.
+     - body: A dictionary representing the JSON body to be sent in the request.
+     - Returns: A decoded object of type `T` if the request is successful.
+     - Throws:
+     - `APIError.invalidURL` if the endpoint is not valid.
+     - `APIError.invalidResponse` if the response is not a valid HTTP response.
+     - `APIError.clientError(Int)` for 4xx status codes.
+     - `APIError.serverError(Int)` for 5xx status codes.
+     - Other possible errors related to the network or JSON decoding.
+     */
+    func put<T: Decodable>(_ endpoint: E, body: [String: Any]) async throws -> T {
+        let bodyData = try encodeToJSON(body)
+        return try await executeRequestWithRetry(endpoint, method: "PUT", body: bodyData)
+    }
+    
+    /**
+     Makes a PATCH request to the given endpoint with the provided JSON body and decodes the response.
+     
+     - Parameters:
+     - endpoint: The endpoint relative to the base URL.
+     - body: A dictionary representing the JSON body to be sent in the request.
+     - Returns: A decoded object of type `T` if the request is successful.
+     - Throws:
+     - `APIError.invalidURL` if the endpoint is not valid.
+     - `APIError.invalidResponse` if the response is not a valid HTTP response.
+     - `APIError.clientError(Int)` for 4xx status codes.
+     - `APIError.serverError(Int)` for 5xx status codes.
+     - Other possible errors related to the network or JSON decoding.
+     */
+    func patch<T: Decodable>(_ endpoint: E, body: [String: Any]) async throws -> T {
+        let bodyData = try encodeToJSON(body)
+        return try await executeRequestWithRetry(endpoint, method: "PATCH", body: bodyData)
+    }
+    
+    /**
+     Makes a DELETE request to the given endpoint and decodes the response.
+     
+     - Parameters:
+     - endpoint: The endpoint relative to the base URL.
+     - Returns: A decoded object of type `T` if the request is successful.
+     - Throws:
+     - `APIError.invalidURL` if the endpoint is not valid.
+     - `APIError.invalidResponse` if the response is not a valid HTTP response.
+     - `APIError.clientError(Int)` for 4xx status codes.
+     - `APIError.serverError(Int)` for 5xx status codes.
+     - Other possible errors related to the network or JSON decoding.
+     */
+    func delete<T: Decodable>(_ endpoint: E) async throws -> T {
+        return try await executeRequestWithRetry(endpoint, method: "DELETE")
+    }
 }
 
 // MARK: - Helper Methods Extension
@@ -267,6 +321,17 @@ private extension HTTPService {
 // MARK: - Retry Logic Extension
 
 private extension HTTPService {
+    /**
+     Executes the HTTP request with retry logic for transient errors (e.g., server errors or timeouts).
+     
+     - Parameters:
+     - endpoint: The endpoint to request.
+     - method: The HTTP method to use (GET, POST, etc.).
+     - body: The optional body data for the request.
+     - Returns: A decoded object of type `T` if the request is successful.
+     - Throws:
+     - `APIError` in case of an error.
+     */
     func executeRequestWithRetry<T: Decodable>(_ endpoint: E, method: String, body: Data? = nil) async throws -> T {
         var currentRetryCount = 0
         
