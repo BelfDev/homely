@@ -1,5 +1,5 @@
 //
-//  ApiService.swift
+//  HTTPService.swift
 //  Homely
 //
 //  Created by Pedro Belfort on 21.09.24.
@@ -24,13 +24,17 @@ class HTTPService<E: EndpointProtocol> : HTTPServiceProtocol {
     private let environment: Environment
     private let session: URLSession
     private let tokenProvider: TokenProviderProtocol
+    private let maxRetryCount: Int
+    private let retryDelay: TimeInterval
     
     private var tokenRefreshTask: Task<String, Error>? = nil
     
-    init(environment: Environment, tokenProvider: TokenProviderProtocol) {
+    init(environment: Environment, tokenProvider: TokenProviderProtocol, maxRetryCount: Int = 3, retryDelay: TimeInterval = 2.0) {
         self.environment = environment
         self.session = HTTPService.createSession()
         self.tokenProvider = tokenProvider
+        self.maxRetryCount = maxRetryCount
+        self.retryDelay = retryDelay
     }
     
     private static func createSession() -> URLSession {
@@ -53,7 +57,7 @@ class HTTPService<E: EndpointProtocol> : HTTPServiceProtocol {
      - Other possible errors related to the network or JSON decoding.
      */
     func get<T: Decodable>(_ endpoint: E) async throws -> T {
-        return try await executeRequest(endpoint, method: "GET")
+        return try await executeRequestWithRetry(endpoint, method: "GET")
     }
     
     /**
@@ -72,7 +76,7 @@ class HTTPService<E: EndpointProtocol> : HTTPServiceProtocol {
      */
     func post<T: Decodable>(_ endpoint: E, body: [String: Any]) async throws -> T {
         let bodyData = try encodeToJSON(body)
-        return try await executeRequest(endpoint, method: "POST", body: bodyData)
+        return try await executeRequestWithRetry(endpoint, method: "POST", body: bodyData)
     }
     
 }
@@ -251,5 +255,39 @@ private extension HTTPService {
             print("Info: \(message)")
         }
         #endif
+    }
+}
+
+// MARK: - Retry Logic Extension
+
+private extension HTTPService {
+    func executeRequestWithRetry<T: Decodable>(_ endpoint: E, method: String, body: Data? = nil) async throws -> T {
+        var currentRetryCount = 0
+        
+        while true {
+            do {
+                return try await executeRequest(endpoint, method: method, body: body)
+            } catch let error as APIError {
+                if shouldRetry(error: error), currentRetryCount < maxRetryCount {
+                    currentRetryCount += 1
+                    logInfo("Retrying request (\(currentRetryCount)) due to error: \(error)")
+                    let backoffDelay = retryDelay * pow(2, Double(currentRetryCount)) // Exponential backoff
+                    try await Task.sleep(nanoseconds: UInt64(backoffDelay * Double(NSEC_PER_SEC))) // Delay before retry
+                } else {
+                    throw error
+                }
+            }
+        }
+    }
+    
+    func shouldRetry(error: APIError) -> Bool {
+        switch error {
+        case .serverError(let statusCode):
+            return [502, 503, 504].contains(statusCode)  // Retry on specific server errors
+        case .timeout:
+            return true  // Retry on timeout
+        default:
+            return false
+        }
     }
 }

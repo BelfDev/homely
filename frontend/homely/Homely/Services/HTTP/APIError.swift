@@ -16,4 +16,5 @@ enum APIError: Error, Equatable {
     case unexpectedStatusCode(Int) // Any unexpected status codes
     case encodingFailed
     case unauthorized
+    case timeout
 }
