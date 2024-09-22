@@ -58,6 +58,7 @@ final class HomelyAPIClient : HomelyAPIClientProtocol {
     // MARK: - API Operations
     
     func login(body: LoginRequestBody) async throws -> User {
+        print("Performing login")
         return try await http.post(.login, body: body)
     }
 }

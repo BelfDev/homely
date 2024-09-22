@@ -8,7 +8,7 @@
 import Foundation
 
 @Observable
-class LoginViewModel {
+final class LoginViewModel {
     private let homelyClient: HomelyAPIClient
     
     var email: String = ""
@@ -20,18 +20,23 @@ class LoginViewModel {
         self.homelyClient = components.homelyClient
     }
     
-    func login() async {
+    @MainActor
+    func login() {
         isLoading = true
         errorMessage = nil
         
-        do {
-            let loginRequestBody = LoginRequestBody(email: email, password: password)
-            let _ = try await homelyClient.login(body: loginRequestBody)
-            isLoading = false
-            // Handle successful login, e.g., navigate to the home screen.
-        } catch {
-            isLoading = false
-            errorMessage = "Login failed: \(error.localizedDescription)"
+        Task {
+            do {
+                let loginRequestBody = LoginRequestBody(email: email, password: password)
+                let token = try await homelyClient.login(body: loginRequestBody)
+                print(token)
+                
+                isLoading = false
+                // Handle successful login, e.g., navigate to the home screen.
+            } catch {
+                isLoading = false
+                errorMessage = "Login failed: \(error.localizedDescription)"
+            }
         }
     }
 }

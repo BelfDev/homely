@@ -31,6 +31,7 @@ class HTTPService<E: EndpointProtocol> : HTTPServiceProtocol {
     private let retryDelay: TimeInterval
     
     private var tokenRefreshTask: Task<String, Error>? = nil
+    private let taskQueue = DispatchQueue(label: "com.homely.httpServiceTaskQueue")
     
     init(environment: EnvConfig, tokenProvider: TokenProviderProtocol, maxRetryCount: Int = 3, retryDelay: TimeInterval = 2.0) {
         self.environment = environment
@@ -151,6 +152,7 @@ private extension HTTPService {
     }
     
     func decodeResponse<T: Decodable>(_ data: Data) throws -> T {
+        print("Trying to decode JSON...")
         return try JSONDecoder().decode(T.self, from: data)
     }
     
@@ -188,8 +190,12 @@ private extension HTTPService {
             return try decodeResponse(data)
         } catch let error as APIError {
             // Attempt to refresh token and retry the original request
-            let retryRequest = try createRequest(endpoint: endpoint, method: method, body: body)
-            return try await handleTokenExpiration(error: error, originalRequest: retryRequest, endpoint: endpoint, body: body)
+            // TODO(BelfDev): Fix token refresh concurrency
+            
+            //            let retryRequest = try createRequest(endpoint: endpoint, method: method, body: body)
+            //            return try await handleTokenExpiration(error: error, originalRequest: retryRequest, endpoint: endpoint, body: body)
+            
+            throw error
         }
     }
     
@@ -251,75 +257,77 @@ private extension HTTPService {
 
 // MARK: - Expired Token Extension
 
-private extension HTTPService {
-    /**
-     Handles the token expiration scenario. If the token is expired, tries to refresh it, updates the token provider, and retries the original request.
-     
-     - Parameters:
-     - originalRequest: The original request that failed due to token expiration.
-     - endpoint: The endpoint of the failed request.
-     - body: The body data of the original request.
-     - Returns: A decoded object of type `T` if the retry is successful.
-     - Throws: An error if the token refresh fails or the retry fails.
-     */
-    func handleTokenExpiration<T: Decodable>(
-        error: APIError,
-        originalRequest: URLRequest,
-        endpoint: E,
-        body: Data?
-    ) async throws -> T {
-        guard case .unauthorized = error else {
-            throw error // If not an unauthorized error, throw it as is
-        }
-        
-        // Check if token refresh is already in progress
-        if let newToken = try await checkTokenRefreshInProgress() {
-            return try await retryRequestWithToken(newToken, request: originalRequest, endpoint: endpoint)
-        }
-        
-        // Start a new token refresh task
-        do {
-            let newToken = try await startTokenRefresh()
-            return try await retryRequestWithToken(newToken, request: originalRequest, endpoint: endpoint)
-        } catch {
-            // Handle failure and clear token
-            await clearTokenOnFailure(error)
-            throw error
-        }
-    }
-    
-    func checkTokenRefreshInProgress() async throws -> String? {
-        if let refreshTask = tokenRefreshTask {
-            return try await refreshTask.value
-        }
-        return nil
-    }
-    
-    func startTokenRefresh() async throws -> String {
-        let refreshTask = Task { () -> String in
-            return try await tokenProvider.refreshToken()
-        }
-        self.tokenRefreshTask = refreshTask
-        let newToken = try await refreshTask.value
-        logInfo("JWT Token refreshed! \(newToken)")
-        return newToken
-    }
-    
-    func retryRequestWithToken<T: Decodable>(_ token: String, request: URLRequest, endpoint: E) async throws -> T {
-        var retryRequest = request
-        retryRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        
-        let (data, response) = try await session.data(for: retryRequest)
-        _ = try validateResponse(response, endpoint: endpoint)
-        return try decodeResponse(data)
-    }
-    
-    func clearTokenOnFailure(_ error: Error) async {
-        self.tokenRefreshTask = nil
-        logError("Token refresh failed: \(error)")
-        tokenProvider.clearToken()
-    }
-}
+// TODO(BelfDev): Fix token refresh concurrency
+
+//private extension HTTPService {
+//    /**
+//     Handles the token expiration scenario. If the token is expired, tries to refresh it, updates the token provider, and retries the original request.
+//
+//     - Parameters:
+//     - originalRequest: The original request that failed due to token expiration.
+//     - endpoint: The endpoint of the failed request.
+//     - body: The body data of the original request.
+//     - Returns: A decoded object of type `T` if the retry is successful.
+//     - Throws: An error if the token refresh fails or the retry fails.
+//     */
+//    func handleTokenExpiration<T: Decodable>(
+//        error: APIError,
+//        originalRequest: URLRequest,
+//        endpoint: E,
+//        body: Data?
+//    ) async throws -> T {
+//        guard case .unauthorized = error else {
+//            throw error // If not an unauthorized error, throw it as is
+//        }
+//
+//        // Check if token refresh is already in progress
+//        if let newToken = try await checkTokenRefreshInProgress() {
+//            return try await retryRequestWithToken(newToken, request: originalRequest, endpoint: endpoint)
+//        }
+//
+//        // Start a new token refresh task
+//        do {
+//            let newToken = try await startTokenRefresh()
+//            return try await retryRequestWithToken(newToken, request: originalRequest, endpoint: endpoint)
+//        } catch {
+//            // Handle failure and clear token
+//            await clearTokenOnFailure(error)
+//            throw error
+//        }
+//    }
+//
+//    func checkTokenRefreshInProgress() async throws -> String? {
+//        if let refreshTask = tokenRefreshTask {
+//            return try await refreshTask.value
+//        }
+//        return nil
+//    }
+//
+//    func startTokenRefresh() async throws -> String {
+//        let refreshTask = Task { () -> String in
+//            return try await tokenProvider.refreshToken()
+//        }
+//        self.tokenRefreshTask = refreshTask
+//        let newToken = try await refreshTask.value
+//        logInfo("JWT Token refreshed! \(newToken)")
+//        return newToken
+//    }
+//
+//    func retryRequestWithToken<T: Decodable>(_ token: String, request: URLRequest, endpoint: E) async throws -> T {
+//        var retryRequest = request
+//        retryRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+//
+//        let (data, response) = try await session.data(for: retryRequest)
+//        _ = try validateResponse(response, endpoint: endpoint)
+//        return try decodeResponse(data)
+//    }
+//
+//    func clearTokenOnFailure(_ error: Error) async {
+//        self.tokenRefreshTask = nil
+//        logError("Token refresh failed: \(error)")
+//        tokenProvider.clearToken()
+//    }
+//}
 
 // MARK: - Retry Logic Extension
 
@@ -340,8 +348,10 @@ private extension HTTPService {
         
         while true {
             do {
+                print("Executing request")
                 return try await executeRequest(endpoint, method: method, body: body)
             } catch let error as APIError {
+                print("REQUEST FAILED")
                 if shouldRetry(error: error), currentRetryCount < maxRetryCount {
                     currentRetryCount += 1
                     logInfo("Retrying request (\(currentRetryCount)) due to error: \(error)")

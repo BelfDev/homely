@@ -7,14 +7,6 @@
 
 import Foundation
 
-struct User: Codable, Identifiable {
-    var id: Int
-    var login: String?
-    var avatar_url: String?
-    
-    init(id: Int, login: String? = nil, avatar_url: String? = nil) {
-        self.id = id
-        self.login = login
-        self.avatar_url = avatar_url
-    }
+struct User: Codable {
+    let access_token: String
 }

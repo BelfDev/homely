@@ -148,9 +148,7 @@ struct LoginScreen: View {
     
     private var loginButton: some View {
         Button {
-            Task {
-                await viewModel.login()
-            }
+            viewModel.login()
         } label: {
             Text(LoginStrings.loginButton)
                 .font(theme.font.button)
@@ -178,5 +176,6 @@ struct LoginScreen: View {
 
 #Preview {
     LoginScreen()
+        .environment(ThemeManager())
         .environment(LoginViewModel(with: ComponentManager(.development)))
 }

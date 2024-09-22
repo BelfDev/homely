@@ -57,6 +57,7 @@ class HomelyAPITokenProvider: TokenProviderProtocol {
      
      - Throws: A custom error indicating that the token needs to be refreshed (i.e., user must log in again).
      */
+    @MainActor
     func refreshToken() async throws -> String {
         // TODO(BelfDev): Upgrade the App to use Refresh Tokens.
         clearToken()

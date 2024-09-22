@@ -14,7 +14,7 @@ enum EnvConfig {
     var baseHomelyAPIUrl: String {
         switch self {
         case .development:
-            return "https://dev-api.example.com"
+            return "https://homely-uabv.onrender.com"
         case .production:
             return "https://api.example.com"
         }
