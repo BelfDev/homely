@@ -11,11 +11,11 @@ protocol HomelyAPIClientProtocol {
     /**
      Logs in a user by sending their credentials to the server.
      
-     - Parameter input: The login request body containing email and password.
+     - Parameter body: The login request body containing email and password.
      - Returns: A `User` object if the request is successful.
      - Throws: An error if the login fails.
      */
-    func login(input: LoginRequestBody) async throws -> User
+    func login(body: LoginRequestBody) async throws -> User
 }
 
 final class HomelyAPIClient : HomelyAPIClientProtocol {
@@ -57,8 +57,7 @@ final class HomelyAPIClient : HomelyAPIClientProtocol {
     
     // MARK: - API Operations
     
-    func login(input: LoginRequestBody) async throws -> User {
-        let body = input.toDictionary()
+    func login(body: LoginRequestBody) async throws -> User {
         return try await http.post(.login, body: body)
     }
 }

@@ -58,6 +58,7 @@ class HomelyAPITokenProvider: TokenProviderProtocol {
      - Throws: A custom error indicating that the token needs to be refreshed (i.e., user must log in again).
      */
     func refreshToken() async throws -> String {
+        // TODO(BelfDev): Upgrade the App to use Refresh Tokens.
         clearToken()
         throw APIError.unauthorized  // `APIError.unauthorized` is how we handle token expiration. We expect users to be forwarded to the Login Screen.
     }

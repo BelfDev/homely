@@ -16,7 +16,10 @@ protocol HTTPServiceProtocol {
     associatedtype E: EndpointProtocol
     
     func get<T: Decodable>(_ endpoint: E) async throws -> T
-    func post<T: Decodable>(_ endpoint: E, body: [String: Any]) async throws -> T
+    func post<T: Decodable, B: Encodable>(_ endpoint: E, body: B) async throws -> T
+    func put<T: Decodable, B: Encodable>(_ endpoint: E, body: B) async throws -> T
+    func patch<T: Decodable, B: Encodable>(_ endpoint: E, body: B) async throws -> T
+    func delete<T: Decodable>(_ endpoint: E) async throws -> T
 }
 
 class HTTPService<E: EndpointProtocol> : HTTPServiceProtocol {
@@ -61,7 +64,7 @@ class HTTPService<E: EndpointProtocol> : HTTPServiceProtocol {
     }
     
     /**
-     Makes a POST request to the given endpoint with the provided JSON body and decodes the response.
+     Makes a POST request to the given endpoint with the provided `Encodable` body and decodes the response.
      
      - Parameters:
      - endpoint: The endpoint relative to the base URL.
@@ -74,13 +77,13 @@ class HTTPService<E: EndpointProtocol> : HTTPServiceProtocol {
      - `APIError.serverError(Int)` for 5xx status codes.
      - Other possible errors related to the network or JSON decoding.
      */
-    func post<T: Decodable>(_ endpoint: E, body: [String: Any]) async throws -> T {
+    func post<T: Decodable, B: Encodable>(_ endpoint: E, body: B) async throws -> T {
         let bodyData = try encodeToJSON(body)
         return try await executeRequestWithRetry(endpoint, method: "POST", body: bodyData)
     }
     
     /**
-     Makes a PUT request to the given endpoint with the provided JSON body and decodes the response.
+     Makes a PUT request to the given endpoint with the provided `Encodable` body and decodes the response.
      
      - Parameters:
      - endpoint: The endpoint relative to the base URL.
@@ -93,13 +96,13 @@ class HTTPService<E: EndpointProtocol> : HTTPServiceProtocol {
      - `APIError.serverError(Int)` for 5xx status codes.
      - Other possible errors related to the network or JSON decoding.
      */
-    func put<T: Decodable>(_ endpoint: E, body: [String: Any]) async throws -> T {
+    func put<T: Decodable, B: Encodable>(_ endpoint: E, body: B) async throws -> T {
         let bodyData = try encodeToJSON(body)
         return try await executeRequestWithRetry(endpoint, method: "PUT", body: bodyData)
     }
     
     /**
-     Makes a PATCH request to the given endpoint with the provided JSON body and decodes the response.
+     Makes a PATCH request to the given endpoint with the provided `Encodable` body and decodes the response.
      
      - Parameters:
      - endpoint: The endpoint relative to the base URL.
@@ -112,7 +115,7 @@ class HTTPService<E: EndpointProtocol> : HTTPServiceProtocol {
      - `APIError.serverError(Int)` for 5xx status codes.
      - Other possible errors related to the network or JSON decoding.
      */
-    func patch<T: Decodable>(_ endpoint: E, body: [String: Any]) async throws -> T {
+    func patch<T: Decodable, B: Encodable>(_ endpoint: E, body: B) async throws -> T {
         let bodyData = try encodeToJSON(body)
         return try await executeRequestWithRetry(endpoint, method: "PATCH", body: bodyData)
     }
@@ -138,9 +141,9 @@ class HTTPService<E: EndpointProtocol> : HTTPServiceProtocol {
 // MARK: - Helper Methods Extension
 
 private extension HTTPService {
-    func encodeToJSON(_ body: [String: Any]) throws -> Data {
+    func encodeToJSON<B: Encodable>(_ body: B) throws -> Data {
         do {
-            return try JSONSerialization.data(withJSONObject: body, options: [])
+            return try JSONEncoder().encode(body)
         } catch {
             logError("Failed to encode JSON: \(error.localizedDescription)")
             throw APIError.encodingFailed
