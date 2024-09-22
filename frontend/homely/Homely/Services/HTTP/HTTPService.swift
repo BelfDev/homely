@@ -68,7 +68,7 @@ class HTTPService<E: EndpointProtocol> : HTTPServiceProtocol {
      
      - Parameters:
      - endpoint: The endpoint relative to the base URL.
-     - body: A dictionary representing the JSON body to be sent in the request.
+     - body: An object conforming to `Encodable` to send as JSON
      - Returns: A decoded object of type `T` if the request is successful.
      - Throws:
      - `APIError.invalidURL` if the endpoint is not valid.
@@ -87,7 +87,7 @@ class HTTPService<E: EndpointProtocol> : HTTPServiceProtocol {
      
      - Parameters:
      - endpoint: The endpoint relative to the base URL.
-     - body: A dictionary representing the JSON body to be sent in the request.
+     - body: An object conforming to `Encodable` to send as JSON
      - Returns: A decoded object of type `T` if the request is successful.
      - Throws:
      - `APIError.invalidURL` if the endpoint is not valid.
@@ -106,7 +106,7 @@ class HTTPService<E: EndpointProtocol> : HTTPServiceProtocol {
      
      - Parameters:
      - endpoint: The endpoint relative to the base URL.
-     - body: A dictionary representing the JSON body to be sent in the request.
+     - body: An object conforming to `Encodable` to send as JSON
      - Returns: A decoded object of type `T` if the request is successful.
      - Throws:
      - `APIError.invalidURL` if the endpoint is not valid.
