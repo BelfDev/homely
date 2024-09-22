@@ -19,10 +19,10 @@ protocol HomelyAPIClientProtocol {
 }
 
 final class HomelyAPIClient : HomelyAPIClientProtocol {
-    private let environment: Environment
+    private let environment: EnvConfig
     private let http: HTTPService<Endpoint>
     
-    init(for environment: Environment) {
+    init(for environment: EnvConfig) {
         self.environment = environment
         self.http = HTTPService<Endpoint>(environment: environment, tokenProvider: HomelyAPITokenProvider())
     }
@@ -50,7 +50,7 @@ final class HomelyAPIClient : HomelyAPIClientProtocol {
          - Parameter environment: The environment containing the base API URL.
          - Returns: The full URL for the endpoint.
          */
-        func url(for environment: Environment) -> String {
+        func url(for environment: EnvConfig) -> String {
             return "\(environment.baseHomelyAPIUrl)\(path)"
         }
     }

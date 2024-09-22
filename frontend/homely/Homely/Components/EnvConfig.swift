@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Environment {
+enum EnvConfig {
     case development
     case production
     

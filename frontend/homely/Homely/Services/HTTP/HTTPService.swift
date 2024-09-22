@@ -9,7 +9,7 @@ import Foundation
 
 protocol EndpointProtocol {
     var path: String { get }
-    func url(for environment: Environment) -> String
+    func url(for environment: EnvConfig) -> String
 }
 
 protocol HTTPServiceProtocol {
@@ -24,7 +24,7 @@ protocol HTTPServiceProtocol {
 
 class HTTPService<E: EndpointProtocol> : HTTPServiceProtocol {
     
-    private let environment: Environment
+    private let environment: EnvConfig
     private let session: URLSession
     private let tokenProvider: TokenProviderProtocol
     private let maxRetryCount: Int
@@ -32,7 +32,7 @@ class HTTPService<E: EndpointProtocol> : HTTPServiceProtocol {
     
     private var tokenRefreshTask: Task<String, Error>? = nil
     
-    init(environment: Environment, tokenProvider: TokenProviderProtocol, maxRetryCount: Int = 3, retryDelay: TimeInterval = 2.0) {
+    init(environment: EnvConfig, tokenProvider: TokenProviderProtocol, maxRetryCount: Int = 3, retryDelay: TimeInterval = 2.0) {
         self.environment = environment
         self.session = HTTPService.createSession()
         self.tokenProvider = tokenProvider

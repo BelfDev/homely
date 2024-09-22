@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct LoginScreen: View {
-    @Environment(ThemeManager.self) private var theme
+    @ThemeProvider private var theme
+    @HomelyAPIProvider private var homelyClient
+    
     @State private var email: String = ""
     @State private var password: String = ""
     
@@ -168,12 +170,12 @@ struct LoginScreen: View {
                     .font(theme.font.body1)
                     .foregroundColor(theme.color.onSurface)
             }
-          
+            
         }
     }
 }
 
 #Preview {
     LoginScreen()
-        .environment(ThemeManager())
+        .environment(ComponentManager(.development))
 }

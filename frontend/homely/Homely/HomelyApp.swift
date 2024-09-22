@@ -9,11 +9,15 @@ import SwiftUI
 
 @main
 struct HomelyApp: App {
-    @State private var theme = ThemeManager()
+    private let components: ComponentManager
+    
+    init() {
+        components = ComponentManager(.development)
+    }
     
     var body: some Scene {
         WindowGroup {
-            LoginScreen().environment(theme)
+            LoginScreen().environment(components)
         }
     }
 }

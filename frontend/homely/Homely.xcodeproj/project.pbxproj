@@ -12,13 +12,15 @@
 		9F0A24212C1DA62600B5DEB3 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0A24202C1DA62600B5DEB3 /* ThemeManager.swift */; };
 		9F0A24232C1DAA5F00B5DEB3 /* MainTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0A24222C1DAA5F00B5DEB3 /* MainTheme.swift */; };
 		9F2B422C2C9EC89100A65225 /* HTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B422B2C9EC89100A65225 /* HTTPService.swift */; };
-		9F2B422E2C9ECEAF00A65225 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B422D2C9ECEAF00A65225 /* Environment.swift */; };
+		9F2B422E2C9ECEAF00A65225 /* EnvConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B422D2C9ECEAF00A65225 /* EnvConfig.swift */; };
 		9F2B42302C9EDF1E00A65225 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B422F2C9EDF1E00A65225 /* APIError.swift */; };
 		9F2B42322C9EF12300A65225 /* HomelyAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B42312C9EF12300A65225 /* HomelyAPIClient.swift */; };
 		9F2B423A2C9EFA3F00A65225 /* LoginRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B42392C9EFA3F00A65225 /* LoginRequestBody.swift */; };
 		9F2B423D2C9F513300A65225 /* HomelyAPITokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B423C2C9F513300A65225 /* HomelyAPITokenProvider.swift */; };
 		9F2B423F2C9F51B800A65225 /* TokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B423E2C9F51B800A65225 /* TokenProvider.swift */; };
 		9F2B42412C9F6C9400A65225 /* KeychainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B42402C9F6C9400A65225 /* KeychainError.swift */; };
+		9F2B42432CA032AC00A65225 /* ComponentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B42422CA032AC00A65225 /* ComponentManager.swift */; };
+		9F2B42472CA03BF500A65225 /* ComponentProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B42462CA03BF500A65225 /* ComponentProperties.swift */; };
 		9F5D8B392C14C725002B98D5 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5D8B382C14C725002B98D5 /* LoginScreen.swift */; };
 		9F6960F72C03B64900605975 /* HomelyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6960F62C03B64900605975 /* HomelyApp.swift */; };
 		9F6960FB2C03B64A00605975 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F6960FA2C03B64A00605975 /* Assets.xcassets */; };
@@ -50,7 +52,6 @@
 		9FCC2E152C680D0100A787C3 /* FixedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCC2E142C680D0100A787C3 /* FixedStrings.swift */; };
 		9FCC2E172C68FF8E00A787C3 /* Limelight-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9FCC2E162C68FC3B00A787C3 /* Limelight-Regular.ttf */; };
 		9FCC2E1B2C69011D00A787C3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCC2E1A2C69011D00A787C3 /* User.swift */; };
-		9FCC2E202C69052900A787C3 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCC2E1F2C69052900A787C3 /* LoginViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,13 +77,15 @@
 		9F0A24202C1DA62600B5DEB3 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		9F0A24222C1DAA5F00B5DEB3 /* MainTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTheme.swift; sourceTree = "<group>"; };
 		9F2B422B2C9EC89100A65225 /* HTTPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPService.swift; sourceTree = "<group>"; };
-		9F2B422D2C9ECEAF00A65225 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		9F2B422D2C9ECEAF00A65225 /* EnvConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvConfig.swift; sourceTree = "<group>"; };
 		9F2B422F2C9EDF1E00A65225 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		9F2B42312C9EF12300A65225 /* HomelyAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomelyAPIClient.swift; sourceTree = "<group>"; };
 		9F2B42392C9EFA3F00A65225 /* LoginRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequestBody.swift; sourceTree = "<group>"; };
 		9F2B423C2C9F513300A65225 /* HomelyAPITokenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomelyAPITokenProvider.swift; sourceTree = "<group>"; };
 		9F2B423E2C9F51B800A65225 /* TokenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenProvider.swift; sourceTree = "<group>"; };
 		9F2B42402C9F6C9400A65225 /* KeychainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainError.swift; sourceTree = "<group>"; };
+		9F2B42422CA032AC00A65225 /* ComponentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentManager.swift; sourceTree = "<group>"; };
+		9F2B42462CA03BF500A65225 /* ComponentProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentProperties.swift; sourceTree = "<group>"; };
 		9F390FF12C1E377500DB1C1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = homely/Info.plist; sourceTree = "<group>"; };
 		9F5D8B382C14C725002B98D5 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		9F6960F32C03B64900605975 /* Homely.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homely.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,7 +121,6 @@
 		9FCC2E142C680D0100A787C3 /* FixedStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedStrings.swift; sourceTree = "<group>"; };
 		9FCC2E162C68FC3B00A787C3 /* Limelight-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Limelight-Regular.ttf"; sourceTree = "<group>"; };
 		9FCC2E1A2C69011D00A787C3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		9FCC2E1F2C69052900A787C3 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +247,16 @@
 			path = HomelyAPI;
 			sourceTree = "<group>";
 		};
+		9F2B42482CA03D5600A65225 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				9F2B422D2C9ECEAF00A65225 /* EnvConfig.swift */,
+				9F2B42422CA032AC00A65225 /* ComponentManager.swift */,
+				9F2B42462CA03BF500A65225 /* ComponentProperties.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		9F6960EA2C03B64900605975 = {
 			isa = PBXGroup;
 			children = (
@@ -269,13 +281,14 @@
 		9F6960F52C03B64900605975 /* Homely */ = {
 			isa = PBXGroup;
 			children = (
+				9F6960F62C03B64900605975 /* HomelyApp.swift */,
+				9F2B42482CA03D5600A65225 /* Components */,
 				9F2B42382C9EF58900A65225 /* Adapters */,
 				9FCC2E1C2C69019F00A787C3 /* Services */,
 				9FCC2E192C6900BE00A787C3 /* Models */,
 				9F73B5A82C6213B50007CD73 /* Features */,
 				9F0A23F62C1997C900B5DEB3 /* Resources */,
 				9F0A23F52C1997AA00B5DEB3 /* Themes */,
-				9F6960F62C03B64900605975 /* HomelyApp.swift */,
 				9F6960FC2C03B64A00605975 /* Preview Content */,
 				9F2B42342C9EF4FF00A65225 /* Wire */,
 			);
@@ -320,7 +333,6 @@
 			children = (
 				9F5D8B382C14C725002B98D5 /* LoginScreen.swift */,
 				9FCC2E122C68043100A787C3 /* LoginStrings.swift */,
-				9FCC2E1F2C69052900A787C3 /* LoginViewModel.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -338,7 +350,6 @@
 			isa = PBXGroup;
 			children = (
 				9FCC2E1A2C69011D00A787C3 /* User.swift */,
-				9F2B422D2C9ECEAF00A65225 /* Environment.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -506,8 +517,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F0A241F2C1DA57400B5DEB3 /* ThemeProtocol.swift in Sources */,
+				9F2B42432CA032AC00A65225 /* ComponentManager.swift in Sources */,
 				9F2B42412C9F6C9400A65225 /* KeychainError.swift in Sources */,
 				9F2B423A2C9EFA3F00A65225 /* LoginRequestBody.swift in Sources */,
+				9F2B42472CA03BF500A65225 /* ComponentProperties.swift in Sources */,
 				9F2B422C2C9EC89100A65225 /* HTTPService.swift in Sources */,
 				9F2B423F2C9F51B800A65225 /* TokenProvider.swift in Sources */,
 				9FCC2E152C680D0100A787C3 /* FixedStrings.swift in Sources */,
@@ -515,12 +528,11 @@
 				9F5D8B392C14C725002B98D5 /* LoginScreen.swift in Sources */,
 				9F6960F72C03B64900605975 /* HomelyApp.swift in Sources */,
 				9F0A24232C1DAA5F00B5DEB3 /* MainTheme.swift in Sources */,
-				9F2B422E2C9ECEAF00A65225 /* Environment.swift in Sources */,
+				9F2B422E2C9ECEAF00A65225 /* EnvConfig.swift in Sources */,
 				9FCC2E1B2C69011D00A787C3 /* User.swift in Sources */,
 				9F2B42322C9EF12300A65225 /* HomelyAPIClient.swift in Sources */,
 				9F2B423D2C9F513300A65225 /* HomelyAPITokenProvider.swift in Sources */,
 				9F0A24212C1DA62600B5DEB3 /* ThemeManager.swift in Sources */,
-				9FCC2E202C69052900A787C3 /* LoginViewModel.swift in Sources */,
 				9F73B5A52C5F63E30007CD73 /* Fonts.swift in Sources */,
 				9F2B42302C9EDF1E00A65225 /* APIError.swift in Sources */,
 			);
