@@ -17,7 +17,9 @@ struct HomelyApp: App {
     
     var body: some Scene {
         WindowGroup {
-            LoginScreen().environment(components)
+            LoginScreen()
+                .environment(components.theme)
+                .environment(LoginViewModel(with: components))
         }
     }
 }

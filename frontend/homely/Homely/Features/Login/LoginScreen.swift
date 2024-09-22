@@ -8,11 +8,8 @@
 import SwiftUI
 
 struct LoginScreen: View {
-    @ThemeProvider private var theme
-    @HomelyAPIProvider private var homelyClient
-    
-    @State private var email: String = ""
-    @State private var password: String = ""
+    @Environment(ThemeManager.self) private var theme
+    @Environment(LoginViewModel.self) private var viewModel
     
     var body: some View {
         GeometryReader { geometry in
@@ -111,13 +108,14 @@ struct LoginScreen: View {
         VStack(
             alignment: .leading,
             spacing: 8.0) {
+                @Bindable var vm = viewModel
                 Text(LoginStrings.emailInputLabel)
                     .font(theme.font.body1)
                     .fontWeight(.medium)
                     .foregroundColor(theme.color.onSurface)
                     .frame(alignment: .leading)
                 
-                TextField("", text: $email)
+                TextField("", text: $vm.email)
                     .frame(height: 48.0)
                     .padding(.horizontal, 12)
                     .background(theme.color.surfaceContainerHigh)
@@ -129,6 +127,7 @@ struct LoginScreen: View {
         VStack(
             alignment: .leading,
             spacing: 8.0) {
+                @Bindable var vm = viewModel
                 Text(LoginStrings.passwordInputLabel)
                     .font(theme.font.body1)
                     .fontWeight(.medium)
@@ -136,7 +135,7 @@ struct LoginScreen: View {
                     .frame(height: 15, alignment: .leading)
                 
                 HStack {
-                    SecureField("", text: $password)
+                    SecureField("", text: $vm.password)
                     Image(systemName:"eye")
                         .foregroundColor(theme.color.onSurface)
                 }
@@ -149,7 +148,9 @@ struct LoginScreen: View {
     
     private var loginButton: some View {
         Button {
-            print("Log user in")
+            Task {
+                await viewModel.login()
+            }
         } label: {
             Text(LoginStrings.loginButton)
                 .font(theme.font.button)
@@ -177,5 +178,5 @@ struct LoginScreen: View {
 
 #Preview {
     LoginScreen()
-        .environment(ComponentManager(.development))
+        .environment(LoginViewModel(with: ComponentManager(.development)))
 }
