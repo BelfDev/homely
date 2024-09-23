@@ -14,68 +14,87 @@ struct LoginScreen: View {
     init(_ components: ComponentManager) {
         vm = LoginViewModel(with: components)
     }
-        
+
     var body: some View {
-        GeometryReader { geometry in
+         GeometryReader { geometry in
+             ZStack(alignment: .top) {
+                 backgroundImage(minHeight: geometry.size.height * 0.3)
+                 
+                 mainContent(geometry: geometry).disabled(vm.isLoading)
+                 if vm.isLoading {
+                    loadingOverlay
+                 }
+             }
+             .edgesIgnoringSafeArea(.bottom)
+             .background(
+                 LinearGradient(
+                     gradient: Gradient(
+                         colors: [.blue, theme.color.surface, theme.color.surface]),
+                     startPoint: .top,
+                     endPoint: .bottom
+                 )
+             )
+         }
+     }
+    
+    private func mainContent(geometry: GeometryProxy) -> some View {
+        ZStack(alignment: .top) {
+            backgroundImage(minHeight: geometry.size.height * 0.3)
+            Text(FixedStrings.appTitle)
+                .foregroundStyle(theme.color.onPrimary)
+                .font(theme.font.h2)
+                .bold()
+                .padding(.top, geometry.size.height * 0.12)
             
-            ZStack(alignment: .top) {
-                backgroundImage(minHeight: geometry.size.height * 0.3)
-                Text(FixedStrings.appTitle)
-                    .foregroundStyle(theme.color.onPrimary)
-                    .font(theme.font.h2)
-                    .bold()
-                    .padding(.top, geometry.size.height * 0.12)
+            ScrollView {
                 
-                ScrollView {
+                VStack {
+                    Spacer()
+                        .frame(height: 32.0)
                     
-                    VStack {
-                        Spacer()
-                            .frame(height: 32.0)
-                        
-                        Text(LoginStrings.screenTitle)
-                            .font(theme.font.h5)
-                            .bold()
-                            .foregroundColor(theme.color.onSurface)
-                        Spacer()
-                            .frame(height: 32.0)
-                        emailInputField
-                        Spacer()
-                            .frame(height: 24.0)
-                        passwordInputField
-                        Spacer()
-                            .frame(height: 8.0)
-                        forgotPasswordButton
-                        Spacer()
-                        loginButton
-                        Spacer()
-                            .frame(height: 8.0)
-                        signUpRow
-                    }
-                    .padding([.horizontal, .bottom], 24.0)
-                    .background(
-                        UnevenRoundedRectangle(
-                            cornerRadii: .init(topLeading: 32.0, topTrailing: 32.0),
-                            style: .continuous
-                        )
-                        .foregroundStyle(theme.color.surface)
-                    )
-                    .frame(maxWidth: .infinity, minHeight: geometry.size.height * 0.7)
-                    .padding(.top, geometry.size.height * 0.3)
+                    Text(LoginStrings.screenTitle)
+                        .font(theme.font.h5)
+                        .bold()
+                        .foregroundColor(theme.color.onSurface)
+                    Spacer()
+                        .frame(height: 32.0)
+                    emailInputField
+                    Spacer()
+                        .frame(height: 24.0)
+                    passwordInputField
+                    Spacer()
+                        .frame(height: 8.0)
+                    forgotPasswordButton
+                    Spacer()
+                    loginButton
+                    Spacer()
+                        .frame(height: 8.0)
+                    signUpRow
                 }
-                .scrollBounceBehavior(.basedOnSize)
-            }
-            .edgesIgnoringSafeArea(.bottom)
-            .background(
-                LinearGradient(
-                    gradient: Gradient(
-                        colors: [.blue,
-                                 theme.color.surface,
-                                 theme.color.surface]),
-                    startPoint: .top,
-                    endPoint: .bottom
+                .padding([.horizontal, .bottom], 24.0)
+                .background(
+                    UnevenRoundedRectangle(
+                        cornerRadii: .init(topLeading: 32.0, topTrailing: 32.0),
+                        style: .continuous
+                    )
+                    .foregroundStyle(theme.color.surface)
                 )
-            )
+                .frame(maxWidth: .infinity, minHeight: geometry.size.height * 0.7)
+                .padding(.top, geometry.size.height * 0.3)
+            }
+            .scrollBounceBehavior(.basedOnSize)
         }
+        .edgesIgnoringSafeArea(.bottom)
+        .background(
+            LinearGradient(
+                gradient: Gradient(
+                    colors: [.blue,
+                             theme.color.surface,
+                             theme.color.surface]),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+        )
     }
     
     private func backgroundImage(minHeight: CGFloat) -> some View {
@@ -174,6 +193,21 @@ struct LoginScreen: View {
             
         }
     }
+    
+    private var loadingOverlay: some View {
+        VStack {
+              ProgressView()
+                  .progressViewStyle(CircularProgressViewStyle())
+                  .scaleEffect(2.0)
+                  .padding(.top, 200)
+              Text("Logging in...")
+                  .font(theme.font.h5)
+                  .foregroundColor(theme.color.onPrimary)
+          }
+          .frame(maxWidth: .infinity, maxHeight: .infinity)
+          .background(theme.color.background.opacity(0.8))
+          .edgesIgnoringSafeArea(.all)
+      }
 }
 
 #Preview {
