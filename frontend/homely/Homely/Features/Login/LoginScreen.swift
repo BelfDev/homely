@@ -195,17 +195,18 @@ struct LoginScreen: View {
     }
     
     private var loadingOverlay: some View {
-        VStack {
-              ProgressView()
-                  .progressViewStyle(CircularProgressViewStyle())
-                  .scaleEffect(2.0)
-                  .padding(.top, 200)
-              Text("Logging in...")
-                  .font(theme.font.h5)
-                  .foregroundColor(theme.color.onPrimary)
+        ZStack {
+              Color.black.opacity(0.5)
+                  .edgesIgnoringSafeArea(.all)
+              
+              VStack {
+                  ProgressView()
+                      .progressViewStyle(CircularProgressViewStyle())
+                      .scaleEffect(2.0)
+                      .tint(theme.color.onPrimary)
+              }
           }
           .frame(maxWidth: .infinity, maxHeight: .infinity)
-          .background(theme.color.background.opacity(0.8))
           .edgesIgnoringSafeArea(.all)
       }
 }
