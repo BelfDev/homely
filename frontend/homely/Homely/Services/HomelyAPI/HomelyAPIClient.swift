@@ -15,7 +15,7 @@ protocol HomelyAPIClientProtocol {
      - Returns: A `User` object if the request is successful.
      - Throws: An error if the login fails.
      */
-    func login(body: LoginRequestBody) async throws -> User
+    func login(body: LoginRequestBody) async throws -> LoginResponse
 }
 
 final class HomelyAPIClient : HomelyAPIClientProtocol {
@@ -57,7 +57,7 @@ final class HomelyAPIClient : HomelyAPIClientProtocol {
     
     // MARK: - API Operations
     
-    func login(body: LoginRequestBody) async throws -> User {
+    func login(body: LoginRequestBody) async throws -> LoginResponse {
         print("Performing login")
         return try await http.post(.login, body: body)
     }

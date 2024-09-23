@@ -7,6 +7,10 @@
 
 import Foundation
 
-struct User: Codable {
-    let access_token: String
+struct LoginResponse: Codable {
+    let accessToken: String
+    
+    enum CodingKeys: String, CodingKey {
+        case accessToken = "access_token"
+    }
 }
