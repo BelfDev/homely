@@ -16,7 +16,7 @@ enum EnvConfig {
         case .development:
             return "https://homely-uabv.onrender.com"
         case .production:
-            return "https://api.example.com"
+            return "https://homely-uabv.onrender.com"
         }
         
     }

@@ -1,5 +1,5 @@
 //
-//  ComponentProperties.swift
+//  ComponentProps.swift
 //  Homely
 //
 //  Created by Pedro Belfort on 22.09.24.
