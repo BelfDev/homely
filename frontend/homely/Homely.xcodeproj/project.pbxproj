@@ -11,7 +11,6 @@
 		9F0A241F2C1DA57400B5DEB3 /* ThemeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0A241E2C1DA57400B5DEB3 /* ThemeProtocol.swift */; };
 		9F0A24212C1DA62600B5DEB3 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0A24202C1DA62600B5DEB3 /* ThemeManager.swift */; };
 		9F0A24232C1DAA5F00B5DEB3 /* MainTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0A24222C1DAA5F00B5DEB3 /* MainTheme.swift */; };
-		9F0A70E62CA1FB5600792B85 /* LoginComponentProps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0A70E52CA1FB5600792B85 /* LoginComponentProps.swift */; };
 		9F2B422C2C9EC89100A65225 /* HTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B422B2C9EC89100A65225 /* HTTPService.swift */; };
 		9F2B422E2C9ECEAF00A65225 /* EnvConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B422D2C9ECEAF00A65225 /* EnvConfig.swift */; };
 		9F2B42302C9EDF1E00A65225 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B422F2C9EDF1E00A65225 /* APIError.swift */; };
@@ -78,7 +77,6 @@
 		9F0A241E2C1DA57400B5DEB3 /* ThemeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeProtocol.swift; sourceTree = "<group>"; };
 		9F0A24202C1DA62600B5DEB3 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		9F0A24222C1DAA5F00B5DEB3 /* MainTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTheme.swift; sourceTree = "<group>"; };
-		9F0A70E52CA1FB5600792B85 /* LoginComponentProps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginComponentProps.swift; sourceTree = "<group>"; };
 		9F2B422B2C9EC89100A65225 /* HTTPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPService.swift; sourceTree = "<group>"; };
 		9F2B422D2C9ECEAF00A65225 /* EnvConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvConfig.swift; sourceTree = "<group>"; };
 		9F2B422F2C9EDF1E00A65225 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
@@ -338,7 +336,6 @@
 				9F5D8B382C14C725002B98D5 /* LoginScreen.swift */,
 				9FCC2E122C68043100A787C3 /* LoginStrings.swift */,
 				9F2B42492CA0443900A65225 /* LoginViewModel.swift */,
-				9F0A70E52CA1FB5600792B85 /* LoginComponentProps.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -522,7 +519,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9F0A70E62CA1FB5600792B85 /* LoginComponentProps.swift in Sources */,
 				9F0A241F2C1DA57400B5DEB3 /* ThemeProtocol.swift in Sources */,
 				9F2B42432CA032AC00A65225 /* ComponentManager.swift in Sources */,
 				9F2B42412C9F6C9400A65225 /* KeychainError.swift in Sources */,

@@ -13,8 +13,8 @@ final class LoginViewModel {
     
     var email: String = ""
     var password: String = ""
-    var isLoading: Bool = false
-    var errorMessage: String? = nil
+    private(set) var isLoading: Bool = false
+    private(set) var errorMessage: String? = nil
     
     init(with components: ComponentManager) {
         self.homelyClient = components.homelyClient

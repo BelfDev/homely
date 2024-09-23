@@ -1,5 +1,5 @@
 //
-//  LoginView.swift
+//  LoginScreen.swift
 //  homely
 //
 //  Created by Pedro Belfort on 08.06.24.
@@ -9,8 +9,12 @@ import SwiftUI
 
 struct LoginScreen: View {
     @ThemeProvider private var theme
-    @LoginViewModelProvider private var vm
+    @State private var vm: LoginViewModel
     
+    init(_ components: ComponentManager) {
+        vm = LoginViewModel(with: components)
+    }
+        
     var body: some View {
         GeometryReader { geometry in
             
@@ -114,8 +118,7 @@ struct LoginScreen: View {
                     .foregroundColor(theme.color.onSurface)
                     .frame(alignment: .leading)
                 
-                @Bindable var vmb = vm
-                TextField("", text: $vmb.email)
+                TextField("", text: $vm.email)
                     .frame(height: 48.0)
                     .padding(.horizontal, 12)
                     .background(theme.color.surfaceContainerHigh)
@@ -134,8 +137,7 @@ struct LoginScreen: View {
                     .frame(height: 15, alignment: .leading)
                 
                 HStack {
-                    @Bindable var vmb = vm
-                    SecureField("", text: $vmb.password)
+                    SecureField("", text: $vm.password)
                     Image(systemName:"eye")
                         .foregroundColor(theme.color.onSurface)
                 }
@@ -175,6 +177,6 @@ struct LoginScreen: View {
 }
 
 #Preview {
-    LoginScreen()
-        .environment(ComponentManager(.development))
+    let components = ComponentManager(.development)
+    LoginScreen(components).environment(components)
 }

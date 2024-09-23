@@ -15,12 +15,3 @@ struct ThemeProvider: DynamicProperty {
         components.theme
     }
 }
-
-@propertyWrapper
-struct HomelyAPIProvider: DynamicProperty {
-    @Environment(ComponentManager.self) private var components
-    
-    var wrappedValue: HomelyAPIClient {
-        components.homelyClient
-    }
-}

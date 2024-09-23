@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct HomelyApp: App {
-    private let components: ComponentManager
+    @State private var components: ComponentManager
     
     init() {
         components = ComponentManager(.development)
@@ -17,7 +17,7 @@ struct HomelyApp: App {
     
     var body: some Scene {
         WindowGroup {
-            LoginScreen().environment(components)
-        }
+            LoginScreen(components)
+        }.environment(components)
     }
 }
