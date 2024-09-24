@@ -1,5 +1,5 @@
 //
-//  User.swift
+//  LoginResponse.swift
 //  Homely
 //
 //  Created by Pedro Belfort on 11.08.24.

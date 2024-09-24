@@ -52,7 +52,7 @@
 		9FCC2E132C68043100A787C3 /* LoginStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCC2E122C68043100A787C3 /* LoginStrings.swift */; };
 		9FCC2E152C680D0100A787C3 /* FixedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCC2E142C680D0100A787C3 /* FixedStrings.swift */; };
 		9FCC2E172C68FF8E00A787C3 /* Limelight-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9FCC2E162C68FC3B00A787C3 /* Limelight-Regular.ttf */; };
-		9FCC2E1B2C69011D00A787C3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCC2E1A2C69011D00A787C3 /* User.swift */; };
+		9FCC2E1B2C69011D00A787C3 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCC2E1A2C69011D00A787C3 /* LoginResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,7 +122,7 @@
 		9FCC2E122C68043100A787C3 /* LoginStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStrings.swift; sourceTree = "<group>"; };
 		9FCC2E142C680D0100A787C3 /* FixedStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedStrings.swift; sourceTree = "<group>"; };
 		9FCC2E162C68FC3B00A787C3 /* Limelight-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Limelight-Regular.ttf"; sourceTree = "<group>"; };
-		9FCC2E1A2C69011D00A787C3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		9FCC2E1A2C69011D00A787C3 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,6 +221,7 @@
 		9F2B42362C9EF53200A65225 /* Input */ = {
 			isa = PBXGroup;
 			children = (
+				9FCC2E1A2C69011D00A787C3 /* LoginResponse.swift */,
 			);
 			path = Input;
 			sourceTree = "<group>";
@@ -352,7 +353,6 @@
 		9FCC2E192C6900BE00A787C3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				9FCC2E1A2C69011D00A787C3 /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -533,7 +533,7 @@
 				9F6960F72C03B64900605975 /* HomelyApp.swift in Sources */,
 				9F0A24232C1DAA5F00B5DEB3 /* MainTheme.swift in Sources */,
 				9F2B422E2C9ECEAF00A65225 /* EnvConfig.swift in Sources */,
-				9FCC2E1B2C69011D00A787C3 /* User.swift in Sources */,
+				9FCC2E1B2C69011D00A787C3 /* LoginResponse.swift in Sources */,
 				9F2B42322C9EF12300A65225 /* HomelyAPIClient.swift in Sources */,
 				9F2B423D2C9F513300A65225 /* HomelyAPITokenProvider.swift in Sources */,
 				9F0A24212C1DA62600B5DEB3 /* ThemeManager.swift in Sources */,
