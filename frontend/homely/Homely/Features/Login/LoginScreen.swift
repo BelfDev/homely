@@ -141,6 +141,9 @@ struct LoginScreen: View {
                     .padding(.horizontal, 12)
                     .background(theme.color.surfaceContainerHigh)
                     .cornerRadius(8)
+                    .keyboardType(.default)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
             }
     }
     
