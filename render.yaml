@@ -5,7 +5,7 @@ services:
   name: Homely
   runtime: docker
   repo: https://github.com/BelfDev/homely
-  plan: free
+  plan: starter
   envVars:
   - key: POSTGRES_PASSWORD
     sync: false
@@ -32,7 +32,7 @@ databases:
 - name: homely-db
   databaseName: homely_e0bt
   user: homely_e0bt_user
-  plan: free
+  plan: starter
   region: frankfurt
   ipAllowList:
   - source: 0.0.0.0/0
