@@ -123,7 +123,6 @@ struct LoginScreen: View {
                         .foregroundColor(theme.color.onSurface)
                 }
             }
-            
         }
     }
     
@@ -174,8 +173,10 @@ struct LoginScreen: View {
             Text(LoginStrings.loginButton)
                 .font(theme.font.button)
                 .foregroundColor(theme.color.onPrimary)
+                .frame(maxWidth: .infinity) // Ensure text takes up the full button frame
         }
         .frame(maxWidth: .infinity, minHeight: 56.0)
+        .contentShape(Rectangle())
         .background(theme.color.primary)
         .cornerRadius(8)
     }

@@ -39,4 +39,26 @@ final class LoginViewModel {
             }
         }
     }
+    
+//    @MainActor
+//    func login() {
+//        isLoading = true
+//        errorMessage = nil
+//        
+//        Task {
+//            do {
+//                print("Trigerring mock login")
+//                try await Task.sleep(nanoseconds: 2 * 1_000_000_000)
+//                
+//                let mockResponse = LoginResponse(accessToken: "mock_access_token")
+//                print("We're good!!!")
+//                print("Token:\n \(mockResponse.accessToken)")
+//                
+//                isLoading = false
+//            } catch {
+//                isLoading = false
+//                errorMessage = "Login failed: \(error.localizedDescription)"
+//            }
+//        }
+//    }
 }
