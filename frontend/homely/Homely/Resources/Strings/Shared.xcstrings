@@ -1,0 +1,24 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "key:error_bottom_sheet_title" : {
+      "comment" : "Text displayed at the top part of the Error Bottom Sheet view. Typically triggered when a general error occurred.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oops, something went wrong!"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oops, algo não está certo!"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

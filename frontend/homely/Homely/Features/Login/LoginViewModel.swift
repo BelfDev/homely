@@ -14,6 +14,7 @@ final class LoginViewModel {
     var email: String = ""
     var password: String = ""
     private(set) var isLoading: Bool = false
+    var hasGeneralError: Bool = false
     private(set) var errorMessage: String? = nil
     
     init(with components: ComponentManager) {
@@ -55,6 +56,8 @@ final class LoginViewModel {
                 print("Token:\n \(mockResponse.accessToken)")
                 
                 isLoading = false
+                hasGeneralError = true
+                errorMessage = "TEST ERROR LALALA"
             } catch {
                 isLoading = false
                 errorMessage = "Login failed: \(error.localizedDescription)"

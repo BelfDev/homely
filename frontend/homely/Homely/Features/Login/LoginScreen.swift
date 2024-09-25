@@ -14,28 +14,34 @@ struct LoginScreen: View {
     init(_ components: ComponentManager) {
         vm = LoginViewModel(with: components)
     }
-
+    
     var body: some View {
-         GeometryReader { geometry in
-             ZStack(alignment: .top) {
-                 backgroundImage(minHeight: geometry.size.height * 0.3)
-                 
-                 mainContent(geometry: geometry).disabled(vm.isLoading)
-                 if vm.isLoading {
+        GeometryReader { geometry in
+            ZStack(alignment: .top) {
+                backgroundImage(minHeight: geometry.size.height * 0.3)
+                
+                mainContent(geometry: geometry).disabled(vm.isLoading)
+                    .sheet(isPresented: $vm.hasGeneralError) {
+                        ErrorBottomSheet(
+                            errorMessage: "Invalid credentials. Please try again with a new email and password."
+                        )
+                    }
+                
+                if vm.isLoading {
                     loadingOverlay
-                 }
-             }
-             .edgesIgnoringSafeArea(.bottom)
-             .background(
-                 LinearGradient(
-                     gradient: Gradient(
-                         colors: [.blue, theme.color.surface, theme.color.surface]),
-                     startPoint: .top,
-                     endPoint: .bottom
-                 )
-             )
-         }
-     }
+                }
+            }
+            .edgesIgnoringSafeArea(.bottom)
+            .background(
+                LinearGradient(
+                    gradient: Gradient(
+                        colors: [.blue, theme.color.surface, theme.color.surface]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+            )
+        }
+    }
     
     private func mainContent(geometry: GeometryProxy) -> some View {
         ZStack(alignment: .top) {
@@ -200,22 +206,24 @@ struct LoginScreen: View {
     
     private var loadingOverlay: some View {
         ZStack {
-              Color.black.opacity(0.5)
-                  .edgesIgnoringSafeArea(.all)
-              
-              VStack {
-                  ProgressView()
-                      .progressViewStyle(CircularProgressViewStyle())
-                      .scaleEffect(2.0)
-                      .tint(theme.color.onPrimary)
-              }
-          }
-          .frame(maxWidth: .infinity, maxHeight: .infinity)
-          .edgesIgnoringSafeArea(.all)
-      }
+            Color.black.opacity(0.5)
+                .edgesIgnoringSafeArea(.all)
+            
+            VStack {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle())
+                    .scaleEffect(2.0)
+                    .tint(theme.color.onPrimary)
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .edgesIgnoringSafeArea(.all)
+    }
 }
 
 #Preview {
     let components = ComponentManager(.development)
     LoginScreen(components).environment(components)
+    
+    //    ErrorBottomSheet(errorMessage: "Whats Up").environment(components)
 }
