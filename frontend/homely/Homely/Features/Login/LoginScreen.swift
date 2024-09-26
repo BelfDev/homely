@@ -22,9 +22,7 @@ struct LoginScreen: View {
                 
                 mainContent(geometry: geometry).disabled(vm.isLoading)
                     .sheet(isPresented: $vm.hasGeneralError) {
-                        ErrorBottomSheet(
-                            errorMessage: "Invalid credentials. Please try again with a new email and password."
-                        )
+                        ErrorBottomSheet(errorMessage: vm.errorMessage)
                     }
                 
                 if vm.isLoading {
@@ -77,7 +75,7 @@ struct LoginScreen: View {
                         .frame(height: 8.0)
                     signUpRow
                 }
-                .padding([.horizontal, .bottom], 24.0)
+                .padding([.horizontal, .bottom], 16.0)
                 .background(
                     UnevenRoundedRectangle(
                         cornerRadii: .init(topLeading: 32.0, topTrailing: 32.0),

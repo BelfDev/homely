@@ -14,42 +14,48 @@ final class LoginViewModel {
     var email: String = ""
     var password: String = ""
     private(set) var isLoading: Bool = false
-    var hasGeneralError: Bool = false
-    private(set) var errorMessage: String? = nil
+    private(set) var errorMessage = ""
+    var hasGeneralError: Bool = false {
+        didSet {
+            if (hasGeneralError == false) {
+                errorMessage = ""
+            }
+            
+        }
+    }
     
     init(with components: ComponentManager) {
         self.homelyClient = components.homelyClient
     }
     
-//    @MainActor
-//    func login() {
-//        isLoading = true
-//        errorMessage = nil
-//        
-//        Task {
-//            do {
-//                let loginRequestBody = LoginRequestBody(email: email, password: password)
-//                let response = try await homelyClient.login(body: loginRequestBody)
-//                print("We're good!!!")
-//                print("Token:\n \(response.accessToken)")
-//                
-//                isLoading = false
-//            } catch {
-//                isLoading = false
-//                errorMessage = "Login failed: \(error.localizedDescription)"
-//            }
-//        }
-//    }
+    //    @MainActor
+    //    func login() {
+    //        isLoading = true
+    //        errorMessage = nil
+    //
+    //        Task {
+    //            do {
+    //                let loginRequestBody = LoginRequestBody(email: email, password: password)
+    //                let response = try await homelyClient.login(body: loginRequestBody)
+    //                print("We're good!!!")
+    //                print("Token:\n \(response.accessToken)")
+    //
+    //                isLoading = false
+    //            } catch {
+    //                isLoading = false
+    //                errorMessage = "Login failed: \(error.localizedDescription)"
+    //            }
+    //        }
+    //    }
     
     @MainActor
     func login() {
         isLoading = true
-        errorMessage = nil
         
         Task {
             do {
                 print("Trigerring mock login")
-                try await Task.sleep(nanoseconds: 2 * 1_000_000_000)
+                try await Task.sleep(nanoseconds: 1 * 1_000_000_000)
                 
                 let mockResponse = LoginResponse(accessToken: "mock_access_token")
                 print("We're good!!!")
@@ -57,10 +63,10 @@ final class LoginViewModel {
                 
                 isLoading = false
                 hasGeneralError = true
-                errorMessage = "TEST ERROR LALALA"
+                errorMessage = SharedStrings.errorInvalidCredentials
             } catch {
                 isLoading = false
-                errorMessage = "Login failed: \(error.localizedDescription)"
+                errorMessage = SharedStrings.errorInvalidCredentials
             }
         }
     }

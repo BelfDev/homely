@@ -14,5 +14,12 @@ struct SharedStrings {
 // MARK: - ErrorBottomSheet
 
 extension SharedStrings {
-    static let errorBottomSheet = String(localized: "key:error_bottom_sheet_title", table: table)
+    static let errorBottomSheetTitle = String(localized: "key:error_bottom_sheet_title", table: table)
+    static let errorBottomSheetButton = String(localized: "key:error_bottom_sheet_button", table: table)
+}
+
+// MARK: - Error Feedback
+
+extension SharedStrings {
+    static let errorInvalidCredentials = String(localized: "key:error_invalid_credentials", table: table)
 }

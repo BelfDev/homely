@@ -8,20 +8,28 @@
 import SwiftUI
 
 struct BottomSheetView<Content>: View where Content : View {
+    @ThemeProvider private var theme
     
     let content: Content
+    let presentationDetents: Set<PresentationDetent>
     
-    init(@ViewBuilder content: () -> Content) {
+    init(_ presentationDetents: Set<PresentationDetent>,
+         @ViewBuilder content: () -> Content) {
+        self.presentationDetents = presentationDetents
         self.content = content()
     }
     
     var body: some View {
-        VStack {
-            content
+        ScrollView {
+            VStack {
+                content
+            }
+            .padding([.horizontal, .vertical], 16.0)
+            .presentationDetents(presentationDetents)
+            .presentationCornerRadius(32)
+            .presentationBackground(theme.color.surface)
         }
-        .padding()
-        .presentationDetents([.height(200)])
-        .presentationCornerRadius(42)
+        .scrollBounceBehavior(.basedOnSize)
     }
 }
 
@@ -30,11 +38,16 @@ struct ErrorBottomSheet: View {
     @Environment(\.dismiss) private var dismiss
     
     let errorMessage: String
-    let closeAction: (() -> Void)? = nil
+    let closeAction: (() -> Void)?
+    
+    init(errorMessage: String, closeAction: (() -> Void)? = nil) {
+           self.errorMessage = errorMessage
+           self.closeAction = closeAction
+       }
     
     var body: some View {
-        BottomSheetView {
-            Text(SharedStrings.errorBottomSheet)
+        BottomSheetView([.fraction(0.30)]) {
+            Text(SharedStrings.errorBottomSheetTitle)
                 .font(theme.font.h6)
                 .foregroundColor(theme.color.onSurface)
             
@@ -48,9 +61,10 @@ struct ErrorBottomSheet: View {
             Spacer().frame(height: 32)
             
             Button {
-                closeAction?() ?? dismiss()
+                closeAction?()
+                dismiss()
             } label: {
-                Text(LoginStrings.loginButton)
+                Text(SharedStrings.errorBottomSheetButton)
                     .font(theme.font.button)
                     .foregroundColor(theme.color.onError)
                     .frame(maxWidth: .infinity)
@@ -60,6 +74,5 @@ struct ErrorBottomSheet: View {
             .background(theme.color.error)
             .cornerRadius(8)
         }
-        .background(theme.color.surface)
     }
 }
