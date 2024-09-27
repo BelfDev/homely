@@ -11,61 +11,64 @@ import Observation
 final class LoginViewModel {
     private let homelyClient: HomelyAPIClient
     
-    var email: String = ""
-    var password: String = ""
     private(set) var isLoading: Bool = false
-    private(set) var errorMessage = ""
-    var hasGeneralError: Bool = false {
+    private(set) var errorMessage = "" {
         didSet {
-            if (hasGeneralError == false) {
-                errorMessage = ""
+            if (!errorMessage.isEmpty) {
+                hasGeneralError = true
             }
-            
         }
     }
+    
+    var hasGeneralError: Bool = false {
+        didSet {
+            if (!errorMessage.isEmpty && !hasGeneralError) {
+                errorMessage = ""
+            }
+        }
+    }
+    var email: String = ""
+    var password: String = ""
     
     init(with components: ComponentManager) {
         self.homelyClient = components.homelyClient
     }
     
-    //    @MainActor
-    //    func login() {
-    //        isLoading = true
-    //        errorMessage = nil
+    //        @MainActor
+    //        func login() {
+    //            isLoading = true
     //
-    //        Task {
-    //            do {
-    //                let loginRequestBody = LoginRequestBody(email: email, password: password)
-    //                let response = try await homelyClient.login(body: loginRequestBody)
-    //                print("We're good!!!")
-    //                print("Token:\n \(response.accessToken)")
+    //            Task {
+    //                defer {isLoading = false}
     //
-    //                isLoading = false
-    //            } catch {
-    //                isLoading = false
-    //                errorMessage = "Login failed: \(error.localizedDescription)"
+    //                do {
+    //                    let loginRequestBody = LoginRequestBody(email: email, password: password)
+    //                    let response = try await homelyClient.login(body: loginRequestBody)
+    //                    print("We're good!!!")
+    //                    print("Token:\n \(response.accessToken)")
+    //                } catch let error as APIError {
+    //                    errorMessage = error.errorMessage
+    //                } catch {
+    //                    errorMessage = SharedStrings.errorGeneric
+    //                }
     //            }
     //        }
-    //    }
     
     @MainActor
     func login() {
         isLoading = true
         
         Task {
+            defer {isLoading = false}
+            
             do {
                 print("Trigerring mock login")
-                try await Task.sleep(nanoseconds: 1 * 1_000_000_000)
+                try await Task.sleep(nanoseconds: 4 * 1_000_000_000)
                 
                 let mockResponse = LoginResponse(accessToken: "mock_access_token")
-                print("We're good!!!")
-                print("Token:\n \(mockResponse.accessToken)")
                 
-                isLoading = false
-                hasGeneralError = true
                 errorMessage = SharedStrings.errorInvalidCredentials
             } catch {
-                isLoading = false
                 errorMessage = SharedStrings.errorInvalidCredentials
             }
         }

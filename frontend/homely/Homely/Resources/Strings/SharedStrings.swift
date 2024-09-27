@@ -22,4 +22,5 @@ extension SharedStrings {
 
 extension SharedStrings {
     static let errorInvalidCredentials = String(localized: "key:error_invalid_credentials", table: table)
+    static let errorGeneric = String(localized: "key:error_generic", table: table)
 }

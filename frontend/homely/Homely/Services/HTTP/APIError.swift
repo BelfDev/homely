@@ -18,3 +18,18 @@ enum APIError: Error, Equatable {
     case unauthorized
     case timeout
 }
+
+// MARK: - Error Feedback
+
+extension APIError {
+    
+    var errorMessage: String {
+        switch(self) {
+        case .unauthorized:
+            SharedStrings.errorInvalidCredentials
+        default:
+            SharedStrings.errorGeneric
+        }
+    }
+    
+}

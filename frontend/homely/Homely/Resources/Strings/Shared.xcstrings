@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Key" : {
+      "extractionState" : "manual"
+    },
     "key:error_bottom_sheet_button" : {
       "comment" : "Text displayed at the bottom part of the Error Bottom Sheet view. Typically closes the bottom sheet.",
       "extractionState" : "manual",
@@ -33,6 +36,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Oops, algo não está certo!"
+          }
+        }
+      }
+    },
+    "key:error_generic" : {
+      "comment" : "Generic error message displayed for any error case that doesn't have a specific message associated with it.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The operation failed. Please try again."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A operação falhou. Por favor, tente novamente."
           }
         }
       }
