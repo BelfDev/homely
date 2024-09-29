@@ -62,14 +62,16 @@ final class HomelyAPIClient : HomelyAPIClientProtocol {
     
     // MARK: - API Operations
     
+    /**
+     Logs in the user with the given credentials and stores the access token.
+     
+     - Parameter body: A `LoginRequestBody` containing the user's login credentials.
+     - Returns: A `LoginResponse` object containing the access token.
+     - Throws: An error if the login request fails or if storing the token encounters an error.
+     */
     func login(body: LoginRequestBody) async throws -> LoginResponse {
-        print("Performing login")
         let response: LoginResponse = try await http.post(.login, body: body)
         try tokenProvider.setToken(response.accessToken)
         return response
-    }
-    
-    func logout() {
-        tokenProvider.clearToken()
     }
 }

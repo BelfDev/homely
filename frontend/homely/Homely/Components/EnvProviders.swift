@@ -26,10 +26,10 @@ struct ThemeProvider: DynamicProperty {
 }
 
 @propertyWrapper
-struct GlobalStateProvider: DynamicProperty {
+struct SessionManagerProvider: DynamicProperty {
     @Environment(ComponentManager.self) private var components
     
-    var wrappedValue: GlobalState {
-        components.globalState
+    var wrappedValue: SessionManager {
+        components.session
     }
 }

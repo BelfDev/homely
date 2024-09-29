@@ -18,6 +18,10 @@ struct HomelyApp: App {
     var body: some Scene {
         WindowGroup {
             RootView()
-        }.environment(components)
+                .environment(components)
+                .onChange(of: components.tokenProvider.jwtToken) {
+                    components.session.didChangeAccessToken()
+                }
+        }
     }
 }

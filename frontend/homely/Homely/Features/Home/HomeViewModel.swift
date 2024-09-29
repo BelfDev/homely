@@ -10,16 +10,15 @@ import Foundation
 @Observable
 final class HomeViewModel {
     private let homelyClient: HomelyAPIClient
-    private let globalState: GlobalState
+    private let session: SessionManager
     
     init(with components: ComponentManager) {
         self.homelyClient = components.homelyClient
-        self.globalState = components.globalState
+        self.session = components.session
     }
     
-    // TODO: Review this
+    
     func logout() {
-        homelyClient.logout()
-        globalState.isLoggedIn = false
+        session.logout()
     }
 }

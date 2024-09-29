@@ -7,6 +7,7 @@
 
 import Foundation
 
+@Observable
 final class HomelyAPITokenProvider: TokenProviderProtocol {
     private let tokenKey = "HomelyJWTToken"
     

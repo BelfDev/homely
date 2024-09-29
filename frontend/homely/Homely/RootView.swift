@@ -11,7 +11,7 @@ struct RootView: View {
     @ComponentsProvider private var components
     
     var body: some View {
-        let isLoggedIn = components.globalState.isLoggedIn
+        let isLoggedIn = components.session.isLoggedIn
         
         Group {
             if isLoggedIn {

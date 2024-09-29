@@ -29,7 +29,7 @@
 		9F5F11252CA9899600EECC4E /* HomeNavStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F11242CA9899600EECC4E /* HomeNavStack.swift */; };
 		9F5F11272CA9899D00EECC4E /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F11262CA9899D00EECC4E /* HomeScreen.swift */; };
 		9F5F11292CA989AE00EECC4E /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F11282CA989AE00EECC4E /* HomeViewModel.swift */; };
-		9F5F112B2CA98B2A00EECC4E /* GlobalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F112A2CA98B2A00EECC4E /* GlobalState.swift */; };
+		9F5F112B2CA98B2A00EECC4E /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F112A2CA98B2A00EECC4E /* SessionManager.swift */; };
 		9F5F112D2CA995B400EECC4E /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F112C2CA995B400EECC4E /* RootView.swift */; };
 		9F5F11312CA9B00D00EECC4E /* LoadingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F11302CA9B00D00EECC4E /* LoadingOverlay.swift */; };
 		9F6960F72C03B64900605975 /* HomelyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6960F62C03B64900605975 /* HomelyApp.swift */; };
@@ -103,7 +103,7 @@
 		9F5F11242CA9899600EECC4E /* HomeNavStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavStack.swift; sourceTree = "<group>"; };
 		9F5F11262CA9899D00EECC4E /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		9F5F11282CA989AE00EECC4E /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		9F5F112A2CA98B2A00EECC4E /* GlobalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalState.swift; sourceTree = "<group>"; };
+		9F5F112A2CA98B2A00EECC4E /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		9F5F112C2CA995B400EECC4E /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		9F5F11302CA9B00D00EECC4E /* LoadingOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingOverlay.swift; sourceTree = "<group>"; };
 		9F6960F32C03B64900605975 /* Homely.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homely.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -168,7 +168,6 @@
 			isa = PBXGroup;
 			children = (
 				9F0A241E2C1DA57400B5DEB3 /* ThemeProtocol.swift */,
-				9F0A24202C1DA62600B5DEB3 /* ThemeManager.swift */,
 				9F0A24222C1DAA5F00B5DEB3 /* MainTheme.swift */,
 			);
 			path = Themes;
@@ -276,6 +275,8 @@
 			children = (
 				9F2B422D2C9ECEAF00A65225 /* EnvConfig.swift */,
 				9F2B42462CA03BF500A65225 /* EnvProviders.swift */,
+				9F0A24202C1DA62600B5DEB3 /* ThemeManager.swift */,
+				9F5F112A2CA98B2A00EECC4E /* SessionManager.swift */,
 				9F2B42422CA032AC00A65225 /* ComponentManager.swift */,
 			);
 			path = Components;
@@ -315,7 +316,6 @@
 		9F6960F52C03B64900605975 /* Homely */ = {
 			isa = PBXGroup;
 			children = (
-				9F5F112A2CA98B2A00EECC4E /* GlobalState.swift */,
 				9F6960F62C03B64900605975 /* HomelyApp.swift */,
 				9F5F112C2CA995B400EECC4E /* RootView.swift */,
 				9F2B42482CA03D5600A65225 /* Components */,
@@ -580,7 +580,7 @@
 				9F73B5A52C5F63E30007CD73 /* Fonts.swift in Sources */,
 				9F5F11272CA9899D00EECC4E /* HomeScreen.swift in Sources */,
 				9F2B42302C9EDF1E00A65225 /* APIError.swift in Sources */,
-				9F5F112B2CA98B2A00EECC4E /* GlobalState.swift in Sources */,
+				9F5F112B2CA98B2A00EECC4E /* SessionManager.swift in Sources */,
 				9F5F11252CA9899600EECC4E /* HomeNavStack.swift in Sources */,
 				9F0A70EB2CA3F3E900792B85 /* SharedStrings.swift in Sources */,
 			);
