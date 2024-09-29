@@ -17,88 +17,71 @@ struct LoginScreen: View {
     
     var body: some View {
         GeometryReader { geometry in
-            ZStack(alignment: .top) {
-                backgroundImage(minHeight: geometry.size.height * 0.3)
-                
-                mainContent(geometry: geometry).disabled(vm.isLoading)
-                    .sheet(isPresented: $vm.hasGeneralError) {
-                        ErrorBottomSheet(errorMessage: vm.errorMessage)
+            ScrollView {
+                ZStack(alignment: .top) {
+                    backgroundImage(minHeight: geometry.size.height * 0.4)
+                    
+                    Text(FixedStrings.appTitle)
+                        .foregroundStyle(theme.color.onPrimary)
+                        .font(theme.font.h2)
+                        .bold()
+                        .padding(.top, geometry.size.height * 0.18)
+                    
+                    mainContent(geometry: geometry).disabled(vm.isLoading)
+                        .padding(.top, geometry.size.height * 0.35)
+                        .sheet(isPresented: $vm.hasGeneralError) {
+                            ErrorBottomSheet(errorMessage: vm.errorMessage)
+                        }
+                    
+                    if vm.isLoading {
+                        LoadingOverlay()
                     }
-                
-                if vm.isLoading {
-                    LoadingOverlay()
                 }
+                .frame(maxWidth: .infinity, minHeight: geometry.size.height)
             }
-            .edgesIgnoringSafeArea(.bottom)
-            .background(
-                LinearGradient(
-                    gradient: Gradient(
-                        colors: [.blue, theme.color.surface, theme.color.surface]),
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-            )
+            .frame(maxHeight: .infinity)
+            .scrollBounceBehavior(.basedOnSize)
+            .edgesIgnoringSafeArea(.all)
+            .background(theme.color.surface)
+            .onTapGesture {
+                hideKeyboard()
+            }
         }
     }
     
     private func mainContent(geometry: GeometryProxy) -> some View {
-        ZStack(alignment: .top) {
-            backgroundImage(minHeight: geometry.size.height * 0.3)
-            Text(FixedStrings.appTitle)
-                .foregroundStyle(theme.color.onPrimary)
-                .font(theme.font.h2)
-                .bold()
-                .padding(.top, geometry.size.height * 0.12)
+        VStack {
+            Spacer()
+                .frame(maxHeight: 32.0)
             
-            ScrollView {
-                
-                VStack {
-                    Spacer()
-                        .frame(height: 32.0)
-                    
-                    Text(LoginStrings.screenTitle)
-                        .font(theme.font.h5)
-                        .bold()
-                        .foregroundColor(theme.color.onSurface)
-                    Spacer()
-                        .frame(height: 32.0)
-                    emailInputField
-                    Spacer()
-                        .frame(height: 24.0)
-                    passwordInputField
-                    Spacer()
-                        .frame(height: 8.0)
-                    forgotPasswordButton
-                    Spacer()
-                    loginButton
-                    Spacer()
-                        .frame(height: 8.0)
-                    signUpRow
-                }
-                .padding([.horizontal, .bottom], 16.0)
-                .background(
-                    UnevenRoundedRectangle(
-                        cornerRadii: .init(topLeading: 32.0, topTrailing: 32.0),
-                        style: .continuous
-                    )
-                    .foregroundStyle(theme.color.surface)
-                )
-                .frame(maxWidth: .infinity, minHeight: geometry.size.height * 0.7)
-                .padding(.top, geometry.size.height * 0.3)
-            }
-            .scrollBounceBehavior(.basedOnSize)
+            Text(LoginStrings.screenTitle)
+                .font(theme.font.h5)
+                .bold()
+                .foregroundColor(theme.color.onSurface)
+            Spacer()
+                .frame(maxHeight: 32.0)
+            emailInputField
+            Spacer()
+                .frame(maxHeight: 24.0)
+            passwordInputField
+            Spacer()
+                .frame(maxHeight: 8.0)
+            forgotPasswordButton
+            Spacer()
+                .frame(minHeight: 16.0)
+            loginButton
+            Spacer()
+                .frame(maxHeight: 8.0)
+            signUpRow
         }
-        .edgesIgnoringSafeArea(.bottom)
+        .padding([.horizontal, .bottom], 24.0)
         .background(
-            LinearGradient(
-                gradient: Gradient(
-                    colors: [.blue,
-                             theme.color.surface,
-                             theme.color.surface]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
+            UnevenRoundedRectangle(
+                cornerRadii: .init(topLeading: 32.0, topTrailing: 32.0),
+                style: .continuous
+            ).foregroundStyle(theme.color.surface)
         )
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     
     private func backgroundImage(minHeight: CGFloat) -> some View {
@@ -115,6 +98,7 @@ struct LoginScreen: View {
             Text(LoginStrings.signUpHelperText)
                 .font(theme.font.body1)
                 .foregroundColor(theme.color.onSurface)
+                .padding([.leading], 2)
             Spacer()
             Button {
                 print("Sign up")
@@ -139,6 +123,7 @@ struct LoginScreen: View {
                     .fontWeight(.medium)
                     .foregroundColor(theme.color.onSurface)
                     .frame(alignment: .leading)
+                    .padding([.leading], 2)
                 
                 TextField("", text: $vm.email)
                     .frame(height: 48.0)
@@ -160,6 +145,7 @@ struct LoginScreen: View {
                     .fontWeight(.medium)
                     .foregroundColor(theme.color.onSurface)
                     .frame(height: 15, alignment: .leading)
+                    .padding([.leading], 2)
                 
                 HStack {
                     SecureField("", text: $vm.password)
