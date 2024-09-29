@@ -31,6 +31,7 @@
 		9F5F11292CA989AE00EECC4E /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F11282CA989AE00EECC4E /* HomeViewModel.swift */; };
 		9F5F112B2CA98B2A00EECC4E /* GlobalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F112A2CA98B2A00EECC4E /* GlobalState.swift */; };
 		9F5F112D2CA995B400EECC4E /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F112C2CA995B400EECC4E /* RootView.swift */; };
+		9F5F11312CA9B00D00EECC4E /* LoadingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F11302CA9B00D00EECC4E /* LoadingOverlay.swift */; };
 		9F6960F72C03B64900605975 /* HomelyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6960F62C03B64900605975 /* HomelyApp.swift */; };
 		9F6960FB2C03B64A00605975 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F6960FA2C03B64A00605975 /* Assets.xcassets */; };
 		9F6960FE2C03B64A00605975 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F6960FD2C03B64A00605975 /* Preview Assets.xcassets */; };
@@ -104,6 +105,7 @@
 		9F5F11282CA989AE00EECC4E /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		9F5F112A2CA98B2A00EECC4E /* GlobalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalState.swift; sourceTree = "<group>"; };
 		9F5F112C2CA995B400EECC4E /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		9F5F11302CA9B00D00EECC4E /* LoadingOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingOverlay.swift; sourceTree = "<group>"; };
 		9F6960F32C03B64900605975 /* Homely.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homely.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F6960F62C03B64900605975 /* HomelyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomelyApp.swift; sourceTree = "<group>"; };
 		9F6960FA2C03B64A00605975 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				9F0A70E82CA35A4C00792B85 /* ErrorBottomSheet.swift */,
+				9F5F11302CA9B00D00EECC4E /* LoadingOverlay.swift */,
 			);
 			path = "Shared Views";
 			sourceTree = "<group>";
@@ -561,6 +564,7 @@
 				9F2B42472CA03BF500A65225 /* EnvProviders.swift in Sources */,
 				9F2B422C2C9EC89100A65225 /* HTTPService.swift in Sources */,
 				9F2B423F2C9F51B800A65225 /* TokenProvider.swift in Sources */,
+				9F5F11312CA9B00D00EECC4E /* LoadingOverlay.swift in Sources */,
 				9FCC2E152C680D0100A787C3 /* FixedStrings.swift in Sources */,
 				9F2B424A2CA0443900A65225 /* LoginViewModel.swift in Sources */,
 				9FCC2E132C68043100A787C3 /* LoginStrings.swift in Sources */,

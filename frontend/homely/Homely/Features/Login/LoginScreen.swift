@@ -26,7 +26,7 @@ struct LoginScreen: View {
                     }
                 
                 if vm.isLoading {
-                    loadingOverlay
+                    LoadingOverlay()
                 }
             }
             .edgesIgnoringSafeArea(.bottom)
@@ -201,27 +201,9 @@ struct LoginScreen: View {
             
         }
     }
-    
-    private var loadingOverlay: some View {
-        ZStack {
-            Color.black.opacity(0.5)
-                .edgesIgnoringSafeArea(.all)
-            
-            VStack {
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle())
-                    .scaleEffect(2.0)
-                    .tint(theme.color.onPrimary)
-            }
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .edgesIgnoringSafeArea(.all)
-    }
 }
 
 #Preview {
     let components = ComponentManager(.development)
     LoginScreen(components).environment(components)
-    
-    //    ErrorBottomSheet(errorMessage: "Whats Up").environment(components)
 }

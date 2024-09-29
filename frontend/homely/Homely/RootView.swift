@@ -16,17 +16,11 @@ struct RootView: View {
         Group {
             if isLoggedIn {
                 HomeNavStack()
-                    .transition(.push(from: .bottom))
-                
             } else {
                 LoginScreen(components)
-                    .transition(.push(from: .top))
+                    .transition(.push(from: .bottom))
             }
         }
-        .animation(.bouncy, value: isLoggedIn)
+        .animation(.snappy(), value: isLoggedIn)
     }
 }
-
-//#Preview {
-//    AppRoot()
-//}

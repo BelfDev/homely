@@ -45,8 +45,9 @@ final class LoginViewModel {
             defer { isLoading = false }
             
             do {
-                let loginRequestBody = LoginRequestBody(email: email, password: password)
-                let response = try await homelyClient.login(body: loginRequestBody)
+//                let loginRequestBody = LoginRequestBody(email: email, password: password)
+//                let response = try await homelyClient.login(body: loginRequestBody)
+                let _ = try await Task.sleep(nanoseconds: 2 * 1_000_000_000)
                 globalState.isLoggedIn = true
             } catch let error as APIError {
                 errorMessage = error.errorMessage
