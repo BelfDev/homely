@@ -23,9 +23,14 @@
 		9F2B423F2C9F51B800A65225 /* TokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B423E2C9F51B800A65225 /* TokenProvider.swift */; };
 		9F2B42412C9F6C9400A65225 /* KeychainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B42402C9F6C9400A65225 /* KeychainError.swift */; };
 		9F2B42432CA032AC00A65225 /* ComponentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B42422CA032AC00A65225 /* ComponentManager.swift */; };
-		9F2B42472CA03BF500A65225 /* ComponentProps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B42462CA03BF500A65225 /* ComponentProps.swift */; };
+		9F2B42472CA03BF500A65225 /* EnvProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B42462CA03BF500A65225 /* EnvProviders.swift */; };
 		9F2B424A2CA0443900A65225 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B42492CA0443900A65225 /* LoginViewModel.swift */; };
 		9F5D8B392C14C725002B98D5 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5D8B382C14C725002B98D5 /* LoginScreen.swift */; };
+		9F5F11252CA9899600EECC4E /* HomeNavStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F11242CA9899600EECC4E /* HomeNavStack.swift */; };
+		9F5F11272CA9899D00EECC4E /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F11262CA9899D00EECC4E /* HomeScreen.swift */; };
+		9F5F11292CA989AE00EECC4E /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F11282CA989AE00EECC4E /* HomeViewModel.swift */; };
+		9F5F112B2CA98B2A00EECC4E /* GlobalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F112A2CA98B2A00EECC4E /* GlobalState.swift */; };
+		9F5F112D2CA995B400EECC4E /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F112C2CA995B400EECC4E /* RootView.swift */; };
 		9F6960F72C03B64900605975 /* HomelyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6960F62C03B64900605975 /* HomelyApp.swift */; };
 		9F6960FB2C03B64A00605975 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F6960FA2C03B64A00605975 /* Assets.xcassets */; };
 		9F6960FE2C03B64A00605975 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F6960FD2C03B64A00605975 /* Preview Assets.xcassets */; };
@@ -47,9 +52,7 @@
 		9F73B59E2C5F623C0007CD73 /* HankenGrotesk-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F73B58C2C5F623C0007CD73 /* HankenGrotesk-Italic.ttf */; };
 		9F73B59F2C5F623C0007CD73 /* HankenGrotesk-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F73B58D2C5F623C0007CD73 /* HankenGrotesk-MediumItalic.ttf */; };
 		9F73B5A02C5F623C0007CD73 /* HankenGrotesk-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F73B58E2C5F623C0007CD73 /* HankenGrotesk-BoldItalic.ttf */; };
-		9F73B5A12C5F623C0007CD73 /* HankenGrotesk-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F73B58F2C5F623C0007CD73 /* HankenGrotesk-BlackItalic.ttf */; };
 		9F73B5A22C5F623C0007CD73 /* HankenGrotesk-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F73B5902C5F623C0007CD73 /* HankenGrotesk-ExtraLight.ttf */; };
-		9F73B5A32C5F623C0007CD73 /* HankenGrotesk-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F73B5912C5F623C0007CD73 /* HankenGrotesk-Black.ttf */; };
 		9F73B5A52C5F63E30007CD73 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F73B5A42C5F63E30007CD73 /* Fonts.swift */; };
 		9FCC2E112C67FFC100A787C3 /* LoginScreen.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9FCC2E102C67FFC100A787C3 /* LoginScreen.xcstrings */; };
 		9FCC2E132C68043100A787C3 /* LoginStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCC2E122C68043100A787C3 /* LoginStrings.swift */; };
@@ -92,10 +95,15 @@
 		9F2B423E2C9F51B800A65225 /* TokenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenProvider.swift; sourceTree = "<group>"; };
 		9F2B42402C9F6C9400A65225 /* KeychainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainError.swift; sourceTree = "<group>"; };
 		9F2B42422CA032AC00A65225 /* ComponentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentManager.swift; sourceTree = "<group>"; };
-		9F2B42462CA03BF500A65225 /* ComponentProps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentProps.swift; sourceTree = "<group>"; };
+		9F2B42462CA03BF500A65225 /* EnvProviders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvProviders.swift; sourceTree = "<group>"; };
 		9F2B42492CA0443900A65225 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		9F390FF12C1E377500DB1C1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = homely/Info.plist; sourceTree = "<group>"; };
 		9F5D8B382C14C725002B98D5 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
+		9F5F11242CA9899600EECC4E /* HomeNavStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavStack.swift; sourceTree = "<group>"; };
+		9F5F11262CA9899D00EECC4E /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
+		9F5F11282CA989AE00EECC4E /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		9F5F112A2CA98B2A00EECC4E /* GlobalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalState.swift; sourceTree = "<group>"; };
+		9F5F112C2CA995B400EECC4E /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		9F6960F32C03B64900605975 /* Homely.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homely.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F6960F62C03B64900605975 /* HomelyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomelyApp.swift; sourceTree = "<group>"; };
 		9F6960FA2C03B64A00605975 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -120,9 +128,7 @@
 		9F73B58C2C5F623C0007CD73 /* HankenGrotesk-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HankenGrotesk-Italic.ttf"; sourceTree = "<group>"; };
 		9F73B58D2C5F623C0007CD73 /* HankenGrotesk-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HankenGrotesk-MediumItalic.ttf"; sourceTree = "<group>"; };
 		9F73B58E2C5F623C0007CD73 /* HankenGrotesk-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HankenGrotesk-BoldItalic.ttf"; sourceTree = "<group>"; };
-		9F73B58F2C5F623C0007CD73 /* HankenGrotesk-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HankenGrotesk-BlackItalic.ttf"; sourceTree = "<group>"; };
 		9F73B5902C5F623C0007CD73 /* HankenGrotesk-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HankenGrotesk-ExtraLight.ttf"; sourceTree = "<group>"; };
-		9F73B5912C5F623C0007CD73 /* HankenGrotesk-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HankenGrotesk-Black.ttf"; path = "../../../../../../../Downloads/Hanken_Grotesk/static/HankenGrotesk-Black.ttf"; sourceTree = "<group>"; };
 		9F73B5A42C5F63E30007CD73 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		9FCC2E102C67FFC100A787C3 /* LoginScreen.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = LoginScreen.xcstrings; sourceTree = "<group>"; };
 		9FCC2E122C68043100A787C3 /* LoginStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStrings.swift; sourceTree = "<group>"; };
@@ -181,8 +187,6 @@
 			isa = PBXGroup;
 			children = (
 				9FCC2E162C68FC3B00A787C3 /* Limelight-Regular.ttf */,
-				9F73B5912C5F623C0007CD73 /* HankenGrotesk-Black.ttf */,
-				9F73B58F2C5F623C0007CD73 /* HankenGrotesk-BlackItalic.ttf */,
 				9F73B5862C5F623C0007CD73 /* HankenGrotesk-Bold.ttf */,
 				9F73B58E2C5F623C0007CD73 /* HankenGrotesk-BoldItalic.ttf */,
 				9F73B5882C5F623C0007CD73 /* HankenGrotesk-ExtraBold.ttf */,
@@ -268,10 +272,20 @@
 			isa = PBXGroup;
 			children = (
 				9F2B422D2C9ECEAF00A65225 /* EnvConfig.swift */,
+				9F2B42462CA03BF500A65225 /* EnvProviders.swift */,
 				9F2B42422CA032AC00A65225 /* ComponentManager.swift */,
-				9F2B42462CA03BF500A65225 /* ComponentProps.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		9F5F11232CA9898700EECC4E /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				9F5F11242CA9899600EECC4E /* HomeNavStack.swift */,
+				9F5F11262CA9899D00EECC4E /* HomeScreen.swift */,
+				9F5F11282CA989AE00EECC4E /* HomeViewModel.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		9F6960EA2C03B64900605975 = {
@@ -298,7 +312,9 @@
 		9F6960F52C03B64900605975 /* Homely */ = {
 			isa = PBXGroup;
 			children = (
+				9F5F112A2CA98B2A00EECC4E /* GlobalState.swift */,
 				9F6960F62C03B64900605975 /* HomelyApp.swift */,
+				9F5F112C2CA995B400EECC4E /* RootView.swift */,
 				9F2B42482CA03D5600A65225 /* Components */,
 				9F2B42382C9EF58900A65225 /* Adapters */,
 				9FCC2E1C2C69019F00A787C3 /* Services */,
@@ -341,6 +357,7 @@
 		9F73B5A82C6213B50007CD73 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				9F5F11232CA9898700EECC4E /* Home */,
 				9F73B5A92C6213F20007CD73 /* Login */,
 			);
 			path = Features;
@@ -503,7 +520,6 @@
 				9F73B5A22C5F623C0007CD73 /* HankenGrotesk-ExtraLight.ttf in Resources */,
 				9F73B5922C5F623C0007CD73 /* HankenGrotesk-ExtraLightItalic.ttf in Resources */,
 				9F73B59A2C5F623C0007CD73 /* HankenGrotesk-ExtraBold.ttf in Resources */,
-				9F73B5A12C5F623C0007CD73 /* HankenGrotesk-BlackItalic.ttf in Resources */,
 				9F73B5942C5F623C0007CD73 /* HankenGrotesk-SemiBold.ttf in Resources */,
 				9F73B5932C5F623C0007CD73 /* HankenGrotesk-SemiBoldItalic.ttf in Resources */,
 				9FCC2E112C67FFC100A787C3 /* LoginScreen.xcstrings in Resources */,
@@ -512,7 +528,6 @@
 				9F73B59C2C5F623C0007CD73 /* HankenGrotesk-Medium.ttf in Resources */,
 				9F73B5962C5F623C0007CD73 /* HankenGrotesk-ExtraBoldItalic.ttf in Resources */,
 				9F6960FB2C03B64A00605975 /* Assets.xcassets in Resources */,
-				9F73B5A32C5F623C0007CD73 /* HankenGrotesk-Black.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -540,8 +555,10 @@
 				9F0A241F2C1DA57400B5DEB3 /* ThemeProtocol.swift in Sources */,
 				9F2B42432CA032AC00A65225 /* ComponentManager.swift in Sources */,
 				9F2B42412C9F6C9400A65225 /* KeychainError.swift in Sources */,
+				9F5F112D2CA995B400EECC4E /* RootView.swift in Sources */,
+				9F5F11292CA989AE00EECC4E /* HomeViewModel.swift in Sources */,
 				9F2B423A2C9EFA3F00A65225 /* LoginRequestBody.swift in Sources */,
-				9F2B42472CA03BF500A65225 /* ComponentProps.swift in Sources */,
+				9F2B42472CA03BF500A65225 /* EnvProviders.swift in Sources */,
 				9F2B422C2C9EC89100A65225 /* HTTPService.swift in Sources */,
 				9F2B423F2C9F51B800A65225 /* TokenProvider.swift in Sources */,
 				9FCC2E152C680D0100A787C3 /* FixedStrings.swift in Sources */,
@@ -557,7 +574,10 @@
 				9F2B423D2C9F513300A65225 /* HomelyAPITokenProvider.swift in Sources */,
 				9F0A24212C1DA62600B5DEB3 /* ThemeManager.swift in Sources */,
 				9F73B5A52C5F63E30007CD73 /* Fonts.swift in Sources */,
+				9F5F11272CA9899D00EECC4E /* HomeScreen.swift in Sources */,
 				9F2B42302C9EDF1E00A65225 /* APIError.swift in Sources */,
+				9F5F112B2CA98B2A00EECC4E /* GlobalState.swift in Sources */,
+				9F5F11252CA9899600EECC4E /* HomeNavStack.swift in Sources */,
 				9F0A70EB2CA3F3E900792B85 /* SharedStrings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

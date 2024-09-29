@@ -212,6 +212,7 @@ private extension HTTPService {
         // Add the JWT token to the Authorization header if available
         if let token = tokenProvider.jwtToken {
             request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            logInfo("Requesting with token: \(token)")
         }
         
         if let body = body {

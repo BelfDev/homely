@@ -21,10 +21,15 @@ protocol HomelyAPIClientProtocol {
 final class HomelyAPIClient : HomelyAPIClientProtocol {
     private let environment: EnvConfig
     private let http: HTTPService<Endpoint>
+    private let tokenProvider: TokenProviderProtocol
     
-    init(for environment: EnvConfig) {
+    init(for environment: EnvConfig, with tokenProvider: TokenProviderProtocol) {
         self.environment = environment
-        self.http = HTTPService<Endpoint>(environment: environment, tokenProvider: HomelyAPITokenProvider())
+        self.tokenProvider = tokenProvider
+        self.http = HTTPService<Endpoint>(
+            environment: environment,
+            tokenProvider: self.tokenProvider
+        )
     }
     
     // MARK: - API Endpoints
@@ -59,6 +64,12 @@ final class HomelyAPIClient : HomelyAPIClientProtocol {
     
     func login(body: LoginRequestBody) async throws -> LoginResponse {
         print("Performing login")
-        return try await http.post(.login, body: body)
+        let response: LoginResponse = try await http.post(.login, body: body)
+        try tokenProvider.setToken(response.accessToken)
+        return response
+    }
+    
+    func logout() {
+        tokenProvider.clearToken()
     }
 }

@@ -9,11 +9,18 @@ import Foundation
 
 @Observable
 class ComponentManager {
-    let homelyClient: HomelyAPIClient
     let theme: ThemeManager
+    let tokenProvider: HomelyAPITokenProvider
+    let homelyClient: HomelyAPIClient
+    let globalState: GlobalState
     
     init(_ environment: EnvConfig) {
-        self.homelyClient = HomelyAPIClient(for: environment)
         self.theme = ThemeManager()
+        self.tokenProvider = HomelyAPITokenProvider()
+        
+        tokenProvider.clearToken()
+        
+        self.homelyClient = HomelyAPIClient(for: environment, with: tokenProvider)
+        self.globalState = GlobalState(tokenProvider)
     }
 }

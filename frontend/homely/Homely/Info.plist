@@ -4,8 +4,6 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>HankenGrotesk-Black.ttf</string>
-		<string>HankenGrotesk-BlackItalic.ttf</string>
 		<string>HankenGrotesk-Bold.ttf</string>
 		<string>HankenGrotesk-BoldItalic.ttf</string>
 		<string>HankenGrotesk-ExtraBold.ttf</string>

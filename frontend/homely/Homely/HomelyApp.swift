@@ -12,12 +12,12 @@ struct HomelyApp: App {
     @State private var components: ComponentManager
     
     init() {
-        components = ComponentManager(.development)
+        self.components = ComponentManager(.development)
     }
     
     var body: some Scene {
         WindowGroup {
-            LoginScreen(components)
+            RootView()
         }.environment(components)
     }
 }

@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-@Observable class ThemeManager{
+@Observable
+class ThemeManager {
     private var current: ThemeProtocol = MainTheme()
     
     func setTheme(_ theme: ThemeProtocol) {

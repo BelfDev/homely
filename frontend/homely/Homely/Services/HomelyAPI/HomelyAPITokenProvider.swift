@@ -7,7 +7,7 @@
 
 import Foundation
 
-class HomelyAPITokenProvider: TokenProviderProtocol {
+final class HomelyAPITokenProvider: TokenProviderProtocol {
     private let tokenKey = "HomelyJWTToken"
     
     // Thread-safe access to the JWT token using a serial dispatch queue
@@ -27,6 +27,10 @@ class HomelyAPITokenProvider: TokenProviderProtocol {
                 return token
             }
         }
+    }
+    
+    var hasAccessToken: Bool {
+        return jwtToken?.isEmpty == false
     }
     
     /**
