@@ -27,15 +27,11 @@ struct LoginScreen: View {
                         .bold()
                         .padding(.top, geometry.size.height * 0.18)
                     
-                    mainContent(geometry: geometry).disabled(vm.isLoading)
+                    mainContent(geometry: geometry)
                         .padding(.top, geometry.size.height * 0.35)
                         .sheet(isPresented: $vm.hasGeneralError) {
                             ErrorBottomSheet(errorMessage: vm.errorMessage)
                         }
-                    
-                    if vm.isLoading {
-                        LoadingOverlay()
-                    }
                 }
                 .frame(maxWidth: .infinity, minHeight: geometry.size.height)
             }
@@ -43,6 +39,12 @@ struct LoginScreen: View {
             .scrollBounceBehavior(.basedOnSize)
             .edgesIgnoringSafeArea(.all)
             .background(theme.color.surface)
+            .disabled(vm.isLoading)
+            .overlay {
+                if vm.isLoading {
+                    LoadingOverlay()
+                }
+            }
             .onTapGesture {
                 hideKeyboard()
             }
