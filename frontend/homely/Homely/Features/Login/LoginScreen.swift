@@ -10,6 +10,7 @@ import SwiftUI
 struct LoginScreen: View {
     @ThemeProvider private var theme
     @State private var vm: LoginViewModel
+    @State private var isPasswordVisible: Bool = false
     
     init(_ components: ComponentManager) {
         vm = LoginViewModel(with: components)
@@ -160,9 +161,25 @@ struct LoginScreen: View {
                     .padding([.leading], 2)
                 
                 HStack {
-                    SecureField("", text: $vm.password)
-                    Image(systemName:"eye")
+                    
+                    Group {
+                        if isPasswordVisible {
+                            TextField("", text: $vm.password)
+                        } else {
+                            SecureField("", text: $vm.password)
+                        }
+                    }
+                    .textContentType(.password)
+                    .keyboardType(.default)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
+                    
+                    Image(systemName: isPasswordVisible ? "eye.slash" : "eye")
+                        .symbolEffect(.bounce, value: isPasswordVisible)
                         .foregroundColor(theme.color.onSurface)
+                        .onTapGesture {
+                            isPasswordVisible.toggle()
+                        }
                 }
                 .frame(height: 48.0)
                 .padding(.horizontal, 12)
