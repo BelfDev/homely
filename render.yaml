@@ -5,7 +5,7 @@ services:
   name: Homely
   runtime: docker
   repo: https://github.com/BelfDev/homely
-  plan: starter
+  plan: free
   envVars:
   - key: POSTGRES_PASSWORD
     sync: false
