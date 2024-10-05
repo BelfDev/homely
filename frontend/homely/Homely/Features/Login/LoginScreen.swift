@@ -132,9 +132,19 @@ struct LoginScreen: View {
                     .padding(.horizontal, 12)
                     .background(theme.color.surfaceContainerHigh)
                     .cornerRadius(8)
-                    .keyboardType(.default)
+                    .textContentType(.emailAddress)
+                    .keyboardType(.emailAddress)
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
+                
+                if let emailError = vm.validations?.emailFieldError {
+                    Text(emailError.errorFeedback)
+                        .font(theme.font.body2)
+                        .foregroundColor(theme.color.error)
+                        .padding([.leading], 2)
+                        .transition(.opacity)
+                        .animation(.easeInOut, value: emailError)
+                }
             }
     }
     
@@ -158,6 +168,15 @@ struct LoginScreen: View {
                 .padding(.horizontal, 12)
                 .background(theme.color.surfaceContainerHigh)
                 .cornerRadius(8)
+                
+                if let passwordError = vm.validations?.passwordFieldError {
+                    Text(passwordError.errorFeedback)
+                        .font(theme.font.body2)
+                        .foregroundColor(theme.color.error)
+                        .padding([.leading], 2)
+                        .transition(.opacity)
+                        .animation(.easeInOut, value: passwordError)
+                }
             }
     }
     
@@ -168,7 +187,7 @@ struct LoginScreen: View {
             Text(LoginStrings.loginButton)
                 .font(theme.font.button)
                 .foregroundColor(theme.color.onPrimary)
-                .frame(maxWidth: .infinity) // Ensure text takes up the full button frame
+                .frame(maxWidth: .infinity)
         }
         .frame(maxWidth: .infinity, minHeight: 56.0)
         .contentShape(Rectangle())

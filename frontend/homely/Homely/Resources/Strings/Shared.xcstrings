@@ -40,6 +40,18 @@
         }
       }
     },
+    "key:error_empty_field" : {
+      "comment" : "Error message displayed when users leave an empty value in a required form field.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please enter a value for this field."
+          }
+        }
+      }
+    },
     "key:error_generic" : {
       "comment" : "Generic error message displayed for any error case that doesn't have a specific message associated with it.",
       "extractionState" : "manual",
@@ -72,6 +84,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Credencial inválido. Por favor novamente com uma combinação de email e senha válida."
+          }
+        }
+      }
+    },
+    "key:error_invalid_email" : {
+      "comment" : "Error message displayed under an email form field if the value entered is invalid.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please enter a valid email address."
+          }
+        }
+      }
+    },
+    "key:error_short_password" : {
+      "comment" : "Error message displayed under a password form field if the value entered is too short.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password must be at least %d characters."
           }
         }
       }

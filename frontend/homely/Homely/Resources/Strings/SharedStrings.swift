@@ -23,4 +23,11 @@ extension SharedStrings {
 extension SharedStrings {
     static let errorInvalidCredentials = String(localized: "key:error_invalid_credentials", table: table)
     static let errorGeneric = String(localized: "key:error_generic", table: table)
+    
+    static let errorEmptyField = String(localized: "key:error_empty_field", table: table)
+    static let errorInvalidEmail = String(localized: "key:error_invalid_email", table: table)
+    static func errorShortPassword(minCount: Int) -> String {
+        let format = String(localized: "key:error_short_password", table: table)
+        return String.localizedStringWithFormat(format, minCount)
+    }
 }

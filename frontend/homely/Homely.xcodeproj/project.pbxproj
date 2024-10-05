@@ -56,6 +56,9 @@
 		9F73B5A02C5F623C0007CD73 /* HankenGrotesk-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F73B58E2C5F623C0007CD73 /* HankenGrotesk-BoldItalic.ttf */; };
 		9F73B5A22C5F623C0007CD73 /* HankenGrotesk-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F73B5902C5F623C0007CD73 /* HankenGrotesk-ExtraLight.ttf */; };
 		9F73B5A52C5F63E30007CD73 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F73B5A42C5F63E30007CD73 /* Fonts.swift */; };
+		9FA71E692CB14723007C09AB /* FormFieldValidators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA71E682CB14723007C09AB /* FormFieldValidators.swift */; };
+		9FA71E6B2CB14763007C09AB /* FormFieldError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA71E6A2CB14763007C09AB /* FormFieldError.swift */; };
+		9FA71E6D2CB148BB007C09AB /* LoginFormValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA71E6C2CB148BB007C09AB /* LoginFormValidator.swift */; };
 		9FCC2E112C67FFC100A787C3 /* LoginScreen.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9FCC2E102C67FFC100A787C3 /* LoginScreen.xcstrings */; };
 		9FCC2E132C68043100A787C3 /* LoginStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCC2E122C68043100A787C3 /* LoginStrings.swift */; };
 		9FCC2E152C680D0100A787C3 /* FixedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCC2E142C680D0100A787C3 /* FixedStrings.swift */; };
@@ -134,6 +137,9 @@
 		9F73B58E2C5F623C0007CD73 /* HankenGrotesk-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HankenGrotesk-BoldItalic.ttf"; sourceTree = "<group>"; };
 		9F73B5902C5F623C0007CD73 /* HankenGrotesk-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HankenGrotesk-ExtraLight.ttf"; sourceTree = "<group>"; };
 		9F73B5A42C5F63E30007CD73 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		9FA71E682CB14723007C09AB /* FormFieldValidators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFieldValidators.swift; sourceTree = "<group>"; };
+		9FA71E6A2CB14763007C09AB /* FormFieldError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFieldError.swift; sourceTree = "<group>"; };
+		9FA71E6C2CB148BB007C09AB /* LoginFormValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormValidator.swift; sourceTree = "<group>"; };
 		9FCC2E102C67FFC100A787C3 /* LoginScreen.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = LoginScreen.xcstrings; sourceTree = "<group>"; };
 		9FCC2E122C68043100A787C3 /* LoginStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStrings.swift; sourceTree = "<group>"; };
 		9FCC2E142C680D0100A787C3 /* FixedStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedStrings.swift; sourceTree = "<group>"; };
@@ -383,8 +389,18 @@
 				9F5D8B382C14C725002B98D5 /* LoginScreen.swift */,
 				9FCC2E122C68043100A787C3 /* LoginStrings.swift */,
 				9F2B42492CA0443900A65225 /* LoginViewModel.swift */,
+				9FA71E6C2CB148BB007C09AB /* LoginFormValidator.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		9FA71E672CB14710007C09AB /* Validators */ = {
+			isa = PBXGroup;
+			children = (
+				9FA71E682CB14723007C09AB /* FormFieldValidators.swift */,
+				9FA71E6A2CB14763007C09AB /* FormFieldError.swift */,
+			);
+			path = Validators;
 			sourceTree = "<group>";
 		};
 		9FCC2E0F2C67FF6500A787C3 /* Strings */ = {
@@ -408,6 +424,7 @@
 		9FCC2E1C2C69019F00A787C3 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				9FA71E672CB14710007C09AB /* Validators */,
 				9F2B423B2C9EFC6F00A65225 /* HomelyAPI */,
 				9F2B42332C9EF4DE00A65225 /* HTTP */,
 			);
@@ -566,10 +583,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FA71E6B2CB14763007C09AB /* FormFieldError.swift in Sources */,
+				9FA71E692CB14723007C09AB /* FormFieldValidators.swift in Sources */,
 				9F0A241F2C1DA57400B5DEB3 /* ThemeProtocol.swift in Sources */,
 				9F2B42432CA032AC00A65225 /* ComponentManager.swift in Sources */,
 				9F2B42412C9F6C9400A65225 /* KeychainError.swift in Sources */,
 				9F5F112D2CA995B400EECC4E /* RootView.swift in Sources */,
+				9FA71E6D2CB148BB007C09AB /* LoginFormValidator.swift in Sources */,
 				9F5F11292CA989AE00EECC4E /* HomeViewModel.swift in Sources */,
 				9F2B423A2C9EFA3F00A65225 /* LoginRequestBody.swift in Sources */,
 				9F2B42472CA03BF500A65225 /* EnvProviders.swift in Sources */,

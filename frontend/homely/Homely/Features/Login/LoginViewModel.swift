@@ -11,7 +11,6 @@ import Observation
 final class LoginViewModel {
     private let homelyClient: HomelyAPIClient
     
-    private(set) var isAuthenticated: Bool = false
     private(set) var isLoading: Bool = false
     private(set) var errorMessage = "" {
         didSet {
@@ -30,6 +29,7 @@ final class LoginViewModel {
     
     var email: String = ""
     var password: String = ""
+    var validations: LoginFormValidations?
     
     init(with components: ComponentManager) {
         self.homelyClient = components.homelyClient
@@ -37,13 +37,15 @@ final class LoginViewModel {
     
     @MainActor
     func login() {
+        let loginRequestBody = LoginRequestBody(email: email, password: password)
+        validations = loginRequestBody.validate()
+        guard validations?.hasFieldErrors == false else { return }
+        
         isLoading = true
         
         Task {
             defer { isLoading = false }
-            
             do {
-                let loginRequestBody = LoginRequestBody(email: email, password: password)
                 _ = try await homelyClient.login(body: loginRequestBody)
             } catch let error as APIError {
                 errorMessage = error.errorMessage
