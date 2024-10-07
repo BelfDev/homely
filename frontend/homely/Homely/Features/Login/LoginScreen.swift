@@ -115,17 +115,11 @@ struct LoginScreen: View {
                 .foregroundColor(theme.color.onSurface)
                 .padding([.leading], 2)
             Spacer()
-            Button {
-                print("Sign up")
-            } label: {
-                HStack {
-                    Text(LoginStrings.signUpButton)
-                        .font(theme.font.body1)
-                        .foregroundColor(theme.color.onSurface)
-                    Image(systemName: "arrow.right")
-                        .foregroundColor(theme.color.onSurface)
-                }
-            }
+            TextButton(
+                title: LoginStrings.signUpButton,
+                action: {print("TODO: Sign Up")},
+                showIcon: true
+            )
         }
     }
     
@@ -147,14 +141,10 @@ struct LoginScreen: View {
     private var forgotPasswordButton: some View {
         HStack {
             Spacer()
-            Button {
-                print("Forgot")
-            } label: {
-                Text(LoginStrings.forgotPasswordButton)
-                    .font(theme.font.body1)
-                    .foregroundColor(theme.color.onSurface)
-            }
-            
+            TextButton(
+                title: LoginStrings.forgotPasswordButton,
+                action: {print("TODO: Forgot")}
+            )
         }
     }
 }
