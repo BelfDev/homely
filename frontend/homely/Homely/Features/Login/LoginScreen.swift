@@ -79,9 +79,7 @@ struct LoginScreen: View {
             )
             .focused($focusedField, equals: .password)
             .submitLabel(.done)
-            Spacer()
-                .frame(maxHeight: 8.0)
-            forgotPasswordButton
+        
             Spacer()
                 .frame(minHeight: 16.0)
             loginButton
@@ -136,16 +134,6 @@ struct LoginScreen: View {
         .contentShape(Rectangle())
         .background(theme.color.primary)
         .cornerRadius(8)
-    }
-    
-    private var forgotPasswordButton: some View {
-        HStack {
-            Spacer()
-            TextButton(
-                title: LoginStrings.forgotPasswordButton,
-                action: {print("TODO: Forgot")}
-            )
-        }
     }
 }
 
