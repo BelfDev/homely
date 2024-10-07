@@ -20,12 +20,9 @@ struct LoginScreen: View {
         GeometryReader { geometry in
             ScrollView {
                 ZStack(alignment: .top) {
-                    backgroundImage(minHeight: geometry.size.height * 0.4)
+                    BackgroundImage(minHeight: geometry.size.height * 0.4)
                     
-                    Text(FixedStrings.appTitle)
-                        .foregroundStyle(theme.color.onPrimary)
-                        .font(theme.font.h2)
-                        .bold()
+                    HomelyAppTitle()
                         .padding(.top, geometry.size.height * 0.18)
                     
                     mainContent(geometry: geometry)
@@ -88,7 +85,7 @@ struct LoginScreen: View {
             )
             Spacer()
                 .frame(maxHeight: 8.0)
-            signUpRow
+            SignUpRow(action: {print("TODO: Sign Up")})
         }
         .padding([.horizontal, .bottom], 24.0)
         .background(
@@ -98,30 +95,6 @@ struct LoginScreen: View {
             ).foregroundStyle(theme.color.surface)
         )
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
-    
-    private func backgroundImage(minHeight: CGFloat) -> some View {
-        Image(.background)
-            .resizable()
-            .scaledToFit()
-            .aspectRatio(contentMode: .fit)
-            .frame(maxWidth: .infinity, minHeight: minHeight)
-            .edgesIgnoringSafeArea(.all)
-    }
-    
-    private var signUpRow: some View {
-        HStack {
-            Text(LoginStrings.signUpHelperText)
-                .font(theme.font.body1)
-                .foregroundColor(theme.color.onSurface)
-                .padding([.leading], 2)
-            Spacer()
-            TextButton(
-                title: LoginStrings.signUpButton,
-                action: {print("TODO: Sign Up")},
-                showIcon: true
-            )
-        }
     }
 }
 
@@ -145,6 +118,53 @@ extension LoginScreen {
             focusedField = nil
         case .none:
             break
+        }
+    }
+}
+
+// MARK: - Subviews
+
+private struct HomelyAppTitle: View {
+    @ThemeProvider private var theme
+    
+    var body: some View {
+        Text(FixedStrings.appTitle)
+            .foregroundStyle(theme.color.onPrimary)
+            .font(theme.font.h2)
+            .bold()
+    }
+}
+
+private struct BackgroundImage: View {
+    let minHeight: CGFloat
+    
+    var body: some View {
+        Image(.background)
+            .resizable()
+            .scaledToFit()
+            .aspectRatio(contentMode: .fit)
+            .frame(maxWidth: .infinity, minHeight: minHeight)
+            .edgesIgnoringSafeArea(.all)
+    }
+}
+
+private struct SignUpRow: View {
+    @ThemeProvider private var theme
+    
+    let action: () -> Void
+    
+    var body: some View {
+        HStack {
+            Text(LoginStrings.signUpHelperText)
+                .font(theme.font.body1)
+                .foregroundColor(theme.color.onSurface)
+                .padding([.leading], 2)
+            Spacer()
+            TextButton(
+                title: LoginStrings.signUpButton,
+                action: action,
+                showIcon: true
+            )
         }
     }
 }
