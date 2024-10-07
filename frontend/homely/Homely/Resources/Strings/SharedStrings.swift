@@ -31,3 +31,10 @@ extension SharedStrings {
         return String.localizedStringWithFormat(format, minCount)
     }
 }
+
+// MARK: - Input Fields
+
+extension SharedStrings {
+    static let emailInputLabel = String(localized: "key:email_input_label", table: table)
+    static let passwordInputLabel = String(localized: "key:password_input_label", table: table)
+}

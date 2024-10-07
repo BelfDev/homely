@@ -63,7 +63,11 @@ struct LoginScreen: View {
                 .foregroundColor(theme.color.onSurface)
             Spacer()
                 .frame(maxHeight: 32.0)
-            emailInputField
+            TextInputField(
+                type: .email,
+                input: $vm.email,
+                error: vm.validations?.emailFieldError
+            )
             Spacer()
                 .frame(maxHeight: 24.0)
             passwordInputField
@@ -117,43 +121,11 @@ struct LoginScreen: View {
         }
     }
     
-    private var emailInputField: some View {
-        VStack(
-            alignment: .leading,
-            spacing: 8.0) {
-                Text(LoginStrings.emailInputLabel)
-                    .font(theme.font.body1)
-                    .fontWeight(.medium)
-                    .foregroundColor(theme.color.onSurface)
-                    .frame(alignment: .leading)
-                    .padding([.leading], 2)
-                
-                TextField("", text: $vm.email)
-                    .frame(height: 48.0)
-                    .padding(.horizontal, 12)
-                    .background(theme.color.surfaceContainerHigh)
-                    .cornerRadius(8)
-                    .textContentType(.emailAddress)
-                    .keyboardType(.emailAddress)
-                    .autocapitalization(.none)
-                    .disableAutocorrection(true)
-                
-                if let emailError = vm.validations?.emailFieldError {
-                    Text(emailError.errorFeedback)
-                        .font(theme.font.body2)
-                        .foregroundColor(theme.color.error)
-                        .padding([.leading], 2)
-                        .transition(.opacity)
-                        .animation(.easeInOut, value: emailError)
-                }
-            }
-    }
-    
     private var passwordInputField: some View {
         VStack(
             alignment: .leading,
             spacing: 8.0) {
-                Text(LoginStrings.passwordInputLabel)
+                Text(SharedStrings.passwordInputLabel)
                     .font(theme.font.body1)
                     .fontWeight(.medium)
                     .foregroundColor(theme.color.onSurface)

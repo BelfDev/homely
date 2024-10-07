@@ -1,30 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "key:email_input_label" : {
-      "comment" : "Text displayed on top of an input field that expects a email value.",
-      "extractionState" : "manual",
-      "localizations" : {
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Email"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Email"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Email"
-          }
-        }
-      }
-    },
     "key:forgot_password_button" : {
       "comment" : "Text displayed in a text button that allows users to recover their passwords.",
       "extractionState" : "manual",
@@ -93,30 +69,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fazer Login"
-          }
-        }
-      }
-    },
-    "key:password_input_label" : {
-      "comment" : "Text displayed on top of an input field that expects a password value.",
-      "extractionState" : "manual",
-      "localizations" : {
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Κωδικός"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Password"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Senha"
           }
         }
       }
