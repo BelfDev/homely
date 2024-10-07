@@ -17,40 +17,24 @@ struct LoginScreen: View {
     }
     
     var body: some View {
-        GeometryReader { geometry in
-            ScrollView {
-                ZStack(alignment: .top) {
-                    BackgroundImage(minHeight: geometry.size.height * 0.4)
-                    
-                    HomelyAppTitle()
-                        .padding(.top, geometry.size.height * 0.18)
-                    
-                    mainContent(geometry: geometry)
-                        .padding(.top, geometry.size.height * 0.35)
-                        .sheet(isPresented: $vm.hasGeneralError) {
-                            ErrorBottomSheet(errorMessage: vm.errorMessage)
-                        }
-                        .onSubmit(focusNextField)
+        LoginScreenScaffold(
+            isLoading: vm.isLoading
+        ) { geometry in
+            BackgroundImage(minHeight: geometry.size.height * 0.4)
+            
+            HomelyAppTitle()
+                .padding(.top, geometry.size.height * 0.18)
+            
+            mainContent()
+                .padding(.top, geometry.size.height * 0.35)
+                .sheet(isPresented: $vm.hasGeneralError) {
+                    ErrorBottomSheet(errorMessage: vm.errorMessage)
                 }
-                .frame(maxWidth: .infinity, minHeight: geometry.size.height)
-            }
-            .frame(maxHeight: .infinity)
-            .scrollBounceBehavior(.basedOnSize)
-            .edgesIgnoringSafeArea(.all)
-            .background(theme.color.surface)
-            .disabled(vm.isLoading)
-            .overlay {
-                if vm.isLoading {
-                    LoadingOverlay()
-                }
-            }
-            .onTapGesture {
-                hideKeyboard()
-            }
+                .onSubmit(focusNextField)
         }
     }
     
-    private func mainContent(geometry: GeometryProxy) -> some View {
+    private func mainContent() -> some View {
         VStack {
             Spacer()
                 .frame(maxHeight: 32.0)
@@ -165,6 +149,37 @@ private struct SignUpRow: View {
                 action: action,
                 showIcon: true
             )
+        }
+    }
+}
+
+private struct LoginScreenScaffold<Content>: View where Content : View {
+    @ThemeProvider private var theme
+    
+    var isLoading: Bool
+    @ViewBuilder var content: (GeometryProxy) -> Content
+    
+    var body: some View {
+        GeometryReader { geometry in
+            ScrollView {
+                ZStack(alignment: .top) {
+                    content(geometry)
+                }
+                .frame(maxWidth: .infinity, minHeight: geometry.size.height)
+            }
+            .frame(maxHeight: .infinity)
+            .scrollBounceBehavior(.basedOnSize)
+            .edgesIgnoringSafeArea(.all)
+            .background(theme.color.surface)
+            .disabled(isLoading)
+            .overlay {
+                if isLoading {
+                    LoadingOverlay()
+                }
+            }
+            .onTapGesture {
+                hideKeyboard()
+            }
         }
     }
 }
