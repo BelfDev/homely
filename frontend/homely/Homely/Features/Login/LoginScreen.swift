@@ -79,10 +79,13 @@ struct LoginScreen: View {
             )
             .focused($focusedField, equals: .password)
             .submitLabel(.done)
-        
+            
             Spacer()
                 .frame(minHeight: 16.0)
-            loginButton
+            FilledButton(
+                title: LoginStrings.loginButton,
+                action: vm.login
+            )
             Spacer()
                 .frame(maxHeight: 8.0)
             signUpRow
@@ -120,21 +123,6 @@ struct LoginScreen: View {
             )
         }
     }
-    
-    private var loginButton: some View {
-        Button {
-            vm.login()
-        } label: {
-            Text(LoginStrings.loginButton)
-                .font(theme.font.button)
-                .foregroundColor(theme.color.onPrimary)
-                .frame(maxWidth: .infinity)
-        }
-        .frame(maxWidth: .infinity, minHeight: 56.0)
-        .contentShape(Rectangle())
-        .background(theme.color.primary)
-        .cornerRadius(8)
-    }
 }
 
 #Preview {
@@ -150,13 +138,13 @@ extension LoginScreen {
     }
     
     private func focusNextField() {
-           switch focusedField {
-           case .email:
-               focusedField = .password
-           case .password:
-               focusedField = nil
-           case .none:
-               break
-           }
-       }
+        switch focusedField {
+        case .email:
+            focusedField = .password
+        case .password:
+            focusedField = nil
+        case .none:
+            break
+        }
+    }
 }
