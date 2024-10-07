@@ -9,11 +9,19 @@ import SwiftUI
 
 @main
 struct HomelyApp: App {
-    @State private var theme = ThemeManager()
+    @State private var components: ComponentManager
+    
+    init() {
+        self.components = ComponentManager(.development)
+    }
     
     var body: some Scene {
         WindowGroup {
-            LoginScreen().environment(theme)
+            RootView()
+                .environment(components)
+                .onChange(of: components.tokenProvider.jwtToken) {
+                    components.session.didChangeAccessToken()
+                }
         }
     }
 }

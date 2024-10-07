@@ -1,0 +1,117 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Key" : {
+      "extractionState" : "manual"
+    },
+    "key:error_bottom_sheet_button" : {
+      "comment" : "Text displayed at the bottom part of the Error Bottom Sheet view. Typically closes the bottom sheet.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Close"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fechar"
+          }
+        }
+      }
+    },
+    "key:error_bottom_sheet_title" : {
+      "comment" : "Text displayed at the top part of the Error Bottom Sheet view. Typically triggered when a general error occurred.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oops, something went wrong!"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oops, algo não está certo!"
+          }
+        }
+      }
+    },
+    "key:error_empty_field" : {
+      "comment" : "Error message displayed when users leave an empty value in a required form field.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please enter a value for this field."
+          }
+        }
+      }
+    },
+    "key:error_generic" : {
+      "comment" : "Generic error message displayed for any error case that doesn't have a specific message associated with it.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The operation failed. Please try again."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A operação falhou. Por favor, tente novamente."
+          }
+        }
+      }
+    },
+    "key:error_invalid_credentials" : {
+      "comment" : "User entered invalid combination of email and password.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invalid credentials. Please try again with a new email and password."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Credencial inválido. Por favor novamente com uma combinação de email e senha válida."
+          }
+        }
+      }
+    },
+    "key:error_invalid_email" : {
+      "comment" : "Error message displayed under an email form field if the value entered is invalid.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please enter a valid email address."
+          }
+        }
+      }
+    },
+    "key:error_short_password" : {
+      "comment" : "Error message displayed under a password form field if the value entered is too short.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password must be at least %d characters."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

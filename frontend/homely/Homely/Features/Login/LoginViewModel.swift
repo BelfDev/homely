@@ -1,43 +1,57 @@
 //
-//  LoginScreenState.swift
+//  LoginViewModel.swift
 //  Homely
 //
-//  Created by Pedro Belfort on 11.08.24.
+//  Created by Pedro Belfort on 22.09.24.
 //
 
-import Foundation
-import Combine
+import Observation
 
-// Placeholder
-@Observable class HomeViewModel {
-
-    enum ViewState {
-        case START
-        case LOADING
-        case SUCCESS(users: [User])
-        case FAILURE(error: String)
+@Observable
+final class LoginViewModel {
+    private let homelyClient: HomelyAPIClient
+    
+    private(set) var isLoading: Bool = false
+    private(set) var errorMessage = "" {
+        didSet {
+            if (!errorMessage.isEmpty) {
+                hasGeneralError = true
+            }
+        }
     }
-
-    var currentState: ViewState = .START
-    private var cancelables = Set<AnyCancellable>()
-
-    init() {
-        getUsers()
+    var hasGeneralError: Bool = false {
+        didSet {
+            if (!errorMessage.isEmpty && !hasGeneralError) {
+                errorMessage = ""
+            }
+        }
     }
-
-    func getUsers() {
-        self.currentState = .LOADING
-        APIService.shared.getUsers()
-            .sink { completion in
-                switch completion {
-                case .finished:
-                    print("Execution Finihsed.")
-                case .failure(let error):
-                    self.currentState = .FAILURE(error: error.localizedDescription)
-                }
-            } receiveValue: { users in
-                print(users)
-                self.currentState = .SUCCESS(users: users)
-            }.store(in: &cancelables)
+    
+    var email: String = ""
+    var password: String = ""
+    var validations: LoginFormValidations?
+    
+    init(with components: ComponentManager) {
+        self.homelyClient = components.homelyClient
+    }
+    
+    @MainActor
+    func login() {
+        let loginRequestBody = LoginRequestBody(email: email, password: password)
+        validations = loginRequestBody.validate()
+        guard validations?.hasFieldErrors == false else { return }
+        
+        isLoading = true
+        
+        Task {
+            defer { isLoading = false }
+            do {
+                _ = try await homelyClient.login(body: loginRequestBody)
+            } catch let error as APIError {
+                errorMessage = error.errorMessage
+            } catch {
+                errorMessage = SharedStrings.errorGeneric
+            }
+        }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  LoginView.swift
+//  LoginScreen.swift
 //  homely
 //
 //  Created by Pedro Belfort on 08.06.24.
@@ -8,71 +8,83 @@
 import SwiftUI
 
 struct LoginScreen: View {
-    @Environment(ThemeManager.self) private var theme
-    @State private var email: String = ""
-    @State private var password: String = ""
+    @ThemeProvider private var theme
+    @State private var vm: LoginViewModel
+    @State private var isPasswordVisible: Bool = false
+    
+    init(_ components: ComponentManager) {
+        vm = LoginViewModel(with: components)
+    }
     
     var body: some View {
         GeometryReader { geometry in
-            
-            ZStack(alignment: .top) {
-                backgroundImage(minHeight: geometry.size.height * 0.3)
-                Text(FixedStrings.appTitle)
-                    .foregroundStyle(theme.color.onPrimary)
-                    .font(theme.font.h2)
-                    .bold()
-                    .padding(.top, geometry.size.height * 0.12)
-                
-                ScrollView {
+            ScrollView {
+                ZStack(alignment: .top) {
+                    backgroundImage(minHeight: geometry.size.height * 0.4)
                     
-                    VStack {
-                        Spacer()
-                            .frame(height: 32.0)
-                        
-                        Text(LoginStrings.screenTitle)
-                            .font(theme.font.h5)
-                            .bold()
-                            .foregroundColor(theme.color.onSurface)
-                        Spacer()
-                            .frame(height: 32.0)
-                        emailInputField
-                        Spacer()
-                            .frame(height: 24.0)
-                        passwordInputField
-                        Spacer()
-                            .frame(height: 8.0)
-                        forgotPasswordButton
-                        Spacer()
-                        loginButton
-                        Spacer()
-                            .frame(height: 8.0)
-                        signUpRow
-                    }
-                    .padding([.horizontal, .bottom], 24.0)
-                    .background(
-                        UnevenRoundedRectangle(
-                            cornerRadii: .init(topLeading: 32.0, topTrailing: 32.0),
-                            style: .continuous
-                        )
-                        .foregroundStyle(theme.color.surface)
-                    )
-                    .frame(maxWidth: .infinity, minHeight: geometry.size.height * 0.7)
-                    .padding(.top, geometry.size.height * 0.3)
+                    Text(FixedStrings.appTitle)
+                        .foregroundStyle(theme.color.onPrimary)
+                        .font(theme.font.h2)
+                        .bold()
+                        .padding(.top, geometry.size.height * 0.18)
+                    
+                    mainContent(geometry: geometry)
+                        .padding(.top, geometry.size.height * 0.35)
+                        .sheet(isPresented: $vm.hasGeneralError) {
+                            ErrorBottomSheet(errorMessage: vm.errorMessage)
+                        }
                 }
-                .scrollBounceBehavior(.basedOnSize)
+                .frame(maxWidth: .infinity, minHeight: geometry.size.height)
             }
-            .edgesIgnoringSafeArea(.bottom)
-            .background(
-                LinearGradient(
-                    gradient: Gradient(
-                        colors: [.blue,
-                                 theme.color.surface,
-                                 theme.color.surface]),
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-            )
+            .frame(maxHeight: .infinity)
+            .scrollBounceBehavior(.basedOnSize)
+            .edgesIgnoringSafeArea(.all)
+            .background(theme.color.surface)
+            .disabled(vm.isLoading)
+            .overlay {
+                if vm.isLoading {
+                    LoadingOverlay()
+                }
+            }
+            .onTapGesture {
+                hideKeyboard()
+            }
         }
+    }
+    
+    private func mainContent(geometry: GeometryProxy) -> some View {
+        VStack {
+            Spacer()
+                .frame(maxHeight: 32.0)
+            
+            Text(LoginStrings.screenTitle)
+                .font(theme.font.h5)
+                .bold()
+                .foregroundColor(theme.color.onSurface)
+            Spacer()
+                .frame(maxHeight: 32.0)
+            emailInputField
+            Spacer()
+                .frame(maxHeight: 24.0)
+            passwordInputField
+            Spacer()
+                .frame(maxHeight: 8.0)
+            forgotPasswordButton
+            Spacer()
+                .frame(minHeight: 16.0)
+            loginButton
+            Spacer()
+                .frame(maxHeight: 8.0)
+            signUpRow
+        }
+        .padding([.horizontal, .bottom], 24.0)
+        .background(
+            UnevenRoundedRectangle(
+                cornerRadii: .init(topLeading: 32.0, topTrailing: 32.0),
+                style: .continuous
+            ).foregroundStyle(theme.color.surface)
+        )
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     
     private func backgroundImage(minHeight: CGFloat) -> some View {
@@ -89,6 +101,7 @@ struct LoginScreen: View {
             Text(LoginStrings.signUpHelperText)
                 .font(theme.font.body1)
                 .foregroundColor(theme.color.onSurface)
+                .padding([.leading], 2)
             Spacer()
             Button {
                 print("Sign up")
@@ -101,7 +114,6 @@ struct LoginScreen: View {
                         .foregroundColor(theme.color.onSurface)
                 }
             }
-            
         }
     }
     
@@ -114,12 +126,26 @@ struct LoginScreen: View {
                     .fontWeight(.medium)
                     .foregroundColor(theme.color.onSurface)
                     .frame(alignment: .leading)
+                    .padding([.leading], 2)
                 
-                TextField("", text: $email)
+                TextField("", text: $vm.email)
                     .frame(height: 48.0)
                     .padding(.horizontal, 12)
                     .background(theme.color.surfaceContainerHigh)
                     .cornerRadius(8)
+                    .textContentType(.emailAddress)
+                    .keyboardType(.emailAddress)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
+                
+                if let emailError = vm.validations?.emailFieldError {
+                    Text(emailError.errorFeedback)
+                        .font(theme.font.body2)
+                        .foregroundColor(theme.color.error)
+                        .padding([.leading], 2)
+                        .transition(.opacity)
+                        .animation(.easeInOut, value: emailError)
+                }
             }
     }
     
@@ -132,28 +158,56 @@ struct LoginScreen: View {
                     .fontWeight(.medium)
                     .foregroundColor(theme.color.onSurface)
                     .frame(height: 15, alignment: .leading)
+                    .padding([.leading], 2)
                 
                 HStack {
-                    SecureField("", text: $password)
-                    Image(systemName:"eye")
+                    
+                    Group {
+                        if isPasswordVisible {
+                            TextField("", text: $vm.password)
+                        } else {
+                            SecureField("", text: $vm.password)
+                        }
+                    }
+                    .textContentType(.password)
+                    .keyboardType(.default)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
+                    
+                    Image(systemName: isPasswordVisible ? "eye.slash" : "eye")
+                        .symbolEffect(.bounce, value: isPasswordVisible)
                         .foregroundColor(theme.color.onSurface)
+                        .onTapGesture {
+                            isPasswordVisible.toggle()
+                        }
                 }
                 .frame(height: 48.0)
                 .padding(.horizontal, 12)
                 .background(theme.color.surfaceContainerHigh)
                 .cornerRadius(8)
+                
+                if let passwordError = vm.validations?.passwordFieldError {
+                    Text(passwordError.errorFeedback)
+                        .font(theme.font.body2)
+                        .foregroundColor(theme.color.error)
+                        .padding([.leading], 2)
+                        .transition(.opacity)
+                        .animation(.easeInOut, value: passwordError)
+                }
             }
     }
     
     private var loginButton: some View {
         Button {
-            print("Log user in")
+            vm.login()
         } label: {
             Text(LoginStrings.loginButton)
                 .font(theme.font.button)
                 .foregroundColor(theme.color.onPrimary)
+                .frame(maxWidth: .infinity)
         }
         .frame(maxWidth: .infinity, minHeight: 56.0)
+        .contentShape(Rectangle())
         .background(theme.color.primary)
         .cornerRadius(8)
     }
@@ -168,12 +222,12 @@ struct LoginScreen: View {
                     .font(theme.font.body1)
                     .foregroundColor(theme.color.onSurface)
             }
-          
+            
         }
     }
 }
 
 #Preview {
-    LoginScreen()
-        .environment(ThemeManager())
+    let components = ComponentManager(.development)
+    LoginScreen(components).environment(components)
 }
