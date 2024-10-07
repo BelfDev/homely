@@ -10,7 +10,7 @@ import SwiftUI
 struct LoginScreen: View {
     @ThemeProvider private var theme
     @State private var vm: LoginViewModel
-    @State private var isPasswordVisible: Bool = false
+    @FocusState private var focusedField: FocusedField?
     
     init(_ components: ComponentManager) {
         vm = LoginViewModel(with: components)
@@ -33,6 +33,7 @@ struct LoginScreen: View {
                         .sheet(isPresented: $vm.hasGeneralError) {
                             ErrorBottomSheet(errorMessage: vm.errorMessage)
                         }
+                        .onSubmit(focusNextField)
                 }
                 .frame(maxWidth: .infinity, minHeight: geometry.size.height)
             }
@@ -68,12 +69,16 @@ struct LoginScreen: View {
                 input: $vm.email,
                 error: vm.validations?.emailFieldError
             )
+            .focused($focusedField, equals: .email)
+            .submitLabel(.next)
             Spacer()
                 .frame(maxHeight: 24.0)
             PasswordInputField(
                 input: $vm.password,
                 error: vm.validations?.passwordFieldError
             )
+            .focused($focusedField, equals: .password)
+            .submitLabel(.done)
             Spacer()
                 .frame(maxHeight: 8.0)
             forgotPasswordButton
@@ -157,4 +162,23 @@ struct LoginScreen: View {
 #Preview {
     let components = ComponentManager(.development)
     LoginScreen(components).environment(components)
+}
+
+// MARK: - Focus
+
+extension LoginScreen {
+    private enum FocusedField {
+        case email, password
+    }
+    
+    private func focusNextField() {
+           switch focusedField {
+           case .email:
+               focusedField = .password
+           case .password:
+               focusedField = nil
+           case .none:
+               break
+           }
+       }
 }
