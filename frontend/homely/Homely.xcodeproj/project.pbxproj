@@ -26,6 +26,8 @@
 		9F2B42472CA03BF500A65225 /* EnvProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B42462CA03BF500A65225 /* EnvProviders.swift */; };
 		9F2B424A2CA0443900A65225 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B42492CA0443900A65225 /* LoginViewModel.swift */; };
 		9F4E7E9F2CB3C8540062EDBB /* TextInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4E7E9E2CB3C8540062EDBB /* TextInputField.swift */; };
+		9F4E7EA12CB3E1D10062EDBB /* PasswordInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4E7EA02CB3E1D10062EDBB /* PasswordInputField.swift */; };
+		9F4E7EA32CB3E34A0062EDBB /* ErrorInputFieldLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4E7EA22CB3E34A0062EDBB /* ErrorInputFieldLabel.swift */; };
 		9F5D8B392C14C725002B98D5 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5D8B382C14C725002B98D5 /* LoginScreen.swift */; };
 		9F5F11252CA9899600EECC4E /* HomeNavStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F11242CA9899600EECC4E /* HomeNavStack.swift */; };
 		9F5F11272CA9899D00EECC4E /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F11262CA9899D00EECC4E /* HomeScreen.swift */; };
@@ -105,6 +107,8 @@
 		9F2B42492CA0443900A65225 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		9F390FF12C1E377500DB1C1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = homely/Info.plist; sourceTree = "<group>"; };
 		9F4E7E9E2CB3C8540062EDBB /* TextInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputField.swift; sourceTree = "<group>"; };
+		9F4E7EA02CB3E1D10062EDBB /* PasswordInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordInputField.swift; sourceTree = "<group>"; };
+		9F4E7EA22CB3E34A0062EDBB /* ErrorInputFieldLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorInputFieldLabel.swift; sourceTree = "<group>"; };
 		9F5D8B382C14C725002B98D5 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		9F5F11242CA9899600EECC4E /* HomeNavStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavStack.swift; sourceTree = "<group>"; };
 		9F5F11262CA9899D00EECC4E /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
@@ -225,6 +229,8 @@
 				9F0A70E82CA35A4C00792B85 /* ErrorBottomSheet.swift */,
 				9F5F11302CA9B00D00EECC4E /* LoadingOverlay.swift */,
 				9F4E7E9E2CB3C8540062EDBB /* TextInputField.swift */,
+				9F4E7EA02CB3E1D10062EDBB /* PasswordInputField.swift */,
+				9F4E7EA22CB3E34A0062EDBB /* ErrorInputFieldLabel.swift */,
 			);
 			path = "Shared Views";
 			sourceTree = "<group>";
@@ -614,10 +620,12 @@
 				9F0A24212C1DA62600B5DEB3 /* ThemeManager.swift in Sources */,
 				9F73B5A52C5F63E30007CD73 /* Fonts.swift in Sources */,
 				9F5F11342CA9C7DA00EECC4E /* View+Keyboard.swift in Sources */,
+				9F4E7EA32CB3E34A0062EDBB /* ErrorInputFieldLabel.swift in Sources */,
 				9F5F11272CA9899D00EECC4E /* HomeScreen.swift in Sources */,
 				9F2B42302C9EDF1E00A65225 /* APIError.swift in Sources */,
 				9F5F112B2CA98B2A00EECC4E /* SessionManager.swift in Sources */,
 				9F5F11252CA9899600EECC4E /* HomeNavStack.swift in Sources */,
+				9F4E7EA12CB3E1D10062EDBB /* PasswordInputField.swift in Sources */,
 				9F0A70EB2CA3F3E900792B85 /* SharedStrings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

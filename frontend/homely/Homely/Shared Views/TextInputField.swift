@@ -62,14 +62,7 @@ struct TextInputField: View {
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
                 
-                if let error = self.error {
-                    Text(error.errorFeedback)
-                        .font(theme.font.body2)
-                        .foregroundColor(theme.color.error)
-                        .padding([.leading], 2)
-                        .transition(.opacity)
-                        .animation(.easeInOut, value: error)
-                }
+                ErrorInputFieldLabel(error: error)
             }
     }
 }

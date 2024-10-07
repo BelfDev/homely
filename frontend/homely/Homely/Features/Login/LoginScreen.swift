@@ -70,7 +70,10 @@ struct LoginScreen: View {
             )
             Spacer()
                 .frame(maxHeight: 24.0)
-            passwordInputField
+            PasswordInputField(
+                input: $vm.password,
+                error: vm.validations?.passwordFieldError
+            )
             Spacer()
                 .frame(maxHeight: 8.0)
             forgotPasswordButton
@@ -119,54 +122,6 @@ struct LoginScreen: View {
                 }
             }
         }
-    }
-    
-    private var passwordInputField: some View {
-        VStack(
-            alignment: .leading,
-            spacing: 8.0) {
-                Text(SharedStrings.passwordInputLabel)
-                    .font(theme.font.body1)
-                    .fontWeight(.medium)
-                    .foregroundColor(theme.color.onSurface)
-                    .frame(height: 15, alignment: .leading)
-                    .padding([.leading], 2)
-                
-                HStack {
-                    
-                    Group {
-                        if isPasswordVisible {
-                            TextField("", text: $vm.password)
-                        } else {
-                            SecureField("", text: $vm.password)
-                        }
-                    }
-                    .textContentType(.password)
-                    .keyboardType(.default)
-                    .autocapitalization(.none)
-                    .disableAutocorrection(true)
-                    
-                    Image(systemName: isPasswordVisible ? "eye.slash" : "eye")
-                        .symbolEffect(.bounce, value: isPasswordVisible)
-                        .foregroundColor(theme.color.onSurface)
-                        .onTapGesture {
-                            isPasswordVisible.toggle()
-                        }
-                }
-                .frame(height: 48.0)
-                .padding(.horizontal, 12)
-                .background(theme.color.surfaceContainerHigh)
-                .cornerRadius(8)
-                
-                if let passwordError = vm.validations?.passwordFieldError {
-                    Text(passwordError.errorFeedback)
-                        .font(theme.font.body2)
-                        .foregroundColor(theme.color.error)
-                        .padding([.leading], 2)
-                        .transition(.opacity)
-                        .animation(.easeInOut, value: passwordError)
-                }
-            }
     }
     
     private var loginButton: some View {
