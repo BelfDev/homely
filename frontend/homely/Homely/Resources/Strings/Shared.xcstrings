@@ -73,6 +73,12 @@
             "state" : "translated",
             "value" : "Please enter a value for this field."
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Por favor preencha esse campo."
+          }
         }
       }
     },
@@ -121,6 +127,12 @@
             "state" : "translated",
             "value" : "Please enter a valid email address."
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Por favor insira um email válido. "
+          }
         }
       }
     },
@@ -132,6 +144,48 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Password must be at least %d characters."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sua senha deve ter pelo menos %d caracteres."
+          }
+        }
+      }
+    },
+    "key:first_name_input_label" : {
+      "comment" : "Text displayed on top of an input field that expects the user's first name.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "First Name"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nome"
+          }
+        }
+      }
+    },
+    "key:last_name_input_label" : {
+      "comment" : "Text displayed on top of an input field that expects the user's last name.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Last Name"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sobrenome"
           }
         }
       }

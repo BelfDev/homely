@@ -8,12 +8,16 @@
 import SwiftUI
 
 enum TextInputContentType {
-    case email
+    case email, firstName, lastName
     
     var defaultLabel: String {
         switch self {
         case .email:
             SharedStrings.emailInputLabel
+        case .firstName:
+            SharedStrings.firstNameInputLabel
+        case .lastName:
+            SharedStrings.lastNameInputLabel
         }
     }
     
@@ -21,6 +25,10 @@ enum TextInputContentType {
         switch self {
         case .email:
                 .emailAddress
+        case .firstName:
+                .givenName
+        case .lastName:
+                .familyName
         }
     }
     
@@ -28,6 +36,10 @@ enum TextInputContentType {
         switch self {
         case .email:
                 .emailAddress
+        case .firstName:
+                .namePhonePad
+        case .lastName:
+                .namePhonePad
         }
     }
 }

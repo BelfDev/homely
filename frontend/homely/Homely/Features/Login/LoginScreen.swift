@@ -9,8 +9,11 @@ import SwiftUI
 
 struct LoginScreen: View {
     @ThemeProvider private var theme
+    @ComponentsProvider private var components // Review this
+    
     @State private var vm: LoginViewModel
     @FocusState private var focusedField: FocusedField?
+    @State private var navigateToSignUp: Bool = false
     
     init(_ components: ComponentManager) {
         vm = LoginViewModel(with: components)
@@ -31,13 +34,16 @@ struct LoginScreen: View {
                     ErrorBottomSheet(errorMessage: vm.errorMessage)
                 }
                 .onSubmit(focusNextField)
+                .navigationDestination(isPresented: $navigateToSignUp) {
+                    SignUpScreen(components)
+                }
         }
     }
     
     private func mainContent() -> some View {
         VStack {
             Spacer()
-                .frame(maxHeight: 32.0)
+                .frame(maxHeight: 24.0)
             
             Text(LoginStrings.screenTitle)
                 .font(theme.font.h5)
@@ -61,17 +67,18 @@ struct LoginScreen: View {
             .focused($focusedField, equals: .password)
             .submitLabel(.done)
             
-            Spacer()
-                .frame(minHeight: 16.0)
+            Spacer(minLength: 16.0)
+            
             FilledButton(
                 title: LoginStrings.loginButton,
                 action: vm.login
             )
-            Spacer()
-                .frame(maxHeight: 8.0)
-            SignUpRow(action: {print("TODO: Sign Up")})
+            SignUpRow() {
+                navigateToSignUp = true
+            }
+            .padding(.top, 2.0)
         }
-        .padding([.horizontal, .bottom], 24.0)
+        .padding(.horizontal, 24.0)
         .background(
             UnevenRoundedRectangle(
                 cornerRadii: .init(topLeading: 32.0, topTrailing: 32.0),
@@ -89,7 +96,7 @@ struct LoginScreen: View {
 
 // MARK: - Focus
 
-extension LoginScreen {
+private extension LoginScreen {
     private enum FocusedField {
         case email, password
     }
