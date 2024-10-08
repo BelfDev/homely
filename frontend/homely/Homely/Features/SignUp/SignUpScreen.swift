@@ -7,8 +7,11 @@
 
 import SwiftUI
 
-struct SignUpScreen: View {
+struct SignUpScreen: ScreenProtocol {
+    static var id = ScreenID.signUp
+    
     @ThemeProvider private var theme
+    
     @State private var vm: SignUpViewModel
     @FocusState private var focusedField: FocusedField?
     
@@ -34,7 +37,7 @@ struct SignUpScreen: View {
 
 #Preview {
     let components = ComponentManager(.development)
-
+    
     NavigationStack {
         SignUpScreen(components).environment(components)
     }

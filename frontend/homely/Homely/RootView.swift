@@ -15,9 +15,9 @@ struct RootView: View {
         
         Group {
             if isLoggedIn {
-                HomeNavStack()
+                HomeRouter()
             } else {
-                LoginScreen(components)
+                LoginRouter()
                     .transition(.push(from: .bottom))
             }
         }

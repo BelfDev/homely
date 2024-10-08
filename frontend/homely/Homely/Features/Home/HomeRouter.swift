@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HomeNavStack: View {
+struct HomeRouter: View {
     @ComponentsProvider private var components
     
     var body: some View {

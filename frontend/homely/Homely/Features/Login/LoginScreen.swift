@@ -7,13 +7,15 @@
 
 import SwiftUI
 
-struct LoginScreen: View {
+struct LoginScreen: ScreenProtocol {
+    static var id = ScreenID.login
+    
     @ThemeProvider private var theme
     @ComponentsProvider private var components // Review this
+    @NavigationManagerProvider<LoginRoute> private var navigation
     
     @State private var vm: LoginViewModel
     @FocusState private var focusedField: FocusedField?
-    @State private var navigateToSignUp: Bool = false
     
     init(_ components: ComponentManager) {
         vm = LoginViewModel(with: components)
@@ -34,9 +36,6 @@ struct LoginScreen: View {
                     ErrorBottomSheet(errorMessage: vm.errorMessage)
                 }
                 .onSubmit(focusNextField)
-                .navigationDestination(isPresented: $navigateToSignUp) {
-                    SignUpScreen(components)
-                }
         }
     }
     
@@ -74,7 +73,7 @@ struct LoginScreen: View {
                 action: vm.login
             )
             SignUpRow() {
-                navigateToSignUp = true
+                navigation.navigate(to: .signUp)
             }
             .padding(.top, 2.0)
         }
