@@ -38,8 +38,8 @@ final class LoginViewModel {
     @MainActor
     func login() {
         let loginRequestBody = LoginRequestBody(email: email, password: password)
-//        validations = loginRequestBody.validate()
-//        guard validations?.hasFieldErrors == false else { return }
+        validations = loginRequestBody.validate()
+        guard validations?.hasFieldErrors == false else { return }
         
         isLoading = true
         

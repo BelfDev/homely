@@ -17,9 +17,6 @@ struct LoginRouter: View {
     
     var body: some View {
         NavigationStack(path: $navigation.path) {
-//            SignUpScreen(components)
-            
-            
             LoginScreen(components)
                 .navigationDestination(for: LoginRoute.self) { destination in
                     switch destination {

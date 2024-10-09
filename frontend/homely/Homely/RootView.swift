@@ -19,8 +19,9 @@ struct RootView: View {
                     .transition(.opacity)
             } else {
                 LoginRouter()
+                    .transition(.move(edge: .bottom))
             }
         }
-        .animation(.easeInOut(duration: 0.4), value: isLoggedIn)
+        .animation(.snappy(duration: 0.4), value: isLoggedIn)
     }
 }

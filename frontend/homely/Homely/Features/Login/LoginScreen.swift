@@ -34,7 +34,8 @@ struct LoginScreen: ScreenProtocol {
                 .padding(.top, geometry.size.height * 0.15)
             
             mainContent()
-                .padding(.top, geometry.size.height * 0.30)
+                .frame(height: geometry.size.height * 0.7)
+                .padding(.top, geometry.size.height * 0.3)
                 .sheet(isPresented: $vm.hasGeneralError) {
                     ErrorBottomSheet(errorMessage: vm.errorMessage)
                 }
@@ -63,7 +64,7 @@ struct LoginScreen: ScreenProtocol {
             .focused($focusedField, equals: .password)
             .submitLabel(.done)
             
-            Spacer(minLength: 0)
+            Spacer(minLength: 8)
             
             FilledButton(
                 title: LoginStrings.loginButton,
@@ -83,7 +84,8 @@ struct LoginScreen: ScreenProtocol {
                     topTrailing: 32
                 ),
                 style: .continuous
-            ).foregroundStyle(theme.color.surface)
+            )
+            .foregroundStyle(theme.color.surface)
         )
     }
 }

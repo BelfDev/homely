@@ -70,8 +70,7 @@ final class HomelyAPIClient : HomelyAPIClientProtocol {
      - Throws: An error if the login request fails or if storing the token encounters an error.
      */
     func login(body: LoginRequestBody) async throws -> LoginResponse {
-//        let response: LoginResponse = try await http.post(.login, body: body)
-        let response: LoginResponse = LoginResponse(accessToken: "fake")
+        let response: LoginResponse = try await http.post(.login, body: body)
         
         try tokenProvider.setToken(response.accessToken)
         return response
