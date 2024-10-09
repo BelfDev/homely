@@ -25,13 +25,22 @@ struct SignUpScreen: ScreenProtocol {
                 VStack(alignment: .leading, spacing: 24) {
                     TextInputField(type: .firstName, input: $vm.firstName)
                         .padding(.top, 24)
+                        .focused($focusedField, equals: .firstName)
+                        .submitLabel(.next)
                     TextInputField(type: .lastName, input: $vm.lastName)
+                        .focused($focusedField, equals: .lastName)
+                        .submitLabel(.next)
                     TextInputField(type: .email, input: $vm.email)
+                        .focused($focusedField, equals: .email)
+                        .submitLabel(.next)
                     PasswordInputField(input: $vm.password)
+                        .focused($focusedField, equals: .password)
+                        .submitLabel(.done)
                     Spacer(minLength: 16)
                     FilledButton(title: SignUpStrings.screenTitle, action: vm.signUp)
                         .padding(.bottom, 54)
                 }
+                .onSubmit(focusNextField)
                 .frame(minHeight: geometry.size.height)
                 .padding(.horizontal, 16)
             }
@@ -58,11 +67,15 @@ struct SignUpScreen: ScreenProtocol {
 
 private extension SignUpScreen {
     private enum FocusedField {
-        case email, password
+        case firstName, lastName, email, password
     }
     
     private func focusNextField() {
         switch focusedField {
+        case .firstName:
+            focusedField = .lastName
+        case .lastName:
+            focusedField = .email
         case .email:
             focusedField = .password
         case .password:
