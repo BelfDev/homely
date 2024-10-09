@@ -59,7 +59,7 @@ struct LoginScreen: ScreenProtocol {
             .focused($focusedField, equals: .password)
             .submitLabel(.done)
             
-            Spacer(minLength: 32)
+            Spacer()
             
             FilledButton(
                 title: LoginStrings.loginButton,
@@ -175,7 +175,7 @@ private struct LoginScreenScaffold<Content>: View where Content : View {
             }
         }
         .edgesIgnoringSafeArea(.top)
-    }
+        .ignoresSafeArea(.keyboard)    }
 }
 
 #Preview {

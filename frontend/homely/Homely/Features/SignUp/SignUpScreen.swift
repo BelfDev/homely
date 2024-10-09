@@ -34,7 +34,8 @@ struct SignUpScreen: ScreenProtocol {
         .toolbarTitleDisplayMode(.inlineLarge)
         .padding(.horizontal, 16.0)
         .padding(.top, 32.0)
-        .padding(.bottom, 54.0)
+        .padding(.bottom, 54)
+        .ignoresSafeArea(.keyboard)
     }
 }
 
