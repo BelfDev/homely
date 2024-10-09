@@ -48,6 +48,7 @@ struct LoginScreen: ScreenProtocol {
                 .font(theme.font.h5)
                 .bold()
                 .foregroundColor(theme.color.onSurface)
+                .padding(.top, 24)
             TextInputField(
                 type: .email,
                 input: $vm.email,
@@ -71,15 +72,15 @@ struct LoginScreen: ScreenProtocol {
             SignUpRow() {
                 navigation.navigate(to: .signUp)
             }
-            .padding(.top, -16.0)
+            .padding(.top, -16)
+            .padding(.bottom, 24)
         }
-        .padding(.horizontal, 24.0)
-        .padding(.vertical, 24.0)
+        .padding(.horizontal, 24)
         .background(
             UnevenRoundedRectangle(
                 cornerRadii: .init(
-                    topLeading: 32.0,
-                    topTrailing: 32.0
+                    topLeading: 32,
+                    topTrailing: 32
                 ),
                 style: .continuous
             ).foregroundStyle(theme.color.surface)

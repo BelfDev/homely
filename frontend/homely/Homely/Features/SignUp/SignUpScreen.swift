@@ -24,16 +24,16 @@ struct SignUpScreen: ScreenProtocol {
             ScrollView {
                 VStack(alignment: .leading, spacing: 24) {
                     TextInputField(type: .firstName, input: $vm.firstName)
-                        .padding(.top, 24.0)
+                        .padding(.top, 24)
                     TextInputField(type: .lastName, input: $vm.lastName)
                     TextInputField(type: .email, input: $vm.email)
                     PasswordInputField(input: $vm.password)
                     Spacer(minLength: 16)
                     FilledButton(title: SignUpStrings.screenTitle, action: vm.signUp)
-                        .padding(.bottom, 54.0)
+                        .padding(.bottom, 54)
                 }
                 .frame(minHeight: geometry.size.height)
-                .padding(.horizontal, 16.0)
+                .padding(.horizontal, 16)
             }
             .onTapGesture {
                 hideKeyboard()
