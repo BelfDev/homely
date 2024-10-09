@@ -70,12 +70,15 @@
 		9F73B5A52C5F63E30007CD73 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F73B5A42C5F63E30007CD73 /* Fonts.swift */; };
 		9FA71E692CB14723007C09AB /* FormFieldValidators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA71E682CB14723007C09AB /* FormFieldValidators.swift */; };
 		9FA71E6B2CB14763007C09AB /* FormFieldError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA71E6A2CB14763007C09AB /* FormFieldError.swift */; };
-		9FA71E6D2CB148BB007C09AB /* LoginFormValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA71E6C2CB148BB007C09AB /* LoginFormValidator.swift */; };
+		9FA71E6D2CB148BB007C09AB /* LoginFormValidations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA71E6C2CB148BB007C09AB /* LoginFormValidations.swift */; };
 		9FCC2E112C67FFC100A787C3 /* LoginScreen.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9FCC2E102C67FFC100A787C3 /* LoginScreen.xcstrings */; };
 		9FCC2E132C68043100A787C3 /* LoginStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCC2E122C68043100A787C3 /* LoginStrings.swift */; };
 		9FCC2E152C680D0100A787C3 /* FixedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCC2E142C680D0100A787C3 /* FixedStrings.swift */; };
 		9FCC2E172C68FF8E00A787C3 /* Limelight-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9FCC2E162C68FC3B00A787C3 /* Limelight-Regular.ttf */; };
 		9FCC2E1B2C69011D00A787C3 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCC2E1A2C69011D00A787C3 /* LoginResponse.swift */; };
+		9FEB3C582CB72A6F00822FB2 /* SignUpFormValidations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEB3C572CB72A6F00822FB2 /* SignUpFormValidations.swift */; };
+		9FEB3C5A2CB72B8500822FB2 /* SignUpRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEB3C592CB72B8500822FB2 /* SignUpRequestBody.swift */; };
+		9FEB3C5C2CB7307700822FB2 /* SignUpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEB3C5B2CB7307700822FB2 /* SignUpResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -163,12 +166,15 @@
 		9F73B5A42C5F63E30007CD73 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		9FA71E682CB14723007C09AB /* FormFieldValidators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFieldValidators.swift; sourceTree = "<group>"; };
 		9FA71E6A2CB14763007C09AB /* FormFieldError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFieldError.swift; sourceTree = "<group>"; };
-		9FA71E6C2CB148BB007C09AB /* LoginFormValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormValidator.swift; sourceTree = "<group>"; };
+		9FA71E6C2CB148BB007C09AB /* LoginFormValidations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormValidations.swift; sourceTree = "<group>"; };
 		9FCC2E102C67FFC100A787C3 /* LoginScreen.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = LoginScreen.xcstrings; sourceTree = "<group>"; };
 		9FCC2E122C68043100A787C3 /* LoginStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStrings.swift; sourceTree = "<group>"; };
 		9FCC2E142C680D0100A787C3 /* FixedStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedStrings.swift; sourceTree = "<group>"; };
 		9FCC2E162C68FC3B00A787C3 /* Limelight-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Limelight-Regular.ttf"; sourceTree = "<group>"; };
 		9FCC2E1A2C69011D00A787C3 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
+		9FEB3C572CB72A6F00822FB2 /* SignUpFormValidations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpFormValidations.swift; sourceTree = "<group>"; };
+		9FEB3C592CB72B8500822FB2 /* SignUpRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRequestBody.swift; sourceTree = "<group>"; };
+		9FEB3C5B2CB7307700822FB2 /* SignUpResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,6 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				9FCC2E1A2C69011D00A787C3 /* LoginResponse.swift */,
+				9FEB3C5B2CB7307700822FB2 /* SignUpResponse.swift */,
 			);
 			path = Input;
 			sourceTree = "<group>";
@@ -288,6 +295,7 @@
 			isa = PBXGroup;
 			children = (
 				9F2B42392C9EFA3F00A65225 /* LoginRequestBody.swift */,
+				9FEB3C592CB72B8500822FB2 /* SignUpRequestBody.swift */,
 			);
 			path = Output;
 			sourceTree = "<group>";
@@ -327,6 +335,7 @@
 				9F4E7EA82CB52C3C0062EDBB /* SignUpScreen.swift */,
 				9F4E7EAB2CB52D290062EDBB /* SignUpViewModel.swift */,
 				9F4E7EAF2CB531FC0062EDBB /* SignUpStrings.swift */,
+				9FEB3C572CB72A6F00822FB2 /* SignUpFormValidations.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -438,7 +447,7 @@
 				9F5D8B382C14C725002B98D5 /* LoginScreen.swift */,
 				9FCC2E122C68043100A787C3 /* LoginStrings.swift */,
 				9F2B42492CA0443900A65225 /* LoginViewModel.swift */,
-				9FA71E6C2CB148BB007C09AB /* LoginFormValidator.swift */,
+				9FA71E6C2CB148BB007C09AB /* LoginFormValidations.swift */,
 				9F4E7EB12CB5CA610062EDBB /* LoginRouter.swift */,
 			);
 			path = Login;
@@ -628,6 +637,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FEB3C5C2CB7307700822FB2 /* SignUpResponse.swift in Sources */,
 				9FA71E6B2CB14763007C09AB /* FormFieldError.swift in Sources */,
 				9F4E7EAC2CB52D290062EDBB /* SignUpViewModel.swift in Sources */,
 				9F4E7EA72CB47E7E0062EDBB /* FilledButton.swift in Sources */,
@@ -636,7 +646,7 @@
 				9F2B42432CA032AC00A65225 /* ComponentManager.swift in Sources */,
 				9F2B42412C9F6C9400A65225 /* KeychainError.swift in Sources */,
 				9F5F112D2CA995B400EECC4E /* RootView.swift in Sources */,
-				9FA71E6D2CB148BB007C09AB /* LoginFormValidator.swift in Sources */,
+				9FA71E6D2CB148BB007C09AB /* LoginFormValidations.swift in Sources */,
 				9F5F11292CA989AE00EECC4E /* HomeViewModel.swift in Sources */,
 				9F2B423A2C9EFA3F00A65225 /* LoginRequestBody.swift in Sources */,
 				9F2B42472CA03BF500A65225 /* EnvProviders.swift in Sources */,
@@ -652,9 +662,11 @@
 				9F0A24232C1DAA5F00B5DEB3 /* MainTheme.swift in Sources */,
 				9F4E7EB22CB5CA610062EDBB /* LoginRouter.swift in Sources */,
 				9F2B422E2C9ECEAF00A65225 /* EnvConfig.swift in Sources */,
+				9FEB3C582CB72A6F00822FB2 /* SignUpFormValidations.swift in Sources */,
 				9F0A70E92CA35A4C00792B85 /* ErrorBottomSheet.swift in Sources */,
 				9FCC2E1B2C69011D00A787C3 /* LoginResponse.swift in Sources */,
 				9F2B42322C9EF12300A65225 /* HomelyAPIClient.swift in Sources */,
+				9FEB3C5A2CB72B8500822FB2 /* SignUpRequestBody.swift in Sources */,
 				9F4E7E9F2CB3C8540062EDBB /* TextInputField.swift in Sources */,
 				9F4E7EA52CB476460062EDBB /* TextButton.swift in Sources */,
 				9F2B423D2C9F513300A65225 /* HomelyAPITokenProvider.swift in Sources */,

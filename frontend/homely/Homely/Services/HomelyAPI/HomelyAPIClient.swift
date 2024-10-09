@@ -35,7 +35,7 @@ final class HomelyAPIClient : HomelyAPIClientProtocol {
     // MARK: - API Endpoints
     
     enum Endpoint: EndpointProtocol {
-        case login
+        case login, signUp
         
         /**
          Returns the path for the given API endpoint.
@@ -46,6 +46,8 @@ final class HomelyAPIClient : HomelyAPIClientProtocol {
             switch self {
             case .login:
                 return "/api/v1/users/login"
+            case .signUp:
+                return "/api/v1/users/signup"
             }
         }
         
@@ -71,6 +73,14 @@ final class HomelyAPIClient : HomelyAPIClientProtocol {
      */
     func login(body: LoginRequestBody) async throws -> LoginResponse {
         let response: LoginResponse = try await http.post(.login, body: body)
+        
+        try tokenProvider.setToken(response.accessToken)
+        return response
+    }
+    
+    // TODO(BelfDev): Review this later
+    func signUp(body: SignUpRequestBody) async throws -> SignUpResponse {
+        let response: SignUpResponse = try await http.post(.signUp, body: body)
         
         try tokenProvider.setToken(response.accessToken)
         return response

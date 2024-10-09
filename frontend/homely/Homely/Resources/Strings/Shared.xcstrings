@@ -136,6 +136,24 @@
         }
       }
     },
+    "key:error_invalid_name" : {
+      "comment" : "Error message displayed under a name form field if the value entered is too short or too long.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Names must be between 2 and 64 characters."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nomes devem ter entre 2 e 64 caracteres."
+          }
+        }
+      }
+    },
     "key:error_short_password" : {
       "comment" : "Error message displayed under a password form field if the value entered is too short.",
       "extractionState" : "manual",
