@@ -118,7 +118,6 @@ private struct HomelyAppTitle: View {
 
 private struct BackgroundImage: View {
     
-    
     let height: CGFloat
     
     var body: some View {
@@ -178,7 +177,6 @@ private struct LoginScreenScaffold<Content>: View where Content : View {
             }
         }
         .edgesIgnoringSafeArea(.top)
-        
     }
 }
 

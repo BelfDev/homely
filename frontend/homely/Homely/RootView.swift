@@ -16,11 +16,11 @@ struct RootView: View {
         Group {
             if isLoggedIn {
                 HomeRouter()
+                    .transition(.opacity)
             } else {
                 LoginRouter()
-                    .transition(.push(from: .bottom))
             }
         }
-        .animation(.snappy(), value: isLoggedIn)
+        .animation(.easeInOut(duration: 0.4), value: isLoggedIn)
     }
 }
