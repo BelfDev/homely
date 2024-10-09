@@ -25,7 +25,10 @@ struct LoginScreen: ScreenProtocol {
         LoginScreenScaffold(
             isLoading: vm.isLoading
         ) { geometry in
-            BackgroundImage(height: geometry.size.height * 0.4)
+            BackgroundImage(
+                width: geometry.size.width,
+                height: geometry.size.height * 0.4
+            )
             
             HomelyAppTitle()
                 .padding(.top, geometry.size.height * 0.15)
@@ -117,15 +120,14 @@ private struct HomelyAppTitle: View {
 }
 
 private struct BackgroundImage: View {
-    
+    let width: CGFloat
     let height: CGFloat
     
     var body: some View {
         Image(.background)
             .resizable()
             .scaledToFill()
-            .frame(height: height)
-            .edgesIgnoringSafeArea(.all)
+            .frame(width: width, height: height)
     }
 }
 
@@ -162,7 +164,10 @@ private struct LoginScreenScaffold<Content>: View where Content : View {
                 ZStack(alignment: .top) {
                     content(geometry)
                 }
-                .frame(idealWidth: .infinity, minHeight: geometry.size.height)
+                .frame(
+                    idealWidth: geometry.size.width,
+                    minHeight: geometry.size.height
+                )
             }
             .scrollBounceBehavior(.basedOnSize)
             .background(theme.color.surface)
