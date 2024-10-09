@@ -22,9 +22,11 @@ struct LoginRouter: View {
                     switch destination {
                     case .signUp:
                         SignUpScreen(components)
+                            
                     }
-                }            
+                }
         }
+        .tint(components.theme.color.primary)
         .environment(navigation)
     }
 }

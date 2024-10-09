@@ -25,13 +25,16 @@ struct SignUpScreen: ScreenProtocol {
             TextInputField(type: .lastName, input: $vm.lastName)
             TextInputField(type: .email, input: $vm.email)
             PasswordInputField(input: $vm.password)
-            Spacer(minLength: 32)
+            //            Spacer(minLength: 32)
+            
+            Spacer()
             FilledButton(title: SignUpStrings.screenTitle, action: vm.signUp)
         }
-        .navigationTitle("Sign Up")
-        .padding(.horizontal, 24.0)
-        .padding(.top, 40.0)
-        .padding(.bottom, 32.0)
+        .navigationTitle(SignUpStrings.screenTitle)
+        .toolbarTitleDisplayMode(.inlineLarge)
+        .padding(.horizontal, 16.0)
+        .padding(.top, 32.0)
+        .padding(.bottom, 54.0)
     }
 }
 

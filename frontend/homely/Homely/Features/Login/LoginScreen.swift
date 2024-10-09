@@ -28,10 +28,10 @@ struct LoginScreen: ScreenProtocol {
             BackgroundImage(minHeight: geometry.size.height * 0.4)
             
             HomelyAppTitle()
-                .padding(.top, geometry.size.height * 0.18)
+                .padding(.top, geometry.size.height * 0.15)
             
             mainContent()
-                .padding(.top, geometry.size.height * 0.35)
+                .padding(.top, geometry.size.height * 0.30)
                 .sheet(isPresented: $vm.hasGeneralError) {
                     ErrorBottomSheet(errorMessage: vm.errorMessage)
                 }
@@ -40,16 +40,11 @@ struct LoginScreen: ScreenProtocol {
     }
     
     private func mainContent() -> some View {
-        VStack {
-            Spacer()
-                .frame(maxHeight: 24.0)
-            
+        VStack(spacing: 24) {
             Text(LoginStrings.screenTitle)
                 .font(theme.font.h5)
                 .bold()
                 .foregroundColor(theme.color.onSurface)
-            Spacer()
-                .frame(maxHeight: 32.0)
             TextInputField(
                 type: .email,
                 input: $vm.email,
@@ -57,8 +52,6 @@ struct LoginScreen: ScreenProtocol {
             )
             .focused($focusedField, equals: .email)
             .submitLabel(.next)
-            Spacer()
-                .frame(maxHeight: 24.0)
             PasswordInputField(
                 input: $vm.password,
                 error: vm.validations?.passwordFieldError
@@ -66,7 +59,7 @@ struct LoginScreen: ScreenProtocol {
             .focused($focusedField, equals: .password)
             .submitLabel(.done)
             
-            Spacer(minLength: 16.0)
+            Spacer(minLength: 32)
             
             FilledButton(
                 title: LoginStrings.loginButton,
@@ -75,22 +68,20 @@ struct LoginScreen: ScreenProtocol {
             SignUpRow() {
                 navigation.navigate(to: .signUp)
             }
-            .padding(.top, 2.0)
+            .padding(.top, -16.0)
         }
         .padding(.horizontal, 24.0)
+        .padding(.vertical, 24.0)
         .background(
             UnevenRoundedRectangle(
-                cornerRadii: .init(topLeading: 32.0, topTrailing: 32.0),
+                cornerRadii: .init(
+                    topLeading: 32.0,
+                    topTrailing: 32.0
+                ),
                 style: .continuous
             ).foregroundStyle(theme.color.surface)
         )
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
-}
-
-#Preview {
-    let components = ComponentManager(.development)
-    LoginScreen(components).environment(components)
 }
 
 // MARK: - Focus
@@ -131,10 +122,8 @@ private struct BackgroundImage: View {
     var body: some View {
         Image(.background)
             .resizable()
-            .scaledToFit()
             .aspectRatio(contentMode: .fit)
-            .frame(maxWidth: .infinity, minHeight: minHeight)
-            .edgesIgnoringSafeArea(.all)
+            .frame(height: minHeight, alignment: .topLeading)
     }
 }
 
@@ -173,9 +162,7 @@ private struct LoginScreenScaffold<Content>: View where Content : View {
                 }
                 .frame(maxWidth: .infinity, minHeight: geometry.size.height)
             }
-            .frame(maxHeight: .infinity)
             .scrollBounceBehavior(.basedOnSize)
-            .edgesIgnoringSafeArea(.all)
             .background(theme.color.surface)
             .disabled(isLoading)
             .overlay {
@@ -187,5 +174,13 @@ private struct LoginScreenScaffold<Content>: View where Content : View {
                 hideKeyboard()
             }
         }
+        .edgesIgnoringSafeArea(.top)
     }
+}
+
+#Preview {
+    let components = ComponentManager(.development)
+    LoginScreen(components)
+        .environment(NavigationManager<LoginRoute>())
+        .environment(components)
 }
