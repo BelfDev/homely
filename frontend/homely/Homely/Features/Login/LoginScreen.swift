@@ -25,7 +25,7 @@ struct LoginScreen: ScreenProtocol {
         LoginScreenScaffold(
             isLoading: vm.isLoading
         ) { geometry in
-            BackgroundImage(minHeight: geometry.size.height * 0.4)
+            BackgroundImage(height: geometry.size.height * 0.4)
             
             HomelyAppTitle()
                 .padding(.top, geometry.size.height * 0.15)
@@ -59,7 +59,7 @@ struct LoginScreen: ScreenProtocol {
             .focused($focusedField, equals: .password)
             .submitLabel(.done)
             
-            Spacer()
+            Spacer(minLength: 0)
             
             FilledButton(
                 title: LoginStrings.loginButton,
@@ -117,13 +117,16 @@ private struct HomelyAppTitle: View {
 }
 
 private struct BackgroundImage: View {
-    let minHeight: CGFloat
+    
+    
+    let height: CGFloat
     
     var body: some View {
         Image(.background)
             .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(height: minHeight, alignment: .topLeading)
+            .scaledToFill()
+            .frame(height: height)
+            .edgesIgnoringSafeArea(.all)
     }
 }
 
@@ -160,7 +163,7 @@ private struct LoginScreenScaffold<Content>: View where Content : View {
                 ZStack(alignment: .top) {
                     content(geometry)
                 }
-                .frame(maxWidth: .infinity, minHeight: geometry.size.height)
+                .frame(idealWidth: .infinity, minHeight: geometry.size.height)
             }
             .scrollBounceBehavior(.basedOnSize)
             .background(theme.color.surface)
@@ -175,7 +178,8 @@ private struct LoginScreenScaffold<Content>: View where Content : View {
             }
         }
         .edgesIgnoringSafeArea(.top)
-        .ignoresSafeArea(.keyboard)    }
+        
+    }
 }
 
 #Preview {
