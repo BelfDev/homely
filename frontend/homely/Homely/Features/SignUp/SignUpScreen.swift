@@ -20,22 +20,29 @@ struct SignUpScreen: ScreenProtocol {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 24) {
-            TextInputField(type: .firstName, input: $vm.firstName)
-            TextInputField(type: .lastName, input: $vm.lastName)
-            TextInputField(type: .email, input: $vm.email)
-            PasswordInputField(input: $vm.password)
-            //            Spacer(minLength: 32)
-            
-            Spacer()
-            FilledButton(title: SignUpStrings.screenTitle, action: vm.signUp)
+        GeometryReader { geometry in
+            ScrollView {
+                VStack(alignment: .leading, spacing: 24) {
+                    TextInputField(type: .firstName, input: $vm.firstName)
+                        .padding(.top, 24.0)
+                    TextInputField(type: .lastName, input: $vm.lastName)
+                    TextInputField(type: .email, input: $vm.email)
+                    PasswordInputField(input: $vm.password)
+                    Spacer(minLength: 16)
+                    FilledButton(title: SignUpStrings.screenTitle, action: vm.signUp)
+                        .padding(.bottom, 54.0)
+                }
+                .frame(minHeight: geometry.size.height)
+                .padding(.horizontal, 16.0)
+            }
+            .onTapGesture {
+                hideKeyboard()
+            }
+            .scrollBounceBehavior(.basedOnSize)
+            .background(theme.color.surface)
+            .navigationTitle(SignUpStrings.screenTitle)
+            .toolbarTitleDisplayMode(.inlineLarge)
         }
-        .navigationTitle(SignUpStrings.screenTitle)
-        .toolbarTitleDisplayMode(.inlineLarge)
-        .padding(.horizontal, 16.0)
-        .padding(.top, 32.0)
-        .padding(.bottom, 54)
-        .ignoresSafeArea(.keyboard)
     }
 }
 
