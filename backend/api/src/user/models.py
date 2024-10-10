@@ -22,7 +22,9 @@ class User(db.Model):
     last_name: DBMapped[str] = db_mapped_column(
         DBString(80), unique=False, nullable=False
     )
-    role: DBMapped[str] = db_mapped_column(DBString(80), nullable=False, default="user")
+    role: DBMapped[str] = db_mapped_column(
+        DBString(80), nullable=False, default="user"
+    )
 
     @property
     def password(self):

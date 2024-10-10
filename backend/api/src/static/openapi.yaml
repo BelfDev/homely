@@ -35,16 +35,35 @@ paths:
                 items:
                   $ref: '#/components/schemas/User'
     post:
-      summary: Create a new user
+      summary: Create a new user and log them in
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: '#/components/schemas/UserCreate'
       responses:
         '201':
-          description: User created successfully
+          description: User created successfully and logged in
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  email:
+                    type: string
+                  firstName:
+                    type: string
+                  lastName:
+                    type: string
+                  accessToken:
+                    type: string
+                    description: JWT access token for the new user
+        '400':
+          description: Bad request (e.g., invalid data or email already exists)
   /v1/users/login:
     post:
       summary: Login a user
@@ -62,12 +81,13 @@ paths:
               schema:
                 type: object
                 properties:
-                  access_token:
+                  accessToken:
                     type: string
+                    description: JWT access token for authenticated requests
         '400':
-          description: Invalid request
+          description: Invalid request (e.g., missing or invalid email/password)
         '401':
-          description: Unauthorized
+          description: Unauthorized (incorrect credentials)
   /v1/admin/users:
     get:
       summary: Get all users (admin)
@@ -82,7 +102,7 @@ paths:
                   $ref: '#/components/schemas/User'
   /v1/users/me:
     get:
-      summary: Get current logged in user
+      summary: Get current logged-in user
       responses:
         '200':
           description: Current user details
@@ -104,6 +124,17 @@ components:
           type: string
         lastName:
           type: string
+    UserCreate:
+      type: object
+      properties:
+        email:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        password:
+          type: string
     Login:
       type: object
       properties:
@@ -111,3 +142,4 @@ components:
           type: string
         password:
           type: string
+          

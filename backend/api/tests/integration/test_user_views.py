@@ -16,12 +16,13 @@ def test_register_user_success(client, app):
     # Check if user is not in the database
     assert db_get_user_by_email(app, valid_email) is None
 
-    # Given valid user data, when registering a new user, then the user is created
+    # Given valid user data, when registering a new user, then the user is created and logged in
     response = client_create_user(client, valid_email, "test123", "Test", "User")
     assert response.status_code == 201
     data = response.get_json()
     assert data["email"] == valid_email
     assert "id" in data
+    assert "accessToken" in data
 
     # Check if user is in the database
     user = db_get_user_by_email(app, valid_email)
@@ -56,6 +57,29 @@ def test_register_user_invalid_email(client):
     # Given invalid email, when registering a new user, then an error is returned
     response = client_create_user(client, "not-an-email", "test123", "Test", "User")
     assert response.status_code == 400
+
+
+def test_token_valid_after_registration(client, app):
+    valid_email = "test@test.com"
+    
+    # Register the user
+    response = client_create_user(client, valid_email, "password123", "Test", "User")
+    assert response.status_code == 201
+    data = response.get_json()
+    assert "accessToken" in data
+
+    # Use the access token to access a protected endpoint
+    token = data["accessToken"]
+    headers = {"Authorization": f"Bearer {token}"}
+    
+    protected_response = client.get(current_user_route, headers=headers)
+    
+    # Assert that the access token is valid and allows access
+    assert protected_response.status_code == 200
+    protected_data = protected_response.get_json()
+    assert protected_data["email"] == valid_email
+    assert protected_data["firstName"] == "Test"
+    assert protected_data["lastName"] == "User"
 
 
 def test_login_success(client, db):
