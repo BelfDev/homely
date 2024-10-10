@@ -33,3 +33,12 @@ struct SessionManagerProvider: DynamicProperty {
         components.session
     }
 }
+
+@propertyWrapper
+struct NavigationManagerProvider<T: Route>: DynamicProperty {
+    @Environment(NavigationManager<T>.self) private var navigation
+    
+    var wrappedValue: NavigationManager<T> {
+        navigation
+    }
+}

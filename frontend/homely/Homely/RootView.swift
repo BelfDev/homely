@@ -15,12 +15,13 @@ struct RootView: View {
         
         Group {
             if isLoggedIn {
-                HomeNavStack()
+                HomeRouter()
+                    .transition(.opacity)
             } else {
-                LoginScreen(components)
-                    .transition(.push(from: .bottom))
+                LoginRouter()
+                    .transition(.move(edge: .bottom))
             }
         }
-        .animation(.snappy(), value: isLoggedIn)
+        .animation(.snappy(duration: 0.4), value: isLoggedIn)
     }
 }

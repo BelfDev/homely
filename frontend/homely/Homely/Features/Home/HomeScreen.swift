@@ -7,8 +7,11 @@
 
 import SwiftUI
 
-struct HomeScreen: View {
+struct HomeScreen: ScreenProtocol {
+    static var id = ScreenID.home
+    
     @ThemeProvider private var theme
+    
     @State private var vm: HomeViewModel
     
     init(_ components: ComponentManager) {

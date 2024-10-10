@@ -39,9 +39,14 @@ def register_user():
     new_user.password = data["password"]
     db.session.add(new_user)
     db.session.commit()
+    # Create access token
+    access_token = create_access_token(
+        identity={"id": str(new_user.id), "role": new_user.role}
+    )
 
     # Return new user
     result = user_schema.dump(new_user)
+    result["accessToken"] = access_token
     return jsonify(result), 201
 
 
@@ -69,7 +74,7 @@ def login():
         return jsonify({"msg": "Bad email or password"}), 401
 
     access_token = create_access_token(identity={"id": str(user.id), "role": user.role})
-    return jsonify(access_token=access_token), 200
+    return jsonify(accessToken=access_token), 200
 
 
 @bp.route("/v1/admin/users", methods=("GET",))

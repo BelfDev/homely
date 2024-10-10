@@ -28,13 +28,15 @@ services:
   autoDeploy: false
   rootDir: backend/api
 
+# Exported from Render on 2024-10-10T07:55:33Z
 databases:
-- name: homely-db
-  databaseName: homely_e0bt
-  user: homely_e0bt_user
-  plan: starter
-  region: frankfurt
-  ipAllowList:
-  - source: 0.0.0.0/0
-    description: everywhere
-  postgresMajorVersion: "16"
+  - name: homely-db
+    databaseName: homely_e0bt
+    user: homely_e0bt_user
+    plan: basic-256mb
+    region: frankfurt
+    ipAllowList:
+    - source: 0.0.0.0/0
+      description: everywhere
+    postgresMajorVersion: "16"
+    diskSizeGB: 1

@@ -30,6 +30,8 @@ protocol TypographyThemeProtocol {
     var body2: Font { get }
     /// Bold | 18
     var button: Font { get }
+    /// Bold | 16
+    var button2: Font { get }
     /// Regular | 12
     var caption: Font { get }
     /// Regular | 10

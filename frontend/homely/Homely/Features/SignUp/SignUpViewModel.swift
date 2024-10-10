@@ -1,14 +1,14 @@
 //
-//  LoginViewModel.swift
+//  SignUpViewModel.swift
 //  Homely
 //
-//  Created by Pedro Belfort on 22.09.24.
+//  Created by Pedro Belfort on 08.10.24.
 //
 
-import Observation
+import Foundation
 
 @Observable
-final class LoginViewModel {
+final class SignUpViewModel {
     private let homelyClient: HomelyAPIClient
     
     private(set) var isLoading: Bool = false
@@ -27,17 +27,23 @@ final class LoginViewModel {
         }
     }
     
+    var firstName: String = ""
+    var lastName: String = ""
     var email: String = ""
     var password: String = ""
-    var validations: LoginFormValidations?
+    
+    var validations: SignUpFormValidations?
     
     init(with components: ComponentManager) {
         self.homelyClient = components.homelyClient
     }
     
+    // TODO(BelfDev): Review this later
     @MainActor
-    func login() {
-        let body = LoginRequestBody(
+    func signUp() {
+        let body = SignUpRequestBody(
+            firstName: firstName,
+            lastName: lastName,
             email: email,
             password: password
         )
@@ -49,7 +55,7 @@ final class LoginViewModel {
         Task {
             defer { isLoading = false }
             do {
-                _ = try await homelyClient.login(body: body)
+                _ = try await homelyClient.signUp(body: body)
             } catch let error as APIError {
                 errorMessage = error.errorMessage
             } catch {

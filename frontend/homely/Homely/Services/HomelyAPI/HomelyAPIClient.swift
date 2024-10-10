@@ -35,7 +35,7 @@ final class HomelyAPIClient : HomelyAPIClientProtocol {
     // MARK: - API Endpoints
     
     enum Endpoint: EndpointProtocol {
-        case login
+        case login, signUp
         
         /**
          Returns the path for the given API endpoint.
@@ -46,6 +46,8 @@ final class HomelyAPIClient : HomelyAPIClientProtocol {
             switch self {
             case .login:
                 return "/api/v1/users/login"
+            case .signUp:
+                return "/api/v1/users"
             }
         }
         
@@ -71,6 +73,24 @@ final class HomelyAPIClient : HomelyAPIClientProtocol {
      */
     func login(body: LoginRequestBody) async throws -> LoginResponse {
         let response: LoginResponse = try await http.post(.login, body: body)
+        
+        try tokenProvider.setToken(response.accessToken)
+        return response
+    }
+    
+    /**
+     Creates a new user and logs them in by sending their details to the server.
+
+     - Parameter body: A `SignUpRequestBody` containing the user's sign-up details such as email, password, first name, and last name.
+     - Returns: A `SignUpResponse` object containing the newly created user's details and access token.
+     - Throws: An error if the login request fails or if storing the token encounters an error.
+     
+     - Important:
+        - The method automatically logs in the user after registration by storing the returned access token using the `TokenProviderProtocol`. This token is used for subsequent authenticated API requests.
+     */
+    func signUp(body: SignUpRequestBody) async throws -> SignUpResponse {
+        let response: SignUpResponse = try await http.post(.signUp, body: body)
+        
         try tokenProvider.setToken(response.accessToken)
         return response
     }

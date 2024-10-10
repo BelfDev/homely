@@ -12,7 +12,11 @@ struct HomelyApp: App {
     @State private var components: ComponentManager
     
     init() {
-        self.components = ComponentManager(.development)
+        var mode: EnvConfig = .production
+//        #if DEBUG
+//        mode = .development
+//        #endif
+        self.components = ComponentManager(mode)
     }
     
     var body: some Scene {

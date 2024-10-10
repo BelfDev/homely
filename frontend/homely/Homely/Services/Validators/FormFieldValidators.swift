@@ -33,6 +33,9 @@ struct FormFieldValidators {
     private static let emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
     private static let emailRegex = try? NSRegularExpression(pattern: emailPattern, options: .caseInsensitive)
     private static let minPasswordLength = 6
+    private static let namePattern = "[A-Za-z0-9\\p{Greek}\\-\\s]{2,64}"
+    private static let nameRegex = try? NSRegularExpression(pattern: namePattern)
+    
     
     // MARK: - Methods
     
@@ -67,6 +70,26 @@ struct FormFieldValidators {
         
         if password.count < minPasswordLength {
             return .invalidPassword(minCount: minPasswordLength)
+        }
+        
+        return nil
+    }
+    
+    /// Validates a first or last name field.
+    ///
+    /// - Parameter fieldValue: The first or last name to validate.
+    /// - Returns: A `FormFieldError` if validation fails, otherwise `nil`.
+    static func validateName(_ fieldValue: String?) -> FormFieldError? {
+        guard let name = fieldValue, !name.isEmpty else {
+            return .empty
+        }
+        guard let nameRegex = nameRegex else {
+            return .invalidName
+        }
+        
+        let range = NSRange(location: 0, length: name.utf16.count)
+        if nameRegex.firstMatch(in: name, options: [], range: range) == nil {
+            return .invalidName
         }
         
         return nil

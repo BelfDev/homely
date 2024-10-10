@@ -1,0 +1,42 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "key:sign_up_button" : {
+      "comment" : "Text displayed in a text button that allows users to create a new account.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Create New Account"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Criar Nova Conta"
+          }
+        }
+      }
+    },
+    "key:sign_up_screen_title" : {
+      "comment" : "Text displayed on top of the Sign Up navigation bar to clarify this screen's purpose.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign Up"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cadastro"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

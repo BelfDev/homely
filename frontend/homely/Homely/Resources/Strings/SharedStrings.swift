@@ -30,4 +30,14 @@ extension SharedStrings {
         let format = String(localized: "key:error_short_password", table: table)
         return String.localizedStringWithFormat(format, minCount)
     }
+    static let errorInvalidName = String(localized: "key:error_invalid_name", table: table)
+}
+
+// MARK: - Input Fields
+
+extension SharedStrings {
+    static let emailInputLabel = String(localized: "key:email_input_label", table: table)
+    static let passwordInputLabel = String(localized: "key:password_input_label", table: table)
+    static let firstNameInputLabel = String(localized: "key:first_name_input_label", table: table)
+    static let lastNameInputLabel = String(localized: "key:last_name_input_label", table: table)
 }

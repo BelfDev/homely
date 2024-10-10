@@ -4,6 +4,30 @@
     "Key" : {
       "extractionState" : "manual"
     },
+    "key:email_input_label" : {
+      "comment" : "Text displayed on top of an input field that expects a email value.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email"
+          }
+        }
+      }
+    },
     "key:error_bottom_sheet_button" : {
       "comment" : "Text displayed at the bottom part of the Error Bottom Sheet view. Typically closes the bottom sheet.",
       "extractionState" : "manual",
@@ -48,6 +72,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Please enter a value for this field."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Por favor preencha esse campo."
           }
         }
       }
@@ -97,6 +127,30 @@
             "state" : "translated",
             "value" : "Please enter a valid email address."
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Por favor insira um email válido. "
+          }
+        }
+      }
+    },
+    "key:error_invalid_name" : {
+      "comment" : "Error message displayed under a name form field if the value entered is too short or too long.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Names must be between 2 and 64 non-special characters."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nomes devem ter entre 2 e 64 caracteres não especiais."
+          }
         }
       }
     },
@@ -108,6 +162,72 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Password must be at least %d characters."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sua senha deve ter pelo menos %d caracteres."
+          }
+        }
+      }
+    },
+    "key:first_name_input_label" : {
+      "comment" : "Text displayed on top of an input field that expects the user's first name.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "First Name"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nome"
+          }
+        }
+      }
+    },
+    "key:last_name_input_label" : {
+      "comment" : "Text displayed on top of an input field that expects the user's last name.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Last Name"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sobrenome"
+          }
+        }
+      }
+    },
+    "key:password_input_label" : {
+      "comment" : "Text displayed on top of an input field that expects a password value.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Κωδικός"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Senha"
           }
         }
       }

@@ -20,6 +20,7 @@ struct MainTypographyTheme: TypographyThemeProtocol {
     var body1: Font { return .custom(Fonts.hankenGroteskLight, size: 16.0) }
     var body2: Font { return .custom(Fonts.hankenGroteskLight, size: 14.0, relativeTo: .body) }
     var button: Font { return .custom(Fonts.hankenGroteskBold, size: 18.0) }
+    var button2: Font { return .custom(Fonts.hankenGroteskSemiBold, size: 16.0) }
     var caption: Font { return .custom(Fonts.hankenGroteskRegular, size: 12.0, relativeTo: .caption) }
     var overline: Font { return .custom(Fonts.hankenGroteskRegular, size: 10.0, relativeTo: .caption2) }
 }

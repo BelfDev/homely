@@ -15,6 +15,7 @@ class UserSchema(WireSchema):
     )
     first_name = fields.String(required=True, validate=validate.Length(min=1, max=80))
     last_name = fields.String(required=True, validate=validate.Length(min=1, max=80))
+    role = fields.String(dump_only=True, validate=validate.Length(min=1, max=80))
 
 
 class LoginSchema(WireSchema):
