@@ -33,7 +33,7 @@ struct FormFieldValidators {
     private static let emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
     private static let emailRegex = try? NSRegularExpression(pattern: emailPattern, options: .caseInsensitive)
     private static let minPasswordLength = 6
-    private static let namePattern = "^[A-Za-z]{1,64}$"
+    private static let namePattern = "[A-Za-z0-9\\p{Greek}\\-\\s]{2,64}"
     private static let nameRegex = try? NSRegularExpression(pattern: namePattern)
     
     

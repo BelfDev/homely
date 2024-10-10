@@ -47,7 +47,7 @@ final class HomelyAPIClient : HomelyAPIClientProtocol {
             case .login:
                 return "/api/v1/users/login"
             case .signUp:
-                return "/api/v1/users/signup"
+                return "/api/v1/users"
             }
         }
         

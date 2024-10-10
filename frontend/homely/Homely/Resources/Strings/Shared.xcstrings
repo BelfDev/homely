@@ -143,13 +143,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Names must be between 2 and 64 characters."
+            "value" : "Names must be between 2 and 64 non-special characters."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nomes devem ter entre 2 e 64 caracteres."
+            "value" : "Nomes devem ter entre 2 e 64 caracteres não especiais."
           }
         }
       }
