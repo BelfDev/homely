@@ -28,9 +28,33 @@ def test_register_user_success(client, app):
     user = db_get_user_by_email(app, valid_email)
     assert user is not None
     assert user.email == valid_email
+    assert user.role == "user"
+
+    assert data["role"] == "user"
 
 
-def test_register_user_existing_email(client, app):
+def test_register_user_cannot_set_admin_role(client, app):
+    valid_email = "admin_attempt@test.com"
+
+    # Attempt to create a user with admin role
+    response = client_create_user(client, valid_email, "test123", "Test", "Admin")
+
+    # The request should succeed, but the role should be ignored
+    assert response.status_code == 201
+    data = response.get_json()
+    assert data["email"] == valid_email
+
+    # Check if user is in the database with correct role
+    user = db_get_user_by_email(app, valid_email)
+    assert user is not None
+    assert user.email == valid_email
+    assert user.role == "user"  # Role should still be "user"
+
+    # Optional: Check the role in the response data
+    assert data["role"] == "user"
+
+
+def test_register_user_existing_email(client):
     valid_email = "test@test.com"
 
     # Create a user
@@ -93,7 +117,7 @@ def test_login_success(client, db):
     response = client_login_user(client, "test@test.com", "test123")
     assert response.status_code == 200
     data = response.get_json()
-    assert "access_token" in data
+    assert "accessToken" in data
 
 
 def test_login_missing_json(client):
@@ -171,7 +195,7 @@ def test_get_all_users(client, db):
 
     login_response = client_login_user(client, "admin@test.com", "admin123")
     assert login_response.status_code == 200
-    access_token = login_response.get_json()["access_token"]
+    access_token = login_response.get_json()["accessToken"]
 
     headers = {"Authorization": f"Bearer {access_token}"}
 
@@ -197,7 +221,7 @@ def test_non_admin_access(client, db):
     # Login as non-admin
     login_response = client_login_user(client, "user@test.com", "user123")
     assert login_response.status_code == 200
-    access_token = login_response.get_json()["access_token"]
+    access_token = login_response.get_json()["accessToken"]
 
     headers = {"Authorization": f"Bearer {access_token}"}
 
@@ -228,7 +252,7 @@ def test_get_current_user(client, db):
     # Login to get access token
     login_response = client_login_user(client, "test@test.com", "test123")
     assert login_response.status_code == 200
-    access_token = login_response.get_json()["access_token"]
+    access_token = login_response.get_json()["accessToken"]
 
     headers = {"Authorization": f"Bearer {access_token}"}
 

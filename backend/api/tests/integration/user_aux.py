@@ -19,6 +19,19 @@ def client_create_user(client, email, password, first_name, last_name):
     )
 
 
+def client_create_admin_user(client, email, password, first_name, last_name):
+    return client.post(
+        register_route,
+        json={
+            "email": email,
+            "password": password,
+            "firstName": first_name,
+            "lastName": last_name,
+            "role": "admin",
+        },
+    )
+
+
 def client_login_user(client, email, password):
     return client.post(login_route, json={"email": email, "password": password})
 

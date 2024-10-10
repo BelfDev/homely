@@ -39,12 +39,12 @@ def register_user():
     new_user.password = data["password"]
     db.session.add(new_user)
     db.session.commit()
+    # Create access token
+    access_token = create_access_token(identity={"id": str(new_user.id), "role": new_user.role})
 
     # Return new user
     result = user_schema.dump(new_user)
-    # Create access token
-    result["accessToken"] = create_access_token(identity={"id": str(result.id), "role": result.role})
-    # Return new user
+    result["accessToken"] = access_token
     return jsonify(result), 201
 
 
