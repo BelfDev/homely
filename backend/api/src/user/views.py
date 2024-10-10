@@ -40,7 +40,9 @@ def register_user():
     db.session.add(new_user)
     db.session.commit()
     # Create access token
-    access_token = create_access_token(identity={"id": str(new_user.id), "role": new_user.role})
+    access_token = create_access_token(
+        identity={"id": str(new_user.id), "role": new_user.role}
+    )
 
     # Return new user
     result = user_schema.dump(new_user)

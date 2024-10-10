@@ -85,7 +85,7 @@ def test_register_user_invalid_email(client):
 
 def test_token_valid_after_registration(client, app):
     valid_email = "test@test.com"
-    
+
     # Register the user
     response = client_create_user(client, valid_email, "password123", "Test", "User")
     assert response.status_code == 201
@@ -95,9 +95,9 @@ def test_token_valid_after_registration(client, app):
     # Use the access token to access a protected endpoint
     token = data["accessToken"]
     headers = {"Authorization": f"Bearer {token}"}
-    
+
     protected_response = client.get(current_user_route, headers=headers)
-    
+
     # Assert that the access token is valid and allows access
     assert protected_response.status_code == 200
     protected_data = protected_response.get_json()
