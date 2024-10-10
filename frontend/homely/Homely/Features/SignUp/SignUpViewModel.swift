@@ -41,11 +41,13 @@ final class SignUpViewModel {
     // TODO(BelfDev): Review this later
     @MainActor
     func signUp() {
-        let signUpRequestBody = SignUpRequestBody(firstName: firstName,
-                                                  lastName: lastName,
-                                                  email: email,
-                                                  password: password)
-        validations = signUpRequestBody.validate()
+        let body = SignUpRequestBody(
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: password
+        )
+        validations = body.validate()
         guard validations?.hasFieldErrors == false else { return }
         
         isLoading = true
@@ -53,7 +55,7 @@ final class SignUpViewModel {
         Task {
             defer { isLoading = false }
             do {
-                _ = try await homelyClient.signUp(body: signUpRequestBody)
+                _ = try await homelyClient.signUp(body: body)
             } catch let error as APIError {
                 errorMessage = error.errorMessage
             } catch {

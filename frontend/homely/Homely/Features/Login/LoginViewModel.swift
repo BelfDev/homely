@@ -37,8 +37,11 @@ final class LoginViewModel {
     
     @MainActor
     func login() {
-        let loginRequestBody = LoginRequestBody(email: email, password: password)
-        validations = loginRequestBody.validate()
+        let body = LoginRequestBody(
+            email: email,
+            password: password
+        )
+        validations = body.validate()
         guard validations?.hasFieldErrors == false else { return }
         
         isLoading = true
@@ -46,7 +49,7 @@ final class LoginViewModel {
         Task {
             defer { isLoading = false }
             do {
-                _ = try await homelyClient.login(body: loginRequestBody)
+                _ = try await homelyClient.login(body: body)
             } catch let error as APIError {
                 errorMessage = error.errorMessage
             } catch {

@@ -8,9 +8,10 @@
 import Foundation
 
 struct SignUpResponse: Codable {
-    let accessToken: String
     
-    enum CodingKeys: String, CodingKey {
-        case accessToken = "access_token"
-    }
+    let id: String
+    let email: String
+    let firstName: String
+    let lastName: String
+    let accessToken: String
 }
