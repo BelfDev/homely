@@ -44,6 +44,7 @@ class HTTPService<E: EndpointProtocol> : HTTPServiceProtocol {
     private static func createSession() -> URLSession {
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 30.0
+        config.timeoutIntervalForResource = 30.0
         return URLSession(configuration: config)
     }
     
@@ -254,6 +255,22 @@ private extension HTTPService {
             throw APIError.unexpectedStatusCode(httpResponse.statusCode)
         }
     }
+    
+    func validateNilResponseError(error: Error? = nil, endpoint: E? = nil) throws -> HTTPURLResponse {
+        if let error = error as? URLError {
+               switch error.code {
+               case .timedOut:
+                   logError("Request timed out.", endpoint: endpoint)
+                   throw APIError.timeout
+               case .cannotFindHost, .cannotConnectToHost, .networkConnectionLost:
+                   logError("Network error: \(error.localizedDescription)", endpoint: endpoint)
+                   throw APIError.networkError(error)
+               default:
+                   logError("Unexpected network error: \(error.localizedDescription)", endpoint: endpoint)
+                   throw APIError.networkError(error)
+               }
+           }
+    }
 }
 
 // MARK: - Expired Token Extension
@@ -371,6 +388,8 @@ private extension HTTPService {
             return [502, 503, 504].contains(statusCode)  // Retry on specific server errors
         case .timeout:
             return true  // Retry on timeout
+        case .urlError(let nsError) where nsError.code == NSURLErrorTimedOut:
+                return true
         default:
             return false
         }
