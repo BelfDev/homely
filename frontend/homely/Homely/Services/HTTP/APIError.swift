@@ -44,12 +44,8 @@ extension APIError {
             return SharedStrings.errorInvalidCredentials
         case .timeout:
             return SharedStrings.errorRequestTimeout
-        case .clientError(let code):
-            return SharedStrings.errorClientError(code)
-        case .serverError(let code):
-            return SharedStrings.errorServerError(code)
         case .networkError(let error):
-            return error.localizedDescription // Returning the localized description of the network error
+            return error.localizedDescription
         default:
             return SharedStrings.errorGeneric
         }

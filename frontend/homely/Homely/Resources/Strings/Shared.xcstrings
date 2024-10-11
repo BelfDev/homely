@@ -89,13 +89,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The operation failed. Please try again."
+            "value" : "Something went wrong. Please try again later."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "A operação falhou. Por favor, tente novamente."
+            "value" : "Algo imprevisto aconteceu. Por favor tente novamente."
           }
         }
       }
@@ -107,13 +107,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Invalid credentials. Please try again with a new email and password."
+            "value" : "Invalid credentials. Please check your email and password."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Credencial inválido. Por favor novamente com uma combinação de email e senha válida."
+            "value" : "Credencial inválido. Por favor confira se inseriu corretamente o seu email e senha."
           }
         }
       }
@@ -150,6 +150,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nomes devem ter entre 2 e 64 caracteres não especiais."
+          }
+        }
+      }
+    },
+    "key:error_request_timeout" : {
+      "comment" : "Error message displayed anywhere warning users that the request timed out.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The request timed out. Please try again."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O tempo para completar essa operação expirou. Tente novamente em instantes."
           }
         }
       }

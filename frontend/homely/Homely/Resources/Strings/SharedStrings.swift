@@ -31,6 +31,7 @@ extension SharedStrings {
         return String.localizedStringWithFormat(format, minCount)
     }
     static let errorInvalidName = String(localized: "key:error_invalid_name", table: table)
+    static let errorRequestTimeout = String(localized: "key:error_request_timeout", table: table)
 }
 
 // MARK: - Input Fields

@@ -33,7 +33,7 @@ class HTTPService<E: EndpointProtocol> : HTTPServiceProtocol {
     private var tokenRefreshTask: Task<String, Error>? = nil
     private let taskQueue = DispatchQueue(label: "com.homely.httpServiceTaskQueue")
     
-    init(environment: EnvConfig, tokenProvider: TokenProviderProtocol, maxRetryCount: Int = 3, retryDelay: TimeInterval = 2.0) {
+    init(environment: EnvConfig, tokenProvider: TokenProviderProtocol, maxRetryCount: Int = 4, retryDelay: TimeInterval = 3.0) {
         self.environment = environment
         self.session = HTTPService.createSession()
         self.tokenProvider = tokenProvider
@@ -188,15 +188,18 @@ private extension HTTPService {
             let (data, response) = try await session.data(for: request)
             
             _ = try validateResponse(response, endpoint: endpoint)
+            logInfo("Request succeeded!")
             return try decodeResponse(data)
-        } catch let error as APIError {
+        } catch let error as URLError {
+            throw parseURLError(error, for: endpoint)
+        } catch {
+            logError("Unexpected error: \(error.localizedDescription)", endpoint: endpoint)
+            throw error
             // Attempt to refresh token and retry the original request
             // TODO(BelfDev): Fix token refresh concurrency
             
             //            let retryRequest = try createRequest(endpoint: endpoint, method: method, body: body)
             //            return try await handleTokenExpiration(error: error, originalRequest: retryRequest, endpoint: endpoint, body: body)
-            
-            throw error
         }
     }
     
@@ -256,20 +259,27 @@ private extension HTTPService {
         }
     }
     
-    func validateNilResponseError(error: Error? = nil, endpoint: E? = nil) throws -> HTTPURLResponse {
-        if let error = error as? URLError {
-               switch error.code {
-               case .timedOut:
-                   logError("Request timed out.", endpoint: endpoint)
-                   throw APIError.timeout
-               case .cannotFindHost, .cannotConnectToHost, .networkConnectionLost:
-                   logError("Network error: \(error.localizedDescription)", endpoint: endpoint)
-                   throw APIError.networkError(error)
-               default:
-                   logError("Unexpected network error: \(error.localizedDescription)", endpoint: endpoint)
-                   throw APIError.networkError(error)
-               }
-           }
+    /**
+     Parses the given `URLError` into the corresponding `APIError`.
+     
+     - Parameters:
+     - error: The `URLError` to parse.
+     - endpoint: The optional `EndpointProtocol` associated with the error.
+     
+     - Returns: The corresponding `APIError` based on the `URLError` code.
+     */
+    func parseURLError(_ error: URLError, for endpoint: E? = nil) -> APIError {
+        switch error.code {
+        case .timedOut:
+            logError("Request timed out.", endpoint: endpoint)
+            return APIError.timeout
+        case .cannotFindHost, .cannotConnectToHost, .networkConnectionLost:
+            logError("Network error: \(error.localizedDescription)", endpoint: endpoint)
+            return APIError.networkError(error)
+        default:
+            logError("Unexpected network error: \(error.localizedDescription)", endpoint: endpoint)
+            return APIError.networkError(error)
+        }
     }
 }
 
@@ -366,32 +376,19 @@ private extension HTTPService {
         
         while true {
             do {
-                print("Executing request")
+                logInfo("Executing request...")
+                
                 return try await executeRequest(endpoint, method: method, body: body)
             } catch let error as APIError {
-                print("REQUEST FAILED")
-                if shouldRetry(error: error), currentRetryCount < maxRetryCount {
-                    currentRetryCount += 1
-                    logInfo("Retrying request (\(currentRetryCount)) due to error: \(error)")
-                    let backoffDelay = retryDelay * pow(2, Double(currentRetryCount)) // Exponential backoff
-                    try await Task.sleep(nanoseconds: UInt64(backoffDelay * Double(NSEC_PER_SEC))) // Delay before retry
-                } else {
-                    throw error
-                }
+                logInfo("Request failed.")
+                
+                guard error.isRetryable, currentRetryCount < maxRetryCount  else { throw error }
+                currentRetryCount += 1
+                logInfo("Start retrying request (\(currentRetryCount)) due to error: \(error).")
+                let backoffDelay = retryDelay * pow(2, Double(currentRetryCount)) // Exponential backoff
+                logInfo("Delay until next request: \(backoffDelay) seconds.")
+                try await Task.sleep(nanoseconds: UInt64(backoffDelay * Double(NSEC_PER_SEC))) // Delay before retry
             }
-        }
-    }
-    
-    func shouldRetry(error: APIError) -> Bool {
-        switch error {
-        case .serverError(let statusCode):
-            return [502, 503, 504].contains(statusCode)  // Retry on specific server errors
-        case .timeout:
-            return true  // Retry on timeout
-        case .urlError(let nsError) where nsError.code == NSURLErrorTimedOut:
-                return true
-        default:
-            return false
         }
     }
 }
