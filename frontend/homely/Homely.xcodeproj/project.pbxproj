@@ -40,6 +40,7 @@
 		9F5579E72CBAE282005C9AAE /* HTTPRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5579E62CBAE282005C9AAE /* HTTPRequestManager.swift */; };
 		9F5579E92CBAE29E005C9AAE /* EndpointProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5579E82CBAE29E005C9AAE /* EndpointProtocol.swift */; };
 		9F5579EB2CBAF67A005C9AAE /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5579EA2CBAF67A005C9AAE /* Debouncer.swift */; };
+		9F5579ED2CBB080D005C9AAE /* LocalStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5579EC2CBB080D005C9AAE /* LocalStoreManager.swift */; };
 		9F5D8B392C14C725002B98D5 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5D8B382C14C725002B98D5 /* LoginScreen.swift */; };
 		9F5F11252CA9899600EECC4E /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F11242CA9899600EECC4E /* HomeRouter.swift */; };
 		9F5F11272CA9899D00EECC4E /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F11262CA9899D00EECC4E /* HomeScreen.swift */; };
@@ -136,6 +137,7 @@
 		9F5579E62CBAE282005C9AAE /* HTTPRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRequestManager.swift; sourceTree = "<group>"; };
 		9F5579E82CBAE29E005C9AAE /* EndpointProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointProtocol.swift; sourceTree = "<group>"; };
 		9F5579EA2CBAF67A005C9AAE /* Debouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
+		9F5579EC2CBB080D005C9AAE /* LocalStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStoreManager.swift; sourceTree = "<group>"; };
 		9F5D8B382C14C725002B98D5 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		9F5F11242CA9899600EECC4E /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
 		9F5F11262CA9899D00EECC4E /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 				9F2B422D2C9ECEAF00A65225 /* EnvConfig.swift */,
 				9F2B42462CA03BF500A65225 /* EnvProviders.swift */,
 				9F0A24202C1DA62600B5DEB3 /* ThemeManager.swift */,
+				9F5579EC2CBB080D005C9AAE /* LocalStoreManager.swift */,
 				9F5F112A2CA98B2A00EECC4E /* SessionManager.swift */,
 				9F2B42422CA032AC00A65225 /* ComponentManager.swift */,
 				9F4E7EBF2CB5D1250062EDBB /* NavigationManager.swift */,
@@ -675,6 +678,7 @@
 				9F2B422E2C9ECEAF00A65225 /* EnvConfig.swift in Sources */,
 				9FEB3C582CB72A6F00822FB2 /* SignUpFormValidations.swift in Sources */,
 				9F0A70E92CA35A4C00792B85 /* ErrorBottomSheet.swift in Sources */,
+				9F5579ED2CBB080D005C9AAE /* LocalStoreManager.swift in Sources */,
 				9FCC2E1B2C69011D00A787C3 /* LoginResponse.swift in Sources */,
 				9F2B42322C9EF12300A65225 /* HomelyAPIClient.swift in Sources */,
 				9FEB3C5A2CB72B8500822FB2 /* SignUpRequestBody.swift in Sources */,

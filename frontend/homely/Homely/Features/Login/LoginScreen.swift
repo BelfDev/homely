@@ -19,6 +19,7 @@ struct LoginScreen: ScreenProtocol {
     
     init(_ components: ComponentManager) {
         vm = LoginViewModel(with: components)
+        vm.autofillCredentialsIfPossible()
     }
     
     var body: some View {

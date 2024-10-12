@@ -10,6 +10,7 @@ import Observation
 @Observable
 final class LoginViewModel {
     private let homelyClient: HomelyAPIClient
+    private let localStore: LocalStoreManager
     
     private(set) var isLoading: Bool = false
     private(set) var errorMessage = "" {
@@ -33,6 +34,7 @@ final class LoginViewModel {
     
     init(with components: ComponentManager) {
         self.homelyClient = components.homelyClient
+        self.localStore = LocalStoreManager()
     }
     
     @MainActor
@@ -50,11 +52,28 @@ final class LoginViewModel {
             defer { isLoading = false }
             do {
                 _ = try await homelyClient.login(body: body)
+                if await localStore.saveCredentials(
+                    email: email,
+                    password: password
+                ) {
+                    print("Credentials saved to Keychain")
+                }
             } catch let error as APIError {
                 errorMessage = error.errorMessage
             } catch {
                 errorMessage = SharedStrings.errorGeneric
             }
+        }
+    }
+    
+    @MainActor
+    func autofillCredentialsIfPossible() {
+        Task {
+            guard let savedEmail = await localStore.getLastUsedEmail() else { return }
+            guard let savedPassword = await localStore.getCredentials(for: savedEmail) else { return }
+            
+            email = savedEmail
+            password = savedPassword
         }
     }
 }
