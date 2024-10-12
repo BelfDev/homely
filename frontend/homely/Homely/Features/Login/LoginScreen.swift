@@ -64,7 +64,7 @@ struct LoginScreen: ScreenProtocol {
             .focused($focusedField, equals: .password)
             .submitLabel(.done)
             
-            Spacer(minLength: 8)
+            Spacer(minLength: 0)
             
             FilledButton(
                 title: LoginStrings.loginButton,
