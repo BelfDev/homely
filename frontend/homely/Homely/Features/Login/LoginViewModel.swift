@@ -31,6 +31,7 @@ final class LoginViewModel {
     
     var email: String = ""
     var password: String = ""
+    var saveCredentials: Bool = false
     var validations: LoginFormValidations?
     
     init(with components: ComponentManager) {
@@ -53,12 +54,8 @@ final class LoginViewModel {
             defer { isLoading = false }
             do {
                 _ = try await homelyClient.login(body: body)
-                if await localStore.saveCredentials(
-                    email: email,
-                    password: password
-                ) {
-                    print("Credentials saved to Keychain")
-                }
+                guard saveCredentials else { return }
+                _ = await localStore.saveCredentials(email: email, password: password)
             } catch let error as APIError {
                 errorMessage = error.errorMessage
             } catch {
@@ -74,7 +71,6 @@ final class LoginViewModel {
             email = savedEmail
         }
     }
-    
     
     // TODO(BelfDev) Add translations
     @MainActor

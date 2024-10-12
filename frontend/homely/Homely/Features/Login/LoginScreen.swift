@@ -66,12 +66,19 @@ struct LoginScreen: ScreenProtocol {
             .submitLabel(.done)
             
             if focusedField == nil {
+                Toggle("Remember me?", isOn: $vm.saveCredentials)
+                    .font(theme.font.body1)
+                    .foregroundColor(theme.color.onSurface)
+                    .padding(.horizontal, 2)
+                    .padding(.top, -16)
+                
+                Spacer(minLength: 0)
+                
                 IconButton(
                     iconName: "faceid",
                     action: vm.authenticateWithFaceID
                 )
                 .font(theme.font.h2)
-                .padding(.top, 16)
             }
             
             Spacer(minLength: 0)
