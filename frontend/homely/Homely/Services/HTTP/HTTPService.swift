@@ -249,6 +249,7 @@ private extension HTTPService {
             return httpResponse
         case 400...499:
             logError("Client error: \(httpResponse.statusCode)", endpoint: endpoint)
+            guard httpResponse.statusCode != 401 else { throw APIError.unauthorized }
             throw APIError.clientError(httpResponse.statusCode)
         case 500...599:
             logError("Server error: \(httpResponse.statusCode)", endpoint: endpoint)
