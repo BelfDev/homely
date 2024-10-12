@@ -183,14 +183,11 @@ private extension HTTPService {
         while true {
             do {
                 return try await executeRequest(endpoint, method: method, body: body)
-            } catch let error as URLError {
-                throw parseURLError(error)
             } catch let error as APIError {
                 logInfo("Request failed with error: \(error).")
                 
                 guard error.isRetryable, currentRetryCount < maxRetryCount else { throw error }
                 
-                // Increment retry count and calculate backoff delay
                 currentRetryCount += 1
                 logInfo("Start retrying request (\(currentRetryCount)) due to error: \(error).")
                 let backoffDelay = calculateBackoffDelay(for: currentRetryCount)
@@ -209,11 +206,15 @@ private extension HTTPService {
     func executeRequest<T: Decodable>(_ endpoint: E, method: String, body: Data? = nil) async throws -> T {
         logInfo("Executing request for \(endpoint.path)...")
         
-        let request = try createRequest(endpoint: endpoint, method: method, body: body)
-        let (data, response) = try await session.data(for: request)
-        
-        _ = try validateResponse(response, endpoint: endpoint)
-        return try decodeResponse(data)
+        do {
+            let request = try createRequest(endpoint: endpoint, method: method, body: body)
+            let (data, response) = try await session.data(for: request)
+            
+            _ = try validateResponse(response, endpoint: endpoint)
+            return try decodeResponse(data)
+        } catch let error as URLError {
+            throw parseURLError(error, for: endpoint)
+        }
     }
     
     func createRequest(endpoint: E, method: String, body: Data? = nil) throws -> URLRequest {
