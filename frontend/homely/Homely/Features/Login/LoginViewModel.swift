@@ -44,7 +44,7 @@ final class LoginViewModel {
         validations = body.validate()
         guard validations?.hasFieldErrors == false else { return }
         
-        isLoading = true
+//        isLoading = true
         
         Task {
             defer { isLoading = false }

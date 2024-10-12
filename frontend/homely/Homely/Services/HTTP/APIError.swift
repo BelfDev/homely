@@ -15,6 +15,7 @@ enum APIError: Error, Equatable {
     case serverError(Int)   // For 5xx status codes
     case unexpectedStatusCode(Int) // Any unexpected status codes
     case encodingFailed
+    case duplicateRequest
     case unauthorized
     case timeout
     case networkError(URLError) // For generic network errors like connection loss

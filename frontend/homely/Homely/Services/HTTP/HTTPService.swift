@@ -7,11 +7,6 @@
 
 import Foundation
 
-protocol EndpointProtocol {
-    var path: String { get }
-    func url(for environment: EnvConfig) -> String
-}
-
 protocol HTTPServiceProtocol {
     associatedtype E: EndpointProtocol
     
@@ -29,6 +24,7 @@ class HTTPService<E: EndpointProtocol> : HTTPServiceProtocol {
     private let tokenProvider: TokenProviderProtocol
     private let maxRetryCount: Int
     private let retryDelay: TimeInterval
+    private let requestManager: RequestManager<E>
     
     init(environment: EnvConfig, tokenProvider: TokenProviderProtocol, maxRetryCount: Int = 5, retryDelay: TimeInterval = 3.0) {
         self.environment = environment
@@ -36,6 +32,7 @@ class HTTPService<E: EndpointProtocol> : HTTPServiceProtocol {
         self.tokenProvider = tokenProvider
         self.maxRetryCount = maxRetryCount
         self.retryDelay = retryDelay
+        self.requestManager = RequestManager<E>()
     }
     
     private static func createSession() -> URLSession {
@@ -59,7 +56,7 @@ class HTTPService<E: EndpointProtocol> : HTTPServiceProtocol {
      - Other possible errors related to the network or JSON decoding.
      */
     func get<T: Decodable>(_ endpoint: E) async throws -> T {
-        return try await executeRequestWithRetry(endpoint, method: "GET")
+        return try await initiateHTTPRequest(endpoint, method: "GET")
     }
     
     /**
@@ -78,7 +75,7 @@ class HTTPService<E: EndpointProtocol> : HTTPServiceProtocol {
      */
     func post<T: Decodable, B: Encodable>(_ endpoint: E, body: B) async throws -> T {
         let bodyData = try encodeToJSON(body)
-        return try await executeRequestWithRetry(endpoint, method: "POST", body: bodyData)
+        return try await initiateHTTPRequest(endpoint, method: "POST", body: bodyData)
     }
     
     /**
@@ -97,7 +94,7 @@ class HTTPService<E: EndpointProtocol> : HTTPServiceProtocol {
      */
     func put<T: Decodable, B: Encodable>(_ endpoint: E, body: B) async throws -> T {
         let bodyData = try encodeToJSON(body)
-        return try await executeRequestWithRetry(endpoint, method: "PUT", body: bodyData)
+        return try await initiateHTTPRequest(endpoint, method: "PUT", body: bodyData)
     }
     
     /**
@@ -116,7 +113,7 @@ class HTTPService<E: EndpointProtocol> : HTTPServiceProtocol {
      */
     func patch<T: Decodable, B: Encodable>(_ endpoint: E, body: B) async throws -> T {
         let bodyData = try encodeToJSON(body)
-        return try await executeRequestWithRetry(endpoint, method: "PATCH", body: bodyData)
+        return try await initiateHTTPRequest(endpoint, method: "PATCH", body: bodyData)
     }
     
     /**
@@ -133,71 +130,88 @@ class HTTPService<E: EndpointProtocol> : HTTPServiceProtocol {
      - Other possible errors related to the network or JSON decoding.
      */
     func delete<T: Decodable>(_ endpoint: E) async throws -> T {
-        return try await executeRequestWithRetry(endpoint, method: "DELETE")
+        return try await initiateHTTPRequest(endpoint, method: "DELETE")
     }
 }
 
-// MARK: - Helper Methods Extension
+// MARK: - Request Execution
 
 private extension HTTPService {
-    func encodeToJSON<B: Encodable>(_ body: B) throws -> Data {
-        do {
-            return try JSONEncoder().encode(body)
-        } catch {
-            logError("Failed to encode JSON: \(error.localizedDescription)")
-            throw APIError.encodingFailed
-        }
-    }
     
-    func decodeResponse<T: Decodable>(_ data: Data) throws -> T {
-        print("Trying to decode JSON...")
-        return try JSONDecoder().decode(T.self, from: data)
-    }
-    
-    
-    func logError(_ message: String, endpoint: E? = nil) {
-        #if DEBUG
-        if let endpoint = endpoint {
-            print("Path: \(endpoint.path)\nAPI Error: \(message)")
-        } else {
-            print("API Error: \(message)")
-        }
-        #endif
-    }
-    
-    func logInfo(_ message: String, endpoint: E? = nil) {
-        #if DEBUG
-        if let endpoint = endpoint {
-            print("Path: \(endpoint.path)\nInfo: \(message)")
-        } else {
-            print("Info: \(message)")
-        }
-        #endif
-    }
-}
+    /**
+     Initiates an HTTP request while ensuring no duplicate requests for the same endpoint are made concurrently.
 
-// MARK: - Request Handling Extension
-
-private extension HTTPService {
-    func executeRequest<T: Decodable>(_ endpoint: E, method: String, body: Data? = nil) async throws -> T {
+     - Parameters:
+     - endpoint: The endpoint to request.
+     - method: The HTTP method to use (GET, POST, etc.).
+     - body: Optional body data to send with the request, if applicable.
+     
+     - Returns: A decoded object of type `T` if the request is successful.
+     
+     - Throws:
+     - `APIError.duplicateRequest` if a request for the same endpoint is already in progress.
+     - `APIError` if any network or API error occurs during the request.
+     */
+    func initiateHTTPRequest<T: Decodable>(_ endpoint: E, method: String, body: Data? = nil) async throws -> T {
+        guard await requestManager.isRequestOngoing(for: endpoint) == false else {
+            logInfo("Request is already ongoing for \(endpoint.path)")
+            throw APIError.duplicateRequest
+        }
+        
+        await requestManager.setRequestOngoing(true, for: endpoint)
+        
         do {
-            let request = try createRequest(endpoint: endpoint, method: method, body: body)
-            let (data, response) = try await session.data(for: request)
-            
-            _ = try validateResponse(response, endpoint: endpoint)
-            logInfo("Request succeeded!")
-            return try decodeResponse(data)
-        } catch let error as URLError {
-            throw parseURLError(error, for: endpoint)
+            let result: T = try await executeRequestWithRetry(endpoint, method: method, body: body)
+            await requestManager.setRequestOngoing(false, for: endpoint)
+            return result
         } catch {
-            logError("Unexpected error: \(error.localizedDescription)", endpoint: endpoint)
+            await requestManager.setRequestOngoing(false, for: endpoint)
             throw error
-            // Attempt to refresh token and retry the original request
-            // TODO(BelfDev): Fix token refresh concurrency
-            
-            //            let retryRequest = try createRequest(endpoint: endpoint, method: method, body: body)
-            //            return try await handleTokenExpiration(error: error, originalRequest: retryRequest, endpoint: endpoint, body: body)
         }
+    }
+
+    /**
+     Executes an HTTP request with retry logic for handling transient errors.
+     
+     - Throws:
+     - `APIError` in case of any network or API error.
+     - If the error is retryable, the method retries the request up to `maxRetryCount` times.
+     */
+    func executeRequestWithRetry<T: Decodable>(_ endpoint: E, method: String, body: Data? = nil) async throws -> T {
+        var currentRetryCount = 0
+        
+        while true {
+            do {
+                return try await executeRequest(endpoint, method: method, body: body)
+            } catch let error as APIError {
+                logInfo("Request failed with error: \(error).")
+                
+                guard error.isRetryable, currentRetryCount < maxRetryCount else { throw error }
+                
+                // Increment retry count and calculate backoff delay
+                currentRetryCount += 1
+                logInfo("Start retrying request (\(currentRetryCount)) due to error: \(error).")
+                let backoffDelay = calculateBackoffDelay(for: currentRetryCount)
+                logInfo("Retrying request in \(backoffDelay) seconds...")
+                
+                // Wait for the backoff delay before retrying
+                try await Task.sleep(nanoseconds: UInt64(backoffDelay * Double(NSEC_PER_SEC)))
+            }
+        }
+    }
+    
+    func calculateBackoffDelay(for retryCount: Int) -> TimeInterval {
+        return retryDelay * pow(2, Double(retryCount))
+    }
+    
+    func executeRequest<T: Decodable>(_ endpoint: E, method: String, body: Data? = nil) async throws -> T {
+        logInfo("Executing request for \(endpoint.path)...")
+        
+        let request = try createRequest(endpoint: endpoint, method: method, body: body)
+        let (data, response) = try await session.data(for: request)
+        
+        _ = try validateResponse(response, endpoint: endpoint)
+        return try decodeResponse(data)
     }
     
     func createRequest(endpoint: E, method: String, body: Data? = nil) throws -> URLRequest {
@@ -221,6 +235,12 @@ private extension HTTPService {
         }
         return request
     }
+    
+}
+
+// MARK: - Response Validation
+
+private extension HTTPService {
     
     /**
      Validates the HTTP response to ensure it has a successful status code (2xx).
@@ -281,38 +301,41 @@ private extension HTTPService {
     }
 }
 
-// MARK: - Retry Logic Extension
+// MARK: - Helper Methods
 
 private extension HTTPService {
-    /**
-     Executes the HTTP request with retry logic for transient errors (e.g., server errors or timeouts).
-     
-     - Parameters:
-     - endpoint: The endpoint to request.
-     - method: The HTTP method to use (GET, POST, etc.).
-     - body: The optional body data for the request.
-     - Returns: A decoded object of type `T` if the request is successful.
-     - Throws:
-     - `APIError` in case of an error.
-     */
-    func executeRequestWithRetry<T: Decodable>(_ endpoint: E, method: String, body: Data? = nil) async throws -> T {
-        var currentRetryCount = 0
-        
-        while true {
-            do {
-                logInfo("Executing request...")
-                
-                return try await executeRequest(endpoint, method: method, body: body)
-            } catch let error as APIError {
-                logInfo("Request failed.")
-                
-                guard error.isRetryable, currentRetryCount < maxRetryCount  else { throw error }
-                currentRetryCount += 1
-                logInfo("Start retrying request (\(currentRetryCount)) due to error: \(error).")
-                let backoffDelay = retryDelay * pow(2, Double(currentRetryCount)) // Exponential backoff
-                logInfo("Delay until next request: \(backoffDelay) seconds.")
-                try await Task.sleep(nanoseconds: UInt64(backoffDelay * Double(NSEC_PER_SEC))) // Delay before retry
-            }
+    func encodeToJSON<B: Encodable>(_ body: B) throws -> Data {
+        do {
+            return try JSONEncoder().encode(body)
+        } catch {
+            logError("Failed to encode JSON: \(error.localizedDescription)")
+            throw APIError.encodingFailed
         }
+    }
+    
+    func decodeResponse<T: Decodable>(_ data: Data) throws -> T {
+        print("Trying to decode JSON...")
+        return try JSONDecoder().decode(T.self, from: data)
+    }
+    
+    
+    func logError(_ message: String, endpoint: E? = nil) {
+        #if DEBUG
+        if let endpoint = endpoint {
+            print("Path: \(endpoint.path)\nAPI Error: \(message)")
+        } else {
+            print("API Error: \(message)")
+        }
+        #endif
+    }
+    
+    func logInfo(_ message: String, endpoint: E? = nil) {
+        #if DEBUG
+        if let endpoint = endpoint {
+            print("Path: \(endpoint.path)\nInfo: \(message)")
+        } else {
+            print("Info: \(message)")
+        }
+        #endif
     }
 }
