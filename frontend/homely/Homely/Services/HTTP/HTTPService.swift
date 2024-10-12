@@ -33,7 +33,7 @@ class HTTPService<E: EndpointProtocol> : HTTPServiceProtocol {
     private var tokenRefreshTask: Task<String, Error>? = nil
     private let taskQueue = DispatchQueue(label: "com.homely.httpServiceTaskQueue")
     
-    init(environment: EnvConfig, tokenProvider: TokenProviderProtocol, maxRetryCount: Int = 4, retryDelay: TimeInterval = 3.0) {
+    init(environment: EnvConfig, tokenProvider: TokenProviderProtocol, maxRetryCount: Int = 5, retryDelay: TimeInterval = 3.0) {
         self.environment = environment
         self.session = HTTPService.createSession()
         self.tokenProvider = tokenProvider
