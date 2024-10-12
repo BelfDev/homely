@@ -54,8 +54,11 @@ final class LoginViewModel {
             defer { isLoading = false }
             do {
                 _ = try await homelyClient.login(body: body)
-                guard saveCredentials else { return }
-                _ = await localStore.saveCredentials(email: email, password: password)
+                if saveCredentials {
+                    _ = await localStore.saveCredentials(email: email, password: password)
+                } else {
+                    _ = await localStore.deleteCredentials(for: email)
+                }
             } catch let error as APIError {
                 errorMessage = error.errorMessage
             } catch {
