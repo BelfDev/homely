@@ -62,6 +62,12 @@ struct SignUpScreen: ScreenProtocol {
                 .frame(minHeight: geometry.size.height)
                 .padding(.horizontal, 16)
             }
+            .disabled(vm.isLoading)
+            .overlay {
+                if vm.isLoading {
+                    LoadingOverlay()
+                }
+            }
             .onTapGesture {
                 hideKeyboard()
             }

@@ -37,6 +37,9 @@
 		9F4E7EB22CB5CA610062EDBB /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4E7EB12CB5CA610062EDBB /* LoginRouter.swift */; };
 		9F4E7EBE2CB5CF950062EDBB /* ScreenProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4E7EBD2CB5CF950062EDBB /* ScreenProtocol.swift */; };
 		9F4E7EC02CB5D1250062EDBB /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4E7EBF2CB5D1250062EDBB /* NavigationManager.swift */; };
+		9F5579E72CBAE282005C9AAE /* HTTPRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5579E62CBAE282005C9AAE /* HTTPRequestManager.swift */; };
+		9F5579E92CBAE29E005C9AAE /* EndpointProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5579E82CBAE29E005C9AAE /* EndpointProtocol.swift */; };
+		9F5579EB2CBAF67A005C9AAE /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5579EA2CBAF67A005C9AAE /* Debouncer.swift */; };
 		9F5D8B392C14C725002B98D5 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5D8B382C14C725002B98D5 /* LoginScreen.swift */; };
 		9F5F11252CA9899600EECC4E /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F11242CA9899600EECC4E /* HomeRouter.swift */; };
 		9F5F11272CA9899D00EECC4E /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F11262CA9899D00EECC4E /* HomeScreen.swift */; };
@@ -130,6 +133,9 @@
 		9F4E7EB12CB5CA610062EDBB /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
 		9F4E7EBD2CB5CF950062EDBB /* ScreenProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenProtocol.swift; sourceTree = "<group>"; };
 		9F4E7EBF2CB5D1250062EDBB /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
+		9F5579E62CBAE282005C9AAE /* HTTPRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRequestManager.swift; sourceTree = "<group>"; };
+		9F5579E82CBAE29E005C9AAE /* EndpointProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointProtocol.swift; sourceTree = "<group>"; };
+		9F5579EA2CBAF67A005C9AAE /* Debouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
 		9F5D8B382C14C725002B98D5 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		9F5F11242CA9899600EECC4E /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
 		9F5F11262CA9899D00EECC4E /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
@@ -258,6 +264,7 @@
 				9F4E7EA22CB3E34A0062EDBB /* ErrorInputFieldLabel.swift */,
 				9F4E7EA42CB476460062EDBB /* TextButton.swift */,
 				9F4E7EA62CB47E7E0062EDBB /* FilledButton.swift */,
+				9F5579EA2CBAF67A005C9AAE /* Debouncer.swift */,
 			);
 			path = "Shared Views";
 			sourceTree = "<group>";
@@ -269,6 +276,8 @@
 				9F2B423E2C9F51B800A65225 /* TokenProvider.swift */,
 				9F2B422F2C9EDF1E00A65225 /* APIError.swift */,
 				9F2B42402C9F6C9400A65225 /* KeychainError.swift */,
+				9F5579E62CBAE282005C9AAE /* HTTPRequestManager.swift */,
+				9F5579E82CBAE29E005C9AAE /* EndpointProtocol.swift */,
 			);
 			path = HTTP;
 			sourceTree = "<group>";
@@ -658,7 +667,9 @@
 				9F2B424A2CA0443900A65225 /* LoginViewModel.swift in Sources */,
 				9FCC2E132C68043100A787C3 /* LoginStrings.swift in Sources */,
 				9F5D8B392C14C725002B98D5 /* LoginScreen.swift in Sources */,
+				9F5579E72CBAE282005C9AAE /* HTTPRequestManager.swift in Sources */,
 				9F6960F72C03B64900605975 /* HomelyApp.swift in Sources */,
+				9F5579EB2CBAF67A005C9AAE /* Debouncer.swift in Sources */,
 				9F0A24232C1DAA5F00B5DEB3 /* MainTheme.swift in Sources */,
 				9F4E7EB22CB5CA610062EDBB /* LoginRouter.swift in Sources */,
 				9F2B422E2C9ECEAF00A65225 /* EnvConfig.swift in Sources */,
@@ -672,6 +683,7 @@
 				9F2B423D2C9F513300A65225 /* HomelyAPITokenProvider.swift in Sources */,
 				9F0A24212C1DA62600B5DEB3 /* ThemeManager.swift in Sources */,
 				9F4E7EB02CB531FC0062EDBB /* SignUpStrings.swift in Sources */,
+				9F5579E92CBAE29E005C9AAE /* EndpointProtocol.swift in Sources */,
 				9F73B5A52C5F63E30007CD73 /* Fonts.swift in Sources */,
 				9F5F11342CA9C7DA00EECC4E /* View+Keyboard.swift in Sources */,
 				9F4E7EA32CB3E34A0062EDBB /* ErrorInputFieldLabel.swift in Sources */,
