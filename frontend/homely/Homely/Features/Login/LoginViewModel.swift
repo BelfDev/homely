@@ -6,6 +6,7 @@
 //
 
 import Observation
+import LocalAuthentication
 
 @Observable
 final class LoginViewModel {
@@ -67,13 +68,31 @@ final class LoginViewModel {
     }
     
     @MainActor
-    func autofillCredentialsIfPossible() {
+    func autoLastEnteredEmail() {
         Task {
             guard let savedEmail = await localStore.getLastUsedEmail() else { return }
-            guard let savedPassword = await localStore.getCredentials(for: savedEmail) else { return }
-            
             email = savedEmail
-            password = savedPassword
+        }
+    }
+    
+    
+    // TODO(BelfDev) Add translations
+    @MainActor
+    func authenticateWithFaceID() {
+        let context = LAContext()
+        let reason = "Authenticate with Face ID to log in."
+        
+        Task {
+            do {
+                guard try await context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) else { return }
+                guard let savedPassword = await localStore.getCredentials(for: email) else {
+                    errorMessage = "No password found for this email on Keychain"
+                    return
+                }
+                password = savedPassword
+            } catch {
+                errorMessage = "Face ID is not available on this device."
+            }
         }
     }
 }

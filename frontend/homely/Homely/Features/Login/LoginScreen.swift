@@ -19,7 +19,7 @@ struct LoginScreen: ScreenProtocol {
     
     init(_ components: ComponentManager) {
         vm = LoginViewModel(with: components)
-        vm.autofillCredentialsIfPossible()
+        vm.autoLastEnteredEmail()
     }
     
     var body: some View {
@@ -64,6 +64,15 @@ struct LoginScreen: ScreenProtocol {
             )
             .focused($focusedField, equals: .password)
             .submitLabel(.done)
+            
+            if focusedField == nil {
+                IconButton(
+                    iconName: "faceid",
+                    action: vm.authenticateWithFaceID
+                )
+                .font(theme.font.h2)
+                .padding(.top, 16)
+            }
             
             Spacer(minLength: 0)
             

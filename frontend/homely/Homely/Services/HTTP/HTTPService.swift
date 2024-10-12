@@ -140,7 +140,7 @@ private extension HTTPService {
     
     /**
      Initiates an HTTP request while ensuring no duplicate requests for the same endpoint are made concurrently.
-
+     
      - Parameters:
      - endpoint: The endpoint to request.
      - method: The HTTP method to use (GET, POST, etc.).
@@ -169,7 +169,7 @@ private extension HTTPService {
             throw error
         }
     }
-
+    
     /**
      Executes an HTTP request with retry logic for handling transient errors.
      
@@ -183,6 +183,8 @@ private extension HTTPService {
         while true {
             do {
                 return try await executeRequest(endpoint, method: method, body: body)
+            } catch let error as URLError {
+                throw parseURLError(error)
             } catch let error as APIError {
                 logInfo("Request failed with error: \(error).")
                 
