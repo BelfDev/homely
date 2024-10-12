@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TextButton: View {
     @ThemeProvider private var theme
+    @State private var debouncer = Debouncer(delay: 3.0)
     
     let title: String
     let action: () -> Void
@@ -18,7 +19,9 @@ struct TextButton: View {
     
     var body: some View {
         
-        Button(action: action) {
+        Button {
+            debouncer.execute { action() }
+        } label: {
             HStack {
                 Text(title)
                     .font(theme.font.button2)

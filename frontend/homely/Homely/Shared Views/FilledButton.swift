@@ -9,13 +9,15 @@ import SwiftUI
 
 struct FilledButton: View {
     @ThemeProvider private var theme
+    @State private var debouncer = Debouncer(delay: 3.0)
     
     let title: String
     let action: () -> Void
     
     var body: some View {
-        Button(action: action)
-        {
+        Button {
+            debouncer.execute { action() }
+        } label: {
             Text(title)
                 .font(theme.font.button)
                 .frame(maxWidth: .infinity)
