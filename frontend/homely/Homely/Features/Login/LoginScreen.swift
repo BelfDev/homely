@@ -189,8 +189,7 @@ private struct LoginScreenScaffold<Content>: View where Content : View {
                     content(geometry)
                 }
                 .frame(
-                    maxWidth: .infinity,
-//                    idealWidth: geometry.size.width,
+                    idealWidth: geometry.size.width,
                     minHeight: geometry.size.height
                 )
             }
