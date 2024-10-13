@@ -20,5 +20,7 @@
 		<string>HankenGrotesk-ThinItalic.ttf</string>
 		<string>Limelight-Regular.ttf</string>
 	</array>
+    <key>NSFaceIDUsageDescription</key>
+    <string>We use Face ID to log you in securely and quickly.</string>
 </dict>
 </plist>

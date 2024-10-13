@@ -22,7 +22,6 @@ struct LoginRouter: View {
                     switch destination {
                     case .signUp:
                         SignUpScreen(components)
-                            
                     }
                 }
         }
