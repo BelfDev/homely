@@ -35,7 +35,6 @@
 		9F4E7EAE2CB531CF0062EDBB /* SignUpScreen.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9F4E7EAD2CB531CF0062EDBB /* SignUpScreen.xcstrings */; };
 		9F4E7EB02CB531FC0062EDBB /* SignUpStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4E7EAF2CB531FC0062EDBB /* SignUpStrings.swift */; };
 		9F4E7EB22CB5CA610062EDBB /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4E7EB12CB5CA610062EDBB /* LoginRouter.swift */; };
-		9F4E7EBE2CB5CF950062EDBB /* ScreenProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4E7EBD2CB5CF950062EDBB /* ScreenProtocol.swift */; };
 		9F4E7EC02CB5D1250062EDBB /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4E7EBF2CB5D1250062EDBB /* NavigationManager.swift */; };
 		9F5579E72CBAE282005C9AAE /* HTTPRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5579E62CBAE282005C9AAE /* HTTPRequestManager.swift */; };
 		9F5579E92CBAE29E005C9AAE /* EndpointProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5579E82CBAE29E005C9AAE /* EndpointProtocol.swift */; };
@@ -134,7 +133,6 @@
 		9F4E7EAD2CB531CF0062EDBB /* SignUpScreen.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = SignUpScreen.xcstrings; sourceTree = "<group>"; };
 		9F4E7EAF2CB531FC0062EDBB /* SignUpStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpStrings.swift; sourceTree = "<group>"; };
 		9F4E7EB12CB5CA610062EDBB /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
-		9F4E7EBD2CB5CF950062EDBB /* ScreenProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenProtocol.swift; sourceTree = "<group>"; };
 		9F4E7EBF2CB5D1250062EDBB /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
 		9F5579E62CBAE282005C9AAE /* HTTPRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRequestManager.swift; sourceTree = "<group>"; };
 		9F5579E82CBAE29E005C9AAE /* EndpointProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointProtocol.swift; sourceTree = "<group>"; };
@@ -262,7 +260,6 @@
 		9F0A70E72CA35A1700792B85 /* Shared Views */ = {
 			isa = PBXGroup;
 			children = (
-				9F4E7EBD2CB5CF950062EDBB /* ScreenProtocol.swift */,
 				9F0A70E82CA35A4C00792B85 /* ErrorBottomSheet.swift */,
 				9F5F11302CA9B00D00EECC4E /* LoadingOverlay.swift */,
 				9F4E7E9E2CB3C8540062EDBB /* TextInputField.swift */,
@@ -700,7 +697,6 @@
 				9F4E7EA32CB3E34A0062EDBB /* ErrorInputFieldLabel.swift in Sources */,
 				9F5F11272CA9899D00EECC4E /* HomeScreen.swift in Sources */,
 				9F2B42302C9EDF1E00A65225 /* APIError.swift in Sources */,
-				9F4E7EBE2CB5CF950062EDBB /* ScreenProtocol.swift in Sources */,
 				9F5F112B2CA98B2A00EECC4E /* SessionManager.swift in Sources */,
 				9F4E7EC02CB5D1250062EDBB /* NavigationManager.swift in Sources */,
 				9F5F11252CA9899600EECC4E /* HomeRouter.swift in Sources */,

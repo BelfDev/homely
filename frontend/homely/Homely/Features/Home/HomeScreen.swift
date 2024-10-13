@@ -7,8 +7,7 @@
 
 import SwiftUI
 
-struct HomeScreen: ScreenProtocol {
-    static var id = ScreenID.home
+struct HomeScreen: View {
     
     @ThemeProvider private var theme
     
@@ -24,12 +23,17 @@ struct HomeScreen: ScreenProtocol {
     
     var body: some View {
         ScrollView {
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Morning, \nSofie!")
+                    .font(theme.font.h3)
+                
+                Text(vm.currentDate)
+                    .font(theme.font.h6)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.vertical, 16)
+             
             Spacer(minLength: 32)
-            
-            Text("Welcome\nPerson")
-                .font(theme.font.h3)
-            
-            Spacer(minLength: 40)
             
             Button {
                 vm.logout()
@@ -47,10 +51,10 @@ struct HomeScreen: ScreenProtocol {
             }
             .padding(8)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 24)
         .background(theme.color.surface)
         .scrollBounceBehavior(.basedOnSize)
-        .navigationTitle("Home Screen")
         .toolbarTitleDisplayMode(.inlineLarge)
     }
     
