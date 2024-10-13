@@ -15,6 +15,7 @@ struct LoginScreen: ScreenProtocol {
     @NavigationManagerProvider<LoginRoute> private var navigation
     
     @State private var vm: LoginViewModel
+    @State private var showAutofill: Bool = true
     @FocusState private var focusedField: FocusedField?
     
     init(_ components: ComponentManager) {
@@ -41,6 +42,12 @@ struct LoginScreen: ScreenProtocol {
                     ErrorBottomSheet(errorMessage: vm.errorMessage)
                 }
                 .onSubmit(focusNextField)
+                .onChange(of: focusedField) { _, newFocus in
+                    let willHideKeyboard = newFocus == nil
+                    withAnimation(willHideKeyboard ? .easeInOut(duration: 0.5) : nil) {
+                        showAutofill = willHideKeyboard
+                    }
+                }
         }
     }
     
@@ -65,7 +72,7 @@ struct LoginScreen: ScreenProtocol {
             .focused($focusedField, equals: .password)
             .submitLabel(.done)
             
-            if focusedField == nil {
+            if showAutofill {
                 Toggle("Remember me?", isOn: $vm.saveCredentials)
                     .font(theme.font.body1)
                     .foregroundColor(theme.color.onSurface)
