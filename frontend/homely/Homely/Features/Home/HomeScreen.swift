@@ -23,48 +23,50 @@ struct HomeScreen: View {
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 8) {
-                HStack(alignment: .firstTextBaseline) {
-                    Text(vm.greeting)
-                        .font(theme.font.h3)
-                    Spacer()
-                    Button("Logout", action: vm.logout)
-                        .buttonStyle(.bordered)
+            VStack {
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack(alignment: .firstTextBaseline) {
+                        Text(vm.greeting)
+                            .font(theme.font.h3)
+                        Spacer()
+                        Button("Logout", action: vm.logout)
+                            .buttonStyle(.bordered)
+                    }
+                    Text(vm.currentDate)
+                        .font(theme.font.h6)
                 }
-                Text(vm.currentDate)
-                    .font(theme.font.h6)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.vertical, 16)
-                        
-            CardView {
-                Text("Special Highlight")
-                    .font(.headline)
-                    .padding()
-            }
-            .frame(minHeight: 256)
-            .padding(.vertical, 16)
-            
-            Group {
-                Text("Modules")
-                    .font(theme.font.h5)
-                    .fontWeight(.semibold)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.vertical, 16)
                 
-                LazyVGrid(columns: columns, spacing: 16) {
-                    FeatureModuleView(title: "Rewards", description: "Track household tasks", iconName: "star")
-                    FeatureModuleView(title: "Shopping List", description: "Manage groceries", iconName: "cart")
-                    FeatureModuleView(title: "Bills", description: "Track monthly expenses", iconName: "creditcard")
-                    FeatureModuleView(title: "Chores", description: "Daily chores schedule", iconName: "list.bullet")
+                CardView {
+                    Text("Special Highlight")
+                        .font(.headline)
+                        .padding()
                 }
+                .frame(minHeight: 256)
+                .padding(.vertical, 16)
+                
+                Group {
+                    Text("Modules")
+                        .font(theme.font.h5)
+                        .fontWeight(.semibold)
+                    
+                    LazyVGrid(columns: columns, spacing: 16) {
+                        FeatureModuleView(title: "Rewards", description: "Track household tasks", iconName: "star", backgroundColor: .green.opacity(0.2))
+                        FeatureModuleView(title: "Shopping List", description: "Manage groceries", iconName: "cart", backgroundColor: .purple.opacity(0.2))
+                        FeatureModuleView(title: "Bills", description: "Track monthly expenses", iconName: "creditcard", backgroundColor: .yellow.opacity(0.2))
+                        FeatureModuleView(title: "Chores", description: "Daily chores schedule", iconName: "list.bullet", backgroundColor: .red.opacity(0.2))
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, 16)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.horizontal, 16)
         .background(theme.color.surface)
         .scrollClipDisabled()
         .scrollBounceBehavior(.basedOnSize)
-        .toolbarTitleDisplayMode(.automatic)
+        .toolbarTitleDisplayMode(.inline)
         .navigationTitle(FixedStrings.appTitle)
     }
     

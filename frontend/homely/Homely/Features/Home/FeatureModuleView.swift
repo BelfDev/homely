@@ -14,27 +14,30 @@ struct FeatureModuleView: View {
     let description: String
     let iconName: String
     
+    var backgroundColor: Color?
+    
     var body: some View {
         VStack {
             Image(systemName: iconName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 40, height: 40)
-                .padding(.bottom, 8)
+                .frame(width: 32, height: 32)
+            
             Text(title)
-                .font(theme.font.h5)
+                .font(theme.font.h6)
                 .bold()
+                .padding(.bottom, 4)
+            
             Text(description)
-                .font(theme.font.body2)
+                .font(theme.font.body1)
                 .foregroundColor(theme.color.onSurface)
                 .multilineTextAlignment(.center)
-                .padding(.top, 4)
         }
         .frame(maxWidth: .infinity, minHeight: 150)
-        .padding()
-        .background(theme.color.surface)
-        .cornerRadius(12)
-        .shadow(radius: 5)
+        .padding(.all, 16)
+        .background(backgroundColor ?? theme.color.surface)
+        .cornerRadius(24)
+        
     }
 }
 
@@ -43,4 +46,5 @@ struct FeatureModuleView: View {
     
     FeatureModuleView(title: "Rewards", description: "Track household tasks", iconName: "star")
         .environment(components)
+        .padding()
 }

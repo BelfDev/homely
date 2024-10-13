@@ -19,7 +19,7 @@ struct CardView<Content>: View where Content: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(theme.color.secondaryContainer)
-        .cornerRadius(12)
+        .cornerRadius(24)
         .shadow(color: theme.color.shadow, radius: 16)
     }
 }
