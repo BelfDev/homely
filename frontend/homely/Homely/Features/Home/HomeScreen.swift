@@ -37,21 +37,35 @@ struct HomeScreen: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.vertical, 16)
                         
-            Spacer(minLength: 40)
-            
-            LazyVGrid(columns: columns, spacing: 16) {
-                FeatureModuleView(title: "Rewards", description: "Track household tasks", iconName: "star")
-                FeatureModuleView(title: "Shopping List", description: "Manage groceries", iconName: "cart")
-                FeatureModuleView(title: "Bills", description: "Track monthly expenses", iconName: "creditcard")
-                FeatureModuleView(title: "Chores", description: "Daily chores schedule", iconName: "list.bullet")
+            CardView {
+                Text("Special Highlight")
+                    .font(.headline)
+                    .padding()
             }
-            .padding(8)
+            .frame(minHeight: 256)
+            .padding(.vertical, 16)
+            
+            Group {
+                Text("Modules")
+                    .font(theme.font.h5)
+                    .fontWeight(.semibold)
+                
+                LazyVGrid(columns: columns, spacing: 16) {
+                    FeatureModuleView(title: "Rewards", description: "Track household tasks", iconName: "star")
+                    FeatureModuleView(title: "Shopping List", description: "Manage groceries", iconName: "cart")
+                    FeatureModuleView(title: "Bills", description: "Track monthly expenses", iconName: "creditcard")
+                    FeatureModuleView(title: "Chores", description: "Daily chores schedule", iconName: "list.bullet")
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 16)
         .background(theme.color.surface)
+        .scrollClipDisabled()
         .scrollBounceBehavior(.basedOnSize)
-        .toolbarTitleDisplayMode(.inlineLarge)
+        .toolbarTitleDisplayMode(.automatic)
+        .navigationTitle(FixedStrings.appTitle)
     }
     
 }

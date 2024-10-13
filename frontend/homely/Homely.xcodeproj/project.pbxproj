@@ -42,6 +42,7 @@
 		9F5579ED2CBB080D005C9AAE /* LocalStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5579EC2CBB080D005C9AAE /* LocalStoreManager.swift */; };
 		9F5579EF2CBB10E6005C9AAE /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5579EE2CBB10E6005C9AAE /* IconButton.swift */; };
 		9F5579F12CBB289F005C9AAE /* FeatureModuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5579F02CBB289F005C9AAE /* FeatureModuleView.swift */; };
+		9F5579F32CBBE32F005C9AAE /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5579F22CBBE32F005C9AAE /* CardView.swift */; };
 		9F5D8B392C14C725002B98D5 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5D8B382C14C725002B98D5 /* LoginScreen.swift */; };
 		9F5F11252CA9899600EECC4E /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F11242CA9899600EECC4E /* HomeRouter.swift */; };
 		9F5F11272CA9899D00EECC4E /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F11262CA9899D00EECC4E /* HomeScreen.swift */; };
@@ -140,6 +141,7 @@
 		9F5579EC2CBB080D005C9AAE /* LocalStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStoreManager.swift; sourceTree = "<group>"; };
 		9F5579EE2CBB10E6005C9AAE /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
 		9F5579F02CBB289F005C9AAE /* FeatureModuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureModuleView.swift; sourceTree = "<group>"; };
+		9F5579F22CBBE32F005C9AAE /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		9F5D8B382C14C725002B98D5 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		9F5F11242CA9899600EECC4E /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
 		9F5F11262CA9899D00EECC4E /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				9F4E7EA62CB47E7E0062EDBB /* FilledButton.swift */,
 				9F5579EA2CBAF67A005C9AAE /* Debouncer.swift */,
 				9F5579EE2CBB10E6005C9AAE /* IconButton.swift */,
+				9F5579F22CBBE32F005C9AAE /* CardView.swift */,
 			);
 			path = "Shared Views";
 			sourceTree = "<group>";
@@ -698,6 +701,7 @@
 				9F5F11272CA9899D00EECC4E /* HomeScreen.swift in Sources */,
 				9F2B42302C9EDF1E00A65225 /* APIError.swift in Sources */,
 				9F5F112B2CA98B2A00EECC4E /* SessionManager.swift in Sources */,
+				9F5579F32CBBE32F005C9AAE /* CardView.swift in Sources */,
 				9F4E7EC02CB5D1250062EDBB /* NavigationManager.swift in Sources */,
 				9F5F11252CA9899600EECC4E /* HomeRouter.swift in Sources */,
 				9F5579EF2CBB10E6005C9AAE /* IconButton.swift in Sources */,
