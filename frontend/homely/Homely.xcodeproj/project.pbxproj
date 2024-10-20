@@ -35,11 +35,14 @@
 		9F4E7EAE2CB531CF0062EDBB /* SignUpScreen.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9F4E7EAD2CB531CF0062EDBB /* SignUpScreen.xcstrings */; };
 		9F4E7EB02CB531FC0062EDBB /* SignUpStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4E7EAF2CB531FC0062EDBB /* SignUpStrings.swift */; };
 		9F4E7EB22CB5CA610062EDBB /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4E7EB12CB5CA610062EDBB /* LoginRouter.swift */; };
-		9F4E7EBE2CB5CF950062EDBB /* ScreenProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4E7EBD2CB5CF950062EDBB /* ScreenProtocol.swift */; };
 		9F4E7EC02CB5D1250062EDBB /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4E7EBF2CB5D1250062EDBB /* NavigationManager.swift */; };
 		9F5579E72CBAE282005C9AAE /* HTTPRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5579E62CBAE282005C9AAE /* HTTPRequestManager.swift */; };
 		9F5579E92CBAE29E005C9AAE /* EndpointProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5579E82CBAE29E005C9AAE /* EndpointProtocol.swift */; };
 		9F5579EB2CBAF67A005C9AAE /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5579EA2CBAF67A005C9AAE /* Debouncer.swift */; };
+		9F5579ED2CBB080D005C9AAE /* LocalStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5579EC2CBB080D005C9AAE /* LocalStoreManager.swift */; };
+		9F5579EF2CBB10E6005C9AAE /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5579EE2CBB10E6005C9AAE /* IconButton.swift */; };
+		9F5579F12CBB289F005C9AAE /* FeatureModuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5579F02CBB289F005C9AAE /* FeatureModuleView.swift */; };
+		9F5579F32CBBE32F005C9AAE /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5579F22CBBE32F005C9AAE /* CardView.swift */; };
 		9F5D8B392C14C725002B98D5 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5D8B382C14C725002B98D5 /* LoginScreen.swift */; };
 		9F5F11252CA9899600EECC4E /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F11242CA9899600EECC4E /* HomeRouter.swift */; };
 		9F5F11272CA9899D00EECC4E /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F11262CA9899D00EECC4E /* HomeScreen.swift */; };
@@ -131,11 +134,14 @@
 		9F4E7EAD2CB531CF0062EDBB /* SignUpScreen.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = SignUpScreen.xcstrings; sourceTree = "<group>"; };
 		9F4E7EAF2CB531FC0062EDBB /* SignUpStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpStrings.swift; sourceTree = "<group>"; };
 		9F4E7EB12CB5CA610062EDBB /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
-		9F4E7EBD2CB5CF950062EDBB /* ScreenProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenProtocol.swift; sourceTree = "<group>"; };
 		9F4E7EBF2CB5D1250062EDBB /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
 		9F5579E62CBAE282005C9AAE /* HTTPRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRequestManager.swift; sourceTree = "<group>"; };
 		9F5579E82CBAE29E005C9AAE /* EndpointProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointProtocol.swift; sourceTree = "<group>"; };
 		9F5579EA2CBAF67A005C9AAE /* Debouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
+		9F5579EC2CBB080D005C9AAE /* LocalStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStoreManager.swift; sourceTree = "<group>"; };
+		9F5579EE2CBB10E6005C9AAE /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
+		9F5579F02CBB289F005C9AAE /* FeatureModuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureModuleView.swift; sourceTree = "<group>"; };
+		9F5579F22CBBE32F005C9AAE /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		9F5D8B382C14C725002B98D5 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		9F5F11242CA9899600EECC4E /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
 		9F5F11262CA9899D00EECC4E /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
@@ -256,7 +262,6 @@
 		9F0A70E72CA35A1700792B85 /* Shared Views */ = {
 			isa = PBXGroup;
 			children = (
-				9F4E7EBD2CB5CF950062EDBB /* ScreenProtocol.swift */,
 				9F0A70E82CA35A4C00792B85 /* ErrorBottomSheet.swift */,
 				9F5F11302CA9B00D00EECC4E /* LoadingOverlay.swift */,
 				9F4E7E9E2CB3C8540062EDBB /* TextInputField.swift */,
@@ -265,6 +270,8 @@
 				9F4E7EA42CB476460062EDBB /* TextButton.swift */,
 				9F4E7EA62CB47E7E0062EDBB /* FilledButton.swift */,
 				9F5579EA2CBAF67A005C9AAE /* Debouncer.swift */,
+				9F5579EE2CBB10E6005C9AAE /* IconButton.swift */,
+				9F5579F22CBBE32F005C9AAE /* CardView.swift */,
 			);
 			path = "Shared Views";
 			sourceTree = "<group>";
@@ -331,6 +338,7 @@
 				9F2B422D2C9ECEAF00A65225 /* EnvConfig.swift */,
 				9F2B42462CA03BF500A65225 /* EnvProviders.swift */,
 				9F0A24202C1DA62600B5DEB3 /* ThemeManager.swift */,
+				9F5579EC2CBB080D005C9AAE /* LocalStoreManager.swift */,
 				9F5F112A2CA98B2A00EECC4E /* SessionManager.swift */,
 				9F2B42422CA032AC00A65225 /* ComponentManager.swift */,
 				9F4E7EBF2CB5D1250062EDBB /* NavigationManager.swift */,
@@ -362,6 +370,7 @@
 				9F5F11242CA9899600EECC4E /* HomeRouter.swift */,
 				9F5F11262CA9899D00EECC4E /* HomeScreen.swift */,
 				9F5F11282CA989AE00EECC4E /* HomeViewModel.swift */,
+				9F5579F02CBB289F005C9AAE /* FeatureModuleView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -673,8 +682,10 @@
 				9F0A24232C1DAA5F00B5DEB3 /* MainTheme.swift in Sources */,
 				9F4E7EB22CB5CA610062EDBB /* LoginRouter.swift in Sources */,
 				9F2B422E2C9ECEAF00A65225 /* EnvConfig.swift in Sources */,
+				9F5579F12CBB289F005C9AAE /* FeatureModuleView.swift in Sources */,
 				9FEB3C582CB72A6F00822FB2 /* SignUpFormValidations.swift in Sources */,
 				9F0A70E92CA35A4C00792B85 /* ErrorBottomSheet.swift in Sources */,
+				9F5579ED2CBB080D005C9AAE /* LocalStoreManager.swift in Sources */,
 				9FCC2E1B2C69011D00A787C3 /* LoginResponse.swift in Sources */,
 				9F2B42322C9EF12300A65225 /* HomelyAPIClient.swift in Sources */,
 				9FEB3C5A2CB72B8500822FB2 /* SignUpRequestBody.swift in Sources */,
@@ -689,10 +700,11 @@
 				9F4E7EA32CB3E34A0062EDBB /* ErrorInputFieldLabel.swift in Sources */,
 				9F5F11272CA9899D00EECC4E /* HomeScreen.swift in Sources */,
 				9F2B42302C9EDF1E00A65225 /* APIError.swift in Sources */,
-				9F4E7EBE2CB5CF950062EDBB /* ScreenProtocol.swift in Sources */,
 				9F5F112B2CA98B2A00EECC4E /* SessionManager.swift in Sources */,
+				9F5579F32CBBE32F005C9AAE /* CardView.swift in Sources */,
 				9F4E7EC02CB5D1250062EDBB /* NavigationManager.swift in Sources */,
 				9F5F11252CA9899600EECC4E /* HomeRouter.swift in Sources */,
+				9F5579EF2CBB10E6005C9AAE /* IconButton.swift in Sources */,
 				9F4E7EA12CB3E1D10062EDBB /* PasswordInputField.swift in Sources */,
 				9F0A70EB2CA3F3E900792B85 /* SharedStrings.swift in Sources */,
 			);
@@ -861,6 +873,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"homely/Preview Content\"";
@@ -868,8 +882,9 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = homely/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Homely;
+				INFOPLIST_KEY_CFBundleDisplayName = Homenize;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "We use Face ID to log you in securely and quickly.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -882,6 +897,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.belfortdev.homely;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -893,6 +909,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"homely/Preview Content\"";
@@ -900,8 +918,9 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = homely/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Homely;
+				INFOPLIST_KEY_CFBundleDisplayName = Homenize;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "We use Face ID to log you in securely and quickly.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -914,6 +933,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.belfortdev.homely;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -930,7 +950,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.belfortdev.homelyTests;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.belfortdev.homely-tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -949,7 +969,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.belfortdev.homelyTests;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.belfortdev.homely-tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -966,7 +986,7 @@
 				DEVELOPMENT_TEAM = 3N2ZMMKPFS;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.belfortdev.homelyUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.belfortdev.homely-ui-tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -983,7 +1003,7 @@
 				DEVELOPMENT_TEAM = 3N2ZMMKPFS;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.belfortdev.homelyUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.belfortdev.homely-ui-tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;

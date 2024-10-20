@@ -7,9 +7,7 @@
 
 import SwiftUI
 
-struct SignUpScreen: ScreenProtocol {
-    static var id = ScreenID.signUp
-    
+struct SignUpScreen: View {
     @ThemeProvider private var theme
     
     @State private var vm: SignUpViewModel

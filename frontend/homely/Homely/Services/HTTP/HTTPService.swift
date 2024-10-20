@@ -140,7 +140,7 @@ private extension HTTPService {
     
     /**
      Initiates an HTTP request while ensuring no duplicate requests for the same endpoint are made concurrently.
-
+     
      - Parameters:
      - endpoint: The endpoint to request.
      - method: The HTTP method to use (GET, POST, etc.).
@@ -169,7 +169,7 @@ private extension HTTPService {
             throw error
         }
     }
-
+    
     /**
      Executes an HTTP request with retry logic for handling transient errors.
      
@@ -188,7 +188,6 @@ private extension HTTPService {
                 
                 guard error.isRetryable, currentRetryCount < maxRetryCount else { throw error }
                 
-                // Increment retry count and calculate backoff delay
                 currentRetryCount += 1
                 logInfo("Start retrying request (\(currentRetryCount)) due to error: \(error).")
                 let backoffDelay = calculateBackoffDelay(for: currentRetryCount)
@@ -207,11 +206,15 @@ private extension HTTPService {
     func executeRequest<T: Decodable>(_ endpoint: E, method: String, body: Data? = nil) async throws -> T {
         logInfo("Executing request for \(endpoint.path)...")
         
-        let request = try createRequest(endpoint: endpoint, method: method, body: body)
-        let (data, response) = try await session.data(for: request)
-        
-        _ = try validateResponse(response, endpoint: endpoint)
-        return try decodeResponse(data)
+        do {
+            let request = try createRequest(endpoint: endpoint, method: method, body: body)
+            let (data, response) = try await session.data(for: request)
+            
+            _ = try validateResponse(response, endpoint: endpoint)
+            return try decodeResponse(data)
+        } catch let error as URLError {
+            throw parseURLError(error, for: endpoint)
+        }
     }
     
     func createRequest(endpoint: E, method: String, body: Data? = nil) throws -> URLRequest {

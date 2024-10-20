@@ -7,18 +7,18 @@
 
 import SwiftUI
 
-struct LoginScreen: ScreenProtocol {
-    static var id = ScreenID.login
-    
+struct LoginScreen: View {
     @ThemeProvider private var theme
     @ComponentsProvider private var components // Review this
     @NavigationManagerProvider<LoginRoute> private var navigation
     
     @State private var vm: LoginViewModel
+    @State private var showAutofill: Bool = true
     @FocusState private var focusedField: FocusedField?
     
     init(_ components: ComponentManager) {
         vm = LoginViewModel(with: components)
+        vm.autoLastEnteredEmail()
     }
     
     var body: some View {
@@ -40,6 +40,12 @@ struct LoginScreen: ScreenProtocol {
                     ErrorBottomSheet(errorMessage: vm.errorMessage)
                 }
                 .onSubmit(focusNextField)
+                .onChange(of: focusedField) { _, newFocus in
+                    let willHideKeyboard = newFocus == nil
+                    withAnimation(willHideKeyboard ? .easeInOut(duration: 0.5) : nil) {
+                        showAutofill = willHideKeyboard
+                    }
+                }
         }
     }
     
@@ -63,6 +69,21 @@ struct LoginScreen: ScreenProtocol {
             )
             .focused($focusedField, equals: .password)
             .submitLabel(.done)
+            
+            Toggle("Remember me?", isOn: $vm.saveCredentials)
+                .font(theme.font.body1)
+                .foregroundColor(theme.color.onSurface)
+                .padding(.horizontal, 2)
+                .padding(.top, -16)
+            
+            if showAutofill {
+                Spacer(minLength: 0)
+                IconButton(
+                    iconName: "faceid",
+                    action: vm.authenticateWithFaceID
+                )
+                .font(theme.font.h2)
+            }
             
             Spacer(minLength: 0)
             
