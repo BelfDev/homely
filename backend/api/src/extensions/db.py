@@ -1,7 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import String
-from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
+from sqlalchemy import String, DateTime, Enum, ForeignKey
+from sqlalchemy.dialects.postgresql import UUID as PGUUID
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship, composite
 
 from src.extensions.extensions import migrate
 from src.extensions.marshmallow import marsh
@@ -16,9 +16,13 @@ db = SQLAlchemy(model_class=Base)
 # Aliases
 DBString = String
 DBMapped = Mapped
+DBDateTime = DateTime
+DBEnum = Enum
+DBForeignKey = ForeignKey
+db_composite = composite
 db_mapped_column = mapped_column
 db_relationship = relationship()
-UUID = UUID
+UUID = PGUUID
 
 
 def init_app(app):
