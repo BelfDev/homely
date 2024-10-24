@@ -36,14 +36,14 @@ class Task(db.Model):
 
     id: DBMapped[uuid.UUID] = db_mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     title: DBMapped[str] = db_mapped_column(DBString(140), unique=False, nullable=False)
-    description: DBMapped[str] = db_mapped_column(DBString(280), unique=False, nullable=False)
+    description: DBMapped[str] = db_mapped_column(DBString(280), unique=False, nullable=True)
     time_window: DBMapped[TimeWindow] = db_composite(TimeWindow)
     created_by: DBMapped[uuid.UUID] = db_mapped_column(UUID(as_uuid=True), DBForeignKey('users.id'), nullable=False)
     created_at: DBMapped[datetime] = db_mapped_column(DBDateTime, nullable=False, default=datetime.now(UTC))
     updated_at: DBMapped[datetime] = db_mapped_column(DBDateTime, nullable=True, onupdate=datetime.now(UTC))
     status: DBMapped[TaskStatus] = db_mapped_column(DBEnum(TaskStatus), nullable=False, default=TaskStatus.OPENED)
 
-    assignees: DBMapped[list] = db_relationship('TaskAssignee', backref='task', lazy='subquery')
+    assignees: DBMapped[list] = db_relationship(TaskAssignee, backref='task', lazy='subquery')
 
     def __repr__(self):
         return f"<Task {self.title}, status: {self.status}>"
