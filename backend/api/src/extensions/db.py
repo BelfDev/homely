@@ -1,16 +1,19 @@
+from datetime import datetime
+
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import String, DateTime, Enum, ForeignKey
+from sqlalchemy import String, DateTime, Enum, ForeignKey, func
 from sqlalchemy.dialects.postgresql import UUID as PGUUID
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship, composite
+from sqlalchemy.orm import registry, Mapped, mapped_column, relationship, composite
 
 from src.extensions.extensions import migrate
 from src.extensions.marshmallow import marsh
 
-
-class Base(DeclarativeBase):
-    pass
-
-
+mapper_registry = registry(
+    type_annotation_map={
+        datetime: DateTime(timezone=True),
+    }
+)
+Base = mapper_registry.generate_base()
 db = SQLAlchemy(model_class=Base)
 
 # Aliases
@@ -21,8 +24,9 @@ DBEnum = Enum
 DBForeignKey = ForeignKey
 db_composite = composite
 db_mapped_column = mapped_column
-db_relationship = relationship()
+db_relationship = relationship
 UUID = PGUUID
+ormfunc = func
 
 
 def init_app(app):

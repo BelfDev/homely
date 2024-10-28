@@ -5,6 +5,7 @@ from flask import Flask, jsonify
 from src.config import DevConfig, ProdConfig, TestConfig
 from src.extensions import db, db_init_app, cors, jwt, marsh, swagger_ui
 from src.user import user_blueprint
+from src.task import task_blueprint
 from src.common import user_identity_lookup, user_lookup_callback
 
 
@@ -48,10 +49,10 @@ def register_extensions(app):
 
 def register_routes(app):
     origins = app.config.get("CORS_ORIGIN_WHITELIST", "*")
-    cors.init_app(user_blueprint, origins=origins)
+    cors.init_app(app, origins=origins)
 
     app.register_blueprint(user_blueprint, url_prefix="/api")
-
+    app.register_blueprint(task_blueprint, url_prefix="/api")
 
 def create_instance_dir(app):
     try:
