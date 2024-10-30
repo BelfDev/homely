@@ -8,7 +8,6 @@ class TaskSchema(WireSchema):
         model = Task
         load_instance = True
         include_fk = True
-        exclude = ("assignees",)
 
     id = fields.UUID(dump_only=True)
     title = fields.String(required=True, validate=validate.Length(min=1, max=140))
@@ -18,5 +17,6 @@ class TaskSchema(WireSchema):
     created_at = fields.DateTime(dump_only=True)
     updated_at = fields.DateTime(dump_only=True)
     status = fields.String(
-        required=True, validate=validate.OneOf([status.value for status in TaskStatus])
+        dump_only=True, validate=validate.OneOf([status.value for status in TaskStatus])
     )
+    assignees = fields.List(fields.UUID(), required=False)

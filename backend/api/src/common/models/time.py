@@ -4,7 +4,7 @@ from datetime import datetime
 from src.extensions import WireSchema, fields
 
 
-@dataclass(frozen=True)
+@dataclass
 class TimeWindow:
     start_time: datetime
     end_time: datetime
