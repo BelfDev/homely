@@ -9,8 +9,8 @@ class TaskWireInSchema(WireSchema):
 
     title = fields.String(required=True, validate=validate.Length(min=1, max=140))
     description = fields.String(required=False, validate=validate.Length(max=280))
-    start_at = fields.DateTime(dump_only=True)
-    end_at = fields.DateTime(dump_only=True)
+    start_at = fields.DateTime()
+    end_at = fields.DateTime()
     created_by = fields.UUID(dump_only=True)
     created_at = fields.DateTime(dump_only=True)
     updated_at = fields.DateTime(dump_only=True)
@@ -37,17 +37,6 @@ class TaskWireInSchema(WireSchema):
         return task
 
 
-# class TaskAssigneeSchema(WireSchema):
-#     class Meta:
-#         model = TaskAssignee
-#         include_fk = True
-#
-#     user_id = fields.UUID(dump_only=True)
-#     task_id = fields.UUID(dump_only=True)
-#     assigned_at = fields.DateTime(dump_only=True)
-#     updated_at = fields.DateTime(dump_only=True)
-
-
 class TaskWireOutSchema(WireSchema):
     class Meta:
         model = Task
@@ -59,7 +48,8 @@ class TaskWireOutSchema(WireSchema):
     # Include more detailed output for assignees
     assignees = fields.Method("get_assignees", dump_only=True)
 
-    def get_assignees(self, task):
+    @staticmethod
+    def get_assignees(task):
         return [
             {
                 "user_id": str(assignee.user_id),
