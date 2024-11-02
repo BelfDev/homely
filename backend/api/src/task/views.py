@@ -35,3 +35,10 @@ def create_task():
 
     result = task_wire_out_schema.dump(task_from_db)
     return result, 201
+
+
+@bp.route("/v1/tasks/<uuid:task_id>", methods=["GET"])
+@jwt_required()
+def get_task(task_id):
+    task = Task.query.get_or_404(task_id)
+    return task_wire_out_schema.dump(task), 200
