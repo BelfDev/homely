@@ -1,5 +1,5 @@
 from flask_marshmallow import Marshmallow
-from marshmallow import INCLUDE, fields, validate, ValidationError, post_load
+from marshmallow import INCLUDE, fields, validate, ValidationError, pre_load, post_load, post_dump
 
 marsh = Marshmallow()
 ValidationError = ValidationError
@@ -7,6 +7,9 @@ INCLUDE = INCLUDE
 fields = fields
 validate = validate
 post_load = post_load
+pre_load = pre_load
+post_dump = post_dump
+auto_field = marsh.auto_field
 
 
 def camelcase(s):
