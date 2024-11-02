@@ -1,4 +1,6 @@
-from src.extensions import WireSchema, fields, validate, post_load, ValidationError
+from datetime import datetime, timezone
+
+from src.extensions import WireSchema, fields, validate, pre_load, post_load, ValidationError
 from src.user.models import User
 from .models import TaskStatus, Task, TaskAssignee
 
@@ -9,8 +11,11 @@ class TaskWireInSchema(WireSchema):
 
     title = fields.String(required=True, validate=validate.Length(min=1, max=140))
     description = fields.String(required=False, validate=validate.Length(max=280))
-    start_at = fields.DateTime()
-    end_at = fields.DateTime()
+    start_at = fields.DateTime(
+        required=False, validate=lambda val: val <= datetime.now(timezone.utc),
+        error_messages={"validator_failed": "Start date cannot be in the future"}
+    )
+    end_at = fields.DateTime(required=False)
     created_by = fields.UUID(dump_only=True)
     created_at = fields.DateTime(dump_only=True)
     updated_at = fields.DateTime(dump_only=True)
@@ -18,6 +23,13 @@ class TaskWireInSchema(WireSchema):
         dump_only=True, validate=validate.OneOf([status.value for status in TaskStatus])
     )
     assignees = fields.List(fields.UUID(), required=False)
+
+    @pre_load
+    def validate_dates(self, data, **kwargs):
+        if "start_at" in data and "end_at" in data:
+            if data["start_at"] > data["end_at"]:
+                raise ValidationError("End date must be after start date", field_name="end_at")
+        return data
 
     @post_load
     def make_task(self, data, **kwargs):
@@ -42,14 +54,11 @@ class TaskWireOutSchema(WireSchema):
         model = Task
         include_fk = True
 
-    status = fields.String(
-        dump_only=True, validate=validate.OneOf([status.value for status in TaskStatus])
-    )
-    # Include more detailed output for assignees
-    assignees = fields.Method("get_assignees", dump_only=True)
+    assignees = fields.Method("adapt_assignees", dump_only=True)
 
     @staticmethod
-    def get_assignees(task):
+    def adapt_assignees(task):
+        """Convert assignees to a list of dictionaries with user details."""
         return [
             {
                 "user_id": str(assignee.user_id),

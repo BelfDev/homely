@@ -25,3 +25,8 @@ class WireSchema(marsh.SQLAlchemyAutoSchema):
     @staticmethod
     def on_bind_field(field_name, field_obj):
         field_obj.data_key = camelcase(field_obj.data_key or field_name)
+
+    @post_dump
+    def remove_none_values(self, data, **kwargs):
+        """Remove keys with None values from serialized output."""
+        return {key: value for key, value in data.items() if value is not None}
