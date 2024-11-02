@@ -1,7 +1,7 @@
-from src.common.models.time import TimeWindowSchema
 from src.extensions import WireSchema, fields, validate, post_load, ValidationError
 from src.user.models import User
 from .models import TaskStatus, Task, TaskAssignee
+
 
 class TaskWireInSchema(WireSchema):
     class Meta:
@@ -9,7 +9,8 @@ class TaskWireInSchema(WireSchema):
 
     title = fields.String(required=True, validate=validate.Length(min=1, max=140))
     description = fields.String(required=False, validate=validate.Length(max=280))
-    time_window = fields.Nested(TimeWindowSchema(), required=False)
+    start_at = fields.DateTime(dump_only=True)
+    end_at = fields.DateTime(dump_only=True)
     created_by = fields.UUID(dump_only=True)
     created_at = fields.DateTime(dump_only=True)
     updated_at = fields.DateTime(dump_only=True)
@@ -34,3 +35,36 @@ class TaskWireInSchema(WireSchema):
         task.assignees = task_assignees
 
         return task
+
+
+# class TaskAssigneeSchema(WireSchema):
+#     class Meta:
+#         model = TaskAssignee
+#         include_fk = True
+#
+#     user_id = fields.UUID(dump_only=True)
+#     task_id = fields.UUID(dump_only=True)
+#     assigned_at = fields.DateTime(dump_only=True)
+#     updated_at = fields.DateTime(dump_only=True)
+
+
+class TaskWireOutSchema(WireSchema):
+    class Meta:
+        model = Task
+        include_fk = True
+
+    status = fields.String(
+        dump_only=True, validate=validate.OneOf([status.value for status in TaskStatus])
+    )
+    # Include more detailed output for assignees
+    assignees = fields.Method("get_assignees", dump_only=True)
+
+    def get_assignees(self, task):
+        return [
+            {
+                "user_id": str(assignee.user_id),
+                "first_name": assignee.user.first_name,
+                "last_name": assignee.user.last_name
+            }
+            for assignee in task.assignees
+        ]
