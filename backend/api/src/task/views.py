@@ -36,6 +36,23 @@ def create_task():
     return task_wire_out_schema.dump(task_from_db), 201
 
 
+@bp.route("/v1/tasks", methods=["GET"])
+@jwt_required()
+def get_all_tasks():
+    user_tasks = Task.query.filter_by(created_by=current_user.id).all()
+    return task_wire_out_schema.dump(user_tasks, many=True), 200
+
+
+@bp.route("/v1/tasks/<uuid:task_id>", methods=["GET"])
+@jwt_required()
+def get_task(task_id):
+    task = Task.query.get_or_404(task_id)
+    if not task.created_by == current_user.id:
+        return jsonify({"msg": "Task not found or access is forbidden"}), 404
+
+    return task_wire_out_schema.dump(task), 200
+
+
 @bp.route("/v1/tasks/<uuid:task_id>", methods=["PUT"])
 @jwt_required()
 def update_task(task_id):
@@ -58,20 +75,3 @@ def update_task(task_id):
     db.session.commit()
 
     return task_wire_out_schema.dump(updated_task), 200
-
-
-@bp.route("/v1/tasks/<uuid:task_id>", methods=["GET"])
-@jwt_required()
-def get_task(task_id):
-    task = Task.query.get_or_404(task_id)
-    if not task.created_by == current_user.id:
-        return jsonify({"msg": "Task not found or access is forbidden"}), 404
-
-    return task_wire_out_schema.dump(task), 200
-
-
-@bp.route("/v1/tasks", methods=["GET"])
-@jwt_required()
-def get_all_tasks():
-    user_tasks = Task.query.filter_by(created_by=current_user.id).all()
-    return task_wire_out_schema.dump(user_tasks, many=True), 200

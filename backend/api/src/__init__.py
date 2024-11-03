@@ -54,6 +54,7 @@ def register_routes(app):
     app.register_blueprint(user_blueprint, url_prefix="/api")
     app.register_blueprint(task_blueprint, url_prefix="/api")
 
+
 def create_instance_dir(app):
     try:
         os.makedirs(app.instance_path)
