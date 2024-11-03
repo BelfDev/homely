@@ -8,8 +8,8 @@ from src.extensions import (
     post_load,
     ValidationError,
 )
-from src.user.models import User
 from .models import TaskStatus, Task, TaskAssignee
+from ..user.models import User
 
 
 class TaskWireInSchema(WireSchema):
@@ -27,8 +27,10 @@ class TaskWireInSchema(WireSchema):
     created_by = fields.UUID(dump_only=True)
     created_at = fields.DateTime(dump_only=True)
     updated_at = fields.DateTime(dump_only=True)
-    status = fields.String(
-        dump_only=True, validate=validate.OneOf([status.value for status in TaskStatus])
+    status = fields.Enum(
+        TaskStatus,
+        required=False,
+        error_messages={"validator_failed": "Invalid task status."}
     )
     assignees = fields.List(fields.UUID(), required=False)
 
@@ -42,9 +44,9 @@ class TaskWireInSchema(WireSchema):
         return data
 
     @post_load
-    def make_task(self, data, **kwargs):
+    def make_or_update_task(self, data, **kwargs):
         assignee_ids = data.pop("assignees", [])
-        task = Task(**data)
+        task = kwargs.get('instance', Task(**data))
 
         if not assignee_ids:
             return task
