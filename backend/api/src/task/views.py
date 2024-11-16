@@ -33,7 +33,9 @@ def create_task():
 
     db.session.add(new_task)
     db.session.flush()
+
     db_utils.add_assignees(assignee_ids, new_task.id)
+
     db.session.commit()
 
     return task_wire_out.dump(new_task), 201
@@ -42,7 +44,7 @@ def create_task():
 @bp.route("/v1/tasks", methods=["GET"])
 @jwt_required()
 def get_all_tasks():
-    user_tasks = Task.query.filter_by(created_by=current_user.id).all()
+    user_tasks = Task.query.filter_by(created_by=current_user.id).options(db.joinedload(Task.assignees)).all()
     return task_wire_out.dump(user_tasks, many=True), 200
 
 
