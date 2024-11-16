@@ -1,5 +1,3 @@
-from pprint import pprint
-
 from flask import Blueprint, request, jsonify
 
 from src.extensions import (
@@ -8,8 +6,9 @@ from src.extensions import (
     jwt_required,
     current_user,
 )
-from src.task.models import Task
+from src.task.models import Task, TaskAssignee
 from src.task.schemas import TaskWireInSchema, TaskWireOutSchema
+from src.user.models import User
 
 bp = Blueprint("tasks", __name__)
 task_wire_in = TaskWireInSchema()
@@ -23,6 +22,8 @@ def create_task():
         return jsonify({"msg": "Missing JSON in request"}), 400
 
     data = request.json
+    assignee_ids = data.pop("assignees", [])
+
     try:
         new_task = task_wire_in.load(data)
     except ValidationError as err:
@@ -31,11 +32,20 @@ def create_task():
     new_task.created_by = current_user.id
 
     db.session.add(new_task)
+    db.session.flush()
+
+    if assignee_ids:
+        assignees = User.query.filter(User.id.in_(assignee_ids)).all()
+        if len(assignees) != len(assignee_ids):
+            return jsonify({"msg": "One or more assignee IDs are invalid"}), 400
+
+        for user in assignees:
+            task_assignee = TaskAssignee(user_id=user.id, task_id=new_task.id)
+            db.session.add(task_assignee)
+
     db.session.commit()
 
-    task_from_db = Task.query.get(new_task.id)
-
-    return task_wire_out.dump(task_from_db), 201
+    return task_wire_out.dump(new_task), 201
 
 
 @bp.route("/v1/tasks", methods=["GET"])
@@ -66,14 +76,23 @@ def update_task(task_id):
         return jsonify({"msg": "Task not found or access is forbidden"}), 404
 
     data = request.json
+    assignee_ids = data.pop("assignees", [])
 
     try:
-        task_wire_in.load(data, instance=task, partial=True)
+        updated_task = task_wire_in.load(data, instance=task, partial=True)
     except ValidationError as err:
         return jsonify(err.messages), 400
 
-    pprint(task)
+    if assignee_ids:
+        assignees = User.query.filter(User.id.in_(assignee_ids)).all()
+        if len(assignees) != len(assignee_ids):
+            return jsonify({"msg": "One or more assignee IDs are invalid"}), 400
+
+        for user in assignees:
+            task_assignee = TaskAssignee(user_id=user.id, task_id=task.id)
+            db.session.add(task_assignee)
+
     db.session.commit()
 
     # Return the updated task data
-    return task_wire_out.dump(task), 200
+    return task_wire_out.dump(updated_task), 200

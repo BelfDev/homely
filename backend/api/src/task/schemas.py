@@ -5,16 +5,16 @@ from src.extensions import (
     fields,
     validate,
     pre_load,
-    post_load,
     ValidationError,
 )
-from .models import TaskStatus, Task, TaskAssignee
-from ..user.models import User
+from .models import TaskStatus, Task
 
 
 class TaskWireInSchema(WireSchema):
     class Meta:
+        model = Task
         include_fk = True
+        load_instance = True
 
     title = fields.String(required=True, validate=validate.Length(min=1, max=140))
     description = fields.String(required=False, validate=validate.Length(max=280))
@@ -42,25 +42,6 @@ class TaskWireInSchema(WireSchema):
                     "End date must be after start date", field_name="end_at"
                 )
         return data
-
-    @post_load
-    def make_or_update_task(self, data, **kwargs):
-        assignee_ids = data.pop("assignees", [])
-        task = kwargs.get('instance', Task(**data))
-
-        if not assignee_ids:
-            return task
-
-        assignees = User.query.filter(User.id.in_(assignee_ids)).all()
-        if len(assignees) != len(assignee_ids):
-            raise ValidationError(
-                "One or more assignee IDs are invalid.", field_name="assignees"
-            )
-
-        task_assignees = [TaskAssignee(user_id=assignee.id) for assignee in assignees]
-        task.assignees = task_assignees
-
-        return task
 
 
 class TaskWireOutSchema(WireSchema):

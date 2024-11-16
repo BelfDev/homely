@@ -75,7 +75,7 @@ class Task(db.Model):
         default=TaskStatus.OPENED,
     )
 
-    assignees: DBMapped[List["TaskAssignee"]] = db_relationship(lazy="subquery")
+    assignees: DBMapped[List["TaskAssignee"]] = db_relationship(lazy="subquery", cascade='all, delete-orphan')
 
     def __repr__(self):
         return f"<Task {self.title}, status: {self.status}>"
