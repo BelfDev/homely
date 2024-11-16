@@ -82,3 +82,20 @@ def update_task(task_id):
 
     # Return the updated task data
     return task_wire_out.dump(updated_task), 200
+
+
+@bp.route("/v1/tasks/<uuid:task_id>", methods=["DELETE"])
+@jwt_required()
+def delete_task(task_id):
+    task = Task.query.get_or_404(task_id)
+
+    if task.created_by != current_user.id:
+        return jsonify({"msg": "Task not found or access is forbidden"}), 403
+
+    try:
+        db.session.delete(task)
+        db.session.commit()
+        return jsonify({"msg": "Task deleted successfully"}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"msg": f"An error occurred: {str(e)}"}), 500
