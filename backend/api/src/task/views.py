@@ -1,14 +1,14 @@
 from flask import Blueprint, request, jsonify
 
+import src.task.db as db_utils
 from src.extensions import (
     db,
     ValidationError,
     jwt_required,
     current_user,
 )
-from src.task.models import Task, TaskAssignee
+from src.task.models import Task
 from src.task.schemas import TaskWireInSchema, TaskWireOutSchema
-from src.user.models import User
 
 bp = Blueprint("tasks", __name__)
 task_wire_in = TaskWireInSchema()
@@ -33,16 +33,7 @@ def create_task():
 
     db.session.add(new_task)
     db.session.flush()
-
-    if assignee_ids:
-        assignees = User.query.filter(User.id.in_(assignee_ids)).all()
-        if len(assignees) != len(assignee_ids):
-            return jsonify({"msg": "One or more assignee IDs are invalid"}), 400
-
-        for user in assignees:
-            task_assignee = TaskAssignee(user_id=user.id, task_id=new_task.id)
-            db.session.add(task_assignee)
-
+    db_utils.add_assignees(assignee_ids, new_task.id)
     db.session.commit()
 
     return task_wire_out.dump(new_task), 201
@@ -83,14 +74,7 @@ def update_task(task_id):
     except ValidationError as err:
         return jsonify(err.messages), 400
 
-    if assignee_ids:
-        assignees = User.query.filter(User.id.in_(assignee_ids)).all()
-        if len(assignees) != len(assignee_ids):
-            return jsonify({"msg": "One or more assignee IDs are invalid"}), 400
-
-        for user in assignees:
-            task_assignee = TaskAssignee(user_id=user.id, task_id=task.id)
-            db.session.add(task_assignee)
+    db_utils.add_assignees(assignee_ids, task_id)
 
     db.session.commit()
 
