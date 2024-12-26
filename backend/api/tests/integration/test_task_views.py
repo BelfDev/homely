@@ -61,3 +61,22 @@ def test_create_minimal_task_success(client, session):
     assert task.created_by is not None
     assert isinstance(task.created_at, datetime)
     assert task.updated_at is None
+
+
+def test_create_task_unauthorized(client, session):
+    title = "Test Task"
+
+    response = client_create_task(
+        client,
+        title=title,
+        authenticated=False,
+    )
+
+    # Verify response status and message
+    assert response.status_code == 401
+    data = response.get_json()
+    assert data["msg"] == "Missing Authorization Header"
+
+    # Verify no task was created in database
+    task_count = session.query(Task).count()
+    assert task_count == 0
