@@ -2,7 +2,11 @@ from uuid import UUID
 from src.task.models import Task, TaskStatus
 from datetime import datetime, timedelta, timezone
 
-from tests.integration.common_aux import db_add_test_user, generate_valid_access_token, is_valid_iso_timestamp
+from tests.integration.common_aux import (
+    db_add_test_user,
+    generate_valid_access_token,
+    is_valid_iso_timestamp,
+)
 from .task_aux import (
     client_create_task,
     client_get_my_tasks,
@@ -341,8 +345,8 @@ def test_create_task_with_three_assignees(client, session):
 
 
 def test_get_all_tasks(client, session):
-    user_id, access_token =  generate_valid_access_token(client)
-    
+    user_id, access_token = generate_valid_access_token(client)
+
     task1 = Task(
         title="First Task",
         description="This is the first task.",
@@ -378,3 +382,18 @@ def test_get_all_tasks(client, session):
     assert "First Task" in task_titles
     assert "Second Task" in task_titles
     assert "Third Task" in task_titles
+
+
+def test_retrieve_all_tasks_empty(client, session):
+    _, access_token = generate_valid_access_token(client)
+    response = client_get_my_tasks(client, access_token)
+
+    assert response.status_code == 200
+    data = response.get_json()
+
+    assert isinstance(data, list)
+    assert len(data) == 0
+
+    # Verify no task was created in database
+    task_count = session.query(Task).count()
+    assert task_count == 0
