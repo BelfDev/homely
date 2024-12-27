@@ -230,7 +230,6 @@ def test_create_task_with_end_at_equal_to_start_at(client, session):
 
 
 def test_create_task_with_only_end_at(client, session):
-    """Test that creating a task with only end_at fails."""
     end_at = datetime.now(timezone.utc)
     response = client_create_task(client, title="End Only Task", end_at=end_at)
 
@@ -285,3 +284,27 @@ def test_create_task_with_timezone_dates(client, session):
     task = session.query(Task).filter_by(id=data["id"]).first()
     assert task.start_at is not None
     assert task.end_at is not None
+
+
+def test_create_task_without_title(client, session):
+    response = client_create_task(client, title=None)
+    assert response.status_code == 400
+
+    # Verify no task was created in database
+    task_count = session.query(Task).count()
+    assert task_count == 0
+
+
+def test_create_task_with_inexistent_customers_as_assignees(client, session):
+    title = "Task with Inexistent Users"
+    assignees = [str(UUID("00000000-0000-0000-0000-000000000001"))]
+
+    response = client_create_task(
+        client, title=title, assignees=assignees
+    )
+    assert response.status_code == 400
+
+    # Verify no task was created in database
+    task_count = session.query(Task).count()
+    assert task_count == 0
+

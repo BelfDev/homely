@@ -26,17 +26,21 @@ def create_task():
 
     try:
         new_task = task_wire_in.load(data)
+        new_task.created_by = current_user.id
+
+        db.session.add(new_task)
+        db.session.flush()
+
+        db_utils.add_assignees(assignee_ids, new_task.id)
+
+        db.session.commit()
+
     except ValidationError as err:
+        db.session.rollback()
         return jsonify(err.messages), 400
-
-    new_task.created_by = current_user.id
-
-    db.session.add(new_task)
-    db.session.flush()
-
-    db_utils.add_assignees(assignee_ids, new_task.id)
-
-    db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"msg": f"An error occurred: {str(e)}"}), 500
 
     return task_wire_out.dump(new_task), 201
 
@@ -44,7 +48,11 @@ def create_task():
 @bp.route("/v1/tasks", methods=["GET"])
 @jwt_required()
 def get_all_tasks():
-    user_tasks = Task.query.filter_by(created_by=current_user.id).options(db.joinedload(Task.assignees)).all()
+    user_tasks = (
+        Task.query.filter_by(created_by=current_user.id)
+        .options(db.joinedload(Task.assignees))
+        .all()
+    )
     return task_wire_out.dump(user_tasks, many=True), 200
 
 
