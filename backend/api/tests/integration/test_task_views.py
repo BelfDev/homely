@@ -299,12 +299,41 @@ def test_create_task_with_inexistent_customers_as_assignees(client, session):
     title = "Task with Inexistent Users"
     assignees = [str(UUID("00000000-0000-0000-0000-000000000001"))]
 
-    response = client_create_task(
-        client, title=title, assignees=assignees
-    )
+    response = client_create_task(client, title=title, assignees=assignees)
     assert response.status_code == 400
 
     # Verify no task was created in database
     task_count = session.query(Task).count()
     assert task_count == 0
 
+
+def test_create_task_with_three_assignees(client, session):
+    assignee1 = db_add_test_user(
+        session, email="assignee1@example.com", first_name="Test", last_name="User1"
+    )
+    assignee2 = db_add_test_user(
+        session, email="assignee2@example.com", first_name="Test", last_name="User2"
+    )
+    assignee3 = db_add_test_user(
+        session, email="assignee3@example.com", first_name="Test", last_name="User3"
+    )
+
+    assignee_ids = [str(assignee1.id), str(assignee2.id), str(assignee3.id)]
+
+    response = client_create_task(
+        client,
+        title="Task with Three Assignees",
+        description="This task is assigned to three users.",
+        assignees=assignee_ids,
+    )
+
+    assert response.status_code == 201
+
+    # Verify the task in the database
+    task = session.query(Task).filter_by(title="Task with Three Assignees").first()
+    assert task is not None
+    assert len(task.assignees) == 3  # Ensure three assignees are linked to the task
+
+    # Verify the assignees are correct
+    assigned_user_ids = {str(assignee.user_id) for assignee in task.assignees}
+    assert assigned_user_ids == set(assignee_ids)
