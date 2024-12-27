@@ -1,6 +1,8 @@
 from datetime import datetime
 from functools import lru_cache
 
+from src.user.models import User
+
 
 @lru_cache(maxsize=1)
 def generate_valid_access_token(client):
@@ -40,3 +42,34 @@ def is_valid_iso_timestamp(timestamp_str: str) -> bool:
         return True
     except ValueError:
         return False
+
+
+def db_add_test_user(
+    session,
+    email: str = "test.user@example.com",
+    password: str = "securepass123",
+    first_name: str = "Test",
+    last_name: str = "User",
+    role: str = "user",
+) -> User:
+    """
+    Creates and adds a test user to the database session.
+
+    Args:
+        session: SQLAlchemy session
+        email: User email (optional)
+        password: User password (optional)
+        first_name: User first name (optional)
+        last_name: User last name (optional)
+        role: User role (optional)
+
+    Returns:
+        User: Created user instance
+    """
+    user = User(email=email, first_name=first_name, last_name=last_name, role=role)
+    user.password = password
+
+    session.add(user)
+    session.flush() 
+
+    return user

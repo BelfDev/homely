@@ -49,9 +49,9 @@ def client_create_task(
     if status is not None:
         data["status"] = status
     if start_at is not None:
-        data["start_at"] = start_at.isoformat()
+        data["startAt"] = start_at.isoformat()
     if end_at is not None:
-        data["end_at"] = end_at.isoformat()
+        data["endAt"] = end_at.isoformat()
 
     return client.post(
         tasks_route,
