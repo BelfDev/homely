@@ -1,9 +1,15 @@
 from datetime import datetime
 
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import String, DateTime, Enum, ForeignKey, func
+from sqlalchemy import String, DateTime, Enum, ForeignKey, func, CheckConstraint
 from sqlalchemy.dialects.postgresql import UUID as PGUUID
-from sqlalchemy.orm import registry, Mapped, mapped_column, relationship, composite
+from sqlalchemy.orm import (
+    registry,
+    Mapped,
+    mapped_column,
+    relationship,
+    composite,
+)
 
 from src.extensions.extensions import migrate
 from src.extensions.marshmallow import marsh
@@ -27,7 +33,7 @@ db_mapped_column = mapped_column
 db_relationship = relationship
 UUID = PGUUID
 ormfunc = func
-
+DBCheckConstraint = CheckConstraint
 
 def init_app(app):
     try:

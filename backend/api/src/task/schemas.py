@@ -30,17 +30,31 @@ class TaskWireInSchema(WireSchema):
     status = fields.Enum(
         TaskStatus,
         required=False,
-        error_messages={"validator_failed": "Invalid task status."}
+        error_messages={"validator_failed": "Invalid task status."},
     )
     assignees = fields.List(fields.UUID(), required=False)
 
     @pre_load
     def validate_dates(self, data, **kwargs):
-        if "start_at" in data and "end_at" in data:
-            if data["start_at"] > data["end_at"]:
+        """Validate task dates follow the rules:
+        - Both can be null
+        - Only start_at can be present
+        - If both present, end_at must be after start_at
+        """
+        start_at = data.get("startAt")
+        end_at = data.get("endAt")
+
+        if end_at is not None:
+            if start_at is None:
                 raise ValidationError(
-                    "End date must be after start date", field_name="end_at"
+                    "start_at is required when end_at is provided",
+                    field_name="start_at",
                 )
+            if start_at >= end_at:  # Changed from > to >=
+                raise ValidationError(
+                    "end_at must be after start_at", field_name="end_at"
+                )
+
         return data
 
 

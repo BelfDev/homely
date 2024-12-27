@@ -144,3 +144,144 @@ def test_create_task_unauthorized(client, session):
     # Verify no task was created in database
     task_count = session.query(Task).count()
     assert task_count == 0
+
+
+def test_create_task_with_no_dates(client, session):
+    response = client_create_task(client, title="No Dates Task")
+
+    assert response.status_code == 201
+    data = response.get_json()
+
+    assert "startAt" not in data
+    assert "endAt" not in data
+
+    # Verify task in the database has null dates
+    task = session.query(Task).filter_by(id=data["id"]).first()
+    assert task.start_at is None
+    assert task.end_at is None
+
+
+def test_create_task_with_only_start_at(client, session):
+    start_at = datetime.now(timezone.utc)
+    response = client_create_task(client, title="Start Only Task", start_at=start_at)
+
+    assert response.status_code == 201
+    data = response.get_json()
+
+    assert is_valid_iso_timestamp(data["startAt"])
+    assert "endAt" not in data
+
+    # Verify task in the database
+    task = session.query(Task).filter_by(id=data["id"]).first()
+    assert task.start_at is not None
+    assert task.end_at is None
+
+
+def test_create_task_with_valid_dates(client, session):
+    start_at = datetime.now(timezone.utc)
+    end_at = start_at + timedelta(days=1)
+    response = client_create_task(
+        client, title="Valid Dates Task", start_at=start_at, end_at=end_at
+    )
+
+    assert response.status_code == 201
+    data = response.get_json()
+
+    assert is_valid_iso_timestamp(data["startAt"])
+    assert is_valid_iso_timestamp(data["startAt"])
+    assert datetime.fromisoformat(
+        data["endAt"].replace("Z", "+00:00")
+    ) > datetime.fromisoformat(data["startAt"].replace("Z", "+00:00"))
+
+    # Verify task in the database
+    task = session.query(Task).filter_by(id=data["id"]).first()
+    assert task.start_at is not None
+    assert task.end_at is not None
+
+
+def test_create_task_with_end_at_before_start_at(client, session):
+    start_at = datetime.now(timezone.utc)
+    end_at = start_at - timedelta(days=1)
+
+    response = client_create_task(
+        client, title="Invalid Date Range Task", start_at=start_at, end_at=end_at
+    )
+    assert response.status_code == 400
+
+    # Verify no task was created in database
+    task_count = session.query(Task).count()
+    assert task_count == 0
+
+
+def test_create_task_with_end_at_equal_to_start_at(client, session):
+    start_at = datetime.now(timezone.utc)
+    response = client_create_task(
+        client,
+        title="Equal Dates Task",
+        start_at=start_at,
+        end_at=start_at,
+    )
+
+    assert response.status_code == 400
+
+    # Verify no task was created in database
+    task_count = session.query(Task).count()
+    assert task_count == 0
+
+
+def test_create_task_with_only_end_at(client, session):
+    """Test that creating a task with only end_at fails."""
+    end_at = datetime.now(timezone.utc)
+    response = client_create_task(client, title="End Only Task", end_at=end_at)
+
+    assert response.status_code == 400
+
+    # Verify no task was created in database
+    task_count = session.query(Task).count()
+    assert task_count == 0
+
+
+def test_create_task_with_far_future_dates(client, session):
+    start_at = datetime.now(timezone.utc)
+    end_at = start_at + timedelta(days=365)  # One year later
+
+    response = client_create_task(
+        client, title="Future Task", start_at=start_at, end_at=end_at
+    )
+    assert response.status_code == 201
+    data = response.get_json()
+
+    assert (
+        datetime.fromisoformat(data["startAt"].replace("Z", "+00:00")).date()
+        == start_at.date()
+    )
+    assert (
+        datetime.fromisoformat(data["endAt"].replace("Z", "+00:00")).date()
+        == end_at.date()
+    )
+
+    # Verify task in the database
+    task = session.query(Task).filter_by(id=data["id"]).first()
+    assert task.start_at is not None
+    assert task.end_at is not None
+
+
+def test_create_task_with_timezone_dates(client, session):
+    start_at = datetime.now(timezone.utc)
+    end_at = start_at.astimezone(timezone(timedelta(hours=1))) + timedelta(days=1)
+
+    response = client_create_task(
+        client, title="Timezone Task", start_at=start_at, end_at=end_at
+    )
+    assert response.status_code == 201
+    data = response.get_json()
+
+    # Verify dates are normalized to UTC
+    start_returned = datetime.fromisoformat(data["startAt"].replace("Z", "+00:00"))
+    end_returned = datetime.fromisoformat(data["endAt"].replace("Z", "+00:00"))
+    assert end_returned > start_returned
+
+    # Verify task in the database
+    task = session.query(Task).filter_by(id=data["id"]).first()
+    assert task.start_at is not None
+    assert task.end_at is not None

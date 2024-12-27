@@ -14,6 +14,7 @@ from src.extensions.db import (
     DBForeignKey,
     db_relationship,
     ormfunc,
+    DBCheckConstraint,
 )
 from src.user.models import User
 
@@ -76,9 +77,16 @@ class Task(db.Model):
     )
 
     assignees: DBMapped[List["TaskAssignee"]] = db_relationship(
-        lazy="subquery",
-        cascade='all, delete-orphan',
-        passive_deletes=True
+        lazy="subquery", cascade="all, delete-orphan", passive_deletes=True
+    )
+
+    __table_args__ = (
+        DBCheckConstraint(
+            "(start_at IS NULL AND end_at IS NULL) OR "  # both null
+            "(start_at IS NOT NULL AND end_at IS NULL) OR "  # only start_at present
+            "(start_at IS NOT NULL AND end_at IS NOT NULL AND end_at > start_at)",  # both present and valid
+            name="check_task_dates",
+        ),
     )
 
     def __repr__(self):
