@@ -72,10 +72,7 @@ def test_create_complete_task_success(client, session):
     end_at = start_at + timedelta(days=7)
 
     assignee = db_add_test_user(
-        session,
-        email="assignee@example.com",
-        first_name="Test",
-        last_name="Assignee"
+        session, email="assignee@example.com", first_name="Test", last_name="Assignee"
     )
     assignees = [str(assignee.id)]
 
@@ -85,7 +82,7 @@ def test_create_complete_task_success(client, session):
         description=description,
         assignees=assignees,
         start_at=start_at,
-        end_at=end_at
+        end_at=end_at,
     )
 
     assert response.status_code == 201
@@ -113,7 +110,7 @@ def test_create_complete_task_success(client, session):
     assert data["status"] == TaskStatus.OPENED.value.upper()
     assert isinstance(data["assignees"], list)
     assert len(data["assignees"]) == 1
-    assert UUID(data["assignees"][0]["user_id"]) == assignee.id
+    assert UUID(data["assignees"][0]["userId"]) == assignee.id
 
     # Verify timestamps
     assert is_valid_iso_timestamp(data["createdAt"])

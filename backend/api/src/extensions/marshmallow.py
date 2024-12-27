@@ -30,6 +30,18 @@ class WireSchema(marsh.SQLAlchemyAutoSchema):
     and snake-case for its internal representation.
     """
 
+    def _camelcase_dict(self, data):
+        """Recursively convert dictionary keys to camelCase."""
+        if isinstance(data, dict):
+            return {
+                camelcase(key) if isinstance(key, str) else key: 
+                self._camelcase_dict(value)
+                for key, value in data.items()
+            }
+        elif isinstance(data, list):
+            return [self._camelcase_dict(item) for item in data]
+        return data
+
     @staticmethod
     def on_bind_field(field_name, field_obj):
         field_obj.data_key = camelcase(field_obj.data_key or field_name)
@@ -38,3 +50,10 @@ class WireSchema(marsh.SQLAlchemyAutoSchema):
     def remove_none_values(self, data, **kwargs):
         """Remove keys with None values from serialized output."""
         return {key: value for key, value in data.items() if value is not None}
+
+    @post_dump(pass_many=True)
+    def camelcase_nested(self, data, many, **kwargs):
+        """Convert nested object keys to camelCase."""
+        if many:
+            return [self._camelcase_dict(item) for item in data]
+        return self._camelcase_dict(data)
