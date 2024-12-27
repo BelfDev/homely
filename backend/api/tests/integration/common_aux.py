@@ -7,7 +7,7 @@ from src.user.models import User
 @lru_cache(maxsize=1)
 def generate_valid_access_token(client):
     """
-    Creates a test customer and returns their access token.
+    Creates a test customer and returns their user id and access token.
     Uses lru_cache to avoid recreating the same customer multiple times.
 
     Args:
@@ -30,9 +30,10 @@ def generate_valid_access_token(client):
     )
 
     data = response.get_json()
+    user_id = data["id"] 
     access_token = data["accessToken"]
-
-    return access_token
+    
+    return user_id, access_token
 
 
 def is_valid_iso_timestamp(timestamp_str: str) -> bool:

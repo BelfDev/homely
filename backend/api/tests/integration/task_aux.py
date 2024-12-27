@@ -1,6 +1,6 @@
 from datetime import datetime
 from flask import Response
-from typing import List, Optional
+from typing import Dict, List, Optional
 from tests.integration.common_aux import generate_valid_access_token
 
 tasks_route = "/api/v1/tasks"
@@ -34,7 +34,7 @@ def client_create_task(
     """
     headers: Dict[str, str] = {}
     if authenticated:
-        access_token = generate_valid_access_token(client)
+        _, access_token =  generate_valid_access_token(client)
         headers["Authorization"] = f"Bearer {access_token}"
 
     data = {
@@ -56,5 +56,15 @@ def client_create_task(
     return client.post(
         tasks_route,
         json=data,
+        headers=headers,
+    )
+
+
+def client_get_my_tasks(client, access_token) -> Response:
+    headers: Dict[str, str] = {}
+    headers["Authorization"] = f"Bearer {access_token}"
+
+    return client.get(
+        tasks_route,
         headers=headers,
     )

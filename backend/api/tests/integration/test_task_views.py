@@ -2,9 +2,10 @@ from uuid import UUID
 from src.task.models import Task, TaskStatus
 from datetime import datetime, timedelta, timezone
 
-from tests.integration.common_aux import db_add_test_user, is_valid_iso_timestamp
+from tests.integration.common_aux import db_add_test_user, generate_valid_access_token, is_valid_iso_timestamp
 from .task_aux import (
     client_create_task,
+    client_get_my_tasks,
 )
 
 
@@ -337,3 +338,43 @@ def test_create_task_with_three_assignees(client, session):
     # Verify the assignees are correct
     assigned_user_ids = {str(assignee.user_id) for assignee in task.assignees}
     assert assigned_user_ids == set(assignee_ids)
+
+
+def test_get_all_tasks(client, session):
+    user_id, access_token =  generate_valid_access_token(client)
+    
+    task1 = Task(
+        title="First Task",
+        description="This is the first task.",
+        created_by=user_id,
+        status=TaskStatus.OPENED,
+    )
+    task2 = Task(
+        title="Second Task",
+        description="This is the second task.",
+        created_by=user_id,
+        status=TaskStatus.OPENED,
+    )
+    task3 = Task(
+        title="Third Task",
+        description="This is the third task.",
+        created_by=user_id,
+        status=TaskStatus.OPENED,
+    )
+
+    session.add_all([task1, task2, task3])
+    session.commit()
+
+    response = client_get_my_tasks(client, access_token)
+
+    assert response.status_code == 200
+    data = response.get_json()
+
+    # Verify that the number of tasks returned matches the number created
+    assert len(data) == 3  # We created 3 tasks
+
+    # Verify that the task details are correct
+    task_titles = {task["title"] for task in data}
+    assert "First Task" in task_titles
+    assert "Second Task" in task_titles
+    assert "Third Task" in task_titles
