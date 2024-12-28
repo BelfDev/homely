@@ -8,9 +8,11 @@ from tests.integration.common_aux import (
     is_valid_iso_timestamp,
 )
 from .task_aux import (
-    client_create_task,
+    client_patch_task,
+    client_post_task,
     client_get_my_tasks,
     client_get_task,
+    client_put_task,
     db_add_task,
     db_add_tasks,
 )
@@ -19,7 +21,7 @@ from .task_aux import (
 def test_create_minimal_task_success(client, session):
     title = "Test Task"
 
-    response = client_create_task(
+    response = client_post_task(
         client,
         title=title,
     )
@@ -84,7 +86,7 @@ def test_create_complete_task_success(client, session):
     )
     assignees = [str(assignee.id)]
 
-    response = client_create_task(
+    response = client_post_task(
         client,
         title=title,
         description=description,
@@ -138,7 +140,7 @@ def test_create_complete_task_success(client, session):
 def test_create_task_unauthorized(client, session):
     title = "Test Task"
 
-    response = client_create_task(
+    response = client_post_task(
         client,
         title=title,
         authenticated=False,
@@ -155,7 +157,7 @@ def test_create_task_unauthorized(client, session):
 
 
 def test_create_task_with_no_dates(client, session):
-    response = client_create_task(client, title="No Dates Task")
+    response = client_post_task(client, title="No Dates Task")
 
     assert response.status_code == 201
     data = response.get_json()
@@ -171,7 +173,7 @@ def test_create_task_with_no_dates(client, session):
 
 def test_create_task_with_only_start_at(client, session):
     start_at = datetime.now(timezone.utc)
-    response = client_create_task(client, title="Start Only Task", start_at=start_at)
+    response = client_post_task(client, title="Start Only Task", start_at=start_at)
 
     assert response.status_code == 201
     data = response.get_json()
@@ -188,7 +190,7 @@ def test_create_task_with_only_start_at(client, session):
 def test_create_task_with_valid_dates(client, session):
     start_at = datetime.now(timezone.utc)
     end_at = start_at + timedelta(days=1)
-    response = client_create_task(
+    response = client_post_task(
         client, title="Valid Dates Task", start_at=start_at, end_at=end_at
     )
 
@@ -211,7 +213,7 @@ def test_create_task_with_end_at_before_start_at(client, session):
     start_at = datetime.now(timezone.utc)
     end_at = start_at - timedelta(days=1)
 
-    response = client_create_task(
+    response = client_post_task(
         client, title="Invalid Date Range Task", start_at=start_at, end_at=end_at
     )
     assert response.status_code == 400
@@ -223,7 +225,7 @@ def test_create_task_with_end_at_before_start_at(client, session):
 
 def test_create_task_with_end_at_equal_to_start_at(client, session):
     start_at = datetime.now(timezone.utc)
-    response = client_create_task(
+    response = client_post_task(
         client,
         title="Equal Dates Task",
         start_at=start_at,
@@ -239,7 +241,7 @@ def test_create_task_with_end_at_equal_to_start_at(client, session):
 
 def test_create_task_with_only_end_at(client, session):
     end_at = datetime.now(timezone.utc)
-    response = client_create_task(client, title="End Only Task", end_at=end_at)
+    response = client_post_task(client, title="End Only Task", end_at=end_at)
 
     assert response.status_code == 400
 
@@ -252,7 +254,7 @@ def test_create_task_with_far_future_dates(client, session):
     start_at = datetime.now(timezone.utc)
     end_at = start_at + timedelta(days=365)  # One year later
 
-    response = client_create_task(
+    response = client_post_task(
         client, title="Future Task", start_at=start_at, end_at=end_at
     )
     assert response.status_code == 201
@@ -277,7 +279,7 @@ def test_create_task_with_timezone_dates(client, session):
     start_at = datetime.now(timezone.utc)
     end_at = start_at.astimezone(timezone(timedelta(hours=1))) + timedelta(days=1)
 
-    response = client_create_task(
+    response = client_post_task(
         client, title="Timezone Task", start_at=start_at, end_at=end_at
     )
     assert response.status_code == 201
@@ -295,7 +297,7 @@ def test_create_task_with_timezone_dates(client, session):
 
 
 def test_create_task_without_title(client, session):
-    response = client_create_task(client, title=None)
+    response = client_post_task(client, title=None)
     assert response.status_code == 400
 
     # Verify no task was created in database
@@ -307,7 +309,7 @@ def test_create_task_with_inexistent_customers_as_assignees(client, session):
     title = "Task with Inexistent Users"
     assignees = [str(UUID("00000000-0000-0000-0000-000000000001"))]
 
-    response = client_create_task(client, title=title, assignees=assignees)
+    response = client_post_task(client, title=title, assignees=assignees)
     assert response.status_code == 400
 
     # Verify no task was created in database
@@ -328,7 +330,7 @@ def test_create_task_with_three_assignees(client, session):
 
     assignee_ids = [str(assignee1.id), str(assignee2.id), str(assignee3.id)]
 
-    response = client_create_task(
+    response = client_post_task(
         client,
         title="Task with Three Assignees",
         description="This task is assigned to three users.",
@@ -350,7 +352,7 @@ def test_create_task_with_three_assignees(client, session):
 def test_create_task_matches_access_token_user_id(client, session):
     user_id, access_token = generate_valid_access_token(client)
 
-    response = client_create_task(
+    response = client_post_task(
         client,
         access_token=access_token,
         title="Test Task",
@@ -369,7 +371,7 @@ def test_create_task_with_another_users_id(client):
     _, user1_access_token = generate_valid_access_token(client, "t1@t.com")
     user2_id, _ = generate_valid_access_token(client, "t2@t.com")
 
-    response = client_create_task(
+    response = client_post_task(
         client,
         title="Illegal Task",
         description="This task should not be created.",
@@ -453,3 +455,55 @@ def test_get_task_by_id_not_found(client):
     response = client_get_task(client, access_token, task.id)
 
     assert response.status_code == 404
+
+
+def test_put_task_success(client, session):
+    user_id, _ = generate_valid_access_token(client)
+
+    original_task = Task(
+        title="Original Task",
+        description="This is the original task.",
+        created_by=UUID(user_id),
+    )
+    db_add_task(session, original_task)
+
+    original_task.title = "Updated Task"
+    original_task.description = "Completely different task."
+
+    response = client_put_task(client, original_task)
+    data = response.get_json()
+
+    assert response.status_code == 200
+
+    # Verify the task in the database
+    updated_task = session.query(Task).filter_by(id=data["id"]).first()
+    assert updated_task.title == "Updated Task"
+    assert updated_task.description == "Completely different task."
+
+
+def test_patch_task_success(client, session):
+    user_id, _ = generate_valid_access_token(client)
+    original_task_description = "This is the original task."
+
+    original_task = Task(
+        title="Original Task",
+        description=original_task_description,
+        created_by=UUID(user_id),
+    )
+    db_add_task(session, original_task)
+
+    new_title = "Partially Updated Task"
+    new_status = TaskStatus.DONE
+    original_task.title = new_title
+    original_task.status = new_status
+
+    response = client_patch_task(client, original_task)
+    data = response.get_json()
+
+    assert response.status_code == 200
+
+    # Verify the task in the database
+    updated_task = session.query(Task).filter_by(id=data["id"]).first()
+    assert updated_task.title == new_title
+    assert updated_task.status == new_status
+    assert updated_task.description == original_task_description

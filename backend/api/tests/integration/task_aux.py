@@ -1,6 +1,7 @@
 from datetime import datetime
 from flask import Response
 from typing import Dict, List, Optional
+from src.task.schemas import TaskWireInSchema
 from tests.integration.common_aux import generate_valid_access_token
 from src.task.models import Task
 from sqlalchemy.orm import Session
@@ -9,7 +10,7 @@ from uuid import UUID
 tasks_route = "/api/v1/tasks"
 
 
-def client_create_task(
+def client_post_task(
     client,
     title: str,
     description: Optional[str] = None,
@@ -85,6 +86,36 @@ def client_get_task(client, access_token, task_id) -> Response:
 
     return client.get(
         f"{tasks_route}/{task_id}",
+        headers=headers,
+    )
+
+
+def client_put_task(client, task) -> Response:
+    headers: Dict[str, str] = {}
+    _, access_token = generate_valid_access_token(client)
+    headers["Authorization"] = f"Bearer {access_token}"
+
+    wire_in = TaskWireInSchema()
+    data = wire_in.dump(task)
+
+    return client.put(
+        f"{tasks_route}/{task.id}",
+        json=data,
+        headers=headers,
+    )
+
+
+def client_patch_task(client, task) -> Response:
+    headers: Dict[str, str] = {}
+    _, access_token = generate_valid_access_token(client)
+    headers["Authorization"] = f"Bearer {access_token}"
+
+    wire_in = TaskWireInSchema()
+    data = wire_in.dump(task)
+
+    return client.patch(
+        f"{tasks_route}/{task.id}",
+        json=data,
         headers=headers,
     )
 

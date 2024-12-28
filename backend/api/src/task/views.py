@@ -78,6 +78,9 @@ def update_task(task_id):
 
     data = request.json
     assignee_ids = data.pop("assignees", [])
+    data.pop("createdAt")
+    data.pop("createdBy")
+    data.pop("updatedAt")
 
     try:
         updated_task = task_wire_in.load(data, instance=task, partial=True)
