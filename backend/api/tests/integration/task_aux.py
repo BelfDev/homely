@@ -2,6 +2,9 @@ from datetime import datetime
 from flask import Response
 from typing import Dict, List, Optional
 from tests.integration.common_aux import generate_valid_access_token
+from src.task.models import Task
+from sqlalchemy.orm import Session
+from uuid import UUID
 
 tasks_route = "/api/v1/tasks"
 
@@ -34,7 +37,7 @@ def client_create_task(
     """
     headers: Dict[str, str] = {}
     if authenticated:
-        _, access_token =  generate_valid_access_token(client)
+        _, access_token = generate_valid_access_token(client)
         headers["Authorization"] = f"Bearer {access_token}"
 
     data = {
@@ -68,3 +71,46 @@ def client_get_my_tasks(client, access_token) -> Response:
         tasks_route,
         headers=headers,
     )
+
+
+def client_get_task(client, access_token, task_id) -> Response:
+    headers: Dict[str, str] = {}
+    headers["Authorization"] = f"Bearer {access_token}"
+
+    return client.get(
+        f"{tasks_route}/{task_id}",
+        headers=headers,
+    )
+
+
+def db_add_task(session: Session, task: Task) -> Task:
+    """
+    Adds a new task to the database.
+
+    Args:
+    session (Session): The SQLAlchemy session to use for the transaction.
+        task (Task): The task object to be added.
+
+    Returns:
+        Task: The task object.
+    """
+
+    session.add(task)
+    session.commit()
+    return task
+
+
+def db_add_tasks(session: Session, tasks: List[dict]) -> List[Task]:
+    """
+    Adds multiple tasks to the database.
+
+    Args:
+        session (Session): The SQLAlchemy session to use for the transaction.
+        tasks (List[dict]): A list of dictionaries containing task data.
+
+    Returns:
+        List[Task]: A list of task objects.
+    """
+    session.add_all(tasks)
+    session.commit()
+    return tasks

@@ -10,6 +10,9 @@ from tests.integration.common_aux import (
 from .task_aux import (
     client_create_task,
     client_get_my_tasks,
+    client_get_task,
+    db_add_task,
+    db_add_tasks,
 )
 
 
@@ -349,25 +352,17 @@ def test_get_all_tasks(client, session):
 
     task1 = Task(
         title="First Task",
-        description="This is the first task.",
         created_by=user_id,
-        status=TaskStatus.OPENED,
     )
     task2 = Task(
         title="Second Task",
-        description="This is the second task.",
         created_by=user_id,
-        status=TaskStatus.OPENED,
     )
     task3 = Task(
         title="Third Task",
-        description="This is the third task.",
         created_by=user_id,
-        status=TaskStatus.OPENED,
     )
-
-    session.add_all([task1, task2, task3])
-    session.commit()
+    db_add_tasks(session, [task1, task2, task3])
 
     response = client_get_my_tasks(client, access_token)
 
@@ -384,7 +379,7 @@ def test_get_all_tasks(client, session):
     assert "Third Task" in task_titles
 
 
-def test_retrieve_all_tasks_empty(client, session):
+def test_get_all_tasks_empty(client, session):
     _, access_token = generate_valid_access_token(client)
     response = client_get_my_tasks(client, access_token)
 
@@ -397,3 +392,33 @@ def test_retrieve_all_tasks_empty(client, session):
     # Verify no task was created in database
     task_count = session.query(Task).count()
     assert task_count == 0
+
+
+def test_get_task_by_id(client, session):
+    user_id, access_token = generate_valid_access_token(client)
+
+    task = Task(
+        title="Test Task",
+        created_by=user_id,
+    )
+    db_add_task(session, task)
+
+    response = client_get_task(client, access_token, task.id)
+
+    assert response.status_code == 200
+    data = response.get_json()
+
+    assert data["title"] == task.title
+
+
+def test_get_task_by_id_not_found(client, session):
+    _, access_token = generate_valid_access_token(client)
+
+    task = Task(
+        title="Test Task",
+        created_by=UUID('00000000-0000-0000-0000-000000000099'),
+    )
+
+    response = client_get_task(client, access_token, task.id)
+
+    assert response.status_code == 404
