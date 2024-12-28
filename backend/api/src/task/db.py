@@ -1,8 +1,6 @@
 from typing import List
 from uuid import UUID
 
-from flask import jsonify
-
 from src.task.models import TaskAssignee
 from src.user.models import User
 
