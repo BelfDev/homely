@@ -8,6 +8,7 @@ from tests.integration.common_aux import (
     is_valid_iso_timestamp,
 )
 from .task_aux import (
+    client_delete_task,
     client_patch_task,
     client_post_task,
     client_get_my_tasks,
@@ -610,3 +611,36 @@ def test_update_task_with_assignees(client, session):
     assert db_task.assignees[0].user_id == assignee1.id
     assert db_task.assignees[1].user_id == assignee2.id
     assert db_task.assignees[2].user_id == assignee3.id
+
+
+def test_delete_task_not_authorized(client, session):
+    user_id, access_token = generate_valid_access_token(client)
+
+    task = Task(
+        title="Original Task",
+        description="This is the original task.",
+        created_by=user_id,
+        status=TaskStatus.OPENED,
+    )
+    db_add_task(session, task)
+
+    response = client_delete_task(client, task.id, access_token)
+
+    assert response.status_code == 204
+
+
+def test_delete_task_only_by_creator(client, session):
+    user1_id, _ = generate_valid_access_token(client, "t1@t.com")
+    user2_id, user2_access_token = generate_valid_access_token(client, "t2@t.com")
+
+    task = Task(
+        title="Original Task",
+        description="This is the original task.",
+        created_by=user1_id,
+        status=TaskStatus.OPENED,
+    )
+    db_add_task(session, task)
+
+    response = client_delete_task(client, task.id, user2_access_token)
+
+    assert response.status_code == 403

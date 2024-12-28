@@ -161,3 +161,19 @@ def db_add_tasks(session: Session, tasks: List[dict]) -> List[Task]:
     session.add_all(tasks)
     session.commit()
     return tasks
+
+
+def client_delete_task(
+    client,
+    task_id,
+    access_token: Optional[str] = None,
+) -> Response:
+    headers: Dict[str, str] = {}
+    if access_token is None:
+        _, access_token = generate_valid_access_token(client)
+    headers["Authorization"] = f"Bearer {access_token}"
+
+    return client.delete(
+        f"{tasks_route}/{task_id}",
+        headers=headers,
+    )

@@ -98,12 +98,12 @@ def delete_task(task_id):
     task = Task.query.get_or_404(task_id)
 
     if task.created_by != current_user.id:
-        return jsonify({"msg": "Task not found or access is forbidden"}), 403
+        return jsonify({"msg": "Tasks can only be deleted by their original creator"}), 403
 
     try:
         db.session.delete(task)
         db.session.commit()
-        return jsonify({"msg": "Task deleted successfully"}), 200
+        return jsonify({"msg": "Task deleted successfully"}), 204
     except Exception as e:
         db.session.rollback()
         return jsonify({"msg": f"An error occurred: {str(e)}"}), 500
