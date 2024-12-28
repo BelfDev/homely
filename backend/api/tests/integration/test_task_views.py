@@ -347,6 +347,24 @@ def test_create_task_with_three_assignees(client, session):
     assert assigned_user_ids == set(assignee_ids)
 
 
+def test_create_task_matches_access_token_user_id(client, session):
+    user_id, access_token = generate_valid_access_token(client)
+
+    response = client_create_task(
+        client,
+        access_token=access_token,
+        title="Test Task",
+    )
+
+    assert response.status_code == 201
+    data = response.get_json()
+
+    task_id = data["id"]
+    created_task = session.query(Task).filter_by(id=task_id).first()
+    assert created_task is not None
+    assert created_task.created_by == UUID(user_id)
+
+
 def test_get_all_tasks(client, session):
     user_id, access_token = generate_valid_access_token(client)
 
@@ -369,10 +387,8 @@ def test_get_all_tasks(client, session):
     assert response.status_code == 200
     data = response.get_json()
 
-    # Verify that the number of tasks returned matches the number created
-    assert len(data) == 3  # We created 3 tasks
+    assert len(data) == 3
 
-    # Verify that the task details are correct
     task_titles = {task["title"] for task in data}
     assert "First Task" in task_titles
     assert "Second Task" in task_titles
@@ -411,12 +427,12 @@ def test_get_task_by_id(client, session):
     assert data["title"] == task.title
 
 
-def test_get_task_by_id_not_found(client, session):
+def test_get_task_by_id_not_found(client):
     _, access_token = generate_valid_access_token(client)
 
     task = Task(
         title="Test Task",
-        created_by=UUID('00000000-0000-0000-0000-000000000099'),
+        created_by=UUID("00000000-0000-0000-0000-000000000099"),
     )
 
     response = client_get_task(client, access_token, task.id)

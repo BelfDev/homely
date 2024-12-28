@@ -18,6 +18,7 @@ def client_create_task(
     start_at: Optional[datetime] = None,
     end_at: Optional[datetime] = None,
     authenticated: bool = True,
+    access_token: Optional[str] = None,
 ) -> Response:
     """
     Create a task with all possible parameters.
@@ -31,13 +32,15 @@ def client_create_task(
         start_at: Start datetime (optional)
         end_at: End datetime (optional)
         authenticated: Whether to include authentication token (defaults to True)
+        access_token: Access token (optional, autogenerates if abscent)
 
     Returns:
         Response: Flask test client response
     """
     headers: Dict[str, str] = {}
     if authenticated:
-        _, access_token = generate_valid_access_token(client)
+        if access_token is None:
+            _, access_token = generate_valid_access_token(client)
         headers["Authorization"] = f"Bearer {access_token}"
 
     data = {
