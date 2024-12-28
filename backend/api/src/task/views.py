@@ -98,7 +98,10 @@ def delete_task(task_id):
     task = Task.query.get_or_404(task_id)
 
     if task.created_by != current_user.id:
-        return jsonify({"msg": "Tasks can only be deleted by their original creator"}), 403
+        return (
+            jsonify({"msg": "Tasks can only be deleted by their original creator"}),
+            403,
+        )
 
     try:
         db.session.delete(task)
