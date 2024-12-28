@@ -18,7 +18,6 @@ def pytest_configure():
         "HOMELY_SECRET", "testing-homely-secret"
     )
 
-
 @pytest.fixture(scope="session")
 def app():
     """Create application for the tests."""

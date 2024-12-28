@@ -14,6 +14,8 @@ env:
   POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
   POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
   POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+  JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
+  JWT_ACCESS_TOKEN_EXPIRES: ${{ secrets.JWT_ACCESS_TOKEN_EXPIRES }}
   CACHE_DIR: /tmp/.cache
 
 jobs:
@@ -49,6 +51,8 @@ jobs:
           echo POSTGRES_USER=$POSTGRES_USER >> .env
           echo POSTGRES_PASSWORD=$POSTGRES_PASSWORD >> .env
           echo POSTGRES_DB=$POSTGRES_DB >> .env
+          echo JWT_SECRET_KEY=$JWT_SECRET_KEY >> .env
+          echo JWT_ACCESS_TOKEN_EXPIRES=$JWT_ACCESS_TOKEN_EXPIRES >> .env
 
       # Step 3: Create cache directory if needed
       - name: Create cache directory if needed
