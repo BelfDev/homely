@@ -21,7 +21,7 @@ class TaskWireInSchema(WireSchema):
     start_at = fields.DateTime(
         required=False,
         validate=lambda val: val <= datetime.now(timezone.utc),
-        error_messages={"validator_failed": "Start date cannot be in the future"},
+        error_messages={"validator_failed": "Start date cannot be in the past"},
     )
     end_at = fields.DateTime(required=False)
     created_by = fields.UUID(dump_only=True)

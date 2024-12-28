@@ -1,11 +1,12 @@
 from datetime import datetime
 from functools import lru_cache
+from typing import Optional
 
 from src.user.models import User
 
 
 @lru_cache(maxsize=1)
-def generate_valid_access_token(client):
+def generate_valid_access_token(client, email: Optional[str] = None):
     """
     Creates a test customer and returns their user id and access token.
     Uses lru_cache to avoid recreating the same customer multiple times.
@@ -22,7 +23,7 @@ def generate_valid_access_token(client):
     response = client.post(
         "/api/v1/users",
         json={
-            "email": test_email,
+            "email": email or test_email,
             "password": test_password,
             "firstName": "Test",
             "lastName": "User",

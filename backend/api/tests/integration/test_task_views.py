@@ -365,6 +365,21 @@ def test_create_task_matches_access_token_user_id(client, session):
     assert created_task.created_by == UUID(user_id)
 
 
+def test_create_task_with_another_users_id(client):
+    _, user1_access_token = generate_valid_access_token(client, "t1@t.com")
+    user2_id, _ = generate_valid_access_token(client, "t2@t.com")
+
+    response = client_create_task(
+        client,
+        title="Illegal Task",
+        description="This task should not be created.",
+        created_by=str(user2_id),
+        access_token=user1_access_token,
+    )
+
+    assert response.status_code == 400
+
+
 def test_get_all_tasks(client, session):
     user_id, access_token = generate_valid_access_token(client)
 

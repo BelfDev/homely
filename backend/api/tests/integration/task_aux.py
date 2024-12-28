@@ -17,6 +17,7 @@ def client_create_task(
     status: Optional[str] = None,
     start_at: Optional[datetime] = None,
     end_at: Optional[datetime] = None,
+    created_by: Optional[str] = None,
     authenticated: bool = True,
     access_token: Optional[str] = None,
 ) -> Response:
@@ -58,6 +59,8 @@ def client_create_task(
         data["startAt"] = start_at.isoformat()
     if end_at is not None:
         data["endAt"] = end_at.isoformat()
+    if created_by is not None:
+        data["createdBy"] = created_by
 
     return client.post(
         tasks_route,
