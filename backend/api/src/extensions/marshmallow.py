@@ -36,8 +36,9 @@ class WireSchema(marsh.SQLAlchemyAutoSchema):
         """Recursively convert dictionary keys to camelCase."""
         if isinstance(data, dict):
             return {
-                camelcase(key) if isinstance(key, str) else key: 
-                self._camelcase_dict(value)
+                camelcase(key) if isinstance(key, str) else key: self._camelcase_dict(
+                    value
+                )
                 for key, value in data.items()
             }
         elif isinstance(data, list):

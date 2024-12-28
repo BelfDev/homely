@@ -35,6 +35,7 @@ UUID = PGUUID
 ormfunc = func
 DBCheckConstraint = CheckConstraint
 
+
 def init_app(app):
     try:
         db.init_app(app)
