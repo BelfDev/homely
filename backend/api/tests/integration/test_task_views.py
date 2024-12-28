@@ -552,3 +552,61 @@ def test_update_task_created_by_field_with_another_user_id(client, session):
     db_task = session.query(Task).filter_by(id=task.id).first()
     assert db_task.title == original_title
     assert db_task.status == TaskStatus.OPENED
+
+
+def test_update_task_with_assignees(client, session):
+    user_id, access_token = generate_valid_access_token(client)
+
+    assignee1 = db_add_test_user(
+        session,
+        email="assignee1@example.com",
+        first_name="Test 1",
+        last_name="Assignee 1",
+    )
+    assignee2 = db_add_test_user(
+        session,
+        email="assignee2@example.com",
+        first_name="Test 2",
+        last_name="Assignee 2",
+    )
+    assignee3 = db_add_test_user(
+        session,
+        email="assignee3@example.com",
+        first_name="Test 3",
+        last_name="Assignee 3",
+    )
+    assignees = [str(assignee.id) for assignee in [assignee1, assignee2, assignee3]]
+
+    task = Task(
+        title="Original Task",
+        description="This is the original task.",
+        created_by=user_id,
+        status=TaskStatus.OPENED,
+    )
+    db_add_task(session, task)
+
+    updated_task = Task(
+        id=task.id,
+        title="Partially Updated Task",
+        status=TaskStatus.DONE,
+        created_by=user_id,
+    )
+
+    response = client_patch_task(
+        client,
+        updated_task,
+        access_token,
+        assignees=assignees,
+    )
+    data = response.get_json()
+
+    assert response.status_code == 200
+
+    # Verify the task in the database
+    db_task = session.query(Task).filter_by(id=data["id"]).first()
+    assert db_task.title == "Partially Updated Task"
+    assert db_task.description == "This is the original task."
+    assert len(db_task.assignees) == 3
+    assert db_task.assignees[0].user_id == assignee1.id
+    assert db_task.assignees[1].user_id == assignee2.id
+    assert db_task.assignees[2].user_id == assignee3.id

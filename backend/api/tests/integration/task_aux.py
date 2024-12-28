@@ -106,7 +106,12 @@ def client_put_task(client, task, access_token: Optional[str] = None) -> Respons
     )
 
 
-def client_patch_task(client, task, access_token: Optional[str] = None) -> Response:
+def client_patch_task(
+    client,
+    task,
+    access_token: Optional[str] = None,
+    assignees: Optional[list[str]] = None,
+) -> Response:
     headers: Dict[str, str] = {}
     if access_token is None:
         _, access_token = generate_valid_access_token(client)
@@ -114,6 +119,9 @@ def client_patch_task(client, task, access_token: Optional[str] = None) -> Respo
 
     wire_in = TaskWireInSchema()
     data = wire_in.dump(task)
+
+    if assignees is not None:
+        data["assignees"] = assignees
 
     return client.patch(
         f"{tasks_route}/{task.id}",
