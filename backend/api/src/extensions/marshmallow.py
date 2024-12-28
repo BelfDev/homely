@@ -1,6 +1,7 @@
 from flask_marshmallow import Marshmallow
 from marshmallow import (
     INCLUDE,
+    EXCLUDE,
     fields,
     validate,
     ValidationError,
@@ -12,6 +13,7 @@ from marshmallow import (
 marsh = Marshmallow()
 ValidationError = ValidationError
 INCLUDE = INCLUDE
+EXCLUDE = EXCLUDE
 fields = fields
 validate = validate
 post_load = post_load

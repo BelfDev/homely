@@ -460,25 +460,35 @@ def test_get_task_by_id_not_found(client):
 def test_put_task_success(client, session):
     user_id, _ = generate_valid_access_token(client)
 
+    original_task_description = "This is the original task."
+
     original_task = Task(
         title="Original Task",
-        description="This is the original task.",
+        description=original_task_description,
         created_by=UUID(user_id),
     )
     db_add_task(session, original_task)
 
-    original_task.title = "Updated Task"
-    original_task.description = "Completely different task."
+    new_title = "Updated Task"
+    new_status = TaskStatus.DONE
 
-    response = client_put_task(client, original_task)
+    updated_task = Task(
+        id=original_task.id,
+        title=new_title,
+        status=new_status,
+        created_by=UUID(user_id),
+    )
+
+    response = client_put_task(client, updated_task)
     data = response.get_json()
 
     assert response.status_code == 200
 
     # Verify the task in the database
-    updated_task = session.query(Task).filter_by(id=data["id"]).first()
-    assert updated_task.title == "Updated Task"
-    assert updated_task.description == "Completely different task."
+    db_task = session.query(Task).filter_by(id=data["id"]).first()
+    assert db_task.title == new_title
+    assert db_task.status == new_status
+    assert db_task.description == original_task_description
 
 
 def test_patch_task_success(client, session):
@@ -494,16 +504,51 @@ def test_patch_task_success(client, session):
 
     new_title = "Partially Updated Task"
     new_status = TaskStatus.DONE
-    original_task.title = new_title
-    original_task.status = new_status
 
-    response = client_patch_task(client, original_task)
+    updated_task = Task(
+        id=original_task.id,
+        title=new_title,
+        status=new_status,
+        created_by=UUID(user_id),
+    )
+
+    response = client_patch_task(client, updated_task)
     data = response.get_json()
 
     assert response.status_code == 200
 
     # Verify the task in the database
-    updated_task = session.query(Task).filter_by(id=data["id"]).first()
-    assert updated_task.title == new_title
-    assert updated_task.status == new_status
-    assert updated_task.description == original_task_description
+    db_task = session.query(Task).filter_by(id=data["id"]).first()
+    assert db_task.title == new_title
+    assert db_task.status == new_status
+    assert db_task.description == original_task_description
+
+
+def test_update_task_created_by_field_with_another_user_id(client, session):
+    user1_id, _ = generate_valid_access_token(client, "t1@t.com")
+    user2_id, user2_access_token = generate_valid_access_token(client, "t2@t.com")
+
+    original_title = "Original Task"
+
+    task = Task(
+        title=original_title,
+        description="This is the original task.",
+        created_by=UUID(user1_id),
+    )
+    db_add_task(session, task)
+
+    updated_task = Task(
+        id=task.id,
+        title="Partially Updated Task",
+        status=TaskStatus.DONE,
+        created_by=user2_id,
+    )
+
+    response = client_patch_task(client, updated_task, user2_access_token)
+
+    # Assert: Check the response status and ensure the update was not successful
+    assert response.status_code == 403
+
+    db_task = session.query(Task).filter_by(id=task.id).first()
+    assert db_task.title == original_title
+    assert db_task.status == TaskStatus.OPENED

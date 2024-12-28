@@ -74,13 +74,10 @@ def update_task(task_id):
 
     task = Task.query.get_or_404(task_id)
     if task.created_by != current_user.id:
-        return jsonify({"msg": "Task not found or access is forbidden"}), 404
+        return jsonify({"msg": "Altering a task's createdBy is forbidden"}), 403
 
     data = request.json
     assignee_ids = data.pop("assignees", [])
-    data.pop("createdAt")
-    data.pop("createdBy")
-    data.pop("updatedAt")
 
     try:
         updated_task = task_wire_in.load(data, instance=task, partial=True)

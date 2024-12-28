@@ -15,6 +15,7 @@ from .marshmallow import (
     fields,
     validate,
     INCLUDE,
+    EXCLUDE,
     ValidationError,
     post_load,
     pre_load,

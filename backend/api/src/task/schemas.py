@@ -2,6 +2,7 @@ from datetime import datetime, timezone
 
 from src.extensions import (
     WireSchema,
+    EXCLUDE,
     fields,
     validate,
     pre_load,
@@ -15,6 +16,7 @@ class TaskWireInSchema(WireSchema):
         model = Task
         include_fk = True
         load_instance = True
+        unknown = EXCLUDE
 
     title = fields.String(required=True, validate=validate.Length(min=1, max=140))
     description = fields.String(required=False, validate=validate.Length(max=280))

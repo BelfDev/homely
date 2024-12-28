@@ -90,9 +90,10 @@ def client_get_task(client, access_token, task_id) -> Response:
     )
 
 
-def client_put_task(client, task) -> Response:
+def client_put_task(client, task, access_token: Optional[str] = None) -> Response:
     headers: Dict[str, str] = {}
-    _, access_token = generate_valid_access_token(client)
+    if access_token is None:
+        _, access_token = generate_valid_access_token(client)
     headers["Authorization"] = f"Bearer {access_token}"
 
     wire_in = TaskWireInSchema()
@@ -105,9 +106,10 @@ def client_put_task(client, task) -> Response:
     )
 
 
-def client_patch_task(client, task) -> Response:
+def client_patch_task(client, task, access_token: Optional[str] = None) -> Response:
     headers: Dict[str, str] = {}
-    _, access_token = generate_valid_access_token(client)
+    if access_token is None:
+        _, access_token = generate_valid_access_token(client)
     headers["Authorization"] = f"Bearer {access_token}"
 
     wire_in = TaskWireInSchema()
