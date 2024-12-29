@@ -411,9 +411,10 @@ def test_get_all_tasks(client, session):
     assert response.status_code == 200
     data = response.get_json()
 
-    assert len(data) == 3
+    assert "tasks" in data
+    assert len(data["tasks"]) == 3
 
-    task_titles = {task["title"] for task in data}
+    task_titles = {task["title"] for task in data["tasks"]}
     assert "First Task" in task_titles
     assert "Second Task" in task_titles
     assert "Third Task" in task_titles
@@ -426,8 +427,9 @@ def test_get_all_tasks_empty(client, session):
     assert response.status_code == 200
     data = response.get_json()
 
-    assert isinstance(data, list)
-    assert len(data) == 0
+    assert "tasks" in data
+    assert isinstance(data["tasks"], list)
+    assert len(data["tasks"]) == 0
 
     # Verify no task was created in database
     task_count = session.query(Task).count()
