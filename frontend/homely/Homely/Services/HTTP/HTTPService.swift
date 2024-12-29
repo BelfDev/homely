@@ -309,7 +309,10 @@ private extension HTTPService {
 private extension HTTPService {
     func encodeToJSON<B: Encodable>(_ body: B) throws -> Data {
         do {
-            return try JSONEncoder().encode(body)
+            let encoder = JSONEncoder()
+             encoder.dateEncodingStrategy = .iso8601
+             encoder.outputFormatting = .prettyPrinted
+            return try encoder.encode(body)
         } catch {
             logError("Failed to encode JSON: \(error.localizedDescription)")
             throw APIError.encodingFailed
@@ -318,7 +321,9 @@ private extension HTTPService {
     
     func decodeResponse<T: Decodable>(_ data: Data) throws -> T {
         print("Trying to decode JSON...")
-        return try JSONDecoder().decode(T.self, from: data)
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        return try decoder.decode(T.self, from: data)
     }
     
     

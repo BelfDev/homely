@@ -35,7 +35,7 @@ final class HomelyAPIClient : HomelyAPIClientProtocol {
     // MARK: - API Endpoints
     
     enum Endpoint: EndpointProtocol {
-        case login, signUp
+        case login, signUp, myTasks
         
         /**
          Returns the path for the given API endpoint.
@@ -48,6 +48,8 @@ final class HomelyAPIClient : HomelyAPIClientProtocol {
                 return "/api/v1/users/login"
             case .signUp:
                 return "/api/v1/users"
+            case .myTasks:
+                return "/api/v1/tasks"
             }
         }
         
@@ -93,5 +95,11 @@ final class HomelyAPIClient : HomelyAPIClientProtocol {
         
         try tokenProvider.setToken(response.accessToken)
         return response
+    }
+    
+    func myTasks() async throws -> [TaskModel] {
+        let response: TasksResponse = try await http.get(.myTasks)
+        let parsedTasks = tasksResponseToTaskList(response)
+        return parsedTasks
     }
 }

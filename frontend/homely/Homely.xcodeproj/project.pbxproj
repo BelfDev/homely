@@ -81,6 +81,9 @@
 		9FA71E692CB14723007C09AB /* FormFieldValidators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA71E682CB14723007C09AB /* FormFieldValidators.swift */; };
 		9FA71E6B2CB14763007C09AB /* FormFieldError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA71E6A2CB14763007C09AB /* FormFieldError.swift */; };
 		9FA71E6D2CB148BB007C09AB /* LoginFormValidations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA71E6C2CB148BB007C09AB /* LoginFormValidations.swift */; };
+		9FC77A882D21BA81009644B7 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC77A872D21BA81009644B7 /* Task.swift */; };
+		9FC77A8C2D21BC39009644B7 /* TasksResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC77A8B2D21BC39009644B7 /* TasksResponse.swift */; };
+		9FC77A8E2D21C0B1009644B7 /* TaskAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC77A8D2D21C0B1009644B7 /* TaskAdapter.swift */; };
 		9FCC2E112C67FFC100A787C3 /* LoginScreen.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9FCC2E102C67FFC100A787C3 /* LoginScreen.xcstrings */; };
 		9FCC2E132C68043100A787C3 /* LoginStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCC2E122C68043100A787C3 /* LoginStrings.swift */; };
 		9FCC2E152C680D0100A787C3 /* FixedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCC2E142C680D0100A787C3 /* FixedStrings.swift */; };
@@ -187,6 +190,9 @@
 		9FA71E682CB14723007C09AB /* FormFieldValidators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFieldValidators.swift; sourceTree = "<group>"; };
 		9FA71E6A2CB14763007C09AB /* FormFieldError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFieldError.swift; sourceTree = "<group>"; };
 		9FA71E6C2CB148BB007C09AB /* LoginFormValidations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormValidations.swift; sourceTree = "<group>"; };
+		9FC77A872D21BA81009644B7 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		9FC77A8B2D21BC39009644B7 /* TasksResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksResponse.swift; sourceTree = "<group>"; };
+		9FC77A8D2D21C0B1009644B7 /* TaskAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAdapter.swift; sourceTree = "<group>"; };
 		9FCC2E102C67FFC100A787C3 /* LoginScreen.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = LoginScreen.xcstrings; sourceTree = "<group>"; };
 		9FCC2E122C68043100A787C3 /* LoginStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStrings.swift; sourceTree = "<group>"; };
 		9FCC2E142C680D0100A787C3 /* FixedStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedStrings.swift; sourceTree = "<group>"; };
@@ -311,6 +317,7 @@
 			children = (
 				9FCC2E1A2C69011D00A787C3 /* LoginResponse.swift */,
 				9FEB3C5B2CB7307700822FB2 /* SignUpResponse.swift */,
+				9FC77A8B2D21BC39009644B7 /* TasksResponse.swift */,
 			);
 			path = Input;
 			sourceTree = "<group>";
@@ -327,6 +334,7 @@
 		9F2B42382C9EF58900A65225 /* Adapters */ = {
 			isa = PBXGroup;
 			children = (
+				9FC77A8D2D21C0B1009644B7 /* TaskAdapter.swift */,
 			);
 			path = Adapters;
 			sourceTree = "<group>";
@@ -368,6 +376,7 @@
 		9F4E7EBC2CB5CF730062EDBB /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				9FC77A872D21BA81009644B7 /* Task.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -706,9 +715,11 @@
 				9FA71E692CB14723007C09AB /* FormFieldValidators.swift in Sources */,
 				9F0A241F2C1DA57400B5DEB3 /* ThemeProtocol.swift in Sources */,
 				9F2B42432CA032AC00A65225 /* ComponentManager.swift in Sources */,
+				9FC77A882D21BA81009644B7 /* Task.swift in Sources */,
 				9F2B42412C9F6C9400A65225 /* KeychainError.swift in Sources */,
 				9F5F112D2CA995B400EECC4E /* RootView.swift in Sources */,
 				9FA71E6D2CB148BB007C09AB /* LoginFormValidations.swift in Sources */,
+				9FC77A8E2D21C0B1009644B7 /* TaskAdapter.swift in Sources */,
 				9F5F11292CA989AE00EECC4E /* HomeViewModel.swift in Sources */,
 				9F2B423A2C9EFA3F00A65225 /* LoginRequestBody.swift in Sources */,
 				9F2B42472CA03BF500A65225 /* EnvProviders.swift in Sources */,
@@ -747,6 +758,7 @@
 				9F4E7EA32CB3E34A0062EDBB /* ErrorInputFieldLabel.swift in Sources */,
 				9F5F11272CA9899D00EECC4E /* HomeScreen.swift in Sources */,
 				9F2B42302C9EDF1E00A65225 /* APIError.swift in Sources */,
+				9FC77A8C2D21BC39009644B7 /* TasksResponse.swift in Sources */,
 				9F974E942D21745500D6BEF6 /* TaskDashboardViewModel.swift in Sources */,
 				9F5F112B2CA98B2A00EECC4E /* SessionManager.swift in Sources */,
 				9F5579F32CBBE32F005C9AAE /* CardView.swift in Sources */,
