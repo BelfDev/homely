@@ -53,7 +53,9 @@ def get_all_tasks():
         .options(db.joinedload(Task.assignees))
         .all()
     )
-    return task_wire_out.dump(user_tasks, many=True), 200
+
+    task_collection = task_wire_out.dump(user_tasks, many=True)
+    return jsonify(tasks=task_collection), 200
 
 
 @bp.route("/v1/tasks/<uuid:task_id>", methods=["GET"])
