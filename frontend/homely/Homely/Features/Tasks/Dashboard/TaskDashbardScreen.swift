@@ -25,6 +25,9 @@ struct TaskDashboardScreen: View {
             navigator.push(TaskRoute.details)
         }
         .padding()
+        
+        FilledButton(title: "Fetch my tasks", action: vm.fetchMyTasks)
+            .padding(.bottom, 54)
     }
     
 }

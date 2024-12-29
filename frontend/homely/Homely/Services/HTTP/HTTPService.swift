@@ -319,10 +319,41 @@ private extension HTTPService {
         }
     }
     
+    func configureDateDecodingStrategy(_ decoder: JSONDecoder) {
+        let iso8601WithFractionalSecondsFormatter: ISO8601DateFormatter = {
+            let formatter = ISO8601DateFormatter()
+            formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+            return formatter
+        }()
+
+        let iso8601WithoutFractionalSecondsFormatter: ISO8601DateFormatter = {
+            let formatter = ISO8601DateFormatter()
+            formatter.formatOptions = [.withInternetDateTime]
+            return formatter
+        }()
+
+        // By default, supports date strings with up to three fractional seconds.
+        // TODO(BelfDev): Modify backend to reduce date precision.
+        decoder.dateDecodingStrategy = .custom { decoder in
+            let container = try decoder.singleValueContainer()
+            let dateString = try container.decode(String.self)
+            
+            if let date = iso8601WithFractionalSecondsFormatter.date(from: dateString) {
+                return date
+            }
+            if let date = iso8601WithoutFractionalSecondsFormatter.date(from: dateString) {
+                return date
+            }
+        
+            throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid date format: \(dateString)")
+        }
+        
+    }
+    
     func decodeResponse<T: Decodable>(_ data: Data) throws -> T {
         print("Trying to decode JSON...")
         let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
+        configureDateDecodingStrategy(decoder)
         return try decoder.decode(T.self, from: data)
     }
     
