@@ -21,6 +21,8 @@ services:
     sync: false
   - key: JWT_SECRET_KEY
     sync: false
+  - key: JWT_ACCESS_TOKEN_EXPIRES
+    sync: false
   region: frankfurt
   healthCheckPath: /api/v1/health
   dockerContext: .

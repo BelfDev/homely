@@ -3,6 +3,7 @@ import pytest
 import os
 from src import create_app
 from src.extensions import db as _db
+from sqlalchemy.orm import sessionmaker, scoped_session
 
 
 def pytest_configure():
@@ -17,34 +18,67 @@ def pytest_configure():
         "HOMELY_SECRET", "testing-homely-secret"
     )
 
-
 @pytest.fixture(scope="session")
 def app():
+    """Create application for the tests."""
     app = create_app()
+    ctx = app.app_context()
+    ctx.push()
 
-    with app.app_context():
-        _db.create_all()
-        yield app
-        _db.drop_all()
+    yield app
 
-
-@pytest.fixture(scope="session")
-def client(app):
-    return app.test_client()
+    ctx.pop()
 
 
 @pytest.fixture(scope="session")
 def db(app):
-    return _db
+    """Database fixture for the tests."""
+    with app.app_context():
+        _db.create_all()
+        yield _db
+        _db.session.remove()
+        _db.drop_all()
+        _db.engine.dispose()  # Close all connections
+
+
+@pytest.fixture(scope="function")
+def session(db):
+    """Creates a new database session for each test."""
+    connection = db.engine.connect()
+    transaction = connection.begin()
+
+    # Create new session for each test
+    factory = sessionmaker(bind=connection)
+    session = scoped_session(factory)
+
+    old_session = db.session
+    db.session = session
+
+    yield session
+
+    # Rollback changes after each test
+    transaction.rollback()
+    connection.close()
+    session.remove()
+    db.session = old_session
+
+
+@pytest.fixture(scope="function")
+def client(app):
+    """Create a client for testing with a new session."""
+    return app.test_client()
 
 
 @pytest.fixture(autouse=True)
-def clear_database(db):
-    db.session.remove()
-    db.drop_all()
-    db.create_all()
+def cleanup(session):
+    """Cleanup after each test."""
+    yield
+    session.rollback()
+    session.close()
+    session.remove()
 
 
 @pytest.fixture()
 def runner(app):
+    """Create a CLI runner."""
     return app.test_cli_runner()

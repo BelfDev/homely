@@ -1,13 +1,19 @@
 import uuid
 
-from src.extensions.db import db, DBString, DBMapped, db_mapped_column, UUID
+from src.extensions.db import (
+    db,
+    DBString,
+    DBMapped,
+    db_mapped_column,
+    UUID,
+)
 from src.extensions.jwt import bcrypt
 
 
 class User(db.Model):
     __tablename__ = "users"
 
-    id: DBMapped[int] = db_mapped_column(
+    id: DBMapped[uuid.UUID] = db_mapped_column(
         UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
     )
     email: DBMapped[str] = db_mapped_column(
