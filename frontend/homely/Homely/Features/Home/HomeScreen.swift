@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeScreen: View {
     
     @ThemeProvider private var theme
+    @NavigationManagerProvider private var navigator
     @State private var vm: HomeViewModel
     
     init(_ components: ComponentManager) {
@@ -51,6 +52,12 @@ struct HomeScreen: View {
                         .font(theme.font.h5)
                         .fontWeight(.semibold)
                     
+                    // Test
+                    Button("Go to Tasks") {
+                        navigator.push(HomeRoute.tasks)
+                    }
+                    .padding()
+                    
                     LazyVGrid(columns: columns, spacing: 16) {
                         FeatureModuleView(title: "Rewards", description: "Track household tasks", iconName: "star", backgroundColor: .green.opacity(0.2))
                         FeatureModuleView(title: "Shopping List", description: "Manage groceries", iconName: "cart", backgroundColor: .purple.opacity(0.2))
@@ -75,6 +82,6 @@ struct HomeScreen: View {
 #Preview {
     let components = ComponentManager(.development)
     HomeScreen(components)
-        .environment(NavigationManager<HomeRoute>())
+        .environment(NavigationManager())
         .environment(components)
 }

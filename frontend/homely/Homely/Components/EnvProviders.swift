@@ -34,11 +34,21 @@ struct SessionManagerProvider: DynamicProperty {
     }
 }
 
+//@propertyWrapper
+//struct NavigationManagerProvider<T: Route>: DynamicProperty {
+//    @Environment(NavigationManager<T>.self) private var navigator
+//    
+//    var wrappedValue: NavigationManager<T> {
+//        navigator
+//    }
+//}
+
+
 @propertyWrapper
-struct NavigationManagerProvider<T: Route>: DynamicProperty {
-    @Environment(NavigationManager<T>.self) private var navigation
+struct NavigationManagerProvider: DynamicProperty {
+    @Environment(NavigationManager.self) private var navigator
     
-    var wrappedValue: NavigationManager<T> {
-        navigation
+    var wrappedValue: NavigationManager {
+        navigator
     }
 }

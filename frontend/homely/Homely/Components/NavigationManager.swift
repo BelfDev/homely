@@ -10,18 +10,18 @@ import SwiftUI
 typealias Route = Hashable & Codable
 
 @Observable
-final class NavigationManager<T: Route> {
+final class NavigationManager {
     var path = NavigationPath()
     
-    func navigate(to route: T) {
+    func push(_ route: any Route) {
         path.append(route)
     }
     
-    func navigateBack() {
+    func pop() {
         path.removeLast()
     }
     
-    func navigateToRoot() {
+    func popToRoot() {
         path.removeLast(path.count)
     }
 }

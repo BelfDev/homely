@@ -9,8 +9,8 @@ import SwiftUI
 
 struct LoginScreen: View {
     @ThemeProvider private var theme
-    @ComponentsProvider private var components // Review this
-    @NavigationManagerProvider<LoginRoute> private var navigation
+    @ComponentsProvider private var components
+    @NavigationManagerProvider private var navigator
     
     @State private var vm: LoginViewModel
     @State private var showAutofill: Bool = true
@@ -92,7 +92,7 @@ struct LoginScreen: View {
                 action: vm.login
             )
             SignUpRow() {
-                navigation.navigate(to: .signUp)
+                navigator.push(LoginRoute.signUp)
             }
             .padding(.top, -16)
             .padding(.bottom, 24)
@@ -212,6 +212,6 @@ private struct LoginScreenScaffold<Content>: View where Content : View {
 #Preview {
     let components = ComponentManager(.development)
     LoginScreen(components)
-        .environment(NavigationManager<LoginRoute>())
+        .environment(NavigationManager())
         .environment(components)
 }
