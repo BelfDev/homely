@@ -14,6 +14,7 @@
 		9F0A70E92CA35A4C00792B85 /* ErrorBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0A70E82CA35A4C00792B85 /* ErrorBottomSheet.swift */; };
 		9F0A70EB2CA3F3E900792B85 /* SharedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0A70EA2CA3F3E900792B85 /* SharedStrings.swift */; };
 		9F0A70ED2CA3F4D600792B85 /* Shared.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9F0A70EC2CA3F4D600792B85 /* Shared.xcstrings */; };
+		9F25E63E2D25A87500EFA688 /* TaskCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F25E63D2D25A87500EFA688 /* TaskCard.swift */; };
 		9F2B422C2C9EC89100A65225 /* HTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B422B2C9EC89100A65225 /* HTTPService.swift */; };
 		9F2B422E2C9ECEAF00A65225 /* EnvConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B422D2C9ECEAF00A65225 /* EnvConfig.swift */; };
 		9F2B42302C9EDF1E00A65225 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B422F2C9EDF1E00A65225 /* APIError.swift */; };
@@ -118,6 +119,7 @@
 		9F0A70E82CA35A4C00792B85 /* ErrorBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorBottomSheet.swift; sourceTree = "<group>"; };
 		9F0A70EA2CA3F3E900792B85 /* SharedStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStrings.swift; sourceTree = "<group>"; };
 		9F0A70EC2CA3F4D600792B85 /* Shared.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Shared.xcstrings; sourceTree = "<group>"; };
+		9F25E63D2D25A87500EFA688 /* TaskCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCard.swift; sourceTree = "<group>"; };
 		9F2B422B2C9EC89100A65225 /* HTTPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPService.swift; sourceTree = "<group>"; };
 		9F2B422D2C9ECEAF00A65225 /* EnvConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvConfig.swift; sourceTree = "<group>"; };
 		9F2B422F2C9EDF1E00A65225 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
@@ -482,7 +484,6 @@
 			isa = PBXGroup;
 			children = (
 				9F974E962D2187E000D6BEF6 /* Details */,
-				9F974E952D2174DD00D6BEF6 /* Views */,
 				9F974E902D21743300D6BEF6 /* Dashboard */,
 				9F974E8E2D21742B00D6BEF6 /* TaskRouter.swift */,
 			);
@@ -492,6 +493,7 @@
 		9F974E902D21743300D6BEF6 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				9F974E952D2174DD00D6BEF6 /* Views */,
 				9F974E912D21744300D6BEF6 /* TaskDashbardScreen.swift */,
 				9F974E932D21745500D6BEF6 /* TaskDashboardViewModel.swift */,
 			);
@@ -501,6 +503,7 @@
 		9F974E952D2174DD00D6BEF6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9F25E63D2D25A87500EFA688 /* TaskCard.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -751,6 +754,7 @@
 				9F5F112B2CA98B2A00EECC4E /* SessionManager.swift in Sources */,
 				9F5579F32CBBE32F005C9AAE /* CardView.swift in Sources */,
 				9F4E7EC02CB5D1250062EDBB /* NavigationManager.swift in Sources */,
+				9F25E63E2D25A87500EFA688 /* TaskCard.swift in Sources */,
 				9F5F11252CA9899600EECC4E /* HomeRouter.swift in Sources */,
 				9F5579EF2CBB10E6005C9AAE /* IconButton.swift in Sources */,
 				9F4E7EA12CB3E1D10062EDBB /* PasswordInputField.swift in Sources */,

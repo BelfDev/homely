@@ -18,6 +18,11 @@ struct TaskDashboardScreen: View {
     }
     
     var body: some View {
+        
+        CardView {
+            Text("Task Dashboard")
+        }
+        
         Text("Hello, World!")
         
         // Test

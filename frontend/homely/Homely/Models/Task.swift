@@ -18,6 +18,10 @@ struct TaskAssignee: Identifiable, Codable {
     let id: UUID
     let firstName: String
     let lastName: String
+    
+    var fullName: String {
+        "\(firstName) \(lastName)"
+    }
 }
 
 // Note: the "Model" suffix was used to prevent collision with Swift's built-in "Task".
@@ -32,4 +36,25 @@ struct TaskModel: Identifiable, Codable {
     let endAt: Date?
     let updatedAt: Date?
     let assignees: [TaskAssignee]
+}
+
+extension TaskModel {
+    
+    static func makeStub() -> TaskModel {
+        let userId = UUID()
+        return TaskModel(
+            id: userId,
+            title: "Task title",
+            description: "Task description",
+            createdAt: Date(),
+            createdBy: userId,
+            status: .done,
+            startAt:  Date.now,
+            endAt: Date.now.addingTimeInterval(2 * 60 * 60),
+            updatedAt: nil,
+            assignees: [
+                TaskAssignee(id: userId, firstName: "Pedro", lastName: "Belfort")
+            ]
+        )
+    }
 }
