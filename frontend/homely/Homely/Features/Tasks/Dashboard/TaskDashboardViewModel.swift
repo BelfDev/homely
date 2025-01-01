@@ -7,11 +7,12 @@
 
 import Foundation
 
+@Observable
 final class TaskDashboardViewModel {
     private let homelyClient: HomelyAPIClient
     private(set) var isLoading: Bool = false
     private(set) var errorMessage = ""
-    private var tasks: [TaskModel] = []
+    private(set) var tasks: [TaskModel] = []
         
     init(with components: ComponentManager) {
         self.homelyClient = components.homelyClient

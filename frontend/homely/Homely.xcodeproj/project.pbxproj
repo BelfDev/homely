@@ -16,6 +16,7 @@
 		9F0A70ED2CA3F4D600792B85 /* Shared.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9F0A70EC2CA3F4D600792B85 /* Shared.xcstrings */; };
 		9F25E63E2D25A87500EFA688 /* TaskCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F25E63D2D25A87500EFA688 /* TaskCard.swift */; };
 		9F25E6402D25B26900EFA688 /* Task+ViewProps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F25E63F2D25B26900EFA688 /* Task+ViewProps.swift */; };
+		9F25E6422D25D0C800EFA688 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F25E6412D25D0C800EFA688 /* TaskListView.swift */; };
 		9F2B422C2C9EC89100A65225 /* HTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B422B2C9EC89100A65225 /* HTTPService.swift */; };
 		9F2B422E2C9ECEAF00A65225 /* EnvConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B422D2C9ECEAF00A65225 /* EnvConfig.swift */; };
 		9F2B42302C9EDF1E00A65225 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B422F2C9EDF1E00A65225 /* APIError.swift */; };
@@ -122,6 +123,7 @@
 		9F0A70EC2CA3F4D600792B85 /* Shared.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Shared.xcstrings; sourceTree = "<group>"; };
 		9F25E63D2D25A87500EFA688 /* TaskCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCard.swift; sourceTree = "<group>"; };
 		9F25E63F2D25B26900EFA688 /* Task+ViewProps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+ViewProps.swift"; sourceTree = "<group>"; };
+		9F25E6412D25D0C800EFA688 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
 		9F2B422B2C9EC89100A65225 /* HTTPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPService.swift; sourceTree = "<group>"; };
 		9F2B422D2C9ECEAF00A65225 /* EnvConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvConfig.swift; sourceTree = "<group>"; };
 		9F2B422F2C9EDF1E00A65225 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
@@ -507,6 +509,7 @@
 			isa = PBXGroup;
 			children = (
 				9F25E63D2D25A87500EFA688 /* TaskCard.swift */,
+				9F25E6412D25D0C800EFA688 /* TaskListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -710,6 +713,7 @@
 				9FA71E692CB14723007C09AB /* FormFieldValidators.swift in Sources */,
 				9F0A241F2C1DA57400B5DEB3 /* ThemeProtocol.swift in Sources */,
 				9F2B42432CA032AC00A65225 /* ComponentManager.swift in Sources */,
+				9F25E6422D25D0C800EFA688 /* TaskListView.swift in Sources */,
 				9FC77A882D21BA81009644B7 /* Task.swift in Sources */,
 				9F2B42412C9F6C9400A65225 /* KeychainError.swift in Sources */,
 				9F5F112D2CA995B400EECC4E /* RootView.swift in Sources */,

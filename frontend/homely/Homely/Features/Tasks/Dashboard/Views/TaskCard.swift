@@ -90,9 +90,9 @@ private extension TaskModel {
         case let (startAt?, endAt?):
             return "\(startAt.formatted(date: .omitted, time: .shortened)) - \(endAt.formatted(date: .omitted, time: .shortened))"
         case let (startAt?, nil):
-            return "\(startAt.formatted(date: .omitted, time: .shortened)) -"
+            return "starts: \(startAt.formatted(date: .omitted, time: .shortened))"
         case let (nil, endAt?):
-            return "- \(endAt.formatted(date: .omitted, time: .shortened))"
+            return "ends: \(endAt.formatted(date: .omitted, time: .shortened))"
         default:
             return nil
         }

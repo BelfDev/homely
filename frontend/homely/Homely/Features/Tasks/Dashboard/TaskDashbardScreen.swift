@@ -12,29 +12,53 @@ struct TaskDashboardScreen: View {
     @ThemeProvider private var theme
     @NavigationManagerProvider private var navigator
     @State private var vm: TaskDashboardViewModel
+    @State private var searchText = ""
+    @State private var selectedDate = Date()
     
     init(_ components: ComponentManager) {
         vm = TaskDashboardViewModel(with: components)
+        vm.fetchMyTasks()
     }
     
     var body: some View {
         
-        CardView {
-            Text("Task Dashboard")
+        ZStack(alignment: .bottomTrailing) {
+            VStack(alignment: .leading) {
+                // Search Bar
+                TextField("Search", text: $searchText)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding(.horizontal)
+
+                // Task List
+                TaskListView(tasks: vm.tasks)
+                    .padding([.top], 24)
+            }
+            
+            // Floating Action Button
+            HStack {
+                Spacer()
+                Button(action: {
+                    // Action for adding a new task
+                }) {
+                    Image(systemName: "plus")
+                        .font(.title)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Circle().fill(Color.blue))
+                        .shadow(radius: 10)
+                }
+                .padding()
+            }
         }
-        
-        Text("Hello, World!")
-        
-        // Test
-        Button("Go to Details") {
-            navigator.push(TaskRoute.details)
+        .overlay {
+            if vm.isLoading {
+                LoadingOverlay()
+            }
         }
-        .padding()
-        
-        FilledButton(title: "Fetch my tasks", action: vm.fetchMyTasks)
-            .padding(.bottom, 54)
+        .background(theme.color.surface)
+        .navigationTitle("Tasks")
+        .toolbarTitleDisplayMode(.inlineLarge)
     }
-    
 }
 
 #Preview {
