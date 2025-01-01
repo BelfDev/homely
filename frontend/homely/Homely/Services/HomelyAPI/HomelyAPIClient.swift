@@ -99,7 +99,7 @@ final class HomelyAPIClient : HomelyAPIClientProtocol {
     
     func myTasks() async throws -> [TaskModel] {
         let response: TasksResponse = try await http.get(.myTasks)
-        let parsedTasks = tasksResponseToTaskList(response)
+        let parsedTasks = response.toTaskList()
         return parsedTasks
     }
 }
