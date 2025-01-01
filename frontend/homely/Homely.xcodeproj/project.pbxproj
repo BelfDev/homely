@@ -15,6 +15,7 @@
 		9F0A70EB2CA3F3E900792B85 /* SharedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0A70EA2CA3F3E900792B85 /* SharedStrings.swift */; };
 		9F0A70ED2CA3F4D600792B85 /* Shared.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9F0A70EC2CA3F4D600792B85 /* Shared.xcstrings */; };
 		9F25E63E2D25A87500EFA688 /* TaskCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F25E63D2D25A87500EFA688 /* TaskCard.swift */; };
+		9F25E6402D25B26900EFA688 /* Task+ViewProps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F25E63F2D25B26900EFA688 /* Task+ViewProps.swift */; };
 		9F2B422C2C9EC89100A65225 /* HTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B422B2C9EC89100A65225 /* HTTPService.swift */; };
 		9F2B422E2C9ECEAF00A65225 /* EnvConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B422D2C9ECEAF00A65225 /* EnvConfig.swift */; };
 		9F2B42302C9EDF1E00A65225 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B422F2C9EDF1E00A65225 /* APIError.swift */; };
@@ -120,6 +121,7 @@
 		9F0A70EA2CA3F3E900792B85 /* SharedStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStrings.swift; sourceTree = "<group>"; };
 		9F0A70EC2CA3F4D600792B85 /* Shared.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Shared.xcstrings; sourceTree = "<group>"; };
 		9F25E63D2D25A87500EFA688 /* TaskCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCard.swift; sourceTree = "<group>"; };
+		9F25E63F2D25B26900EFA688 /* Task+ViewProps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+ViewProps.swift"; sourceTree = "<group>"; };
 		9F2B422B2C9EC89100A65225 /* HTTPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPService.swift; sourceTree = "<group>"; };
 		9F2B422D2C9ECEAF00A65225 /* EnvConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvConfig.swift; sourceTree = "<group>"; };
 		9F2B422F2C9EDF1E00A65225 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
@@ -369,6 +371,7 @@
 			isa = PBXGroup;
 			children = (
 				9FC77A872D21BA81009644B7 /* Task.swift */,
+				9F25E63F2D25B26900EFA688 /* Task+ViewProps.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -716,6 +719,7 @@
 				9F2B42472CA03BF500A65225 /* EnvProviders.swift in Sources */,
 				9F974E922D21744300D6BEF6 /* TaskDashbardScreen.swift in Sources */,
 				9F4E7EA92CB52C3C0062EDBB /* SignUpScreen.swift in Sources */,
+				9F25E6402D25B26900EFA688 /* Task+ViewProps.swift in Sources */,
 				9F974E8F2D21742B00D6BEF6 /* TaskRouter.swift in Sources */,
 				9F2B422C2C9EC89100A65225 /* HTTPService.swift in Sources */,
 				9F2B423F2C9F51B800A65225 /* TokenProvider.swift in Sources */,
