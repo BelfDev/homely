@@ -31,6 +31,7 @@ struct TaskDashboardScreen: View {
 
                 // Task List
                 // TODO(BelfDev): Put back the vm.
+//                TaskListView(tasks: TaskModel.makeStubList())
                 TaskListView(tasks: TaskModel.makeStubList())
                     .padding([.top], 24)
             }
@@ -43,10 +44,10 @@ struct TaskDashboardScreen: View {
                 }) {
                     Image(systemName: "plus")
                         .font(.title)
-                        .foregroundColor(.white)
+                        .foregroundColor(theme.color.onPrimary)
                         .padding()
-                        .background(Circle().fill(Color.blue))
-                        .shadow(radius: 10)
+                        .background(Circle().fill(theme.color.primary))
+                        .shadow(color: theme.color.shadow, radius: 10)
                 }
                 .padding()
             }

@@ -8,21 +8,17 @@
 import SwiftUI
 
 private struct StatusBadge: View {
-    let title: String
-    let color: Color
+    @ThemeProvider private var theme
     
-    init(status: TaskStatus) {
-        self.title = status.rawValue
-        self.color = status.color
-    }
+    let status: TaskStatus
 
     var body: some View {
-        Text(title)
-            .font(.caption)
-            .bold()
-            .foregroundColor(.white)
+        Text(status.rawValue)
+            .font(theme.font.caption)
+            .fontWeight(.semibold)
+            .foregroundColor(theme.color.onSecondary)
             .padding(8)
-            .background(color)
+            .background(status.color(theme.color))
             .cornerRadius(16)
     }
 }
@@ -48,23 +44,25 @@ struct TaskCard: View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
                 Text(title)
-                    .font(.headline)
+                    .font(theme.font.h5)
+                    .fontWeight(.semibold)
                 Spacer()
-                StatusBadge(status: self.status)
+                StatusBadge(status: status)
             }
 
             if let description = description {
                 Text(description)
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
+                    .font(theme.font.body1)
+                    .foregroundColor(theme.color.onSurface)
             }
 
             HStack {
                 if let timeRange {
                     Image(systemName: "clock")
-                        .foregroundColor(.secondary)
+                        .foregroundColor(theme.color.secondary)
                     Text(timeRange)
-                        .font(.caption)
+                        .font(theme.font.caption)
+                        .foregroundColor(theme.color.secondary)
                 }
                 
                 Spacer()
@@ -78,9 +76,9 @@ struct TaskCard: View {
             }
         }
         .padding()
-        .background(status.color.opacity(0.2))
+        .background(status.color(theme.color).opacity(0.2))
         .cornerRadius(16)
-//        .shadow(color: theme.color.shadow, radius: 16)
+        //        .shadow(color: theme.color.shadow, radius: 16)
     }
 }
 
@@ -96,6 +94,23 @@ private extension TaskModel {
             return "until \(endAt.formatted(date: .abbreviated, time: .shortened))"
         default:
             return nil
+        }
+    }
+}
+
+private extension TaskStatus {
+    
+    // TODO(BelfDev): Use theme instead.
+    func color(_ colorTheme: ColorThemeProtocol) -> Color {
+        switch self {
+        case .done:
+            return .green
+        case .contested:
+            return .red
+        case .inProgress:
+            return .orange
+        case .opened:
+            return .gray
         }
     }
 }
