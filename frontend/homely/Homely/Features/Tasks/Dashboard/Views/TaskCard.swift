@@ -85,14 +85,15 @@ struct TaskCard: View {
 }
 
 private extension TaskModel {
+    // TODO(BelfDev): localize and create more advanced formats
     var formattedTimeRange: String? {
         switch (startAt, endAt) {
         case let (startAt?, endAt?):
-            return "\(startAt.formatted(date: .omitted, time: .shortened)) - \(endAt.formatted(date: .omitted, time: .shortened))"
+            return "from \(startAt.formatted(date: .abbreviated, time: .shortened)) \nuntil \(endAt.formatted(date: .abbreviated, time: .shortened))"
         case let (startAt?, nil):
-            return "starts: \(startAt.formatted(date: .omitted, time: .shortened))"
+            return "from \(startAt.formatted(date: .abbreviated, time: .shortened))"
         case let (nil, endAt?):
-            return "ends: \(endAt.formatted(date: .omitted, time: .shortened))"
+            return "until \(endAt.formatted(date: .abbreviated, time: .shortened))"
         default:
             return nil
         }

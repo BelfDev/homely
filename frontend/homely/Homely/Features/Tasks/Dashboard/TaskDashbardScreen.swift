@@ -30,7 +30,8 @@ struct TaskDashboardScreen: View {
                     .padding(.horizontal)
 
                 // Task List
-                TaskListView(tasks: vm.tasks)
+                // TODO(BelfDev): Put back the vm.
+                TaskListView(tasks: TaskModel.makeStubList())
                     .padding([.top], 24)
             }
             
@@ -63,7 +64,11 @@ struct TaskDashboardScreen: View {
 
 #Preview {
     let components = ComponentManager(.development)
-    TaskDashboardScreen(components)
-        .environment(NavigationManager())
-        .environment(components)
+    let nav = NavigationManager()
+    
+    NavigationStack() {
+        TaskDashboardScreen(components)
+            .environment(nav)
+            .environment(components)
+    }
 }

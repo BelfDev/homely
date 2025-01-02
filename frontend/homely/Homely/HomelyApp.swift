@@ -12,7 +12,7 @@ struct HomelyApp: App {
     @State private var components: ComponentManager
     
     init() {
-        var mode: EnvConfig = .development
+        var mode: EnvConfig = .production
 //        #if DEBUG
 //        mode = .development
 //        #endif

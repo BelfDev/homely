@@ -8,14 +8,9 @@
 import Foundation
 
 protocol HomelyAPIClientProtocol {
-    /**
-     Logs in a user by sending their credentials to the server.
-     
-     - Parameter body: The login request body containing email and password.
-     - Returns: A `User` object if the request is successful.
-     - Throws: An error if the login fails.
-     */
     func login(body: LoginRequestBody) async throws -> LoginResponse
+    func signUp(body: SignUpRequestBody) async throws -> SignUpResponse
+    func myTasks() async throws -> [TaskModel]
 }
 
 final class HomelyAPIClient : HomelyAPIClientProtocol {

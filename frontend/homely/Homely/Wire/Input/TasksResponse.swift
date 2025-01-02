@@ -25,7 +25,7 @@ struct TaskAssigneeIn: Identifiable, Decodable {
 struct TaskIn: Identifiable, Decodable {
     let id: UUID
     let title: String
-    let description: String
+    let description: String?
     let createdAt: Date
     let createdBy: UUID
     let status: TaskStatusIn
