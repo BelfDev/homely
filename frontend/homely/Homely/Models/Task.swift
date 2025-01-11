@@ -11,10 +11,6 @@ struct TaskAssignee: Identifiable, Codable {
     let id: UUID
     let firstName: String
     let lastName: String
-    
-    var fullName: String {
-        "\(firstName) \(lastName)"
-    }
 }
 
 // Note: the "Model" suffix was used to prevent collision with Swift's built-in "Task".

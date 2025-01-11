@@ -35,7 +35,7 @@ struct TaskCard: View {
     init(task: TaskModel) {
         self.title = task.title
         self.description = task.description
-        self.timeRange = task.formattedTimeRange
+        self.timeRange = task.formattedRelativeTimeRange
         self.status = task.status
         self.assigneeImage = "person.circle"
     }
