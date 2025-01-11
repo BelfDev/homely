@@ -52,9 +52,11 @@ extension TaskModel {
             let endString = relativeDateString(for: endAt)
             return "\(startString) - \(endString)"
         case let (startAt?, nil):
-            return relativeDateString(for: startAt)
+            let startString = relativeDateString(for: startAt)
+            return "\(startString) - ∞"
         case let (nil, endAt?):
-            return relativeDateString(for: endAt)
+            let endString = relativeDateString(for: endAt)
+            return "∞ - \(endString)"
         default:
             return nil
         }
