@@ -31,9 +31,9 @@ struct TaskDashboardScreen: View {
 
                 // Task List
                 // TODO(BelfDev): Put back the vm.
-//                TaskListView(tasks: TaskModel.makeStubList())
-                TaskListView(tasks: TaskModel.makeStubList())
-                    .padding([.top], 24)
+                TaskListView(tasks: TaskModel.makeStubStaticList())
+//                TaskListView(tasks: vm.tasks)
+//                    .padding([.top], 24)
             }
             
             // Floating Action Button

@@ -83,6 +83,11 @@
 		9FA71E692CB14723007C09AB /* FormFieldValidators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA71E682CB14723007C09AB /* FormFieldValidators.swift */; };
 		9FA71E6B2CB14763007C09AB /* FormFieldError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA71E6A2CB14763007C09AB /* FormFieldError.swift */; };
 		9FA71E6D2CB148BB007C09AB /* LoginFormValidations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA71E6C2CB148BB007C09AB /* LoginFormValidations.swift */; };
+		9FAB88872D32FED800DEF3CE /* Task.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9FAB88862D32FED800DEF3CE /* Task.xcstrings */; };
+		9FAB88892D32FF1400DEF3CE /* TaskStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAB88882D32FF1400DEF3CE /* TaskStrings.swift */; };
+		9FAB888B2D33034F00DEF3CE /* TaskStatus+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAB888A2D33034F00DEF3CE /* TaskStatus+UI.swift */; };
+		9FAB888D2D3303F000DEF3CE /* TaskStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAB888C2D3303F000DEF3CE /* TaskStatus.swift */; };
+		9FAB888F2D33042500DEF3CE /* Task+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAB888E2D33042500DEF3CE /* Task+UI.swift */; };
 		9FC77A882D21BA81009644B7 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC77A872D21BA81009644B7 /* Task.swift */; };
 		9FC77A8C2D21BC39009644B7 /* TasksResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC77A8B2D21BC39009644B7 /* TasksResponse.swift */; };
 		9FCC2E112C67FFC100A787C3 /* LoginScreen.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9FCC2E102C67FFC100A787C3 /* LoginScreen.xcstrings */; };
@@ -193,6 +198,11 @@
 		9FA71E682CB14723007C09AB /* FormFieldValidators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFieldValidators.swift; sourceTree = "<group>"; };
 		9FA71E6A2CB14763007C09AB /* FormFieldError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFieldError.swift; sourceTree = "<group>"; };
 		9FA71E6C2CB148BB007C09AB /* LoginFormValidations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormValidations.swift; sourceTree = "<group>"; };
+		9FAB88862D32FED800DEF3CE /* Task.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Task.xcstrings; sourceTree = "<group>"; };
+		9FAB88882D32FF1400DEF3CE /* TaskStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStrings.swift; sourceTree = "<group>"; };
+		9FAB888A2D33034F00DEF3CE /* TaskStatus+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskStatus+UI.swift"; sourceTree = "<group>"; };
+		9FAB888C2D3303F000DEF3CE /* TaskStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStatus.swift; sourceTree = "<group>"; };
+		9FAB888E2D33042500DEF3CE /* Task+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+UI.swift"; sourceTree = "<group>"; };
 		9FC77A872D21BA81009644B7 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		9FC77A8B2D21BC39009644B7 /* TasksResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksResponse.swift; sourceTree = "<group>"; };
 		9FCC2E102C67FFC100A787C3 /* LoginScreen.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = LoginScreen.xcstrings; sourceTree = "<group>"; };
@@ -371,6 +381,9 @@
 			isa = PBXGroup;
 			children = (
 				9FC77A872D21BA81009644B7 /* Task.swift */,
+				9FAB888A2D33034F00DEF3CE /* TaskStatus+UI.swift */,
+				9FAB888C2D3303F000DEF3CE /* TaskStatus.swift */,
+				9FAB888E2D33042500DEF3CE /* Task+UI.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -488,6 +501,7 @@
 				9F974E962D2187E000D6BEF6 /* Details */,
 				9F974E902D21743300D6BEF6 /* Dashboard */,
 				9F974E8E2D21742B00D6BEF6 /* TaskRouter.swift */,
+				9FAB88882D32FF1400DEF3CE /* TaskStrings.swift */,
 			);
 			path = Tasks;
 			sourceTree = "<group>";
@@ -536,6 +550,7 @@
 				9F0A70EC2CA3F4D600792B85 /* Shared.xcstrings */,
 				9F0A70EA2CA3F3E900792B85 /* SharedStrings.swift */,
 				9F4E7EAD2CB531CF0062EDBB /* SignUpScreen.xcstrings */,
+				9FAB88862D32FED800DEF3CE /* Task.xcstrings */,
 			);
 			path = Strings;
 			sourceTree = "<group>";
@@ -674,6 +689,7 @@
 				9F73B5942C5F623C0007CD73 /* HankenGrotesk-SemiBold.ttf in Resources */,
 				9F73B5932C5F623C0007CD73 /* HankenGrotesk-SemiBoldItalic.ttf in Resources */,
 				9FCC2E112C67FFC100A787C3 /* LoginScreen.xcstrings in Resources */,
+				9FAB88872D32FED800DEF3CE /* Task.xcstrings in Resources */,
 				9F73B5982C5F623C0007CD73 /* HankenGrotesk-Bold.ttf in Resources */,
 				9FCC2E172C68FF8E00A787C3 /* Limelight-Regular.ttf in Resources */,
 				9F73B59C2C5F623C0007CD73 /* HankenGrotesk-Medium.ttf in Resources */,
@@ -705,7 +721,9 @@
 			files = (
 				9FEB3C5C2CB7307700822FB2 /* SignUpResponse.swift in Sources */,
 				9FA71E6B2CB14763007C09AB /* FormFieldError.swift in Sources */,
+				9FAB88892D32FF1400DEF3CE /* TaskStrings.swift in Sources */,
 				9F4E7EAC2CB52D290062EDBB /* SignUpViewModel.swift in Sources */,
+				9FAB888F2D33042500DEF3CE /* Task+UI.swift in Sources */,
 				9F4E7EA72CB47E7E0062EDBB /* FilledButton.swift in Sources */,
 				9FA71E692CB14723007C09AB /* FormFieldValidators.swift in Sources */,
 				9F0A241F2C1DA57400B5DEB3 /* ThemeProtocol.swift in Sources */,
@@ -726,6 +744,7 @@
 				9F5F11312CA9B00D00EECC4E /* LoadingOverlay.swift in Sources */,
 				9F974E982D2187F300D6BEF6 /* TaskDetailsScreen.swift in Sources */,
 				9FCC2E152C680D0100A787C3 /* FixedStrings.swift in Sources */,
+				9FAB888D2D3303F000DEF3CE /* TaskStatus.swift in Sources */,
 				9F2B424A2CA0443900A65225 /* LoginViewModel.swift in Sources */,
 				9FCC2E132C68043100A787C3 /* LoginStrings.swift in Sources */,
 				9F5D8B392C14C725002B98D5 /* LoginScreen.swift in Sources */,
@@ -734,6 +753,7 @@
 				9F5579EB2CBAF67A005C9AAE /* Debouncer.swift in Sources */,
 				9F0A24232C1DAA5F00B5DEB3 /* MainTheme.swift in Sources */,
 				9F4E7EB22CB5CA610062EDBB /* LoginRouter.swift in Sources */,
+				9FAB888B2D33034F00DEF3CE /* TaskStatus+UI.swift in Sources */,
 				9F2B422E2C9ECEAF00A65225 /* EnvConfig.swift in Sources */,
 				9F5579F12CBB289F005C9AAE /* FeatureModuleView.swift in Sources */,
 				9FEB3C582CB72A6F00822FB2 /* SignUpFormValidations.swift in Sources */,

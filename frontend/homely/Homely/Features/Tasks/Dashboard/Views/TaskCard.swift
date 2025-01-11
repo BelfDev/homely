@@ -13,13 +13,13 @@ private struct StatusBadge: View {
     let status: TaskStatus
 
     var body: some View {
-        Text(status.rawValue)
+        Text(status.localizedName.uppercased())
             .font(theme.font.caption)
-            .fontWeight(.semibold)
+            .fontWeight(.bold)
             .foregroundColor(theme.color.onSecondary)
             .padding(8)
             .background(status.color(theme.color))
-            .cornerRadius(16)
+            .cornerRadius(8)
     }
 }
 
@@ -82,44 +82,29 @@ struct TaskCard: View {
     }
 }
 
-private extension TaskModel {
-    // TODO(BelfDev): localize and create more advanced formats
-    var formattedTimeRange: String? {
-        switch (startAt, endAt) {
-        case let (startAt?, endAt?):
-            return "from \(startAt.formatted(date: .abbreviated, time: .shortened)) \nuntil \(endAt.formatted(date: .abbreviated, time: .shortened))"
-        case let (startAt?, nil):
-            return "from \(startAt.formatted(date: .abbreviated, time: .shortened))"
-        case let (nil, endAt?):
-            return "until \(endAt.formatted(date: .abbreviated, time: .shortened))"
-        default:
-            return nil
-        }
-    }
-}
-
-private extension TaskStatus {
-    
-    // TODO(BelfDev): Use theme instead.
-    func color(_ colorTheme: ColorThemeProtocol) -> Color {
-        switch self {
-        case .done:
-            return .green
-        case .contested:
-            return .red
-        case .inProgress:
-            return .orange
-        case .opened:
-            return .gray
-        }
-    }
-}
-
 #Preview {
     let components = ComponentManager(.development)
 
     TaskCard(
-        task: TaskModel.makeStub()
+        task: TaskModel.makeStubStaticList()[0]
+    )
+    .environment(components)
+    .padding()
+    
+    TaskCard(
+        task: TaskModel.makeStubStaticList()[1]
+    )
+    .environment(components)
+    .padding()
+    
+    TaskCard(
+        task: TaskModel.makeStubStaticList()[2]
+    )
+    .environment(components)
+    .padding()
+    
+    TaskCard(
+        task: TaskModel.makeStubStaticList()[3]
     )
     .environment(components)
     .padding()

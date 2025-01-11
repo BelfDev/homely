@@ -1,0 +1,78 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "key:status_contested" : {
+      "comment" : "Text displayed to indicate the \"contested\" status of a task. That is, it's challenged by another user.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contested"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contestado"
+          }
+        }
+      }
+    },
+    "key:status_done" : {
+      "comment" : "Text displayed to indicate the \"done\" status of a task. That is, the work is finished.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feito"
+          }
+        }
+      }
+    },
+    "key:status_in_progress" : {
+      "comment" : "Text displayed to indicate the \"in progress\" status of a task. That is, it's being worked on.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In Progress"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Em andamento"
+          }
+        }
+      }
+    },
+    "key:status_open" : {
+      "comment" : "Text displayed to indicate the \"open\" status of a task. That is, it has just been created.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Em aberto"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
