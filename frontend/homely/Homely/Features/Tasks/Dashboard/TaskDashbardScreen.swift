@@ -22,44 +22,41 @@ struct TaskDashboardScreen: View {
     
     var body: some View {
         
-        ZStack(alignment: .bottomTrailing) {
-            VStack(alignment: .leading) {
-                // Search Bar
-                TextField("Search", text: $searchText)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding(.horizontal)
-
-                // Task List
-                // TODO(BelfDev): Put back the vm.
-                TaskListView(tasks: TaskModel.makeStubStaticList())
-//                TaskListView(tasks: vm.tasks)
-//                    .padding([.top], 24)
-            }
-            
-            // Floating Action Button
-            HStack {
-                Spacer()
-                Button(action: {
-                    // Action for adding a new task
-                }) {
-                    Image(systemName: "plus")
-                        .font(.title)
-                        .foregroundColor(theme.color.onPrimary)
-                        .padding()
-                        .background(Circle().fill(theme.color.primary))
-                        .shadow(color: theme.color.shadow, radius: 10)
+        TaskListView(tasks: vm.tasks)
+            .padding([.top], 24)
+            .overlay {
+                if vm.isLoading {
+                    LoadingOverlay()
                 }
-                .padding()
             }
-        }
-        .overlay {
-            if vm.isLoading {
-                LoadingOverlay()
-            }
-        }
-        .background(theme.color.surface)
-        .navigationTitle("Tasks")
-        .toolbarTitleDisplayMode(.inlineLarge)
+            .background(theme.color.surface)
+            .navigationTitle(TaskStrings.dashboardScreenTitle)
+            .toolbarTitleDisplayMode(.large)
+       
+        //        ZStack(alignment: .bottomTrailing) {
+        //            VStack(alignment: .leading) {
+        //                //                TaskListView(tasks: TaskModel.makeStubStaticList())
+        //                //                    .padding([.top], 24)
+        //                TaskListView(tasks: vm.tasks)
+        //                    .padding([.top], 24)
+        //            }
+        //            
+        //            // Floating Action Button
+        //            HStack {
+        //                Spacer()
+        //                Button(action: {
+        //                    // Action for adding a new task
+        //                }) {
+        //                    Image(systemName: "plus")
+        //                        .font(.title)
+        //                        .foregroundColor(theme.color.onPrimary)
+        //                        .padding()
+        //                        .background(Circle().fill(theme.color.primary))
+        //                        .shadow(color: theme.color.shadow, radius: 10)
+        //                }
+        //                .padding()
+        //            }.hidden() // Change later
+        //        }
     }
 }
 

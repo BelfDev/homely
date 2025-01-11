@@ -27,47 +27,36 @@ struct HomeScreen: View {
             VStack {
                 VStack(alignment: .leading, spacing: 8) {
                     HStack(alignment: .firstTextBaseline) {
-                        Text(vm.greeting)
-                            .font(theme.font.h3)
+                        Text(vm.currentDate)
+                            .font(theme.font.h5)
                         Spacer()
                         Button("Logout", action: vm.logout)
-                            .buttonStyle(.bordered)
+                            .buttonStyle(.borderless)
                     }
-                    Text(vm.currentDate)
-                        .font(theme.font.h6)
+                    
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.vertical, 16)
                 
                 CardView {
-                    Text("Special Highlight")
-                        .font(.headline)
-                        .padding()
+                    Text(TaskStrings.dashboardScreenTitle)
+                        .font(theme.font.h5)
+                        .bold()
                 }
                 .frame(minHeight: 256)
                 .padding(.vertical, 16)
+                .onTapGesture(perform:  {
+                    navigator.push(HomeRoute.tasks)
+                })
                 
                 Group {
-                    Text("Modules")
-                        .font(theme.font.h5)
-                        .fontWeight(.semibold)
-                    
-                    // Test
-                    Button("Go to Tasks") {
-                        navigator.push(HomeRoute.tasks)
-                    }
-                    .padding()
-                    
-                    LazyVGrid(columns: columns, spacing: 16) {
-                        FeatureModuleView(title: "Rewards", description: "Track household tasks", iconName: "star", backgroundColor: .green.opacity(0.2))
-                        FeatureModuleView(title: "Shopping List", description: "Manage groceries", iconName: "cart", backgroundColor: .purple.opacity(0.2))
-                        FeatureModuleView(title: "Bills", description: "Track monthly expenses", iconName: "creditcard", backgroundColor: .yellow.opacity(0.2))
-                        FeatureModuleView(title: "Chores", description: "Daily chores schedule", iconName: "list.bullet", backgroundColor: .red.opacity(0.2))
-                    }
+                    Text("More will come, promise!")
+                    Text("...")
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
+                .font(theme.font.h6)
+                .foregroundColor(theme.color.secondary)
             }
-            .padding(.horizontal, 16)
+            .padding()
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(theme.color.surface)

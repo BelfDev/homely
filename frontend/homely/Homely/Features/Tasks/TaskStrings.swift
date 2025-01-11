@@ -33,4 +33,6 @@ struct TaskStrings {
         let format = String(localized: "key:weeks_ago", table: table)
         return String.localizedStringWithFormat(format, weeks)
     }
+    
+    static let dashboardScreenTitle = String(localized: "key:task_dashboard_screen_title", table: table)
 }

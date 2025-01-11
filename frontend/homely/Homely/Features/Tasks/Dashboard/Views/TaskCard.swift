@@ -75,10 +75,9 @@ struct TaskCard: View {
                 }
             }
         }
-        .padding()
+        .padding(12)
         .background(status.color(theme.color).opacity(0.2))
         .cornerRadius(16)
-        //        .shadow(color: theme.color.shadow, radius: 16)
     }
 }
 

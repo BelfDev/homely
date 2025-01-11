@@ -41,19 +41,13 @@ extension TaskModel {
                 "Plan trip"
             ]
                 .randomElement()!,
-            //            description: Bool
-            //                .random() ? [
-            //                    "Task description",
-            //                    "Optional description",
-            //                    "Complete this by the end of the day",
-            //                    "Requires extra attention",
-            //                ].randomElement()! : nil,
-            description: [
-                "Task description",
-                "Optional description",
-                "Complete this by the end of the day",
-                "Requires extra attention",
-            ].randomElement()!,
+            description: Bool
+                .random() ? [
+                    "Task description",
+                    "Optional description",
+                    "Complete this by the end of the day",
+                    "Requires extra attention",
+                ].randomElement()! : nil,
             createdAt: Date()
                 .addingTimeInterval(Double.random(in: -7...0) * 24 * 60 * 60),
             createdBy: userId,

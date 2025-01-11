@@ -23,11 +23,7 @@ struct TaskListView: View {
 #Preview {
     let components = ComponentManager(.development)
     TaskListView(
-        tasks: [
-            TaskModel.makeStub(),
-            TaskModel.makeStub(),
-            TaskModel.makeStub()
-        ]
+        tasks: TaskModel.makeStubStaticList()
     )
     .environment(components)
 }

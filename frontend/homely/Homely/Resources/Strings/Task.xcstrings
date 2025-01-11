@@ -145,6 +145,24 @@
         }
       }
     },
+    "key:task_dashboard_screen_title" : {
+      "comment" : "Text displayed on top of the Task Dashboard screen to make clear its purpose.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tasks"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tarefas"
+          }
+        }
+      }
+    },
     "key:today" : {
       "comment" : "Text displayed when the date is today; typically used in Task cards.",
       "extractionState" : "manual",
