@@ -1,0 +1,258 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "key:date_tomorrow" : {
+      "comment" : "Text displayed when the date is tomorrow; typically used in Task cards.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "tomorrow"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "amanhã"
+          }
+        }
+      }
+    },
+    "key:days_ago" : {
+      "comment" : "Text displayed when the date was a few days ago; typically used in Task cards.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d days ago"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d dias atrás"
+          }
+        }
+      }
+    },
+    "key:in_days" : {
+      "comment" : "Text displayed when the date is in a few days time; typically used in Task cards.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "in %d days"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "em %d dias"
+          }
+        }
+      }
+    },
+    "key:in_weeks" : {
+      "comment" : "Text displayed when the date is in a few weeks time; typically used in Task cards.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "in %d weeks"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "em %d semanas"
+          }
+        }
+      }
+    },
+    "key:status_contested" : {
+      "comment" : "Text displayed to indicate the \"contested\" status of a task. That is, it's challenged by another user.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contested"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contestado"
+          }
+        }
+      }
+    },
+    "key:status_done" : {
+      "comment" : "Text displayed to indicate the \"done\" status of a task. That is, the work is finished.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feito"
+          }
+        }
+      }
+    },
+    "key:status_in_progress" : {
+      "comment" : "Text displayed to indicate the \"in progress\" status of a task. That is, it's being worked on.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In Progress"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Em andamento"
+          }
+        }
+      }
+    },
+    "key:status_open" : {
+      "comment" : "Text displayed to indicate the \"open\" status of a task. That is, it has just been created.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Em aberto"
+          }
+        }
+      }
+    },
+    "key:task_dashboard_screen_title" : {
+      "comment" : "Text displayed on top of the Task Dashboard screen to make clear its purpose.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tasks"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tarefas"
+          }
+        }
+      }
+    },
+    "key:today" : {
+      "comment" : "Text displayed when the date is today; typically used in Task cards.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "today"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "hoje"
+          }
+        }
+      }
+    },
+    "key:today_with_time" : {
+      "comment" : "Text displayed when the date is today at a given time; typically used in Task cards.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "today at %@"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "hoje às %@"
+          }
+        }
+      }
+    },
+    "key:tomorrow_with_time" : {
+      "comment" : "Text displayed when the date is tomorrow at a given time; typically used in Task cards.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "tomorrow at %@"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "amanhã às %@"
+          }
+        }
+      }
+    },
+    "key:weeks_ago" : {
+      "comment" : "Text displayed when the date was a few weeks ago; typically used in Task cards.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d weeks ago"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d semanas atrás"
+          }
+        }
+      }
+    },
+    "key:yesterday" : {
+      "comment" : "Text displayed when the date was yesterday; typically used in Task cards.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "yesterday"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ontem"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

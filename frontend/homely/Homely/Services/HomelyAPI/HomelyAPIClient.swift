@@ -8,14 +8,9 @@
 import Foundation
 
 protocol HomelyAPIClientProtocol {
-    /**
-     Logs in a user by sending their credentials to the server.
-     
-     - Parameter body: The login request body containing email and password.
-     - Returns: A `User` object if the request is successful.
-     - Throws: An error if the login fails.
-     */
     func login(body: LoginRequestBody) async throws -> LoginResponse
+    func signUp(body: SignUpRequestBody) async throws -> SignUpResponse
+    func myTasks() async throws -> [TaskModel]
 }
 
 final class HomelyAPIClient : HomelyAPIClientProtocol {
@@ -35,7 +30,7 @@ final class HomelyAPIClient : HomelyAPIClientProtocol {
     // MARK: - API Endpoints
     
     enum Endpoint: EndpointProtocol {
-        case login, signUp
+        case login, signUp, myTasks
         
         /**
          Returns the path for the given API endpoint.
@@ -48,6 +43,8 @@ final class HomelyAPIClient : HomelyAPIClientProtocol {
                 return "/api/v1/users/login"
             case .signUp:
                 return "/api/v1/users"
+            case .myTasks:
+                return "/api/v1/tasks"
             }
         }
         
@@ -93,5 +90,11 @@ final class HomelyAPIClient : HomelyAPIClientProtocol {
         
         try tokenProvider.setToken(response.accessToken)
         return response
+    }
+    
+    func myTasks() async throws -> [TaskModel] {
+        let response: TasksResponse = try await http.get(.myTasks)
+        let parsedTasks = response.toTaskList()
+        return parsedTasks
     }
 }

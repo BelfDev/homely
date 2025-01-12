@@ -8,18 +8,24 @@
 import SwiftUI
 
 enum HomeRoute: Route {
-    case details
+    case tasks
 }
 
 struct HomeRouter: View {
     @ComponentsProvider private var components
-    @State private var navigation = NavigationManager<HomeRoute>()
+    @State private var navigator = NavigationManager()
     
     var body: some View {
-        NavigationStack(path: $navigation.path) {
+        NavigationStack(path: $navigator.path) {
             HomeScreen(components)
+                .navigationDestination(for: HomeRoute.self) { destination in
+                    switch destination {
+                    case .tasks:
+                        TaskRouter()
+                    }
+                }
         }
         .tint(components.theme.color.primary)
-        .environment(navigation)
+        .environment(navigator)
     }
 }

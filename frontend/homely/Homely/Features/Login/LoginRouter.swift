@@ -13,10 +13,10 @@ enum LoginRoute: Route {
 
 struct LoginRouter: View {
     @ComponentsProvider private var components
-    @State private var navigation = NavigationManager<LoginRoute>()
+    @State private var navigator = NavigationManager()
     
     var body: some View {
-        NavigationStack(path: $navigation.path) {
+        NavigationStack(path: $navigator.path) {
             LoginScreen(components)
                 .navigationDestination(for: LoginRoute.self) { destination in
                     switch destination {
@@ -26,6 +26,6 @@ struct LoginRouter: View {
                 }
         }
         .tint(components.theme.color.primary)
-        .environment(navigation)
+        .environment(navigator)
     }
 }
