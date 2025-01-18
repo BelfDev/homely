@@ -22,46 +22,28 @@ struct TaskDashboardScreen: View {
     
     var body: some View {
         
-        //        TaskListView(tasks: vm.tasks)
-        TaskListView(
-            tasks: TaskModel
-                .makeStubStaticList() + TaskModel
-                .makeStubStaticList()
-        )
-        .background(theme.color.surface)
-        .navigationTitle(TaskStrings.dashboardScreenTitle)
-        .toolbarTitleDisplayMode(.large)
-        .overlay {
-            if vm.isLoading {
-                LoadingOverlay()
+        // TaskListView(tasks: vm.tasks)
+        
+        ZStack(alignment: .bottomTrailing) {
+            TaskListView(
+                tasks: TaskModel
+                    .makeStubStaticList() + TaskModel
+                    .makeStubStaticList()
+            )
+            .background(theme.color.surface)
+            .navigationTitle(TaskStrings.dashboardScreenTitle)
+            .toolbarTitleDisplayMode(.large)
+            .overlay {
+                if vm.isLoading {
+                    LoadingOverlay()
+                }
             }
-        }
             
-       
-        //        ZStack(alignment: .bottomTrailing) {
-        //            VStack(alignment: .leading) {
-        //                //                TaskListView(tasks: TaskModel.makeStubStaticList())
-        //                //                    .padding([.top], 24)
-        //                TaskListView(tasks: vm.tasks)
-        //                    .padding([.top], 24)
-        //            }
-        //            
-        //            // Floating Action Button
-        //            HStack {
-        //                Spacer()
-        //                Button(action: {
-        //                    // Action for adding a new task
-        //                }) {
-        //                    Image(systemName: "plus")
-        //                        .font(.title)
-        //                        .foregroundColor(theme.color.onPrimary)
-        //                        .padding()
-        //                        .background(Circle().fill(theme.color.primary))
-        //                        .shadow(color: theme.color.shadow, radius: 10)
-        //                }
-        //                .padding()
-        //            }.hidden() // Change later
-        //        }
+            FloatingActionButton(actionType: .add) {
+                // Do something
+            }
+            .padding(.trailing, 20)
+        }
     }
 }
 
