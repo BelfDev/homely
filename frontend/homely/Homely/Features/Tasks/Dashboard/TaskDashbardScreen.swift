@@ -22,16 +22,21 @@ struct TaskDashboardScreen: View {
     
     var body: some View {
         
-        TaskListView(tasks: vm.tasks)
-            .padding([.top], 24)
-            .overlay {
-                if vm.isLoading {
-                    LoadingOverlay()
-                }
+        //        TaskListView(tasks: vm.tasks)
+        TaskListView(
+            tasks: TaskModel
+                .makeStubStaticList() + TaskModel
+                .makeStubStaticList()
+        )
+        .background(theme.color.surface)
+        .navigationTitle(TaskStrings.dashboardScreenTitle)
+        .toolbarTitleDisplayMode(.large)
+        .overlay {
+            if vm.isLoading {
+                LoadingOverlay()
             }
-            .background(theme.color.surface)
-            .navigationTitle(TaskStrings.dashboardScreenTitle)
-            .toolbarTitleDisplayMode(.large)
+        }
+            
        
         //        ZStack(alignment: .bottomTrailing) {
         //            VStack(alignment: .leading) {
