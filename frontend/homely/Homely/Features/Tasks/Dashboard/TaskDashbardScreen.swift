@@ -40,7 +40,7 @@ struct TaskDashboardScreen: View {
             }
             
             FloatingActionButton(actionType: .add) {
-                // Do something
+                navigator.push(TaskRoute.newTask)
             }
             .padding(.trailing, 19)
         }

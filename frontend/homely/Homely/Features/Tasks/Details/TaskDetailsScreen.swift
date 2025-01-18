@@ -23,5 +23,10 @@ struct TaskDetailsScreen: View {
 }
 
 #Preview {
+    let components = ComponentManager(.development)
+    let nav = NavigationManager()
+    
     TaskDetailsScreen()
+        .environment(components)
+        .environment(nav)
 }

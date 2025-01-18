@@ -16,6 +16,11 @@
 		9F0A70ED2CA3F4D600792B85 /* Shared.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9F0A70EC2CA3F4D600792B85 /* Shared.xcstrings */; };
 		9F1DCEB22D3C288000660241 /* FloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1DCEB12D3C288000660241 /* FloatingActionButton.swift */; };
 		9F1DCEB42D3C2ACE00660241 /* ButtonActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1DCEB32D3C2ACE00660241 /* ButtonActionType.swift */; };
+		9F1DCEB72D3C2E6400660241 /* NewTaskScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1DCEB62D3C2E6400660241 /* NewTaskScreen.swift */; };
+		9F1DCEB92D3C336900660241 /* NewTaskScreen.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9F1DCEB82D3C336900660241 /* NewTaskScreen.xcstrings */; };
+		9F1DCEBB2D3C33F100660241 /* NewTaskStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1DCEBA2D3C33F100660241 /* NewTaskStrings.swift */; };
+		9F1DCEBD2D3C349100660241 /* NewTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1DCEBC2D3C349100660241 /* NewTaskViewModel.swift */; };
+		9F1DCEC12D3C45D100660241 /* DateInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1DCEC02D3C45D100660241 /* DateInputField.swift */; };
 		9F25E63E2D25A87500EFA688 /* TaskCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F25E63D2D25A87500EFA688 /* TaskCard.swift */; };
 		9F25E6422D25D0C800EFA688 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F25E6412D25D0C800EFA688 /* TaskListView.swift */; };
 		9F2B422C2C9EC89100A65225 /* HTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B422B2C9EC89100A65225 /* HTTPService.swift */; };
@@ -129,6 +134,11 @@
 		9F0A70EC2CA3F4D600792B85 /* Shared.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Shared.xcstrings; sourceTree = "<group>"; };
 		9F1DCEB12D3C288000660241 /* FloatingActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingActionButton.swift; sourceTree = "<group>"; };
 		9F1DCEB32D3C2ACE00660241 /* ButtonActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonActionType.swift; sourceTree = "<group>"; };
+		9F1DCEB62D3C2E6400660241 /* NewTaskScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskScreen.swift; sourceTree = "<group>"; };
+		9F1DCEB82D3C336900660241 /* NewTaskScreen.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = NewTaskScreen.xcstrings; sourceTree = "<group>"; };
+		9F1DCEBA2D3C33F100660241 /* NewTaskStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskStrings.swift; sourceTree = "<group>"; };
+		9F1DCEBC2D3C349100660241 /* NewTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewModel.swift; sourceTree = "<group>"; };
+		9F1DCEC02D3C45D100660241 /* DateInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputField.swift; sourceTree = "<group>"; };
 		9F25E63D2D25A87500EFA688 /* TaskCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCard.swift; sourceTree = "<group>"; };
 		9F25E6412D25D0C800EFA688 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
 		9F2B422B2C9EC89100A65225 /* HTTPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPService.swift; sourceTree = "<group>"; };
@@ -302,8 +312,20 @@
 				9F5579EA2CBAF67A005C9AAE /* Debouncer.swift */,
 				9F5579EE2CBB10E6005C9AAE /* IconButton.swift */,
 				9F5579F22CBBE32F005C9AAE /* CardView.swift */,
+				9F1DCEC02D3C45D100660241 /* DateInputField.swift */,
 			);
 			path = "Shared Views";
+			sourceTree = "<group>";
+		};
+		9F1DCEB52D3C2E4400660241 /* NewTask */ = {
+			isa = PBXGroup;
+			children = (
+				9F1DCEB62D3C2E6400660241 /* NewTaskScreen.swift */,
+				9F1DCEBA2D3C33F100660241 /* NewTaskStrings.swift */,
+				9F1DCEBC2D3C349100660241 /* NewTaskViewModel.swift */,
+				9F1DCEB82D3C336900660241 /* NewTaskScreen.xcstrings */,
+			);
+			path = NewTask;
 			sourceTree = "<group>";
 		};
 		9F2B42332C9EF4DE00A65225 /* HTTP */ = {
@@ -377,6 +399,7 @@
 				9F4E7EAB2CB52D290062EDBB /* SignUpViewModel.swift */,
 				9F4E7EAF2CB531FC0062EDBB /* SignUpStrings.swift */,
 				9FEB3C572CB72A6F00822FB2 /* SignUpFormValidations.swift */,
+				9F4E7EAD2CB531CF0062EDBB /* SignUpScreen.xcstrings */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -496,6 +519,7 @@
 				9F2B42492CA0443900A65225 /* LoginViewModel.swift */,
 				9FA71E6C2CB148BB007C09AB /* LoginFormValidations.swift */,
 				9F4E7EB12CB5CA610062EDBB /* LoginRouter.swift */,
+				9FCC2E102C67FFC100A787C3 /* LoginScreen.xcstrings */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -503,6 +527,8 @@
 		9F974E8B2D2173D300D6BEF6 /* Tasks */ = {
 			isa = PBXGroup;
 			children = (
+				9FAB88862D32FED800DEF3CE /* Task.xcstrings */,
+				9F1DCEB52D3C2E4400660241 /* NewTask */,
 				9F974E962D2187E000D6BEF6 /* Details */,
 				9F974E902D21743300D6BEF6 /* Dashboard */,
 				9F974E8E2D21742B00D6BEF6 /* TaskRouter.swift */,
@@ -551,12 +577,9 @@
 		9FCC2E0F2C67FF6500A787C3 /* Strings */ = {
 			isa = PBXGroup;
 			children = (
-				9FCC2E102C67FFC100A787C3 /* LoginScreen.xcstrings */,
 				9FCC2E142C680D0100A787C3 /* FixedStrings.swift */,
 				9F0A70EC2CA3F4D600792B85 /* Shared.xcstrings */,
 				9F0A70EA2CA3F3E900792B85 /* SharedStrings.swift */,
-				9F4E7EAD2CB531CF0062EDBB /* SignUpScreen.xcstrings */,
-				9FAB88862D32FED800DEF3CE /* Task.xcstrings */,
 			);
 			path = Strings;
 			sourceTree = "<group>";
@@ -690,6 +713,7 @@
 				9F73B59D2C5F623C0007CD73 /* HankenGrotesk-Thin.ttf in Resources */,
 				9F73B59B2C5F623C0007CD73 /* HankenGrotesk-ThinItalic.ttf in Resources */,
 				9F73B5A22C5F623C0007CD73 /* HankenGrotesk-ExtraLight.ttf in Resources */,
+				9F1DCEB92D3C336900660241 /* NewTaskScreen.xcstrings in Resources */,
 				9F73B5922C5F623C0007CD73 /* HankenGrotesk-ExtraLightItalic.ttf in Resources */,
 				9F73B59A2C5F623C0007CD73 /* HankenGrotesk-ExtraBold.ttf in Resources */,
 				9F73B5942C5F623C0007CD73 /* HankenGrotesk-SemiBold.ttf in Resources */,
@@ -728,10 +752,13 @@
 				9FEB3C5C2CB7307700822FB2 /* SignUpResponse.swift in Sources */,
 				9FA71E6B2CB14763007C09AB /* FormFieldError.swift in Sources */,
 				9FAB88892D32FF1400DEF3CE /* TaskStrings.swift in Sources */,
+				9F1DCEB72D3C2E6400660241 /* NewTaskScreen.swift in Sources */,
 				9F4E7EAC2CB52D290062EDBB /* SignUpViewModel.swift in Sources */,
 				9FAB888F2D33042500DEF3CE /* Task+UI.swift in Sources */,
+				9F1DCEBB2D3C33F100660241 /* NewTaskStrings.swift in Sources */,
 				9F4E7EA72CB47E7E0062EDBB /* FilledButton.swift in Sources */,
 				9FA71E692CB14723007C09AB /* FormFieldValidators.swift in Sources */,
+				9F1DCEC12D3C45D100660241 /* DateInputField.swift in Sources */,
 				9F1DCEB22D3C288000660241 /* FloatingActionButton.swift in Sources */,
 				9F0A241F2C1DA57400B5DEB3 /* ThemeProtocol.swift in Sources */,
 				9F2B42432CA032AC00A65225 /* ComponentManager.swift in Sources */,
@@ -764,6 +791,7 @@
 				9F2B422E2C9ECEAF00A65225 /* EnvConfig.swift in Sources */,
 				9F5579F12CBB289F005C9AAE /* FeatureModuleView.swift in Sources */,
 				9FEB3C582CB72A6F00822FB2 /* SignUpFormValidations.swift in Sources */,
+				9F1DCEBD2D3C349100660241 /* NewTaskViewModel.swift in Sources */,
 				9F0A70E92CA35A4C00792B85 /* ErrorBottomSheet.swift in Sources */,
 				9F5579ED2CBB080D005C9AAE /* LocalStoreManager.swift in Sources */,
 				9FCC2E1B2C69011D00A787C3 /* LoginResponse.swift in Sources */,

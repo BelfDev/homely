@@ -9,6 +9,7 @@ import SwiftUI
 
 enum TaskRoute: Route {
     case details
+    case newTask
 }
 
 struct TaskRouter: View {
@@ -20,6 +21,8 @@ struct TaskRouter: View {
                 switch destination {
                 case .details:
                     TaskDetailsScreen()
+                case .newTask:
+                    NewTaskScreen(components)
                 }
             }
     }

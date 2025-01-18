@@ -57,7 +57,7 @@ struct SignUpScreen: View {
                     ErrorBottomSheet(errorMessage: vm.errorMessage)
                 }
                 .onSubmit(focusNextField)
-                .frame(minHeight: geometry.size.height)
+                .frame(minHeight: geometry.size.height, alignment: .top)
                 .padding(.horizontal, 16)
             }
             .disabled(vm.isLoading)
