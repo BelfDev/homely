@@ -17,9 +17,10 @@ private struct StatusBadge: View {
             .font(theme.font.caption)
             .fontWeight(.bold)
             .foregroundColor(theme.color.onSecondary)
-            .padding(8)
+            .padding(.vertical, 2)
+            .padding(.horizontal, 4)
             .background(status.color(theme.color))
-            .cornerRadius(8)
+            .cornerRadius(4)
     }
 }
 
@@ -42,7 +43,7 @@ struct TaskCard: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            HStack {
+            HStack(alignment: .center) {
                 Text(title)
                     .font(theme.font.h5)
                     .fontWeight(.semibold)
