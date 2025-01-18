@@ -42,7 +42,7 @@ struct TaskDashboardScreen: View {
             FloatingActionButton(actionType: .add) {
                 // Do something
             }
-            .padding(.trailing, 20)
+            .padding(.trailing, 19)
         }
     }
 }
