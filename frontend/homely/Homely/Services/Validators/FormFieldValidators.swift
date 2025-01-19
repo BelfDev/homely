@@ -13,6 +13,10 @@ struct FormFieldValidators {
     
     // MARK: - Constants
     
+    private static let titleMaxLength = 140
+    private static let descriptionMaxLength = 280
+    private static let minDateRange = TimeInterval(60)
+    
     /// A regex pattern for basic email address validation.
     ///
     /// This pattern checks for a standard format with the following characteristics:
@@ -31,10 +35,15 @@ struct FormFieldValidators {
     /// - Does not support more complex email address formats (quoted strings, IP addresses).
     /// - Doesn't cover all valid email addresses as per [RFC 5322](https://www.ietf.org/rfc/rfc5322.txt) but provides a simpler, practical validation.
     private static let emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-    private static let emailRegex = try? NSRegularExpression(pattern: emailPattern, options: .caseInsensitive)
+    private static let emailRegex = try? NSRegularExpression(
+        pattern: emailPattern,
+        options: .caseInsensitive
+    )
     private static let minPasswordLength = 6
     private static let namePattern = "[A-Za-z0-9\\p{Greek}\\-\\s]{2,64}"
-    private static let nameRegex = try? NSRegularExpression(pattern: namePattern)
+    private static let nameRegex = try? NSRegularExpression(
+        pattern: namePattern
+    )
     
     
     // MARK: - Methods
@@ -92,6 +101,78 @@ struct FormFieldValidators {
             return .invalidName
         }
         
+        return nil
+    }
+    
+    /// Validates a task title.
+    ///
+    /// - Parameter fieldValue: The title to validate.
+    /// - Returns: A `FormFieldError` if validation fails, otherwise `nil`.
+    static func validateTitle(_ fieldValue: String?) -> FormFieldError? {
+        guard let title = fieldValue, !title.isEmpty else {
+            return .empty
+        }
+            
+        if title.count > titleMaxLength {
+            return .tooLong(maxCount: titleMaxLength)
+        }
+            
+        return nil
+    }
+    
+    /// Validates a task description.
+    ///
+    /// - Parameter fieldValue: The description to validate.
+    /// - Returns: A `FormFieldError` if validation fails, otherwise `nil`.
+    static func validateDescription(_ fieldValue: String?) -> FormFieldError? {
+        guard let description = fieldValue, !description.isEmpty else {
+            return nil
+        }
+        
+        if description.count > descriptionMaxLength {
+            return .tooLong(maxCount: descriptionMaxLength)
+        }
+        
+        return nil
+    }
+    
+    /// Validates a `startAt` date to ensure it is in the future.
+    ///
+    /// - Parameter startAt: The start date to validate.
+    /// - Returns: A `FormFieldError` if validation fails, otherwise `nil`.
+    static func validateStartAt(_ startAt: Date?) -> FormFieldError? {
+        guard let startAt = startAt else {
+            return .empty
+        }
+          
+        if startAt < Date().addingTimeInterval(-1 * 60 * 60) {
+            return .dateInPast
+        }
+          
+        return nil
+    }
+    
+    /// Validates an `endAt` date to ensure it is after `startAt`.
+    ///
+    /// - Parameters:
+    ///   - startAt: The start date to compare against.
+    ///   - endAt: The end date to validate.
+    /// - Returns: A `FormFieldError` if validation fails, otherwise `nil`.
+    static func validateEndAt(startAt: Date?, endAt: Date?) -> FormFieldError? {
+        guard let endAt = endAt else {
+            return nil
+        }
+        
+        if let startAt = startAt {
+            guard endAt > startAt else {
+                return .endDateBeforeStartDate
+            }
+            
+            if endAt.timeIntervalSince(startAt) < minDateRange {
+                return .dateRangeTooShort(minDuration: minDateRange)
+            }
+        }
+            
         return nil
     }
 }

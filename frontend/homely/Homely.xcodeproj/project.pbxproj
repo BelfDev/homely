@@ -21,6 +21,8 @@
 		9F1DCEBB2D3C33F100660241 /* NewTaskStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1DCEBA2D3C33F100660241 /* NewTaskStrings.swift */; };
 		9F1DCEBD2D3C349100660241 /* NewTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1DCEBC2D3C349100660241 /* NewTaskViewModel.swift */; };
 		9F1DCEC12D3C45D100660241 /* DateInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1DCEC02D3C45D100660241 /* DateInputField.swift */; };
+		9F1DCEC32D3D87CD00660241 /* NewTaskFormValidations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1DCEC22D3D87CD00660241 /* NewTaskFormValidations.swift */; };
+		9F1DCEC52D3D8F9E00660241 /* NewTaskRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1DCEC42D3D8F9E00660241 /* NewTaskRequestBody.swift */; };
 		9F25E63E2D25A87500EFA688 /* TaskCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F25E63D2D25A87500EFA688 /* TaskCard.swift */; };
 		9F25E6422D25D0C800EFA688 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F25E6412D25D0C800EFA688 /* TaskListView.swift */; };
 		9F2B422C2C9EC89100A65225 /* HTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B422B2C9EC89100A65225 /* HTTPService.swift */; };
@@ -139,6 +141,8 @@
 		9F1DCEBA2D3C33F100660241 /* NewTaskStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskStrings.swift; sourceTree = "<group>"; };
 		9F1DCEBC2D3C349100660241 /* NewTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewModel.swift; sourceTree = "<group>"; };
 		9F1DCEC02D3C45D100660241 /* DateInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputField.swift; sourceTree = "<group>"; };
+		9F1DCEC22D3D87CD00660241 /* NewTaskFormValidations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskFormValidations.swift; sourceTree = "<group>"; };
+		9F1DCEC42D3D8F9E00660241 /* NewTaskRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskRequestBody.swift; sourceTree = "<group>"; };
 		9F25E63D2D25A87500EFA688 /* TaskCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCard.swift; sourceTree = "<group>"; };
 		9F25E6412D25D0C800EFA688 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
 		9F2B422B2C9EC89100A65225 /* HTTPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPService.swift; sourceTree = "<group>"; };
@@ -324,6 +328,7 @@
 				9F1DCEBA2D3C33F100660241 /* NewTaskStrings.swift */,
 				9F1DCEBC2D3C349100660241 /* NewTaskViewModel.swift */,
 				9F1DCEB82D3C336900660241 /* NewTaskScreen.xcstrings */,
+				9F1DCEC22D3D87CD00660241 /* NewTaskFormValidations.swift */,
 			);
 			path = NewTask;
 			sourceTree = "<group>";
@@ -365,6 +370,7 @@
 			children = (
 				9F2B42392C9EFA3F00A65225 /* LoginRequestBody.swift */,
 				9FEB3C592CB72B8500822FB2 /* SignUpRequestBody.swift */,
+				9F1DCEC42D3D8F9E00660241 /* NewTaskRequestBody.swift */,
 			);
 			path = Output;
 			sourceTree = "<group>";
@@ -764,6 +770,7 @@
 				9F2B42432CA032AC00A65225 /* ComponentManager.swift in Sources */,
 				9F25E6422D25D0C800EFA688 /* TaskListView.swift in Sources */,
 				9FC77A882D21BA81009644B7 /* Task.swift in Sources */,
+				9F1DCEC52D3D8F9E00660241 /* NewTaskRequestBody.swift in Sources */,
 				9F2B42412C9F6C9400A65225 /* KeychainError.swift in Sources */,
 				9F5F112D2CA995B400EECC4E /* RootView.swift in Sources */,
 				9FA71E6D2CB148BB007C09AB /* LoginFormValidations.swift in Sources */,
@@ -811,6 +818,7 @@
 				9FC77A8C2D21BC39009644B7 /* TasksResponse.swift in Sources */,
 				9F974E942D21745500D6BEF6 /* TaskDashboardViewModel.swift in Sources */,
 				9F5F112B2CA98B2A00EECC4E /* SessionManager.swift in Sources */,
+				9F1DCEC32D3D87CD00660241 /* NewTaskFormValidations.swift in Sources */,
 				9F5579F32CBBE32F005C9AAE /* CardView.swift in Sources */,
 				9F1DCEB42D3C2ACE00660241 /* ButtonActionType.swift in Sources */,
 				9F4E7EC02CB5D1250062EDBB /* NavigationManager.swift in Sources */,

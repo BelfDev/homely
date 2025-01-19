@@ -41,27 +41,33 @@ struct TasksResponse: Decodable {
 
 // MARK: - Adapters
 
+extension TaskIn {
+    func toTaskModel() -> TaskModel {
+        return  TaskModel(
+            id: self.id,
+            title: self.title,
+            description: self.description,
+            createdAt: self.createdAt,
+            createdBy: self.createdBy,
+            status: TaskStatus(rawValue: self.status.rawValue)!,
+            startAt: self.startAt,
+            endAt: self.endAt,
+            updatedAt: self.updatedAt,
+            assignees: self.assignees.map { assigneeIn in
+                TaskAssignee(
+                    id: assigneeIn.userId,
+                    firstName: assigneeIn.firstName,
+                    lastName: assigneeIn.lastName
+                )
+            }
+        )
+    }
+}
+
 extension TasksResponse {
     func toTaskList() -> [TaskModel] {
         return self.tasks.map { taskIn in
-            TaskModel(
-                id: taskIn.id,
-                title: taskIn.title,
-                description: taskIn.description,
-                createdAt: taskIn.createdAt,
-                createdBy: taskIn.createdBy,
-                status: TaskStatus(rawValue: taskIn.status.rawValue)!,
-                startAt: taskIn.startAt,
-                endAt: taskIn.endAt,
-                updatedAt: taskIn.updatedAt,
-                assignees: taskIn.assignees.map { assigneeIn in
-                    TaskAssignee(
-                        id: assigneeIn.userId,
-                        firstName: assigneeIn.firstName,
-                        lastName: assigneeIn.lastName
-                    )
-                }
-            )
+            taskIn.toTaskModel()
         }
     }
 }

@@ -26,8 +26,8 @@ struct NewTaskScreen: View {
                         type: .text(
                             label: NewTaskStrings.titleInputLabel
                         ),
-                        input: $vm.title
-                        //                        error: vm.validations?.firstNameFieldError
+                        input: $vm.title,
+                        error: vm.validations?.titleFieldError
                     )
                     .padding(.top, 24)
                     .focused($focusedField, equals: .title)
@@ -35,7 +35,8 @@ struct NewTaskScreen: View {
                     
                     DateInputField(
                         label: NewTaskStrings.startAtInputLabel,
-                        input: $vm.startAt
+                        input: $vm.startAt,
+                        error: vm.validations?.startAtFieldError
                     )
                     .focused($focusedField, equals: .start)
                     .submitLabel(.next)
@@ -43,7 +44,8 @@ struct NewTaskScreen: View {
                     DateInputField(
                         label: NewTaskStrings.endAtInputLabel,
                         input: $vm.endAt,
-                        minimumDate: vm.startAt
+                        minimumDate: vm.startAt,
+                        error: vm.validations?.endAtFieldError
                     )
                     .focused($focusedField, equals: .end)
                     .submitLabel(.next)
@@ -52,35 +54,21 @@ struct NewTaskScreen: View {
                         type: .textArea(
                             label: NewTaskStrings.descriptionInputLabel
                         ),
-                        input: $vm.description
-                        //                                            error: vm.validations?.lastNameFieldError
+                        input: $vm.description,
+                        error: vm.validations?.descriptionFieldError
                     )
                     .focused($focusedField, equals: .description)
                     .submitLabel(.done)
-
-               
                     
-                    //                    TextInputField(
-                    //                        type: .email,
-                    //                        input: $vm.email,
-                    //                        error: vm.validations?.emailFieldError
-                    //                    )
-                    //                    .focused($focusedField, equals: .email)
-                    //                    .submitLabel(.next)
-                    //                    PasswordInputField(
-                    //                        input: $vm.password,
-                    //                        error: vm.validations?.passwordFieldError
-                    //                    )
-                    //                    .focused($focusedField, equals: .password)
-                    //                    .submitLabel(.done)
-                    //                    Spacer(minLength: 16)
-                    //                    FilledButton(title: SignUpStrings.screenTitle, action: vm.signUp)
-                    //                        .padding(.bottom, 54)
+                    FilledButton(
+                        title: NewTaskStrings.createTaskButton,
+                        action: vm.createNewTask
+                    )
                 }
                 .sheet(isPresented: $vm.hasGeneralError) {
                     ErrorBottomSheet(errorMessage: vm.errorMessage)
                 }
-                //                .onSubmit(focusNextField)
+                .onSubmit(focusNextField)
                 .frame(minHeight: geometry.size.height, alignment: .top)
                 .padding(.horizontal, 16)
             }
@@ -97,6 +85,9 @@ struct NewTaskScreen: View {
             .background(theme.color.surface)
             .navigationBarTitle(NewTaskStrings.screenTitle)
             .toolbarTitleDisplayMode(.inlineLarge)
+            .onChange(of: vm.taskCreated) {
+                navigator.pop()
+            }
         }
     }
 }
@@ -111,7 +102,7 @@ private extension NewTaskScreen {
     private func focusNextField() {
         switch focusedField {
         case .title:
-            focusedField = .start 
+            focusedField = .description
         case .start:
             focusedField = .end
         case .end:
@@ -123,7 +114,6 @@ private extension NewTaskScreen {
         }
     }
 }
-
 
 #Preview {
     let components = ComponentManager(.development)

@@ -73,6 +73,24 @@
         }
       }
     },
+    "key:new_task_button" : {
+      "comment" : "Text displayed on the button that triggers a new task creation.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Create new task"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Criar nova tarefa"
+          }
+        }
+      }
+    },
     "key:new_task_screen_title" : {
       "comment" : "Text displayed on top of the New Task navigation bar to clarify this screen's purpose.",
       "extractionState" : "manual",

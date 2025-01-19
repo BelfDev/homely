@@ -30,7 +30,7 @@ final class HomelyAPIClient : HomelyAPIClientProtocol {
     // MARK: - API Endpoints
     
     enum Endpoint: EndpointProtocol {
-        case login, signUp, myTasks
+        case login, users, tasks
         
         /**
          Returns the path for the given API endpoint.
@@ -41,9 +41,9 @@ final class HomelyAPIClient : HomelyAPIClientProtocol {
             switch self {
             case .login:
                 return "/api/v1/users/login"
-            case .signUp:
+            case .users:
                 return "/api/v1/users"
-            case .myTasks:
+            case .tasks:
                 return "/api/v1/tasks"
             }
         }
@@ -86,15 +86,20 @@ final class HomelyAPIClient : HomelyAPIClientProtocol {
         - The method automatically logs in the user after registration by storing the returned access token using the `TokenProviderProtocol`. This token is used for subsequent authenticated API requests.
      */
     func signUp(body: SignUpRequestBody) async throws -> SignUpResponse {
-        let response: SignUpResponse = try await http.post(.signUp, body: body)
+        let response: SignUpResponse = try await http.post(.users, body: body)
         
         try tokenProvider.setToken(response.accessToken)
         return response
     }
     
     func myTasks() async throws -> [TaskModel] {
-        let response: TasksResponse = try await http.get(.myTasks)
+        let response: TasksResponse = try await http.get(.tasks)
         let parsedTasks = response.toTaskList()
         return parsedTasks
+    }
+    
+    func createNewTask(body: NewTaskRequestBody) async throws -> TaskModel {
+        let response: TaskIn = try await http.post(.tasks, body: body)
+        return response.toTaskModel()
     }
 }

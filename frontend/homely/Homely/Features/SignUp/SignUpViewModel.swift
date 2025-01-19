@@ -42,9 +42,9 @@ final class SignUpViewModel {
     @MainActor
     func signUp() {
         let body = SignUpRequestBody(
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
+            firstName: firstName.trimmingCharacters(in: .whitespacesAndNewlines),
+            lastName: lastName.trimmingCharacters(in: .whitespacesAndNewlines),
+            email: email.trimmingCharacters(in: .whitespacesAndNewlines),
             password: password
         )
         validations = body.validate()
