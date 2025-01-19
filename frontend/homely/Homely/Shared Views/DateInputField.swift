@@ -28,47 +28,48 @@ struct DateInputField: View {
     }()
     
     var body: some View {
-        if let selectedDate = input.wrappedValue {
-            DatePicker(
-                label,
-                selection: Binding<Date>(
-                    get: { selectedDate },
-                    set: { input.wrappedValue = $0 }
-                ),
-                in: dateRange,
-                displayedComponents: [.date, .hourAndMinute]
-            )
-            .font(theme.font.body1)
-            .fontWeight(.medium)
-            .foregroundColor(theme.color.onSurface)
-            .frame(alignment: .leading)
-            .padding([.leading], 2)
-            .datePickerStyle(.compact)
-            .transition(
-                .opacity.combined(with: .move(edge: .top))
-            )
-            .onDisappear {
-                if input.wrappedValue == nil {
-                    isDatePickerVisible = false
+        VStack(alignment: .leading) {
+            if isDatePickerVisible, let selectedDate = input.wrappedValue {
+                HStack {
+                    DatePicker(
+                        label,
+                        selection: Binding<Date>(
+                            get: { selectedDate },
+                            set: { input.wrappedValue = $0 }
+                        ),
+                        in: dateRange,
+                        displayedComponents: [.date, .hourAndMinute]
+                    )
+                    .datePickerStyle(.compact)
+                    
+                    Button(action: {
+                        withAnimation {
+                            input.wrappedValue = nil
+                            isDatePickerVisible = false
+                        }
+                    }) {
+                        Image(systemName: "xmark.circle.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 24, height: 24)
+                            .foregroundColor(theme.color.error)
+                            .accessibilityLabel("Clear date selection")
+                    }
+                    .buttonStyle(.plain)
+                    .padding(.leading, 4)
                 }
-            }
-        } else {
-            Button(
-                action: {
+                .transition(
+                    .opacity.combined(with: .move(edge: .top))
+                )
+            } else {
+                Button(action: {
                     withAnimation {
                         input.wrappedValue = Date()
                         isDatePickerVisible = true
                     }
-                 
                 }) {
                     HStack {
                         Text(label)
-                            .font(theme.font.body1)
-                            .fontWeight(.medium)
-                            .foregroundColor(theme.color.onSurface)
-                            .frame(alignment: .leading)
-                            .padding([.leading], 2)
-                        
                         Spacer()
                         Text("Select a date")
                             .foregroundColor(theme.color.secondary)
@@ -76,22 +77,16 @@ struct DateInputField: View {
                             .background(theme.color.surfaceContainerHigh)
                             .cornerRadius(10)
                     }
-                   
-        
                 }
+                .transition(.opacity.combined(with: .move(edge: .bottom)))
+            }
+
+            ErrorInputFieldLabel(error: error)
         }
-        
-        ErrorInputFieldLabel(error: error)
-        
-        
-        //        DatePicker(
-        //            label,
-        //            selection: input,
-        //            in: dateRange,
-        //            displayedComponents: [.date, .hourAndMinute]
-        //        )
-        //        .datePickerStyle(.compact)
-        
+        .font(theme.font.body1)
+        .fontWeight(.medium)
+        .foregroundColor(theme.color.onSurface)
+        .animation(.easeInOut, value: isDatePickerVisible)
     }
 }
 
