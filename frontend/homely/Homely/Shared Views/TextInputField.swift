@@ -91,6 +91,7 @@ struct TextInputField: View {
                             .padding(.horizontal, 12)
                             .scrollContentBackground(.hidden)
                             .autocapitalization(.sentences)
+                            .disableAutocorrection(false)
                     }
                 }
                 .background(theme.color.surfaceContainerHigh)
