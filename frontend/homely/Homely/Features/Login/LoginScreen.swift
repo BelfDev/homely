@@ -18,7 +18,7 @@ struct LoginScreen: View {
     
     init(_ components: ComponentManager) {
         vm = LoginViewModel(with: components)
-        vm.autoLastEnteredEmail()
+        vm.autofillLastEnteredEmail()
     }
     
     var body: some View {

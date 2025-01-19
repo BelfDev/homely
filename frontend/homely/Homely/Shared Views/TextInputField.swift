@@ -8,7 +8,9 @@
 import SwiftUI
 
 enum TextInputContentType {
-    case email, firstName, lastName
+    case email, firstName, lastName, text(label: String), textArea(
+        label: String
+    )
     
     var defaultLabel: String {
         switch self {
@@ -18,6 +20,10 @@ enum TextInputContentType {
             SharedStrings.firstNameInputLabel
         case .lastName:
             SharedStrings.lastNameInputLabel
+        case .text(let label):
+            label
+        case .textArea(let label):
+            label
         }
     }
     
@@ -29,6 +35,10 @@ enum TextInputContentType {
                 .givenName
         case .lastName:
                 .familyName
+        case .text:
+                .name
+        case .textArea:
+                .name
         }
     }
     
@@ -40,6 +50,10 @@ enum TextInputContentType {
                 .namePhonePad
         case .lastName:
                 .namePhonePad
+        case .text:
+                .default
+        case .textArea:
+                .default
         }
     }
 }
@@ -63,16 +77,29 @@ struct TextInputField: View {
                     .foregroundColor(theme.color.onSurface)
                     .frame(alignment: .leading)
                     .padding([.leading], 2)
-                
-                TextField("", text: input)
-                    .frame(height: 48.0)
-                    .padding(.horizontal, 12)
-                    .background(theme.color.surfaceContainerHigh)
-                    .cornerRadius(8)
-                    .textContentType(type.textContentType)
-                    .keyboardType(type.keyboardType)
-                    .autocapitalization(.none)
-                    .disableAutocorrection(true)
+            
+                Group {
+                    switch type {
+                    case .email, .firstName, .lastName, .text:
+                        TextField("", text: input)
+                            .frame(height: 48.0)
+                            .padding(.horizontal, 12)
+                            
+                    case .textArea:
+                        TextEditor(text: input)
+                            .frame(height: 300.0)
+                            .padding(.horizontal, 12)
+                            .scrollContentBackground(.hidden)
+                            .autocapitalization(.sentences)
+                            .disableAutocorrection(false)
+                    }
+                }
+                .background(theme.color.surfaceContainerHigh)
+                .cornerRadius(8)
+                .textContentType(type.textContentType)
+                .keyboardType(type.keyboardType)
+                .autocapitalization(.none)
+                .disableAutocorrection(true)
                 
                 ErrorInputFieldLabel(error: error)
             }
@@ -88,6 +115,13 @@ struct TextInputField: View {
     
     TextInputField(
         type: .email,
+        input: fakeInput
+    )
+    .padding()
+    .environment(components)
+    
+    TextInputField(
+        type: .textArea(label: "Hi"),
         input: fakeInput
     )
     .padding()

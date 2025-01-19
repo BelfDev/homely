@@ -68,7 +68,7 @@ final class LoginViewModel {
     }
     
     @MainActor
-    func autoLastEnteredEmail() {
+    func autofillLastEnteredEmail() {
         Task {
             guard let savedEmail = await localStore.getLastUsedEmail() else { return }
             email = savedEmail

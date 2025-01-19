@@ -1,8 +1,41 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "Key" : {
-      "extractionState" : "manual"
+    "key:date_input_clear_accessibility" : {
+      "comment" : "Accessibility label for the action which clears the date selection.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear date selection"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Limpar seleção de data"
+          }
+        }
+      }
+    },
+    "key:date_input_placeholder" : {
+      "comment" : "Text displayed as placeholder of the date input field. Once users touch it, it animates into the date picker.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select a date"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selecione uma data"
+          }
+        }
+      }
     },
     "key:email_input_label" : {
       "comment" : "Text displayed on top of an input field that expects a email value.",
@@ -64,6 +97,42 @@
         }
       }
     },
+    "key:error_date_in_past" : {
+      "comment" : "Error message displayed when users select a date in the past.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The selected date must be in the future."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A data selecionada precisa ser no futuro."
+          }
+        }
+      }
+    },
+    "key:error_date_range_too_short" : {
+      "comment" : "Error message displayed under a form field if the date range selected is too short.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The date range must be at least %@ minutes long."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O intervalo de datas selecionado precisa ser de pelo menos %@ minutos."
+          }
+        }
+      }
+    },
     "key:error_empty_field" : {
       "comment" : "Error message displayed when users leave an empty value in a required form field.",
       "extractionState" : "manual",
@@ -78,6 +147,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Por favor preencha esse campo."
+          }
+        }
+      }
+    },
+    "key:error_end_date_before_start_date" : {
+      "comment" : "Error message displayed when users try to select an end date that occurs before the start date.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The end date must be after the start date."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A data de encerramento deve ser após a data de início."
           }
         }
       }
@@ -186,6 +273,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sua senha deve ter pelo menos %d caracteres."
+          }
+        }
+      }
+    },
+    "key:error_too_long_text" : {
+      "comment" : "Error message displayed under a form field if the text value entered is too long.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This field cannot exceed %d characters."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esse campo não pode exceder %d caracteres."
           }
         }
       }
