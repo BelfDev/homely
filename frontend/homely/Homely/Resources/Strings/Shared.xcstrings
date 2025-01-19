@@ -1,8 +1,35 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "Key" : {
-      "extractionState" : "manual"
+    "key:date_input_clear_accessibility" : {
+      "comment" : "Accessibility label for the action which clears the date selection.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear date selection"
+          }
+        }
+      }
+    },
+    "key:date_input_placeholder" : {
+      "comment" : "Text displayed as placeholder of the date input field. Once users touch it, it animates into the date picker.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select a date"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selecione uma data"
+          }
+        }
+      }
     },
     "key:email_input_label" : {
       "comment" : "Text displayed on top of an input field that expects a email value.",

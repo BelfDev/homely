@@ -41,4 +41,6 @@ extension SharedStrings {
     static let passwordInputLabel = String(localized: "key:password_input_label", table: table)
     static let firstNameInputLabel = String(localized: "key:first_name_input_label", table: table)
     static let lastNameInputLabel = String(localized: "key:last_name_input_label", table: table)
+    static let dateInputPlaceholder = String(localized: "key:date_input_placeholder", table: table)
+    static let dateInputClearAccessibility = String(localized: "key:date_input_clear_accessibility", table: table)
 }

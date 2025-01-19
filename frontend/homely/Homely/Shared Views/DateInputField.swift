@@ -53,7 +53,7 @@ struct DateInputField: View {
                             .scaledToFit()
                             .frame(width: 24, height: 24)
                             .foregroundColor(theme.color.error)
-                            .accessibilityLabel("Clear date selection")
+                            .accessibilityLabel(SharedStrings.dateInputClearAccessibility)
                     }
                     .buttonStyle(.plain)
                     .padding(.leading, 4)
@@ -71,7 +71,7 @@ struct DateInputField: View {
                     HStack {
                         Text(label)
                         Spacer()
-                        Text("Select a date")
+                        Text(SharedStrings.dateInputPlaceholder)
                             .foregroundColor(theme.color.secondary)
                             .padding(8)
                             .background(theme.color.surfaceContainerHigh)
