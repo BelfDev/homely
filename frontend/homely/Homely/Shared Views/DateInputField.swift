@@ -10,12 +10,28 @@ import SwiftUI
 struct DateInputField: View {
     @ThemeProvider private var theme
     @State private var isDatePickerVisible = false
-
+    @State private var showClearButton = false
+    
     var label: String
     var input: Binding<Date?>
+    var minimumDate: Date?
     var error: FormFieldError?
     
-    let dateRange: ClosedRange<Date> = {
+    let dateRange: ClosedRange<Date>
+    let animationDuration: Double = 0.20
+    var onDateSelected: ((Date) -> Void)? = nil
+
+    init(
+        label: String,
+        input: Binding<Date?>,
+        error: FormFieldError? = nil,
+        minimumDate: Date? = nil
+    ) {
+        self.label = label
+        self.input = input
+        self.error = error
+        self.minimumDate = minimumDate
+
         let calendar = Calendar.current
         let now = Date()
         let startOfToday = calendar.startOfDay(for: now)
@@ -24,8 +40,9 @@ struct DateInputField: View {
             value: 1,
             to: startOfToday
         )!
-        return startOfToday...endOfYear
-    }()
+        self.dateRange = (minimumDate ?? startOfToday)...endOfYear
+    }
+
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -35,32 +52,60 @@ struct DateInputField: View {
                         label,
                         selection: Binding<Date>(
                             get: { selectedDate },
-                            set: { input.wrappedValue = $0 }
+                            set: {
+                                input.wrappedValue = $0
+                                onDateSelected?($0)
+                            }
                         ),
                         in: dateRange,
                         displayedComponents: [.date, .hourAndMinute]
                     )
                     .datePickerStyle(.compact)
-                    
-                    Button(action: {
-                        withAnimation {
-                            input.wrappedValue = nil
-                            isDatePickerVisible = false
-                        }
-                    }) {
-                        Image(systemName: "xmark.circle.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 24, height: 24)
-                            .foregroundColor(theme.color.error)
-                            .accessibilityLabel(SharedStrings.dateInputClearAccessibility)
+                    .gesture(
+                        DragGesture(minimumDistance: 20)
+                            .onEnded { value in
+                                if value.translation.width < 0 {
+                                    withAnimation(
+                                        .easeInOut(duration: animationDuration)
+                                    ) {
+                                        showClearButton = true
+                                    }
+                                } else if value.translation.width > 0 {
+                                    withAnimation(
+                                        .easeInOut(duration: animationDuration)
+                                    ) {
+                                        showClearButton = false
+                                    }
+                                }
+                            }
+                    )
+                       
+                    if showClearButton {
+                        Button(
+                            action: {
+                                withAnimation(
+                                    .easeInOut(duration: animationDuration)
+                                ) {
+                                    input.wrappedValue = nil
+                                    isDatePickerVisible = false
+                                    showClearButton = false
+                                }
+                            }) {
+                                Image(systemName: "xmark.circle.fill")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 24, height: 24)
+                                    .foregroundColor(theme.color.error)
+                                    .accessibilityLabel(
+                                        SharedStrings.dateInputClearAccessibility
+                                    )
+                            }
+                            .buttonStyle(.plain)
+                            .padding(.leading, 4)
+                            .transition(.opacity.combined(with: .scale))
                     }
-                    .buttonStyle(.plain)
-                    .padding(.leading, 4)
                 }
-                .transition(
-                    .opacity.combined(with: .move(edge: .top))
-                )
+                .transition(.opacity.combined(with: .move(edge: .top)))
             } else {
                 Button(action: {
                     withAnimation {

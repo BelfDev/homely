@@ -42,7 +42,8 @@ struct NewTaskScreen: View {
                     
                     DateInputField(
                         label: NewTaskStrings.endAtInputLabel,
-                        input: $vm.endAt
+                        input: $vm.endAt,
+                        minimumDate: vm.startAt
                     )
                     .focused($focusedField, equals: .end)
                     .submitLabel(.next)
