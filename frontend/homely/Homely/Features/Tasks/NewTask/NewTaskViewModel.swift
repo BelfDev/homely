@@ -29,8 +29,8 @@ final class NewTaskViewModel {
     
     var title: String = ""
     var description: String = ""
-    var startAt: Date = Date()
-    var endAt: Date = Date()
+    var startAt: Date? = nil
+    var endAt: Date? = nil
 
 //    var validations: SignUpFormValidations?
     

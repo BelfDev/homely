@@ -9,9 +9,10 @@ import SwiftUI
 
 struct DateInputField: View {
     @ThemeProvider private var theme
+    @State private var isDatePickerVisible = false
 
     var label: String
-    var input: Binding<Date>
+    var input: Binding<Date?>
     var error: FormFieldError?
     
     let dateRange: ClosedRange<Date> = {
@@ -27,27 +28,95 @@ struct DateInputField: View {
     }()
     
     var body: some View {
-        DatePicker(
-            label,
-            selection: input,
-            in: dateRange,
-            displayedComponents: [.date, .hourAndMinute]
-        )
-        .datePickerStyle(.compact)
+        if let selectedDate = input.wrappedValue {
+            DatePicker(
+                label,
+                selection: Binding<Date>(
+                    get: { selectedDate },
+                    set: { input.wrappedValue = $0 }
+                ),
+                in: dateRange,
+                displayedComponents: [.date, .hourAndMinute]
+            )
+            .font(theme.font.body1)
+            .fontWeight(.medium)
+            .foregroundColor(theme.color.onSurface)
+            .frame(alignment: .leading)
+            .padding([.leading], 2)
+            .datePickerStyle(.compact)
+            .transition(
+                .opacity.combined(with: .move(edge: .top))
+            )
+            .onDisappear {
+                if input.wrappedValue == nil {
+                    isDatePickerVisible = false
+                }
+            }
+        } else {
+            Button(
+                action: {
+                    withAnimation {
+                        input.wrappedValue = Date()
+                        isDatePickerVisible = true
+                    }
+                 
+                }) {
+                    HStack {
+                        Text(label)
+                            .font(theme.font.body1)
+                            .fontWeight(.medium)
+                            .foregroundColor(theme.color.onSurface)
+                            .frame(alignment: .leading)
+                            .padding([.leading], 2)
+                        
+                        Spacer()
+                        Text("Select a date")
+                            .foregroundColor(theme.color.secondary)
+                            .padding(10)
+                            .background(theme.color.surfaceContainerHigh)
+                            .cornerRadius(10)
+                    }
+                   
+        
+                }
+        }
+        
+        ErrorInputFieldLabel(error: error)
+        
+        
+        //        DatePicker(
+        //            label,
+        //            selection: input,
+        //            in: dateRange,
+        //            displayedComponents: [.date, .hourAndMinute]
+        //        )
+        //        .datePickerStyle(.compact)
         
     }
 }
 
 #Preview {
     let components = ComponentManager(.development)
-    let fakeInput = Binding<Date>(
+    let fakeInput = Binding<Date?>(
         get: { Date() },
         set: { _ in }
     )
+    let fakeNilInput = Binding<Date?>(
+        get: { nil },
+        set: { _ in }
+    )
+    
     
     DateInputField(
         label: "Start Date",
         input: fakeInput
+    )
+    .padding()
+    .environment(components)
+    
+    DateInputField(
+        label: "Start Date",
+        input: fakeNilInput
     )
     .padding()
     .environment(components)
