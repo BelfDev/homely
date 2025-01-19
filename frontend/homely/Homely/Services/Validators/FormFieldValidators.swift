@@ -142,7 +142,7 @@ struct FormFieldValidators {
     /// - Returns: A `FormFieldError` if validation fails, otherwise `nil`.
     static func validateStartAt(_ startAt: Date?) -> FormFieldError? {
         guard let startAt = startAt else {
-            return .empty
+            return nil
         }
           
         if startAt < Date().addingTimeInterval(-1 * 60 * 60) {

@@ -26,7 +26,8 @@ final class TaskDashboardViewModel {
         Task {
             defer { isLoading = false }
             do {
-                self.tasks = try await homelyClient.myTasks()
+                let tasks = try await homelyClient.myTasks()
+                self.tasks = tasks.sorted(by: { $0.createdAt > $1.createdAt })
             } catch let error as APIError {
                 errorMessage = error.errorMessage
             } catch {

@@ -90,6 +90,7 @@ struct TextInputField: View {
                             .frame(height: 300.0)
                             .padding(.horizontal, 12)
                             .scrollContentBackground(.hidden)
+                            .autocapitalization(.sentences)
                     }
                 }
                 .background(theme.color.surfaceContainerHigh)
