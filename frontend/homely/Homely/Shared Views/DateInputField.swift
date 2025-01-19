@@ -73,7 +73,7 @@ struct DateInputField: View {
                         Spacer()
                         Text("Select a date")
                             .foregroundColor(theme.color.secondary)
-                            .padding(10)
+                            .padding(8)
                             .background(theme.color.surfaceContainerHigh)
                             .cornerRadius(10)
                     }
