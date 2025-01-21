@@ -8,20 +8,25 @@
 import SwiftUI
 
 struct TaskListView: View {
+    @ThemeProvider private var theme
+    
     let tasks: [TaskModel]
     let onDelete: (TaskModel) -> Void
        
     var body: some View {
         
-        List {
-            ForEach(tasks, id: \.id) { task in
-                TaskCard(task: task)
-                    .listRowSeparator(.hidden)
-                    .listRowBackground(Color.clear)
-            }
-            .onDelete { indexSet in
-                indexSet.forEach { self.onDelete(tasks[$0]) }
-            }
+        List(tasks, id: \.id) { task in
+            TaskCard(task: task)
+                .listRowSeparator(.hidden)
+                .listRowBackground(Color.clear)
+                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                    Button(
+                        SharedStrings.swipeToDeleteButton,
+                        role: .destructive,
+                        action: { onDelete(task) }
+                    )
+                    .tint(theme.color.error)
+                }
         }
         .listStyle(.plain)
     }

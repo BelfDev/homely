@@ -22,18 +22,9 @@ struct TaskDashboardScreen: View {
     
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            //            TaskListView(tasks: vm.tasks)
-//            TaskListView(
-//                tasks: TaskModel
-//                    .makeStubStaticList() + TaskModel
-//                    .makeStubStaticList(),
-//                onDelete: { vm.deleteTask($0) }
-//            )
             TaskListView(
                 tasks: vm.tasks,
-                onDelete: { task in
-                    vm.deleteTask(task)
-                }
+                onDelete: vm.deleteTask
             )
             .background(theme.color.surface)
             .navigationTitle(TaskStrings.dashboardScreenTitle)

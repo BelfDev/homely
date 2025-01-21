@@ -108,4 +108,8 @@ extension SharedStrings {
         )
         return String.localizedStringWithFormat(format, minDuration)
     }
+    static let swipeToDeleteButton = String(
+        localized: "key:swipe_to_delete",
+        table: table
+    )
 }
