@@ -30,7 +30,7 @@ final class HomelyAPIClient : HomelyAPIClientProtocol {
     // MARK: - API Endpoints
     
     enum Endpoint: EndpointProtocol {
-        case login, users, tasks
+        case login, users, tasks(UUID? = nil)
         
         /**
          Returns the path for the given API endpoint.
@@ -43,8 +43,9 @@ final class HomelyAPIClient : HomelyAPIClientProtocol {
                 return "/api/v1/users/login"
             case .users:
                 return "/api/v1/users"
-            case .tasks:
-                return "/api/v1/tasks"
+            case .tasks(let id):
+                let endpoint = "/api/v1/tasks"
+                return id != nil ? "\(endpoint)/\(id!)" : endpoint
             }
         }
         
@@ -93,13 +94,17 @@ final class HomelyAPIClient : HomelyAPIClientProtocol {
     }
     
     func myTasks() async throws -> [TaskModel] {
-        let response: TasksResponse = try await http.get(.tasks)
+        let response: TasksResponse = try await http.get(.tasks())
         let parsedTasks = response.toTaskList()
         return parsedTasks
     }
     
     func createNewTask(body: NewTaskRequestBody) async throws -> TaskModel {
-        let response: TaskIn = try await http.post(.tasks, body: body)
+        let response: TaskIn = try await http.post(.tasks(), body: body)
         return response.toTaskModel()
+    }
+    
+    func deleteTask(_ task: TaskModel) async throws {
+        let _: NoContentResponse = try await http.delete(.tasks(task.id))
     }
 }

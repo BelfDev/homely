@@ -9,12 +9,19 @@ import SwiftUI
 
 struct TaskListView: View {
     let tasks: [TaskModel]
+    let onDelete: (TaskModel) -> Void
        
     var body: some View {
-        List(tasks, id: \.id) { task in
-            TaskCard(task: task)
-                .listRowSeparator(.hidden)
-                .listRowBackground(Color.clear)
+        
+        List {
+            ForEach(tasks, id: \.id) { task in
+                TaskCard(task: task)
+                    .listRowSeparator(.hidden)
+                    .listRowBackground(Color.clear)
+            }
+            .onDelete { indexSet in
+                indexSet.forEach { self.onDelete(tasks[$0]) }
+            }
         }
         .listStyle(.plain)
     }
@@ -23,7 +30,8 @@ struct TaskListView: View {
 #Preview {
     let components = ComponentManager(.development)
     TaskListView(
-        tasks: TaskModel.makeStubStaticList()
+        tasks: TaskModel.makeStubStaticList(),
+        onDelete: { _ in }
     )
     .environment(components)
 }

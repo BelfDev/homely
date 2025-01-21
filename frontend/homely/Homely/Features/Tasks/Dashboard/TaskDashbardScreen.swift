@@ -22,20 +22,27 @@ struct TaskDashboardScreen: View {
     
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            //            TaskListView(
-            //                tasks: TaskModel
-            //                    .makeStubStaticList() + TaskModel
-            //                    .makeStubStaticList()
-            //            )
-            TaskListView(tasks: vm.tasks)
-                .background(theme.color.surface)
-                .navigationTitle(TaskStrings.dashboardScreenTitle)
-                .toolbarTitleDisplayMode(.large)
-                .overlay {
-                    if vm.isLoading {
-                        LoadingOverlay()
-                    }
+            //            TaskListView(tasks: vm.tasks)
+//            TaskListView(
+//                tasks: TaskModel
+//                    .makeStubStaticList() + TaskModel
+//                    .makeStubStaticList(),
+//                onDelete: { vm.deleteTask($0) }
+//            )
+            TaskListView(
+                tasks: vm.tasks,
+                onDelete: { task in
+                    vm.deleteTask(task)
                 }
+            )
+            .background(theme.color.surface)
+            .navigationTitle(TaskStrings.dashboardScreenTitle)
+            .toolbarTitleDisplayMode(.large)
+            .overlay {
+                if vm.isLoading {
+                    LoadingOverlay()
+                }
+            }
             
             FloatingActionButton(actionType: .add) {
                 navigator.push(TaskRoute.newTask)
