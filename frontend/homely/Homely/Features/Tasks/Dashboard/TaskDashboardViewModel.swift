@@ -36,8 +36,25 @@ final class TaskDashboardViewModel {
         }
     }
     
+    @MainActor
+    func deleteTask(_ task: TaskModel) {
+        Task {
+            do {
+                try await homelyClient.deleteTask(task)
+                if let index = self.tasks.firstIndex(
+                    where: { $0.id == task.id }) {
+                    self.tasks.remove(at: index)
+                }
+            } catch let error as APIError {
+                errorMessage = error.errorMessage
+            } catch {
+                errorMessage = SharedStrings.errorGeneric
+            }
+        }
+        
+    }
+    
     func clearErrors() {
         errorMessage = ""
     }
-    
 }

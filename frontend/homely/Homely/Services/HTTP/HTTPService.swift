@@ -211,6 +211,13 @@ private extension HTTPService {
             let (data, response) = try await session.data(for: request)
             
             _ = try validateResponse(response, endpoint: endpoint)
+            if T.self == NoContentResponse.self {
+                logInfo(
+                    "Response type matches no content. Skipping decoding and returning empty value."
+                )
+                return NoContentResponse() as! T
+            }
+            
             return try decodeResponse(data)
         } catch let error as URLError {
             throw parseURLError(error, for: endpoint)

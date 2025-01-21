@@ -354,6 +354,24 @@
           }
         }
       }
+    },
+    "key:swipe_to_delete" : {
+      "comment" : "Text displayed on top of the swipe to delete button. Typically used on lists.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deletar"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"
