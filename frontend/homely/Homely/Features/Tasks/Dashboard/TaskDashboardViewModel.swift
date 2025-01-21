@@ -41,7 +41,10 @@ final class TaskDashboardViewModel {
         Task {
             do {
                 try await homelyClient.deleteTask(task)
-                self.tasks.removeAll { $0.id == task.id }
+                if let index = self.tasks.firstIndex(
+                    where: { $0.id == task.id }) {
+                    self.tasks.remove(at: index)
+                }
             } catch let error as APIError {
                 errorMessage = error.errorMessage
             } catch {
