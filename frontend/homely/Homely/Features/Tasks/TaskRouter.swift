@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-enum TaskRoute: Route {
-    case details
+enum TaskRoute: Route, Equatable {
+    case details(of: TaskModel)
     case newTask
 }
 
@@ -19,8 +19,8 @@ struct TaskRouter: View {
         TaskDashboardScreen(components)
             .navigationDestination(for: TaskRoute.self) { destination in
                 switch destination {
-                case .details:
-                    TaskDetailsScreen()
+                case .details(let taskModel):
+                    TaskDetailsScreen(components, task: taskModel)
                 case .newTask:
                     NewTaskScreen(components)
                 }

@@ -12,6 +12,7 @@ struct TaskListView: View {
     
     let tasks: [TaskModel]
     let onDelete: (TaskModel) -> Void
+    let onPress: (TaskModel) -> Void
        
     var body: some View {
         
@@ -27,6 +28,7 @@ struct TaskListView: View {
                     )
                     .tint(theme.color.error)
                 }
+                .onTapGesture(perform: { onPress(task) })
         }
         .listStyle(.plain)
     }
@@ -36,7 +38,8 @@ struct TaskListView: View {
     let components = ComponentManager(.development)
     TaskListView(
         tasks: TaskModel.makeStubStaticList(),
-        onDelete: { _ in }
+        onDelete: { _ in },
+        onPress: { _ in }
     )
     .environment(components)
 }
