@@ -9,12 +9,23 @@ import SwiftUI
 
 struct StatusBadge: View {
     @ThemeProvider private var theme
-    
+
     let status: TaskStatus
+    var size: Size = .small
+
+    enum Size { case small, big }
+    var contentFont: Font {
+        switch size {
+        case .small:
+            return theme.font.caption
+        case .big:
+            return theme.font.h6
+        }
+    }
 
     var body: some View {
         Text(status.localizedName.uppercased())
-            .font(theme.font.caption)
+            .font(contentFont)
             .fontWeight(.bold)
             .foregroundColor(theme.color.onSecondary)
             .padding(.vertical, 2)
@@ -26,7 +37,12 @@ struct StatusBadge: View {
 
 #Preview {
     let components = ComponentManager(.development)
+    
     StatusBadge(status: .done)
-    .environment(components)
-    .padding()
+        .environment(components)
+        .padding()
+    
+    StatusBadge(status: .done, size: .big)
+        .environment(components)
+        .padding()
 }
