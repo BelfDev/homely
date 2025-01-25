@@ -36,7 +36,24 @@ struct TaskDetailsScreen: View {
                             .fontWeight(.thin)
                     }
                     
+                    Spacer(minLength: 0)
+                        .frame(height: 24)
+
+                    AttributeRow(icon: "person.circle") {
+                        Text(vm.task.createdBy.uuidString)
+                    }
                     
+                    if let start = vm.task.startAt {
+                        AttributeRow(icon: "clock") {
+                            Text(TaskDetailsStrings.start(at: start))
+                        }
+                    }
+
+                    if let end = vm.task.endAt {
+                        AttributeRow(icon: "clock") {
+                            Text(TaskDetailsStrings.end(at: end))
+                        }
+                    }
 
                     Spacer()
 
@@ -61,6 +78,24 @@ struct TaskDetailsScreen: View {
     }
 }
 
+private struct AttributeRow<Content>: View where Content: View {
+    @ThemeProvider private var theme
+    
+    let icon: String
+    @ViewBuilder var content: Content
+
+    var body: some View {
+        
+        HStack {
+            Image(systemName: icon)
+            content
+                .font(theme.font.body1)
+        }
+        .padding(.vertical, 4)
+        Divider()
+    }
+}
+
 #Preview {
     let userId = UUID()
     let components = ComponentManager(.development)
@@ -75,16 +110,10 @@ struct TaskDetailsScreen: View {
             .addingTimeInterval(Double.random(in: -7...0) * 24 * 60 * 60),
         createdBy: userId,
         status: TaskStatus.allCases.randomElement()!,
-        startAt:
-            Bool
-            .random()
-            ? Date.now
-                .addingTimeInterval(Double.random(in: -3...3) * 60 * 60) : nil,
-        endAt:
-            Bool
-            .random()
-            ? Date.now
-                .addingTimeInterval(Double.random(in: 1...5) * 60 * 60) : nil,
+        startAt: Date.now
+            .addingTimeInterval(Double.random(in: -3...3) * 60 * 60),
+        endAt: Date.now
+            .addingTimeInterval(Double.random(in: 1...5) * 60 * 60),
         updatedAt:
             Bool
             .random()

@@ -36,5 +36,18 @@ struct TaskDetailsStrings {
                 with: dateFormatter.string(from: date)
             )
     }
-    
+    static func start(at date: Date) -> String {
+        return String(localized: "key:start_at", table: table)
+            .replacingOccurrences(
+                of: "%@",
+                with: dateFormatter.string(from: date)
+            )
+    }
+    static func end(at date: Date) -> String {
+        return String(localized: "key:end_at", table: table)
+            .replacingOccurrences(
+                of: "%@",
+                with: dateFormatter.string(from: date)
+            )
+    }
 }

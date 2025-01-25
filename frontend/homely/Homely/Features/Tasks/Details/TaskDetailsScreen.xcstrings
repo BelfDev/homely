@@ -19,6 +19,24 @@
         }
       }
     },
+    "key:end_at" : {
+      "comment" : "Text concatenated with the date in which the task should end or have ended.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ends on %@"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Termina em %@"
+          }
+        }
+      }
+    },
     "key:last_updated_at" : {
       "comment" : "Text concatenated with the date in which the task was last updated.",
       "extractionState" : "manual",
@@ -33,6 +51,24 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Atualizada em %@"
+          }
+        }
+      }
+    },
+    "key:start_at" : {
+      "comment" : "Text concatenated with the date in which the task should start or have started.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Starts on %@"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Começa em %@"
           }
         }
       }
