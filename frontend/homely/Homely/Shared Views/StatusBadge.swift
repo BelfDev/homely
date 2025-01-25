@@ -19,7 +19,7 @@ struct StatusBadge: View {
         case .small:
             return theme.font.caption
         case .big:
-            return theme.font.h6
+            return theme.font.body1
         }
     }
 

@@ -33,7 +33,8 @@ struct TaskDetailsScreen: View {
                     if let description = vm.task.description {
                         Text(description)
                             .font(theme.font.h6)
-                            .fontWeight(.thin)
+                            .fontWeight(.regular)
+                            .padding(.top, 4)
                     }
 
                     Spacer(minLength: 0)
@@ -69,6 +70,7 @@ struct TaskDetailsScreen: View {
                     .font(theme.font.body2)
                 }
                 .padding(.horizontal, 16)
+                .padding(.vertical, 16)
                 .frame(
                     maxWidth: .infinity,
                     minHeight: geometry.size.height,
@@ -77,6 +79,8 @@ struct TaskDetailsScreen: View {
             .foregroundStyle(theme.color.onSurface)
             .background(theme.color.surface)
         }
+        .navigationTitle(TaskDetailsStrings.screenTitle)
+        .toolbarTitleDisplayMode(.inline)
     }
 }
 
