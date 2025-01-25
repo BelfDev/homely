@@ -7,23 +7,6 @@
 
 import SwiftUI
 
-private struct StatusBadge: View {
-    @ThemeProvider private var theme
-    
-    let status: TaskStatus
-
-    var body: some View {
-        Text(status.localizedName.uppercased())
-            .font(theme.font.caption)
-            .fontWeight(.bold)
-            .foregroundColor(theme.color.onSecondary)
-            .padding(.vertical, 2)
-            .padding(.horizontal, 4)
-            .background(status.color(theme.color))
-            .cornerRadius(4)
-    }
-}
-
 struct TaskCard: View {
     @ThemeProvider private var theme
     

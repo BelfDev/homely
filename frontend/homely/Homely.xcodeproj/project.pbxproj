@@ -87,6 +87,9 @@
 		9F73B5A22C5F623C0007CD73 /* HankenGrotesk-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F73B5902C5F623C0007CD73 /* HankenGrotesk-ExtraLight.ttf */; };
 		9F73B5A52C5F63E30007CD73 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F73B5A42C5F63E30007CD73 /* Fonts.swift */; };
 		9F741A1E2D423ACC000A2FDF /* TaskDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F741A1D2D423ACC000A2FDF /* TaskDetailsViewModel.swift */; };
+		9F741A202D4572AD000A2FDF /* StatusBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F741A1F2D4572AD000A2FDF /* StatusBadge.swift */; };
+		9F741A222D45746C000A2FDF /* TaskDetailsScreen.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9F741A212D45746C000A2FDF /* TaskDetailsScreen.xcstrings */; };
+		9F741A242D457567000A2FDF /* TaskDetailsStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F741A232D457567000A2FDF /* TaskDetailsStrings.swift */; };
 		9F974E8F2D21742B00D6BEF6 /* TaskRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F974E8E2D21742B00D6BEF6 /* TaskRouter.swift */; };
 		9F974E922D21744300D6BEF6 /* TaskDashbardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F974E912D21744300D6BEF6 /* TaskDashbardScreen.swift */; };
 		9F974E942D21745500D6BEF6 /* TaskDashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F974E932D21745500D6BEF6 /* TaskDashboardViewModel.swift */; };
@@ -213,6 +216,9 @@
 		9F73B5902C5F623C0007CD73 /* HankenGrotesk-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HankenGrotesk-ExtraLight.ttf"; sourceTree = "<group>"; };
 		9F73B5A42C5F63E30007CD73 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		9F741A1D2D423ACC000A2FDF /* TaskDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailsViewModel.swift; sourceTree = "<group>"; };
+		9F741A1F2D4572AD000A2FDF /* StatusBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBadge.swift; sourceTree = "<group>"; };
+		9F741A212D45746C000A2FDF /* TaskDetailsScreen.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = TaskDetailsScreen.xcstrings; sourceTree = "<group>"; };
+		9F741A232D457567000A2FDF /* TaskDetailsStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailsStrings.swift; sourceTree = "<group>"; };
 		9F974E8E2D21742B00D6BEF6 /* TaskRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRouter.swift; sourceTree = "<group>"; };
 		9F974E912D21744300D6BEF6 /* TaskDashbardScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDashbardScreen.swift; sourceTree = "<group>"; };
 		9F974E932D21745500D6BEF6 /* TaskDashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDashboardViewModel.swift; sourceTree = "<group>"; };
@@ -321,6 +327,7 @@
 				9F5579EE2CBB10E6005C9AAE /* IconButton.swift */,
 				9F5579F22CBBE32F005C9AAE /* CardView.swift */,
 				9F1DCEC02D3C45D100660241 /* DateInputField.swift */,
+				9F741A1F2D4572AD000A2FDF /* StatusBadge.swift */,
 			);
 			path = "Shared Views";
 			sourceTree = "<group>";
@@ -573,6 +580,8 @@
 			children = (
 				9F974E972D2187F300D6BEF6 /* TaskDetailsScreen.swift */,
 				9F741A1D2D423ACC000A2FDF /* TaskDetailsViewModel.swift */,
+				9F741A212D45746C000A2FDF /* TaskDetailsScreen.xcstrings */,
+				9F741A232D457567000A2FDF /* TaskDetailsStrings.swift */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -733,6 +742,7 @@
 				9FCC2E112C67FFC100A787C3 /* LoginScreen.xcstrings in Resources */,
 				9FAB88872D32FED800DEF3CE /* Task.xcstrings in Resources */,
 				9F73B5982C5F623C0007CD73 /* HankenGrotesk-Bold.ttf in Resources */,
+				9F741A222D45746C000A2FDF /* TaskDetailsScreen.xcstrings in Resources */,
 				9FCC2E172C68FF8E00A787C3 /* Limelight-Regular.ttf in Resources */,
 				9F73B59C2C5F623C0007CD73 /* HankenGrotesk-Medium.ttf in Resources */,
 				9F73B5962C5F623C0007CD73 /* HankenGrotesk-ExtraBoldItalic.ttf in Resources */,
@@ -781,6 +791,7 @@
 				9F5F112D2CA995B400EECC4E /* RootView.swift in Sources */,
 				9FA71E6D2CB148BB007C09AB /* LoginFormValidations.swift in Sources */,
 				9F5F11292CA989AE00EECC4E /* HomeViewModel.swift in Sources */,
+				9F741A202D4572AD000A2FDF /* StatusBadge.swift in Sources */,
 				9F2B423A2C9EFA3F00A65225 /* LoginRequestBody.swift in Sources */,
 				9F2B42472CA03BF500A65225 /* EnvProviders.swift in Sources */,
 				9F974E922D21744300D6BEF6 /* TaskDashbardScreen.swift in Sources */,
@@ -802,6 +813,7 @@
 				9F0A24232C1DAA5F00B5DEB3 /* MainTheme.swift in Sources */,
 				9F4E7EB22CB5CA610062EDBB /* LoginRouter.swift in Sources */,
 				9FAB888B2D33034F00DEF3CE /* TaskStatus+UI.swift in Sources */,
+				9F741A242D457567000A2FDF /* TaskDetailsStrings.swift in Sources */,
 				9F2B422E2C9ECEAF00A65225 /* EnvConfig.swift in Sources */,
 				9F5579F12CBB289F005C9AAE /* FeatureModuleView.swift in Sources */,
 				9FEB3C582CB72A6F00822FB2 /* SignUpFormValidations.swift in Sources */,

@@ -1,0 +1,60 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "key:created_at" : {
+      "comment" : "Text concatenated with the date in which the task was created.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Created on %@"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Criada em %@"
+          }
+        }
+      }
+    },
+    "key:last_updated_at" : {
+      "comment" : "Text concatenated with the date in which the task was last updated.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated on %@"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Atualizada em %@"
+          }
+        }
+      }
+    },
+    "key:task_details_screen_title" : {
+      "comment" : "Text displayed on top of the Task Details screen to make clear its purpose.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Task Details"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detalhes da Tarefa"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
