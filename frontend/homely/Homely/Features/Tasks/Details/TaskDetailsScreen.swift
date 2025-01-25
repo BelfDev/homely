@@ -35,14 +35,14 @@ struct TaskDetailsScreen: View {
                             .font(theme.font.h6)
                             .fontWeight(.thin)
                     }
-                    
+
                     Spacer(minLength: 0)
                         .frame(height: 24)
 
                     AttributeRow(icon: "person.circle") {
                         Text(vm.task.createdBy.uuidString)
                     }
-                    
+
                     if let start = vm.task.startAt {
                         AttributeRow(icon: "clock") {
                             Text(TaskDetailsStrings.start(at: start))
@@ -58,10 +58,12 @@ struct TaskDetailsScreen: View {
                     Spacer()
 
                     Group {
-                        Text(TaskDetailsStrings.updated(at: vm.task.createdAt))
+                        Text(TaskDetailsStrings.created(at: vm.task.createdAt))
+                            .italic()
 
                         if let updatedAt = vm.task.updatedAt {
                             Text(TaskDetailsStrings.updated(at: updatedAt))
+                                .italic()
                         }
                     }
                     .font(theme.font.body2)
@@ -80,12 +82,12 @@ struct TaskDetailsScreen: View {
 
 private struct AttributeRow<Content>: View where Content: View {
     @ThemeProvider private var theme
-    
+
     let icon: String
     @ViewBuilder var content: Content
 
     var body: some View {
-        
+
         HStack {
             Image(systemName: icon)
             content
@@ -114,13 +116,8 @@ private struct AttributeRow<Content>: View where Content: View {
             .addingTimeInterval(Double.random(in: -3...3) * 60 * 60),
         endAt: Date.now
             .addingTimeInterval(Double.random(in: 1...5) * 60 * 60),
-        updatedAt:
-            Bool
-            .random()
-            ? Date.now
-                .addingTimeInterval(
-                    Double.random(in: -1...1) * 24 * 60 * 60
-                ) : nil,
+        updatedAt: Date.now
+            .addingTimeInterval(Double.random(in: -1...1) * 24 * 60 * 60),
         assignees: (1...Int.random(in: 1...3)).map { _ in
             let assigneeId = UUID()
             return TaskAssignee(
