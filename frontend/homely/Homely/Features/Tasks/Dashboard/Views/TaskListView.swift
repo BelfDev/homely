@@ -13,6 +13,7 @@ struct TaskListView: View {
     let tasks: [TaskModel]
     let onDelete: (TaskModel) -> Void
     let onPress: (TaskModel) -> Void
+    let onLongPress: (TaskModel) -> Void
        
     var body: some View {
         
@@ -29,7 +30,7 @@ struct TaskListView: View {
                     .tint(theme.color.error)
                 }
                 .onTapGesture(perform: { onPress(task) })
-                .onLongPressGesture(minimumDuration: 0.5) { onPress(task) }
+                .onLongPressGesture(minimumDuration: 0.5) { onLongPress(task) }
         }
         .listStyle(.plain)
     }
@@ -40,7 +41,8 @@ struct TaskListView: View {
     TaskListView(
         tasks: TaskModel.makeStubStaticList(),
         onDelete: { _ in },
-        onPress: { _ in }
+        onPress: { _ in },
+        onLongPress: { _ in }
     )
     .environment(components)
 }

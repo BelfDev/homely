@@ -13,6 +13,8 @@ final class TaskDashboardViewModel {
     private(set) var isLoading: Bool = false
     private(set) var errorMessage = ""
     private(set) var tasks: [TaskModel] = []
+    
+    var selectedTask: TaskModel?
         
     init(with components: ComponentManager) {
         self.homelyClient = components.homelyClient
@@ -52,6 +54,22 @@ final class TaskDashboardViewModel {
             }
         }
         
+    }
+    
+    @MainActor
+    func updateTaskStatus(_ task: TaskModel, to newStatus: TaskStatus) {
+//        Task {
+//            do {
+//                try await homelyClient.updateTaskStatus(task, to: newStatus)
+//                if let index = tasks.firstIndex(where: { $0.id == task.id }) {
+//                    tasks[index].status = newStatus
+//                }
+//            } catch let error as APIError {
+//                errorMessage = error.errorMessage
+//            } catch {
+//                errorMessage = SharedStrings.errorGeneric
+//            }
+//        }
     }
     
     func clearErrors() {

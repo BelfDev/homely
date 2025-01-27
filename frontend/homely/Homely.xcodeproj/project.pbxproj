@@ -36,6 +36,7 @@
 		9F2B42432CA032AC00A65225 /* ComponentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B42422CA032AC00A65225 /* ComponentManager.swift */; };
 		9F2B42472CA03BF500A65225 /* EnvProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B42462CA03BF500A65225 /* EnvProviders.swift */; };
 		9F2B424A2CA0443900A65225 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B42492CA0443900A65225 /* LoginViewModel.swift */; };
+		9F4442872D477FC100A3C7ED /* QuickStatusUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4442862D477FC100A3C7ED /* QuickStatusUpdateView.swift */; };
 		9F4E7E9F2CB3C8540062EDBB /* TextInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4E7E9E2CB3C8540062EDBB /* TextInputField.swift */; };
 		9F4E7EA12CB3E1D10062EDBB /* PasswordInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4E7EA02CB3E1D10062EDBB /* PasswordInputField.swift */; };
 		9F4E7EA32CB3E34A0062EDBB /* ErrorInputFieldLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4E7EA22CB3E34A0062EDBB /* ErrorInputFieldLabel.swift */; };
@@ -162,6 +163,7 @@
 		9F2B42462CA03BF500A65225 /* EnvProviders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvProviders.swift; sourceTree = "<group>"; };
 		9F2B42492CA0443900A65225 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		9F390FF12C1E377500DB1C1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = homely/Info.plist; sourceTree = "<group>"; };
+		9F4442862D477FC100A3C7ED /* QuickStatusUpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickStatusUpdateView.swift; sourceTree = "<group>"; };
 		9F4E7E9E2CB3C8540062EDBB /* TextInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputField.swift; sourceTree = "<group>"; };
 		9F4E7EA02CB3E1D10062EDBB /* PasswordInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordInputField.swift; sourceTree = "<group>"; };
 		9F4E7EA22CB3E34A0062EDBB /* ErrorInputFieldLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorInputFieldLabel.swift; sourceTree = "<group>"; };
@@ -571,6 +573,7 @@
 				9F25E63D2D25A87500EFA688 /* TaskCard.swift */,
 				9F25E6412D25D0C800EFA688 /* TaskListView.swift */,
 				9F1DCEB12D3C288000660241 /* FloatingActionButton.swift */,
+				9F4442862D477FC100A3C7ED /* QuickStatusUpdateView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -799,6 +802,7 @@
 				9F974E8F2D21742B00D6BEF6 /* TaskRouter.swift in Sources */,
 				9F2B422C2C9EC89100A65225 /* HTTPService.swift in Sources */,
 				9F2B423F2C9F51B800A65225 /* TokenProvider.swift in Sources */,
+				9F4442872D477FC100A3C7ED /* QuickStatusUpdateView.swift in Sources */,
 				9F5F11312CA9B00D00EECC4E /* LoadingOverlay.swift in Sources */,
 				9F974E982D2187F300D6BEF6 /* TaskDetailsScreen.swift in Sources */,
 				9FCC2E152C680D0100A787C3 /* FixedStrings.swift in Sources */,
