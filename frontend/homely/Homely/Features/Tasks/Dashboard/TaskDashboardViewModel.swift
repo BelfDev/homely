@@ -13,8 +13,6 @@ final class TaskDashboardViewModel {
     private(set) var isLoading: Bool = false
     private(set) var errorMessage = ""
     private(set) var tasks: [TaskModel] = []
-    
-    var selectedTask: TaskModel?
         
     init(with components: ComponentManager) {
         self.homelyClient = components.homelyClient

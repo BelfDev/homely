@@ -16,46 +16,53 @@ struct QuickStatusUpdateView: View {
     let onClose: () -> Void
 
     var body: some View {
-        VStack(spacing: 16) {
-            HStack {
-                Spacer()
-                Spacer()
-                Text("Update Status")
-                    .font(theme.font.h5)
-                Spacer()
+        ZStack {
+            Color.black.opacity(0.5)
+                .edgesIgnoringSafeArea(.all)
 
-                Button(action: onClose) {
-                    Image(systemName: "xmark.circle.fill")
-                        .font(.title.weight(.regular))
-                        .foregroundColor(theme.color.onSurface)
-                        .clipShape(Circle())
+            VStack(spacing: 16) {
+                HStack {
+                    Spacer()
+                    Spacer()
+                    Text("Update Status")
+                        .font(theme.font.h5)
+                    Spacer()
 
+                    Button(action: onClose) {
+                        Image(systemName: "xmark.circle.fill")
+                            .font(.title.weight(.regular))
+                            .foregroundColor(theme.color.onSurface)
+                            .clipShape(Circle())
+
+                    }
+
+                }
+                .padding(.vertical, 8)
+
+                ForEach(TaskStatus.allCases, id: \.self) { status in
+                    Button(action: {
+                        onStatusChange(status)
+                    }) {
+                        Text(status.localizedName)
+                            .foregroundColor(theme.color.onPrimary)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(theme.color.secondary)
+                            )
+                    }
                 }
 
             }
-            .padding(.vertical, 8)
-
-            ForEach(TaskStatus.allCases, id: \.self) { status in
-                Button(action: {
-                    onStatusChange(status)
-                }) {
-                    Text(status.localizedName)
-                        .foregroundColor(theme.color.onPrimary)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .fill(theme.color.secondary)
-                        )
-                }
-            }
-
+            .padding()
+            .background(theme.color.surface)
+            .cornerRadius(16)
+            .shadow(radius: 10)
+            .padding(.horizontal)
         }
-        .padding()
-        .background(theme.color.surface)
-        .cornerRadius(16)
-        .shadow(radius: 10)
-        .padding(.horizontal)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .edgesIgnoringSafeArea(.all)
     }
 }
 

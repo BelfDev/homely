@@ -16,6 +16,9 @@ struct TaskDashboardScreen: View {
     @State private var searchText = ""
     @State private var selectedDate = Date()
 
+    @State private var isQuickUpdateMenuVisible = false
+    @State private var selectedTask: TaskModel?
+
     init(_ components: ComponentManager) {
         vm = TaskDashboardViewModel(with: components)
     }
@@ -29,7 +32,9 @@ struct TaskDashboardScreen: View {
                     navigator.push(TaskRoute.details(of: task))
                 },
                 onLongPress: { task in
-
+                    // TODO(BelfDev): Review this logic later.
+                    selectedTask = task
+                    isQuickUpdateMenuVisible = true
                 }
             )
             .background(theme.color.surface)
@@ -39,6 +44,22 @@ struct TaskDashboardScreen: View {
                 if vm.isLoading {
                     LoadingOverlay()
                 }
+
+                // TODO(BelfDev): Review this logic later.
+                if isQuickUpdateMenuVisible, let task = selectedTask {
+                    QuickStatusUpdateView(
+                        task: task,
+                        onStatusChange: { newStatus in
+                            vm.updateTaskStatus(task, to: newStatus)
+                            isQuickUpdateMenuVisible = false
+                        },
+                        onClose: {
+                            isQuickUpdateMenuVisible = false
+                        }
+                    )
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+                    .animation(.easeInOut, value: isQuickUpdateMenuVisible)
+                }
             }
 
             FloatingActionButton(actionType: .add) {
@@ -46,20 +67,6 @@ struct TaskDashboardScreen: View {
             }
             .padding(.trailing, 19)
 
-            if let task = vm.selectedTask {
-                QuickStatusUpdateView(
-                    task: task,
-                    onStatusChange: { newStatus in
-                        vm.updateTaskStatus(task, to: newStatus)
-                        vm.selectedTask = nil
-                    },
-                    onClose: {
-                        vm.selectedTask = nil
-                    }
-                )
-                .transition(.move(edge: .bottom).combined(with: .opacity))
-                .animation(.spring(), value: vm.selectedTask != nil)
-            }
         }
         .onAppear {
             vm.fetchMyTasks()
