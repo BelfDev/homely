@@ -77,7 +77,7 @@ struct TaskDetailsScreen: View {
                     alignment: .topLeading)
             }
             .foregroundStyle(theme.color.onSurface)
-            .background(theme.color.surface)
+            .background(vm.task.status.color(theme.color).opacity(0.2))
         }
         .navigationTitle(TaskDetailsStrings.screenTitle)
         .toolbarTitleDisplayMode(.inline)

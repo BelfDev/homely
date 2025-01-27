@@ -29,6 +29,7 @@ struct TaskListView: View {
                     .tint(theme.color.error)
                 }
                 .onTapGesture(perform: { onPress(task) })
+                .onLongPressGesture(minimumDuration: 0.5) { onPress(task) }
         }
         .listStyle(.plain)
     }
