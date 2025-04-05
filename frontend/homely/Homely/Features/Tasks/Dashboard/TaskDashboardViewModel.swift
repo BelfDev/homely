@@ -54,6 +54,7 @@ final class TaskDashboardViewModel {
         
     }
     
+    // TODO(BelfDev): Finish the logic below in a follow-up.
     @MainActor
     func updateTaskStatus(_ task: TaskModel, to newStatus: TaskStatus) {
 //        Task {
