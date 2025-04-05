@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct TaskAssignee: Identifiable, Codable {
+struct TaskAssignee: Identifiable, Codable, Equatable, Hashable {
     let id: UUID
     let firstName: String
     let lastName: String
 }
 
 // Note: the "Model" suffix was used to prevent collision with Swift's built-in "Task".
-struct TaskModel: Identifiable, Codable {
+struct TaskModel: Identifiable, Codable, Equatable, Hashable {
     let id: UUID
     let title: String
     let description: String?

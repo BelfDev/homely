@@ -54,6 +54,23 @@ final class TaskDashboardViewModel {
         
     }
     
+    // TODO(BelfDev): Finish the logic below in a follow-up.
+    @MainActor
+    func updateTaskStatus(_ task: TaskModel, to newStatus: TaskStatus) {
+//        Task {
+//            do {
+//                try await homelyClient.updateTaskStatus(task, to: newStatus)
+//                if let index = tasks.firstIndex(where: { $0.id == task.id }) {
+//                    tasks[index].status = newStatus
+//                }
+//            } catch let error as APIError {
+//                errorMessage = error.errorMessage
+//            } catch {
+//                errorMessage = SharedStrings.errorGeneric
+//            }
+//        }
+    }
+    
     func clearErrors() {
         errorMessage = ""
     }
